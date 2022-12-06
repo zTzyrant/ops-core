@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&family=Righteous&display=swap');
+
+h2{
+    font-family: 'Righteous';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 72px;
+    line-height: 89px;
+    display: flex;
+    align-items: center;
+    color: #07484A;
+}

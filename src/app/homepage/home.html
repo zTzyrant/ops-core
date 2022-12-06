@@ -1,4 +1,11 @@
-<div class="alert alert-primary" role="alert">
-    A simple primary alert—check it out!
+<section>
+  <div class="container" *ngIf="datas">
+    <div class="row">
+      <div class="col-sm-6" *ngFor="let data of datas">
+        <div class="card">
+          {{ data.username }}
+        </div>
+      </div>
+    </div>
   </div>
-  
+</section>
