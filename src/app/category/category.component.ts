@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./category.css'],
 })
 
-export class CategoryComponent {
-
+export class CategoryComponent{
+  ngOnInit(): void {
+    
+  }
 }
