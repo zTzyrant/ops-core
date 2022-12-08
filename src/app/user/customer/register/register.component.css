@@ -1,12 +1,81 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&family=Righteous&display=swap');
-
-h2{
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Righteous&display=swap');
+.tagbrandops{
     font-family: 'Righteous';
     font-style: normal;
     font-weight: 400;
     font-size: 72px;
     line-height: 89px;
-    display: flex;
     align-items: center;
     color: #07484A;
+    margin-top: 2rem;
+    margin-left: 95px;
+}
+
+.tittlepage{
+    font-family: 'Inter';
+    text-align: center;
+}
+
+.smalltitle{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    color: #8692A6;
+    text-align: center;
+}
+
+.inputcustops{
+    height: 55px;
+    text-decoration: none;
+}
+
+.mt-3.inputcustops{
+    height: 100% !important;
+}
+
+.cusopssub{
+    width: 100%;
+    background: #07484A;
+    border-radius: 6px;
+    height: 55px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    align-items: center;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.cusopssub:hover{
+    background: #063839 !important;
+    background-color: #063839 !important;
+
+}
+
+.cusopssub:active{
+    background: #052d2e !important;
+    background-color: #052d2e !important;
+    border-color: #14494a !important;
+}
+
+@media (max-width: 1281px) {
+    .tagbrandops{
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+
+@media (max-width: 574px) {
+    .inputcustops{
+        width: 95% !important;
+        margin-right: auto !important;
+        margin-left: auto !important;
+    }
 }

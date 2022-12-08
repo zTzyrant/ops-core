@@ -1,11 +1,117 @@
-<section class="section">
-    <div class="container-fluid">
-        <div class="d-flex justify-content-start">
-            <h2>OPS</h2>
-        </div>
-        <div class="d-flex justify-content-center mx-auto">
-            Hi
-        </div>
+<div class="col">
+    <h1 class="tagbrandops">OPS</h1>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col col-md-auto">
+                <h2 class="tittlepage">Register OPS Account</h2>
+                <p class="smalltitle">Go inside the best Online Printing Systems !</p>
 
+                <form [formGroup]="customerregistform" (ngSubmit)="chekusernameavilable()" novalidate>
+                    <div class="col-12 mb-2">
+                        <label for="usernamex" class="form-label">Username</label>
+                        <input name="usernamex" type="text" class="form-control inputcustops" formControlName="username" placeholder="Username">
+                        <div class="alert alert-danger mt-3 inputcustops" *ngIf="customerregistform.controls['username'].invalid && (customerregistform.controls['username'].dirty || customerregistform.controls['username'].touched)">
+                            <div *ngIf="username.errors?.['required']">
+                                * Username is required.
+                            </div>
+                            <div *ngIf="username.errors?.['minlength']">
+                                * Username shouldn't be less than 5 words.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-2">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-group inputcustops">
+                            <input id="ps1x" name="password" type="password" class="form-control" formControlName="password" placeholder="Password">
+                            <span class="input-group-text" title="show password" onclick="showpass()"><i class="bi bi-eye-fill eyeinpt"></i></span>
+                        </div>
+                        
+                        
+                        <div class="alert alert-danger mt-3 inputcustops" *ngIf="customerregistform.controls['password'].invalid && (customerregistform.controls['password'].dirty || customerregistform.controls['password'].touched)">
+                            <div *ngIf="password.errors?.['required']">
+                                * Password is required.
+                            </div>
+                            <div *ngIf="password.errors?.['minlength']">
+                                * Password shouldn't be less than 6 words.
+                            </div>
+                            <div *ngIf="password.errors?.['strongNumber']">
+                                * Password must contain one number.
+                            </div>
+                            <div *ngIf="password.errors?.['strongUpper']">
+                                * Password must contain one uppercase.
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 mb-2">
+                        <label for="email" class="form-label">Email</label>
+                        <input name="email" type="text" class="form-control inputcustops" formControlName="email" placeholder="Email@example.com">
+                        <div class="alert alert-danger mt-3 inputcustops" *ngIf="customerregistform.controls['email'].invalid && (customerregistform.controls['email'].dirty || customerregistform.controls['email'].touched)">
+                            <div *ngIf="email.errors?.['required']">
+                                * Email is required.
+                            </div>
+                            <div *ngIf="email.errors?.['email']">
+                                * Please enter valid email !
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-2">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control inputcustops" formControlName="fullname" placeholder="John Doe">
+                        <div class="alert alert-danger mt-3 inputcustops" *ngIf="customerregistform.controls['fullname'].invalid && (customerregistform.controls['fullname'].dirty || customerregistform.controls['fullname'].touched)">
+                            <div *ngIf="fullname.errors?.['required']">
+                                * Full Name is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-2">
+                        <label class="form-label">Gender</label>
+                        <select class="form-select inputcustops" formControlName="genderselect">
+                            <option selected value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                          </select>
+                        <div class="alert alert-danger mt-3 inputcustops" *ngIf="customerregistform.controls['genderselect'].invalid && (customerregistform.controls['genderselect'].dirty || customerregistform.controls['genderselect'].touched)">
+                            <div *ngIf="genderselect.errors?.['required']">
+                                * Please select your gender.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-2">
+                        <label class="form-label">Phone Number</label>
+                        <input type="number" class="form-control inputcustops" formControlName="phone" placeholder="082130301122">
+                        <div class="alert alert-danger mt-3 inputcustops" *ngIf="customerregistform.controls['phone'].invalid && (customerregistform.controls['phone'].dirty || customerregistform.controls['phone'].touched)">
+                            <div *ngIf="phone.errors?.['required']">
+                                * Please input your phone number.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-2">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required formControlName="agreeterm">
+                        <label class="form-check-label" for="invalidCheck">
+                          Agree to terms and conditions
+                        </label>
+                      </div>
+                      <div class="alert alert-danger mt-3 inputcustops" *ngIf="customerregistform.controls['agreeterm'].invalid && (customerregistform.controls['agreeterm'].dirty || customerregistform.controls['agreeterm'].touched)">
+                        <div *ngIf="agreeterm.errors?.['required']">
+                            You must agree before submitting.
+                        </div>
+                    </div>
+                    </div>
+
+                    
+                    <div class="col-12">
+                      <button class="btn btn-primary cusopssub mb-5" type="submit" [disabled]="customerregistform.invalid">Sign up for free</button>
+                    </div>
+                  </form>
+            </div>
+        </div>
     </div>
-</section>
+</div>
