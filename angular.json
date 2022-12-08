@@ -58,7 +58,10 @@
             "scripts": [
               "./node_modules/@popperjs/core/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.js"
-            ]
+            ],
+            "allowedCommonJsDependencies": [
+              "sweetalert2"
+           ]
           },
           "configurations": {
             "production": {
