@@ -8,21 +8,33 @@ import { HttpClientModule } from '@angular/common/http';
 import { CategoryComponent } from './category/category.component';
 import { RegisterComponent } from './user/customer/register/register.component'
 import { ReactiveFormsModule } from '@angular/forms';
+import { CurdApiService } from './secure/curd.api.service';
+
+//toastr
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { LoginComponent } from './user/customer/login/login.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     CategoryComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
   ],
-  providers: [],
+  providers: [
+    CurdApiService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

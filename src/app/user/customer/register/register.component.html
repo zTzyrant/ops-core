@@ -6,109 +6,147 @@
                 <h2 class="tittlepage">Register OPS Account</h2>
                 <p class="smalltitle">Go inside the best Online Printing Systems !</p>
 
-                <form [formGroup]="customerregistform" (ngSubmit)="chekusernameavilable()" novalidate>
+                <form [formGroup]="customerregistform" (ngSubmit)="checksubmit()" novalidate>
                     <div class="col-12 mb-2">
                         <label for="usernamex" class="form-label">Username</label>
-                        <input name="usernamex" type="text" class="form-control inputcustops" formControlName="username" placeholder="Username">
-                        <div class="alert alert-danger mt-3 inputcustops" *ngIf="customerregistform.controls['username'].invalid && (customerregistform.controls['username'].dirty || customerregistform.controls['username'].touched)">
+                        <input name="usernamex" type="text" class="form-control inputcustops" formControlName="username" placeholder="Username"
+                            [ngClass]="{'is-invalid': (customerregistform.controls['username'].invalid && (customerregistform.controls['username'].dirty || customerregistform.controls['username'].touched)), 
+                            'is-valid': customerregistform.controls['username'].valid}"
+                            maxlength="255"
+                        >
+                        <div class="invalid-feedback alert alert-danger mt-3 inputcustops">
                             <div *ngIf="username.errors?.['required']">
-                                * Username is required.
+                                <i class="bi bi-exclamation-octagon"></i>
+                                Username is required.
                             </div>
                             <div *ngIf="username.errors?.['minlength']">
-                                * Username shouldn't be less than 5 words.
+                                <i class="bi bi-exclamation-octagon"></i>
+                                Username shouldn't be less than 5 words.
                             </div>
                         </div>
                     </div>
 
                     <div class="col-12 mb-2">
                         <label for="password" class="form-label">Password</label>
-                        <div class="input-group inputcustops">
-                            <input id="ps1x" name="password" type="password" class="form-control" formControlName="password" placeholder="Password">
-                            <span class="input-group-text" title="show password" onclick="showpass()"><i class="bi bi-eye-fill eyeinpt"></i></span>
-                        </div>
-                        
-                        
-                        <div class="alert alert-danger mt-3 inputcustops" *ngIf="customerregistform.controls['password'].invalid && (customerregistform.controls['password'].dirty || customerregistform.controls['password'].touched)">
-                            <div *ngIf="password.errors?.['required']">
-                                * Password is required.
+                        <div class="col-12">
+                            <div class="form-group position-relative has-icon-right">
+                                <input name="password" class="form-control inputcustops ps1x" formControlName="password" placeholder="Password"
+                                    [type]="passwordinputtype ? 'password' : 'text'"
+                                    [ngClass]="{'is-invalid': customerregistform.controls['password'].invalid && (customerregistform.controls['password'].dirty || customerregistform.controls['password'].touched)}"
+                                    maxlength="255"    
+                                >
+                                <div class="form-control-icon cstareapass" (click)="tooglepassword()">
+                                    <i class="bi bi-eye-slash" *ngIf="passwordinputtype"></i>
+                                    <i class="bi bi-eye" *ngIf="!passwordinputtype"></i>
+                                </div>
+                                <div class="invalid-feedback alert alert-danger mt-3 inputcustops">
+                                    <div *ngIf="password.errors?.['required']">
+                                        <i class="bi bi-exclamation-octagon"></i>
+                                        Password is required.
+                                    </div>
+                                    <div *ngIf="password.errors?.['minlength']">
+                                        <i class="bi bi-exclamation-octagon"></i>
+                                         Password shouldn't be less than 6 words.
+                                    </div>
+                                    <div *ngIf="password.errors?.['strongNumber']">
+                                        <i class="bi bi-exclamation-octagon"></i>
+                                         Password should contain at least 1 number.
+                                    </div>
+                                    <div *ngIf="password.errors?.['strongUpper']">
+                                        <i class="bi bi-exclamation-octagon"></i>
+                                         Password should contain at least 1 uppercase.
+                                    </div>
+                                </div>   
                             </div>
-                            <div *ngIf="password.errors?.['minlength']">
-                                * Password shouldn't be less than 6 words.
-                            </div>
-                            <div *ngIf="password.errors?.['strongNumber']">
-                                * Password must contain one number.
-                            </div>
-                            <div *ngIf="password.errors?.['strongUpper']">
-                                * Password must contain one uppercase.
-                            </div>
-                        </div>
+                        </div>                            
                     </div>
 
 
                     <div class="col-12 mb-2">
                         <label for="email" class="form-label">Email</label>
-                        <input name="email" type="text" class="form-control inputcustops" formControlName="email" placeholder="Email@example.com">
-                        <div class="alert alert-danger mt-3 inputcustops" *ngIf="customerregistform.controls['email'].invalid && (customerregistform.controls['email'].dirty || customerregistform.controls['email'].touched)">
+                        <input name="email" type="text" class="form-control inputcustops" formControlName="email" placeholder="email@example.com"
+                            [ngClass]="{'is-invalid': customerregistform.controls['email'].invalid && (customerregistform.controls['email'].dirty || customerregistform.controls['email'].touched), 'is-valid': customerregistform.controls['email'].valid}"
+                            maxlength="255"
+                        >
+                        <div class="invalid-feedback alert alert-danger mt-3 inputcustops">
                             <div *ngIf="email.errors?.['required']">
-                                * Email is required.
+                                <i class="bi bi-exclamation-octagon"></i>
+                                Email is required.
                             </div>
                             <div *ngIf="email.errors?.['email']">
-                                * Please enter valid email !
+                                <i class="bi bi-exclamation-octagon"></i>
+                                Please enter valid email !
                             </div>
                         </div>
                     </div>
 
                     <div class="col-12 mb-2">
                         <label class="form-label">Full Name</label>
-                        <input type="text" class="form-control inputcustops" formControlName="fullname" placeholder="John Doe">
-                        <div class="alert alert-danger mt-3 inputcustops" *ngIf="customerregistform.controls['fullname'].invalid && (customerregistform.controls['fullname'].dirty || customerregistform.controls['fullname'].touched)">
+                        <input type="text" class="form-control inputcustops" formControlName="fullname" placeholder="John Doe"
+                        [ngClass]="{'is-invalid': customerregistform.controls['fullname'].invalid && (customerregistform.controls['fullname'].dirty || customerregistform.controls['fullname'].touched), 'is-valid': customerregistform.controls['fullname'].valid}"
+                        maxlength="255"
+                        >
+                        <div class="invalid-feedback alert alert-danger mt-3 inputcustops">
                             <div *ngIf="fullname.errors?.['required']">
-                                * Full Name is required.
+                                <i class="bi bi-exclamation-octagon"></i>
+                                Full Name is required.
                             </div>
                         </div>
                     </div>
 
                     <div class="col-12 mb-2">
                         <label class="form-label">Gender</label>
-                        <select class="form-select inputcustops" formControlName="genderselect">
+                        <select class="form-select inputcustops" formControlName="genderselect"
+                            [ngClass]="{'is-invalid': customerregistform.controls['genderselect'].invalid && (customerregistform.controls['genderselect'].dirty || customerregistform.controls['genderselect'].touched), 'is-valid': customerregistform.controls['genderselect'].valid}"
+                        >
                             <option selected value="">Select Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                           </select>
-                        <div class="alert alert-danger mt-3 inputcustops" *ngIf="customerregistform.controls['genderselect'].invalid && (customerregistform.controls['genderselect'].dirty || customerregistform.controls['genderselect'].touched)">
+                        <div class="invalid-feedback alert alert-danger mt-3 inputcustops">
                             <div *ngIf="genderselect.errors?.['required']">
-                                * Please select your gender.
+                                <i class="bi bi-exclamation-octagon"></i>
+                                Please select your gender.
                             </div>
                         </div>
                     </div>
 
                     <div class="col-12 mb-2">
                         <label class="form-label">Phone Number</label>
-                        <input type="number" class="form-control inputcustops" formControlName="phone" placeholder="082130301122">
-                        <div class="alert alert-danger mt-3 inputcustops" *ngIf="customerregistform.controls['phone'].invalid && (customerregistform.controls['phone'].dirty || customerregistform.controls['phone'].touched)">
+                        <input type="text" class="form-control inputcustops" formControlName="phone" placeholder="082130301122"
+                            [ngClass]="{'is-invalid': customerregistform.controls['phone'].invalid && (customerregistform.controls['phone'].dirty || customerregistform.controls['phone'].touched), 'is-valid': customerregistform.controls['phone'].valid}"
+                            maxlength="255"
+                        >
+                        <div class="invalid-feedback alert alert-danger mt-3 inputcustops">
                             <div *ngIf="phone.errors?.['required']">
-                                * Please input your phone number.
+                                <i class="bi bi-exclamation-octagon"></i>
+                                Please input your phone number.
                             </div>
                         </div>
                     </div>
 
                     <div class="col-12 mb-2">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required formControlName="agreeterm">
-                        <label class="form-check-label" for="invalidCheck">
-                          Agree to terms and conditions
-                        </label>
-                      </div>
-                      <div class="alert alert-danger mt-3 inputcustops" *ngIf="customerregistform.controls['agreeterm'].invalid && (customerregistform.controls['agreeterm'].dirty || customerregistform.controls['agreeterm'].touched)">
-                        <div *ngIf="agreeterm.errors?.['required']">
-                            You must agree before submitting.
+                        <div class="form-check"
+                        [ngClass]="{'is-invalid': customerregistform.controls['agreeterm'].invalid && (customerregistform.controls['agreeterm'].dirty), 'is-valid': customerregistform.controls['agreeterm'].valid}"
+                        >
+                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required formControlName="agreeterm" required=""
+                            >
+                            <label class="form-check-label" for="invalidCheck">
+                            Agree to terms and conditions
+                            </label>
                         </div>
-                    </div>
+                        <div class="invalid-feedback alert alert-danger mt-3 inputcustops">
+                            <div *ngIf="agreeterm.errors?.['required']">
+                                <i class="bi bi-exclamation-octagon"></i>
+                                You must agree before submitting.
+                            </div>
+                        </div>
+                        
                     </div>
 
-                    
-                    <div class="col-12">
-                      <button class="btn btn-primary cusopssub mb-5" type="submit" [disabled]="customerregistform.invalid">Sign up for free</button>
+                    <div class="col-12">      
+                        <button class="btn btn-primary cusopssub mt-2 mb-2" type="submit" [disabled]="customerregistform.invalid">Sign up for free</button>
+                        <p class="text-center">Already have an account? <a href="/">Sign in Here.</a></p>
                     </div>
                   </form>
             </div>

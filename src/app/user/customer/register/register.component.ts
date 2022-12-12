@@ -2,34 +2,90 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import Swal from 'sweetalert2';
 import {Title} from "@angular/platform-browser";
-
+import { CurdApiService } from 'src/app/secure/curd.api.service';
+import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
+import * as CryptoJS from 'crypto-js'
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent{
+  passwordinputtype = true;
   datas: any;
-  xhttpdatas: Subscription | any;
+  usernames: any;
+  rxjs: Subscription | any;
+  changme = true;
+  usernameold: string[] = [];
   public customerregistform: FormGroup | any;
 
   constructor(public fb: FormBuilder,
-      private http: HttpClient,
-      private titleService:Title) {
-        this.titleService.setTitle("Register Account to OPS")
-        this.registerValidform();
+    private http: HttpClient,
+    private titleService: Title,
+    private curdService: CurdApiService,
+    private toastr: ToastrService
+  ) {
+      this.titleService.setTitle("Register Account to OPS")
+      this.registerValidform();
+    }
+
+  checksubmit(){
+    let verifusername = true;
+    const tempPassword = this.password.value;
+    this.curdService.getUsersname().subscribe(users => {
+      this.datas = users;
+      this.datas = this.datas.payload.datas;
+
+      for(let z = 0; z < this.datas.length; z++){
+        if(this.datas[z].username == this.username.value){
+          verifusername = false;
+
+          
+        }
+      }
+
+      const encryptPassword = CryptoJS.AES.encrypt(tempPassword, environment.keyEncrypt);
+            
+      this.customerregistform.value.password = encryptPassword.toString();    
+      console.log(this.customerregistform.value.password);
+      
+      
+      if(verifusername){
+        
+        this.curdService.registercustomer(this.customerregistform.value).subscribe(respone => {
+          let temp: any;
+          temp = respone;
+          if(temp.statussql === 1){
+            Swal.fire(
+              'Good job!',
+              `Success register ${this.fullname.value} to OPS database`,
+              'success'
+            )
+          } else if(temp.statussql === 0) {
+            this.toastr.error('Please check your inputed data !', 'Form data cannot be null');
+          } else {
+            this.toastr.error('Internal Server Error');
+          }
+          
+        })
+        
+      } else {
+        this.toastr.error('Username Already used!');
+      }
+
+    });
   }
 
-  ngOnInit(){
-
+  tooglepassword(){
+    this.passwordinputtype = !this.passwordinputtype;
   }
-
 
   registerValidform() {
     this.customerregistform = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(5), ]],
+      username: ['', [Validators.required, Validators.minLength(5)]],
       password: ['', [Validators.required,
         this.strongNumber, this.strongUpper,
         Validators.minLength(6)
@@ -43,7 +99,6 @@ export class RegisterComponent{
   }
 
   strongNumber(control: FormControl){
-    
     let hasNumber = /\d/.test(control.value);
     const valid = hasNumber;
     if (!valid) {
@@ -59,38 +114,6 @@ export class RegisterComponent{
       return { strongUpper: true };
     }
     return null;
-  }
-
-  chekusernameavilable(){
-    let chekusrname = true;
-    this.xhttpdatas = this.http.get('http://localhost:3000/datausrname').subscribe(datas => {
-      this.datas = datas;
-      this.datas = this.datas.payload.datas;
-
-
-      for(let z = 0; z < this.datas.length; z++){
-        if(this.datas[z].username == this.username.value){
-          chekusrname = false;
-        }
-      }
-
-      if(chekusrname){
-        Swal.fire(
-          'Good job!',
-          'Username Avilable!',
-          'success'
-        )
-        
-      } else {
-        Swal.fire(
-          'Error!',
-          'Username already used!',
-          'error'
-        )
-        
-      }
-    })
-
   }
 
   get username() {
@@ -120,4 +143,5 @@ export class RegisterComponent{
   get agreeterm(){
     return this.customerregistform.get('agreeterm');
   }
+
 }

@@ -64,18 +64,120 @@
     border-color: #14494a !important;
 }
 
+.form-group {
+    margin-bottom: 0.7rem;
+  }
+  .form-group label {
+    font-weight: 600;
+  }
+  .form-group .small,
+  .form-group small {
+    font-size: 0.7rem;
+  }
+  .form-group.with-title {
+    position: relative;
+  }
+  .form-group.with-title label {
+    background-color: #e9ecef;
+    border: solid #eef3f8;
+    border-width: 1px 1px 0;
+    font-size: 0.6rem;
+    left: 0;
+    padding: 5px;
+    position: absolute;
+    top: 0;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    width: 100%;
+  }
+  .form-group.with-title .form-control,
+  .form-group.with-title dataTable-input {
+    padding-top: 2rem;
+  }
+  .form-group.with-title .form-control:focus ~ label,
+  .form-group.with-title dataTable-input:focus ~ label {
+    border-left: 1px solid #435ebe;
+    border-right: 1px solid #435ebe;
+    border-top: 1px solid #435ebe;
+  }
+  .form-group[class*="has-icon-"].has-icon-left .form-control {
+    padding-left: 2.5rem;
+  }
+  .form-group[class*="has-icon-"].has-icon-left .form-control-icon {
+    left: 0;
+  }
+  .form-group[class*="has-icon-"].has-icon-right .form-control {
+    padding-right: 2.5rem;
+  }
+  .form-group[class*="has-icon-"].has-icon-right .form-control-icon {
+    right: 0;
+  }
+  .form-group[class*="has-icon-"] .form-control:focus ~ .form-control-icon i,
+  .form-group[class*="has-icon-"] .form-control:focus ~ .form-control-icon svg {
+    color: #5a8dee;
+  }
+  .form-group[class*="has-icon-"] .form-control.form-control-xl {
+    padding-left: 3rem;
+  }
+  .form-group[class*="has-icon-"]
+    .form-control.form-control-xl
+    ~ .form-control-icon
+    i {
+    font-size: 1.6rem;
+  }
+  .form-group[class*="has-icon-"]
+    .form-control.form-control-xl
+    ~ .form-control-icon
+    i:before {
+    color: #a6a8aa;
+  }
+  .form-group[class*="has-icon-"] .form-control-icon {
+    padding: 0 0.6rem;
+    position: absolute;
+  }
+  .form-group[class*="has-icon-"] .form-control-icon i,
+  .form-group[class*="has-icon-"] .form-control-icon svg {
+    color: #adb5bd;
+    font-size: 1.2rem;
+    width: 1.2rem;
+  }
+  .form-group[class*="has-icon-"] .form-control-icon i:before,
+  .form-group[class*="has-icon-"] .form-control-icon svg:before {
+    vertical-align: sub;
+  }
+  .form-group.mandatory .form-label:first-child:after {
+    color: #dc3545;
+    content: " *";
+  }
+  .form-group.is-invalid * {
+    border-color: #dc3545;
+    color: #dc3545;
+  }
+  .form-control ~ .form-control-icon {
+    top: 20%;
+  }
+
+.ps1x.is-invalid {
+  background-position: right calc(2.3rem + 0.1875rem) center !important;
+}
+
+.cstareapass .bi{
+  cursor: pointer;
+}
+
+.has-icon-right .form-control-icon{
+  top: 0.73rem !important;
+}
+
 @media (max-width: 1281px) {
-    .tagbrandops{
-        text-align: center !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-    }
+  .tagbrandops{
+      text-align: center !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+  }
 }
 
 @media (max-width: 574px) {
-    .inputcustops{
-        width: 95% !important;
-        margin-right: auto !important;
-        margin-left: auto !important;
-    }
+  .form-group[class*="has-icon-"] .form-control-icon {
+      padding: 0 calc(0.6rem + 2.9%);   
+  }
 }
