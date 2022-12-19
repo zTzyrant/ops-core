@@ -14,7 +14,7 @@ import { CurdApiService } from './secure/curd.api.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { LoginComponent } from './user/customer/login/login.component';
-
+import { HeaderComponent } from './core/header/header.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,8 @@ import { LoginComponent } from './user/customer/login/login.component';
     HomepageComponent,
     CategoryComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

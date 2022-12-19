@@ -1,0 +1,221 @@
+/* HEADER WHEN USER NOT LOGIN */
+.headeropscat{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 7%;
+    width: 100%;
+    height: 70px;
+    left: 0px;
+    top: 0px;
+    background: #FFFFFF;
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.08);
+}
+
+.brandops{
+    width: 66px;
+    height: 43px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.brandopstag{
+    width: 66px;
+    height: 43px;
+    left: 0px;
+    top: 0px;
+
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 43px;
+
+    /* identical to box height */
+
+    color: #07484A;
+}
+
+.searchcatops{
+    /* Auto layout */
+    width: 78%;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin-left: 2rem;
+}
+
+.chartops{
+    flex: none;
+    flex-grow: 0;
+    order: 2;
+    margin-left: 1rem;
+    font-size: 25px;
+    color: #07484A;
+}
+
+.categorynotlog{
+    flex: none;
+    flex-grow: 0;
+    order: 3;
+    margin-left: 1rem;
+}
+
+.categorynotlog .log001{
+    width: 84px;
+    height: 38px;
+    background: #07484A;
+    border-radius: 8px;
+
+    /* text */
+    
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.categorynotlog .log001:hover{
+    background: #053839;
+}
+
+.categorynotlog .sign001{
+    margin-left: 1rem;
+    width: 100px;
+    height: 38px;
+
+    background: #FFFFFF;
+    border: 1px solid #07484A;
+    border-radius: 8px;
+
+    /* text */
+    
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    color: #07484A;
+}
+
+.categorynotlog .sign001:hover{
+    background: #07484A;
+    color: #fff;
+}
+
+.searchcatops .form-control{
+    border-right: none !important;
+}
+
+.searchcatops .input-group-text{
+    background-color: transparent !important;
+}
+
+/* END HEADER WHEN USER NOT LOGIN */
+
+/* HEADER WHEN USER ALREADY LOGIN */
+.categorylogops{
+    flex: none;
+    flex-grow: 0;
+    order: 3;
+    margin-left: 1rem;
+    font-size: 25px;
+    color: #07484A;
+}
+
+
+
+
+.notifcatops{
+    flex: none;
+    flex-grow: 0;
+    order: 2;
+    margin-left: 1rem;
+    font-size: 25px;
+    color: #07484A;
+}
+
+/* END HEADER WHEN USER ALREADY LOGIN */
+
+.listifmobileops{
+    display: none;
+    flex: none;
+    flex-grow: 0;
+    order: 4;
+    margin-left: 1rem;
+    font-size: 25px;
+    color: #07484A;
+}
+
+/* Media On screen custom */
+@media screen and (max-width: 1440px){
+    .headeropscat{
+        padding: 10px 50px !important;
+    }.searchcatops{
+        width: 73% !important;
+    }
+
+}
+@media screen and (max-width: 1300px){
+    .headeropscat{
+        padding: 10px 50px !important;
+    }.searchcatops{
+        width: 69% !important;
+    }
+
+}
+@media screen and (max-width: 1080px){
+    .headeropscat{
+        padding: 10px 25px !important;
+
+    }
+    .searchcatops{
+        width: 62% !important;
+    }
+
+}
+
+@media screen and (max-width: 940px){
+    .searchcatops, .hasloginedops .searchcatops{
+        width: 75% !important;
+        max-width: none !important;
+    }
+    .categorynotlog, .notifcatops, .categorylogops{
+        display: none;
+    } .listifmobileops {
+        display: inline;
+    }
+}
+@media screen and (max-width: 763px){
+    .headeropscat{
+        padding: 10px 10px !important;
+    }
+    .searchcatops, .hasloginedops .searchcatops{
+        width: 70% !important;
+    }
+}
+@media screen and (max-width: 601px){
+    .headeropscat{
+        padding: 10px 10px !important;
+    }
+    .searchcatops, .hasloginedops .searchcatops{
+        width: 65% !important;
+    }
+}
+@media screen and (max-width: 500px){
+    .searchcatops, .hasloginedops .searchcatops{
+        width: 50% !important;
+    }
+}
+@media screen and (max-width: 400px){
+    .searchcatops, .hasloginedops .searchcatops{
+        width: 45% !important;
+    }
+}
+/* end Media On screen custon */
