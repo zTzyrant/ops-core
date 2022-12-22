@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -23,7 +22,6 @@ export class RegisterComponent{
   public customerregistform: FormGroup | any;
 
   constructor(public fb: FormBuilder,
-    private http: HttpClient,
     private titleService: Title,
     private curdService: CurdApiService,
     private toastr: ToastrService
@@ -33,7 +31,7 @@ export class RegisterComponent{
     }
 
   checksubmit(){
-    let verifusername = true;
+    let verifusername = true, verifEmail = true, verifPhone = true;
     const tempPassword = this.password.value;
     this.curdService.getUsersname().subscribe(users => {
       this.datas = users;
@@ -41,20 +39,23 @@ export class RegisterComponent{
 
       for(let z = 0; z < this.datas.length; z++){
         if(this.datas[z].username == this.username.value){
-          verifusername = false;
-
-          
+          verifusername = false;          
+        }
+        if(this.datas[z].email == this.email.value){
+          verifEmail = false;          
+        }
+        if(this.datas[z].phone == this.phone.value){
+          verifPhone = false;          
         }
       }
 
-      const encryptPassword = CryptoJS.AES.encrypt(tempPassword, environment.keyEncrypt);
+      const encryptPassword = CryptoJS.HmacSHA256(this.password.value, environment.keyEncrypt)
             
-      this.customerregistform.value.password = encryptPassword.toString();    
+      this.customerregistform.value.password = CryptoJS.enc.Base64.stringify(encryptPassword)
       console.log(this.customerregistform.value.password);
       
       
-      if(verifusername){
-        
+      if(verifusername && verifEmail && verifPhone){
         this.curdService.registercustomer(this.customerregistform.value).subscribe(respone => {
           let temp: any;
           temp = respone;
@@ -73,7 +74,8 @@ export class RegisterComponent{
         })
         
       } else {
-        this.toastr.error('Username Already used!');
+        let message = (!verifusername) ? 'Username' : (!verifEmail) ? 'Email!' : 'Phone Number';
+        this.toastr.error(`${message} Already used!`);
       }
 
     });

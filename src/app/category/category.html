@@ -1,52 +1,52 @@
-<div class="headeropscat">
-    <div class="brandops">
-        <h2 class="brandopstag">OPS</h2>
-    </div>
-    <div class="searchcatops">
-        <div class="input-group" onsubmit="console.log('submited')">
-            <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2" onfocus="">
-            <span class="input-group-text" id="basic-addon2" ><i class="bi bi-search" style="color: #07484A;"></i></span>
-        </div> 
-    </div>
-    <div class="chartops">
-        <i class="bi bi-cart-fill" style="color: #07484A;"></i>
-    </div>
-    <div class="listifmobileops">
-        <i class="bi bi-list"></i>
-    </div>
-    <div class="categorynotlog">
-        <button type="button" class="btn log001">Login</button>
-        <button type="button" class="btn sign001">Sign Up</button>
-    </div>
-</div>
+<app-header></app-header>
 
-<div class="headeropscat hasloginedops" style="top: 100px;">
-    <div class="brandops">
-        <h2 class="brandopstag">OPS</h2>
-    </div>
-    <div class="searchcatops">
-        <div class="input-group" onsubmit="console.log('submited')">
-            <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
-            <span class="input-group-text" id="basic-addon2" ><i class="bi bi-search" style="color: #07484A;"></i></span>
-        </div> 
-    </div>
-    <div class="chartops">
-        <i class="bi bi-cart-fill"></i>
-    </div>
-    <div class="notifcatops">
-        <i class="bi bi-bell-fill"></i>
-    </div>
-    <div class="listifmobileops">
-        <i class="bi bi-list"></i>
-    </div>
-    <div class="categorylogops">
-        <div class="dropdown">
-            <i class="bi bi-person-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
+<app-login></app-login>
+
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-md-2 sidebar">
+        <div>Filter</div>
+        <div>
+          <select class="form-select" aria-label="Sort by paper type">
+            <option selected>Paper Type</option>
+            <option value="A4">A4</option>
+            <option value="F4">F4</option>
+            <option value="A6">A6</option>
+          </select>
+          <select class="form-select" aria-label="Sort by Location">
+            <option selected>Location</option>
+            <option value="Denpasar">Denpasar</option>
+            <option value="Badung">Badung</option>
+            <option value="Tabanan">Tabanan</option>
+          </select>
         </div>
+      </div>
+      <div class="col-md-9 marketplace">
+        <div class="d-flex flex-column">
+          <div class="d-flex flex-row">
+            <div class="flex-fill p-3 itemsloc">
+              <img src="https://www.paperone.co.id/images/paperonedigit/digital_hero.png" class="itemsimageops" alt="Item">
+              <div class="col-9 textareaforitems">
+                <div>A4 Paper With High Quality Printing</div>
+                <div>Rp. 1.000</div>
+                <div>Star | sold 20</div>
+              </div>
+            </div>
+            <div class="flex-fill p-3 itemsloc">
+              <img src="https://static.bmdstatic.com/pk/product/medium/5e16e787cdcd1.jpg" class="itemsimageops" alt="Item">
+              <div class="col-9 textareaforitems">
+                <div>A4 Paper With High Quality Printing</div>
+                <div>Rp. 1.000</div>
+                <div>Star | sold 20</div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-row">
+            <div class="flex-fill text-white text-center p-3 itemsloc">Product 3</div>
+            <div class="flex-fill text-white text-center p-3 itemsloc">Product 4</div>
+          </div>
+        </div>
+        
     </div>
 </div>
+  

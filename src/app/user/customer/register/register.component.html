@@ -64,7 +64,7 @@
 
                     <div class="col-12 mb-2">
                         <label for="email" class="form-label">Email</label>
-                        <input name="email" type="text" class="form-control inputcustops" formControlName="email" placeholder="email@example.com"
+                        <input name="email" type="text" class="form-control inputcustops" formControlName="email" placeholder="email@example.com" email
                             [ngClass]="{'is-invalid': customerregistform.controls['email'].invalid && (customerregistform.controls['email'].dirty || customerregistform.controls['email'].touched), 'is-valid': customerregistform.controls['email'].valid}"
                             maxlength="255"
                         >
@@ -98,7 +98,7 @@
                         <label class="form-label">Gender</label>
                         <select class="form-select inputcustops" formControlName="genderselect"
                             [ngClass]="{'is-invalid': customerregistform.controls['genderselect'].invalid && (customerregistform.controls['genderselect'].dirty || customerregistform.controls['genderselect'].touched), 'is-valid': customerregistform.controls['genderselect'].valid}"
-                        >
+                        required="">
                             <option selected value="">Select Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -146,7 +146,7 @@
 
                     <div class="col-12">      
                         <button class="btn btn-primary cusopssub mt-2 mb-2" type="submit" [disabled]="customerregistform.invalid">Sign up for free</button>
-                        <p class="text-center">Already have an account? <a href="/">Sign in Here.</a></p>
+                        <p class="text-center">Already have an account? <a href="/category">Sign in Here.</a></p>
                     </div>
                   </form>
             </div>

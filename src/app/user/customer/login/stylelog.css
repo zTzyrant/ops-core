@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+.mywidllog{
+    width: 420px !important;
+}
+.cloudme{
+    margin-left: auto;
+    margin-right: auto;
+    width: 374.32px;
+    height: 68.05px;
+    background: #07484A;
+    border: 2px solid #07484A;
+    border-radius: 20px;
+}
+
+.ordinarybtn{
+    width: 170px;
+    background: transparent;
+    border-radius: 18px;
+    margin: auto;
+    outline: none;
+    border: none;
+}
+.templ{
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 25px;
+    color: #FFFFFF;
+}
+
+.activelog{
+    color: #07484A !important;
+    height: 55.9px;
+    background: #FFFFFF;
+}
+
+.form-label{
+    font-family: 'Outfit';
+    font-weight: 600 !important;
+    line-height: 20px !important;
+    color: #000000;
+}
+
+input{
+    width: 375px;
+    height: 60px;
+    display: block;
+  margin-right: auto;
+  margin-left: auto;
+    font-family: 'Outfit';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+}
+
+input[type="submit"]{
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    font-family: 'Outfit';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    border-radius: 8px !important;
+}
+
+  .form-group[class*="has-icon-"].has-icon-right .form-control {
+    padding-right: 2.5rem;
+  }
+  .form-group[class*="has-icon-"].has-icon-right .form-control-icon {
+    right: 0;
+  }
+  .form-group[class*="has-icon-"] .form-control:focus ~ .form-control-icon i,
+  .form-group[class*="has-icon-"] .form-control:focus ~ .form-control-icon svg {
+    color: #5a8dee;
+  }
+  .form-group[class*="has-icon-"] .form-control.form-control-xl {
+    padding-left: 3rem;
+  }
+  .form-group[class*="has-icon-"]
+    .form-control.form-control-xl
+    ~ .form-control-icon
+    i {
+    font-size: 1.6rem;
+  }
+  .form-group[class*="has-icon-"]
+    .form-control.form-control-xl
+    ~ .form-control-icon
+    i:before {
+    color: #a6a8aa;
+  }
+  .form-group[class*="has-icon-"] .form-control-icon {
+    padding: 0 0.6rem;
+    position: absolute;
+  }
+  .form-group[class*="has-icon-"] .form-control-icon i,
+  .form-group[class*="has-icon-"] .form-control-icon svg {
+    color: #adb5bd;
+    font-size: 1.2rem;
+    width: 1.2rem;
+  }
+  .form-group[class*="has-icon-"] .form-control-icon i:before,
+  .form-group[class*="has-icon-"] .form-control-icon svg:before {
+    vertical-align: sub;
+  }
+  .form-control ~ .form-control-icon {
+    top: 20%;
+  }
+  
+  .has-icon-right .form-control-icon{
+    top: 25%;
+    right: 4% !important;
+    cursor: pointer;
+  }
+
+@media (max-width: 576px){
+    .modal-dialog {
+        max-width: var(--bs-modal-width);
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 430px){
+    .mywidllog{
+        width: 98% !important;
+    }
+    .cloudme{
+        width: 98% !important;
+    } .ordinarybtn {
+        width: 45% !important;
+    } input{
+        width: 100%;
+    }
+}

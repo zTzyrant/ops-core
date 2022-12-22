@@ -1,0 +1,39 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mywidllog">
+      <div class="modal-content">
+        <form action="" [formGroup]="loginform" (ngSubmit)="login()" novalidate>
+          <div class="modal-header">
+          <div class="btn-group cloudme" role="group" aria-label="Basic example">
+            <button type="button" class="ordinarybtn templ" [ngClass]="{'activelog': btnloginwith}" (click)="changeLoginWith(true)">Username</button>
+            <button type="button" class="ordinarybtn templ" [ngClass]="{'activelog': !btnloginwith}" (click)="changeLoginWith(false)">Email</button>
+          </div>
+          </div>
+          <div class="modal-body mx-auto">
+            <label class="form-label" *ngIf="btnloginwith">Login With Username</label>
+            <label class="form-label" *ngIf="!btnloginwith">Login With Email</label>
+            <div class="mb-3">
+                <input class="mx-auto" type="text" class="form-control" placeholder="Username" formControlName="username" *ngIf="btnloginwith">
+                <input class="mx-auto" type="email" class="form-control" placeholder="Email" formControlName="email" *ngIf="!btnloginwith"
+                  [ngClass]="{'is-invalid': (loginform.controls['email'].invalid && (loginform.controls['email'].dirty || loginform.controls['email'].touched)), 
+                  'is-valid': loginform.controls['email'].valid}"
+                >
+              </div>
+              <div class="mb-3">
+                <div class="form-group position-relative has-icon-right">
+                  <input class="mx-auto" name="password" class="form-control inputcustops ps1x" formControlName="password" placeholder="Password"
+                    [type]="passwordinputtype ? 'password' : 'text'"
+                  >
+                  <div class="form-control-icon cstareapass" (click)="tooglepassword()">
+                      <i class="bi bi-eye-slash" *ngIf="passwordinputtype"></i>
+                      <i class="bi bi-eye" *ngIf="!passwordinputtype"></i>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" class="cloudme"  value="Login">
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
