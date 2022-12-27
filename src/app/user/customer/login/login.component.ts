@@ -55,7 +55,10 @@ export class LoginComponent {
   }
 
   login(){
-
+    if(!this.username.value && this.email.value && this.password){
+      this.toast.error('Please check your inputed data !', 'Form data cannot be null')
+      return
+    }
     this.loginform.value.password = this.curdService.encryptPassword(this.loginform.value.password)
     this.curdService.logincustomer(this.loginform.value).subscribe(response => {
       let tempResponse : any;

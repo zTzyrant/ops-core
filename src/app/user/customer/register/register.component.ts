@@ -31,8 +31,12 @@ export class RegisterComponent{
     }
 
   checksubmit(){
+    if(this.customerregistform.invalid){
+      this.toastr.error('Please check your inputed data !', 'Form data cannot be null')
+      this.customerregistform.markAllAsTouched();
+      return 
+    }
     let verifusername = true, verifEmail = true, verifPhone = true;
-    const tempPassword = this.password.value;
     this.curdService.getUsersname().subscribe(users => {
       this.datas = users;
       this.datas = this.datas.payload.datas;
@@ -74,7 +78,7 @@ export class RegisterComponent{
         })
         
       } else {
-        let message = (!verifusername) ? 'Username' : (!verifEmail) ? 'Email!' : 'Phone Number';
+        let message = (!verifusername) ? 'Username' : (!verifEmail) ? 'Email' : 'Phone Number';
         this.toastr.error(`${message} Already used!`);
       }
 
@@ -92,13 +96,23 @@ export class RegisterComponent{
         this.strongNumber, this.strongUpper,
         Validators.minLength(6)
       ]],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email, this.regexValidemail]],
       fullname: ['', Validators.required],
       genderselect: ['', Validators.required],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       agreeterm: ['', Validators.required]
     });
   }
+
+  regexValidemail(control: FormControl){
+    let isemail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,100}$/.test(control.value);
+    if (!isemail) {
+      return {isemail: true};
+    }
+    return null;
+  }
+
+
 
   strongNumber(control: FormControl){
     let hasNumber = /\d/.test(control.value);

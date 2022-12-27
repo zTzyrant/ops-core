@@ -14,8 +14,7 @@
             <div class="mb-3">
                 <input class="mx-auto" type="text" class="form-control" placeholder="Username" formControlName="username" *ngIf="btnloginwith">
                 <input class="mx-auto" type="email" class="form-control" placeholder="Email" formControlName="email" *ngIf="!btnloginwith"
-                  [ngClass]="{'is-invalid': (loginform.controls['email'].invalid && (loginform.controls['email'].dirty || loginform.controls['email'].touched)), 
-                  'is-valid': loginform.controls['email'].valid}"
+                  [ngClass]="{'is-invalid': (loginform.controls['email'].invalid && (loginform.controls['email'].dirty || loginform.controls['email'].touched))}"
                 >
               </div>
               <div class="mb-3">
@@ -29,6 +28,7 @@
                   </div>
                 </div>
               </div>
+              <a href="../gateway/forgotpassword">Forgotten your password?</a>
           </div>
           <div class="modal-footer">
             <input type="submit" class="cloudme"  value="Login">

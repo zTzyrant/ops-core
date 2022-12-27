@@ -15,6 +15,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { LoginComponent } from './user/customer/login/login.component';
 import { HeaderComponent } from './core/header/header.component';
+import { ProfileComponent } from './user/customer/profile/profile.component';
+import { ResetpasswordComponent } from './user/customer/resetpassword/resetpassword.component';
+import { ChangedpasswordComponent } from './user/customer/api/changedpassword/changedpassword.component';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { HeaderComponent } from './core/header/header.component';
     CategoryComponent,
     RegisterComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    ProfileComponent,
+    ResetpasswordComponent,
+    ChangedpasswordComponent,
+
   ],
   imports: [
     BrowserModule,

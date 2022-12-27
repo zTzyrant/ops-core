@@ -24,6 +24,10 @@ export class CurdApiService {
     return this.http.post(`${this.apiurl}/logincustomer`, datas)
   }
 
+  requestRestartPassword(datas: any){
+    return this.http.get(`${this.apiurl}/resetpassword?email=${datas}`)
+  }
+
   checkloginlegal(){
     if(localStorage.getItem('logindatas') != null){
       let stringJson = localStorage.getItem('logindatas')

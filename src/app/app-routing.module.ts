@@ -3,17 +3,29 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
 import { CategoryComponent } from './category/category.component';
 import { RegisterComponent } from './user/customer/register/register.component';
+import { ProfileComponent } from './user/customer/profile/profile.component';
+import { ResetpasswordComponent } from './user/customer/resetpassword/resetpassword.component';
+import { ChangedpasswordComponent } from './user/customer/api/changedpassword/changedpassword.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'homes',
     component: HomepageComponent
   }, {
-    path:'category',
+    path:'',
     component: CategoryComponent
   }, {
     path: 'register',
     component: RegisterComponent
+  }, {
+    path: 'user/profile',
+    component: ProfileComponent
+  }, {
+    path: 'gateway/forgotpassword',
+    component: ResetpasswordComponent
+  }, {
+    path: 'api/resetpassword',
+    component: ChangedpasswordComponent
   }
   
 ];

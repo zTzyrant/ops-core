@@ -49,8 +49,8 @@
         <div class="dropdown">
             <i class="bi bi-person-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
             <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="/user/profile">Profile {{  apilogin.fields[0].username }}</a></li>
               <li><a class="dropdown-item" (click)="signout()">Sign Out</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
         </div>

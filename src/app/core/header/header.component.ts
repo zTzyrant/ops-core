@@ -6,16 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  myObject = {
-    name : "john doe",
-    age : 32,
-    gender : "male",
-    profession : "optician" 
-  }
-  
-  apilogin = localStorage.getItem('logindatas');
+  apilogin = JSON.parse(localStorage.getItem('logindatas')!);
   signout(){
     localStorage.removeItem('logindatas')
     location.reload();
   }
+
 }
