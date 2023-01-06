@@ -1,3 +1,6 @@
+a{
+    text-decoration: none;
+}
 /* HEADER WHEN USER NOT LOGIN */
 .headeropscat{
     display: flex;
@@ -10,6 +13,8 @@
     top: 0px;
     background: #FFFFFF;
     box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    z-index: 10;
 }
 
 .brandops{
@@ -120,6 +125,12 @@
 /* END HEADER WHEN USER NOT LOGIN */
 
 /* HEADER WHEN USER ALREADY LOGIN */
+.melogin{
+    margin-left: 5px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
 .categorylogops{
     flex: none;
     flex-grow: 0;

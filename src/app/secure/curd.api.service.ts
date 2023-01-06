@@ -25,13 +25,15 @@ export class CurdApiService {
   }
 
   requestRestartPassword(datas: any){
-    return this.http.get(`${this.apiurl}/resetpassword?email=${datas}`)
+    return this.http.get(`${this.apiurl}/forgetpassword?email=${datas}`)
   }
 
   checkloginlegal(){
     if(localStorage.getItem('logindatas') != null){
       let stringJson = localStorage.getItem('logindatas')
       let jsonData = JSON.parse(stringJson!)
+      console.log(jsonData);
+      
       let getuname = jsonData.fields
       let decryptSession = CryptoJS.HmacSHA256(getuname[0].username, environment.keyEncrypt)
       let baseDecryptSession = CryptoJS.enc.Base64.stringify(decryptSession)
@@ -46,5 +48,24 @@ export class CurdApiService {
     data = CryptoJS.HmacSHA256(data, environment.keyEncrypt)
     data = CryptoJS.enc.Base64.stringify(data)
     return data
+  }
+
+  checkSaltTokenEmail(datas: any, token: any){
+    return this.http.get(`${this.apiurl}/checkToken?email=${datas}&salt=${token}`)
+  }
+
+  requestUpdateConsumerPassword(email: any, token: any, newPassword: any){
+    return this.http.get(`${this.apiurl}/updatePassowrd?email=${email}&salt=${token}&newpassword=${newPassword}`)
+  }
+
+  reqUpdateConsumerAccount(body: any){
+    return this.http.post(`${this.apiurl}/updateCustomer`, body)
+  }
+
+  updateSessionConsumer(datas: any){
+    this.http.post(`${this.apiurl}/getconsumerdatas`, datas).subscribe(response => {
+      let newDatas = response      
+      localStorage.setItem('logindatas', JSON.stringify(newDatas));
+    })   
   }
 }

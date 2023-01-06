@@ -1,9 +1,15 @@
+a{
+  color: black;
+  text-decoration: none;
+}
+
 .itemsloc {
   box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   margin: 10px;
   width: 45%;
-  
+  cursor: pointer;
+  max-width: 48%;
 }
 
 .itemsimageops{
@@ -19,6 +25,7 @@
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+    max-width: 100% !important;
   }
   .flex-row{
     flex-direction: column !important;
@@ -29,6 +36,9 @@
 }
 
 @media screen and (max-width: 984px) {
+  .itemsloc{
+    max-width: 47%;
+  }
   .itemsimageops{
     width: 100% !important;
   }
@@ -39,8 +49,7 @@
     overflow: hidden;
     text-overflow: ellipsis; 
     bottom: 0;
-
-    padding: 5px;
+    padding: 10px 15px;
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
     background-color: rgba(236, 236, 236, 0.75);

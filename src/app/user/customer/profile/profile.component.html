@@ -1,0 +1,116 @@
+<app-header></app-header>
+<div class="container-fluid ">
+
+    <div class="col-md-10 mt-4 mb-3 mx-auto">
+        <div class="card shadow">
+
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#account-information" type="button" role="tab" aria-controls="account-information" aria-selected="true">
+                        Account Information
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#consumer-address" type="button" role="tab" aria-controls="consumer-address" aria-selected="false" disabled>
+                        Address
+                    </button>
+                </li>
+            </ul>
+                
+            <div class="tab-content" id="myTabContent">
+                <!-- Account Information -->
+                <div class="tab-pane fade show active" id="account-information" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                    <form [formGroup]="formUpdateProfile" (ngSubmit)="submitChangesProfile()">
+                        <div class="card-body">
+                            <div class="row">
+
+                                <!-- Username -->
+                                <div class="col-md-6 my-2">
+                                    <div class="form-group">
+                                        <label for="username" class="form-label">Username</label>
+                                        <div class="input-group">
+                                            <input type="text" id="username" class="form-control" value="{{this.jsonData.fields[0].username}}" disabled="" >
+                                            <!-- for now please email admin for change username -->
+                                            <!-- <button class="btn btn-outline-secondary" type="button" id="edit-username" (click)="editSomeDatas('username')">Edit</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End-of-Username -->
+
+                                <!-- Fullname -->                 
+                                <div class="col-md-6  my-2">
+                                    <div class="form-group">
+                                        <label for="fullname" class="form-label">Full name</label>
+                                        <div class="input-group">
+                                            <input type="text" id="fullname" class="form-control" formControlName="fullname">
+                                            <button class="btn btn-outline-secondary" type="button" id="edit-fullname" (click)="editSomeDatas('fullname')" *ngIf="!this.listManage.updateFullname">Edit</button>
+                                            <button class="btn btn-outline-secondary" type="button" id="edit-fullname" (click)="cancelSomeDatas('fullname')" *ngIf="this.listManage.updateFullname">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End-of-Fullname -->
+
+                                <!-- Email -->                 
+                                <div class="col-md-6  my-2">
+                                    <div class="form-group">
+                                        <label for="email" class="form-label">Email</label>
+                                        <div class="input-group">
+                                            <input type="text" id="email" class="form-control" value="{{this.jsonData.fields[0].email}}" disabled="" >
+                                            <!-- for now please email admin for change email -->
+                                            <!-- <button class="btn btn-outline-secondary" type="button" id="edit-email">Edit</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End-of-Email -->
+
+                                <!-- Gender -->                 
+                                <div class="col-md-6  my-2">
+                                    <div class="form-group">
+                                        <label for="gender" class="form-label">Gender</label>
+                                        <div class="input-group">
+                                            <select class="form-control" id="gender" required formControlName="gender">
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
+                                            <button class="btn btn-outline-secondary" type="button" id="edit-gender" (click)="editSomeDatas('gender')" *ngIf="!this.listManage.updateGender">Edit</button>
+                                            <button class="btn btn-outline-secondary" type="button" id="edit-fullname" (click)="cancelSomeDatas('gender')" *ngIf="this.listManage.updateGender">Cancel</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End-of-Gender -->
+
+                                <!-- Phone -->
+                                <div class="col-md-6  my-2">
+                                    <div class="form-group">
+                                        <label for="phone" class="form-label">Phone</label>
+                                        <div class="input-group">
+                                            <input type="text" id="phone" class="form-control" value="{{this.jsonData.fields[0].phone}}" disabled="" >
+                                            <!-- for now please email admin for change phone -->
+                                            <!-- <button class="btn btn-outline-secondary" type="button" id="edit-phone">Edit</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End-of-Phone -->
+
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white" *ngIf="changesDatas">
+                            <button type="button" class="btn btn-outline-secondary my-2 mx-2">Cancel</button>
+                            <button type="submit" class="btn cusopssub my-2 mx-2">Submit Changes</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- End-of-Tab Account Information -->
+
+                <!-- Tab Address -->
+                <div class="tab-pane fade" id="consumer-address" role="tabpanel" aria-labelledby="consumer-address" tabindex="0">
+                    <div class="card-body">
+                        Address tab
+                    </div>
+                </div>
+                <!-- End-of-Tab Address -->
+
+        </div>
+    </div>
+</div>

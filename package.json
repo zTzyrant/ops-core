@@ -19,6 +19,8 @@
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
     "@popperjs/core": "^2.11.6",
+    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.2",
     "crypto-js": "^4.1.1",
@@ -32,6 +34,8 @@
     "@angular-devkit/build-angular": "^15.0.1",
     "@angular/cli": "~15.0.1",
     "@angular/compiler-cli": "^15.0.0",
+    "@types/bcrypt": "^5.0.0",
+    "@types/bcryptjs": "^2.4.2",
     "@types/crypto-js": "^4.1.1",
     "typescript": "~4.8.2"
   }

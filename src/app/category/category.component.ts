@@ -10,4 +10,8 @@ export class CategoryComponent{
   ngOnInit(): void {
     
   }
+
+  viewProduct(url: any){
+    location.href = url
+  }
 }

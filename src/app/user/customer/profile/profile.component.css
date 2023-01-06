@@ -1,0 +1,33 @@
+.nav-link{
+    color: #07484A;
+}
+button.nav-link{
+    width: 200px;
+}
+button.nav-link.active{
+    border-bottom: 2px solid #07484A;
+}
+
+.cusopssub{
+    background: #07484A;
+    color: #FFFFFF !important;
+}
+
+.btn{
+    height: 3rem;
+}
+
+.cusopssub:hover{
+    background: #063839 !important;
+    background-color: #063839 !important;
+}
+
+.cusopssub:active{
+    background: #052d2e !important;
+    background-color: #052d2e !important;
+    border-color: #14494a !important;
+}
+
+.form-control{
+    height: 3rem;
+}

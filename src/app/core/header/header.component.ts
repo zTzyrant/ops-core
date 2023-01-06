@@ -9,7 +9,7 @@ export class HeaderComponent {
   apilogin = JSON.parse(localStorage.getItem('logindatas')!);
   signout(){
     localStorage.removeItem('logindatas')
-    location.reload();
+    location.href = '/';
   }
 
 }

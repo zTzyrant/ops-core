@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { CurdApiService } from 'src/app/secure/curd.api.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -25,7 +27,7 @@ import { CurdApiService } from 'src/app/secure/curd.api.service';
                   <input type="email" id="email" class="form-control" name="email" placeholder="Enter Your Email" formControlName="email"
                     [ngClass]="{'is-invalid': customerResetPassword.controls['email'].invalid && (customerResetPassword.controls['email'].dirty ||
                     customerResetPassword.controls['email'].touched), 'is-valid': customerResetPassword.controls['email'].valid}"
-                    required="">
+                    required="" [readOnly]="loadingValidationEmail" style="height: 3rem;">
                   <div class="invalid-feedback alert alert-danger mt-3 inputcustops">
                       <div *ngIf="email.errors?.['required']">
                           <i class="bi bi-exclamation-octagon"></i>
@@ -38,8 +40,12 @@ import { CurdApiService } from 'src/app/secure/curd.api.service';
                   </div>
                 </div>
                 <div class="mb-3 d-grid">
-                  <button type="submit" class="btn btn-primary cusopssub">
+                  <button type="submit" class="btn btn-primary cusopssub" *ngIf="!loadingValidationEmail">
                     Reset Password
+                  </button>
+                  <button class="btn cusopssub" type="button" disabled *ngIf="loadingValidationEmail">
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    Loading...
                   </button>
                 </div>
                 <span>Don't have an account? <a href="register">sign up</a></span>
@@ -94,7 +100,13 @@ export class ResetpasswordComponent {
 
   public customerResetPassword: FormGroup | any;
 
-  constructor(public fb: FormBuilder,private curdService: CurdApiService,){
+  loadingValidationEmail = false
+
+  constructor(
+    public fb: FormBuilder,
+    private curdService: CurdApiService,
+    private toastr: ToastrService
+  ){
     this.checkdatas();
   }
 
@@ -118,13 +130,27 @@ export class ResetpasswordComponent {
   }
 
   submit(){
-    alert("what")
+    if(this.customerResetPassword.invalid){
+      this.customerResetPassword.markAllAsTouched();
+      this.toastr.error('Please check your inputed data !')
 
+      return
+    }
+    this.loadingValidationEmail = true
     this.curdService.requestRestartPassword(this.customerResetPassword.value.email).subscribe(respone => {
       let temp: any;
       temp = respone; 
-      if(temp === '1'){
-        alert("what")
+      console.log(temp);
+      
+      if(temp === 1){
+        Swal.fire('Success!','Successfuly sending link reset password to your email !','success')
+        this.loadingValidationEmail = false
+      } if(temp === 0){
+        Swal.fire('Error','Something went wrong! Please try again letter.', 'error')
+        this.loadingValidationEmail = false
+      } if(temp === -1) {
+        Swal.fire('Invalid', 'This email is not registerd in OPS Core !', 'warning')
+        this.loadingValidationEmail = false
       }
     
     })

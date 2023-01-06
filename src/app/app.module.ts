@@ -18,6 +18,8 @@ import { HeaderComponent } from './core/header/header.component';
 import { ProfileComponent } from './user/customer/profile/profile.component';
 import { ResetpasswordComponent } from './user/customer/resetpassword/resetpassword.component';
 import { ChangedpasswordComponent } from './user/customer/api/changedpassword/changedpassword.component';
+import { MerchantpageComponent } from './merchant/merchantpage/merchantpage.component';
+import { DetailsproductComponent } from './merchant/detailsproduct/detailsproduct.component';
 
 
 @NgModule({
@@ -31,6 +33,8 @@ import { ChangedpasswordComponent } from './user/customer/api/changedpassword/ch
     ProfileComponent,
     ResetpasswordComponent,
     ChangedpasswordComponent,
+    MerchantpageComponent,
+    DetailsproductComponent,
 
   ],
   imports: [
