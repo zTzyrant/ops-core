@@ -25,6 +25,7 @@
     "bootstrap-icons": "^1.10.2",
     "crypto-js": "^4.1.1",
     "ngx-toastr": "^16.0.1",
+    "pdfjs-dist": "^3.2.146",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.6.15",
     "tslib": "^2.3.0",

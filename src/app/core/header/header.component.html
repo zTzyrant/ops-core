@@ -63,7 +63,8 @@
             </div>
             
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" routerLink="/user/profile">Profile {{  apilogin.fields[0].username }}</a></li>
+              <li><a class="dropdown-item" routerLink="/user/profile" *ngIf="meUIuser == 0">Profile {{  apilogin.fields[0].username }}</a></li>
+              <li><a class="dropdown-item" href="developer/dashboard" *ngIf="meUIuser == 1">Dashboard Developer</a></li>
               <li><a class="dropdown-item" (click)="signout()">Sign Out</a></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>

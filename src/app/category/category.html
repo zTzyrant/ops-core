@@ -24,45 +24,19 @@
     <div class="col-md-9 marketplace">
       <div class="d-flex flex-column">
         <div class="d-flex flex-row flex-wrap">
-          <div class="flex-fill p-3 itemsloc" (click)="viewProduct('view/merch/id')">
-            <img src="https://www.paperone.co.id/images/paperonedigit/digital_hero.png" class="itemsimageops" alt="Item">
-            <a href="view/merch/id">
+
+          <div class="flex-fill p-3 itemsloc" *ngFor="let data of datas | async">
+            <a href="view/merch/{{data.productID}}">
+              <img src="{{data.imageurl}}" class="itemsimageops" alt="Item">
               <div class="col-9 textareaforitems">
-                <div>A4 Paper With High Quality Printing</div>
-                <div>Rp. 1.000</div>
+                <div>{{data.productTitle}}</div>
+                <div>Rp. {{data.price}}</div>
                 <div>Star | sold 20</div>
               </div>
             </a>
           </div>
-          <div class="flex-fill p-3 itemsloc">
-            <img src="https://static.bmdstatic.com/pk/product/medium/5e16e787cdcd1.jpg" class="itemsimageops" alt="Item">
-            <div class="col-9 textareaforitems">
-              <div>A4 Paper With High Quality Printing</div>
-              <div>Rp. 1.000</div>
-              <div>Star | sold 20</div>
-            </div>
-          </div>
         </div>
-        <div class="d-flex flex-row flex-wrap">
-          <div class="flex-fill p-3 itemsloc" (click)="viewProduct('view/merch/id')">
-            <img src="https://www.paperone.co.id/images/paperonedigit/digital_hero.png" class="itemsimageops" alt="Item">
-            <a href="view/merch/id">
-              <div class="col-9 textareaforitems">
-                <div>A4 Paper With High Quality Printing</div>
-                <div>Rp. 1.000</div>
-                <div>Star | sold 20</div>
-              </div>
-            </a>
-          </div>
-          <div class="flex-fill p-3 itemsloc">
-            <img src="https://static.bmdstatic.com/pk/product/medium/5e16e787cdcd1.jpg" class="itemsimageops" alt="Item">
-            <div class="col-9 textareaforitems">
-              <div>A4 Paper With High Quality Printing</div>
-              <div>Rp. 1.000</div>
-              <div>Star | sold 20</div>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </div>
   </div>

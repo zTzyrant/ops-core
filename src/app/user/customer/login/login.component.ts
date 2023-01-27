@@ -15,7 +15,8 @@ export class LoginComponent {
   btnloginwith = true;
   passwordinputtype = true;
   public loginform: FormGroup | any;
-  constructor(public fb: FormBuilder,
+  constructor(
+    public fb: FormBuilder,
     private curdService: CurdApiService,
     private toast : ToastrService
   ){

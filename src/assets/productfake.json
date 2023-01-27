@@ -1,0 +1,45 @@
+[{ 
+		"productID": "0001",
+		"productTitle": "Printing Paper A4",
+		"productDecription": "Printing paper a4",
+		"category": "Paper",
+		"productType": "unset",
+		"quantity": "unknown",
+		"price": "1000",
+		"colorType": "b&w",
+		"printingQuality": "draft",
+		"imageurl": "https://www.paperone.co.id/images/paperonedigit/digital_hero.png"
+	},   { 
+		"productID": "0001",
+		"productTitle": "Printing Paper A4",
+		"productDecription": "Printing paper a4",
+		"category": "Paper",
+		"productType": "unset",
+		"quantity": "unknown",
+		"price": "1000",
+		"colorType": "b&w",
+		"printingQuality": "draft",
+		"imageurl": "https://static.bmdstatic.com/pk/product/medium/5e16e787cdcd1.jpg"
+	},   { 
+		"productID": "0001",
+		"productTitle": "Printing Paper A4",
+		"productDecription": "Printing paper a4",
+		"category": "Paper",
+		"productType": "unset",
+		"quantity": "unknown",
+		"price": "1000",
+		"colorType": "b&w",
+		"printingQuality": "draft",
+		"imageurl": "https://www.paperone.co.id/images/paperonedigit/digital_hero.png"
+	},   { 
+		"productID": "0001",
+		"productTitle": "Printing Paper A4",
+		"productDecription": "Printing paper a4",
+		"category": "Paper",
+		"productType": "unset",
+		"quantity": "unknown",
+		"price": "1000",
+		"colorType": "b&w",
+		"printingQuality": "draft",
+		"imageurl": "https://static.bmdstatic.com/pk/product/medium/5e16e787cdcd1.jpg"
+	}]

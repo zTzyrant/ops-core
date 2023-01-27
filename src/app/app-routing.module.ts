@@ -4,10 +4,11 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { CategoryComponent } from './category/category.component';
 import { RegisterComponent } from './user/customer/register/register.component';
 import { ProfileComponent } from './user/customer/profile/profile.component';
-import { ResetpasswordComponent } from './user/customer/resetpassword/resetpassword.component';
+import { ResetpasswordComponent } from './user/customer/api/resetpassword/resetpassword.component';
 import { ChangedpasswordComponent } from './user/customer/api/changedpassword/changedpassword.component';
 import { MerchantpageComponent } from './merchant/merchantpage/merchantpage.component';
 import { DetailsproductComponent } from './merchant/detailsproduct/detailsproduct.component';
+import { DashboardComponent } from './developer/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,9 @@ const routes: Routes = [
   }, {
     path: 'view/:merchantname/:productid',
     component: DetailsproductComponent
+  }, {
+    path: 'developer/dashboard',
+    component: DashboardComponent
   }
   
 ];

@@ -11,6 +11,7 @@ export class CurdApiService {
   apiurl = environment.apiurl;
   constructor(private http: HttpClient) { }
 
+
   // Get All username
   getUsersname(){
     return this.http.get(`${this.apiurl}/datausrname`);
@@ -67,5 +68,13 @@ export class CurdApiService {
       let newDatas = response      
       localStorage.setItem('logindatas', JSON.stringify(newDatas));
     })   
+  }
+
+  uploadorderpdf(datas: any){
+    return this.http.post(`${this.apiurl}/uploadorderpdf`, datas);
+  }
+
+  checkpdfpages(datas: any){
+    return this.http.post(`${this.apiurl}/calcpages`, datas);
   }
 }

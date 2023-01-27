@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter');
+@import url('https://fonts.cdnfonts.com/css/open-sauce-one');
+
+*{
+  color: #07484A;
+}
+
+h2{
+  font-weight: 700;
+  font-size: 3rem;
+}
+
+h3{
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.frame-pic{
+  max-width: 526px;
+  max-height: 526px;
+  width: 100%;
+}
+
+.small-img-prod{
+  border-radius: 5px;
+  width: 100%;
+}
+
+
+.img-zoom-lens {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  /*set the size of the lens:*/
+  width: 100px;
+  height: 100px;
+}
+
+/* description areas */
+.prod-description p {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
+
+.desc-collapsed{
+  -webkit-line-clamp: none !important;
+  overflow: visible !important;
+}
+
+.extend-description{
+  font-family: 'Open Sauce One', sans-serif;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* order areas */
+
+.btn-areas-ops{
+  background-color: transparent;
+  border: 1px solid #202020;
+  border-radius: 8px;
+
+}
+
+.order-label{
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 100%;
+  color: #202020;
+}
+
+.btn, .filesareas, .form-control::file-selector-button{
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 0.57rem 0.9rem;
+  border-radius: 8px;
+}
+
+.filesareas{
+  font-weight: 400;
+  font-size: 1rem;
+  border: 1px solid black;
+}
+
+.form-control::file-selector-button{
+  font-weight: 400;
+  font-size: 1rem;
+  border: none;
+  background: #07484A;
+  color: white;
+}
+
+.form-control:hover::file-selector-button, .btn:hover{
+  background: #043233 !important;
+  color: white;
+}
+
+.btn-check:checked + .btn, .btn-submit{
+  background: #07484A;
+  color: #fff;
+}
+
+.copies-areas{
+  padding: 0.57rem 0.9rem;
+  background: #07484A;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-align: center;
+  vertical-align: middle;
+  width: 70px;
+}
+
+.orderpannel{
+  border-top: 1px solid #202020;
+  border-bottom: 1px solid #202020;
+  padding-top: 1.1rem;
+  padding-bottom: 1.1rem;
+}
