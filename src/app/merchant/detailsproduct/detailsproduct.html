@@ -8,18 +8,11 @@
           <div class="col-12 mb-1" >
             <div class="lightbox frame-pic">
               <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="false">
-                <div class="carousel-inner " style="border-radius: 10px;">
-                  <div class="carousel-item active">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/15a.webp" class="d-block frame-pic" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/13a.webp" class="d-block frame-pic" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/14a.webp" class="d-block frame-pic" alt="...">
+                <div class="carousel-inner " style="border-radius: 10px">
+                  <div class="carousel-item frame-pic"  *ngFor="let data of currentProdService.productTypeOPS" [ngClass]="{'active': currentProdService.productTypeOPS[0] === data}">
+                    <img src="{{data.imageurl}}" class="d-block pic-size" alt="...">
                   </div>
                 </div>
-                
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" style="background-color: black;" aria-hidden="true"></span>
                   <span class="visually-hidden">Previous</span>
@@ -32,39 +25,14 @@
             </div>
           </div>
 
-  
-          <div class="col-3 mt-1" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1">
-            <img
-              src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/15a.webp"
-              alt="Gallery image 4"
-              class="small-img-prod"
-            />
-          </div>
+            <div class="areas-small-img mt-1" (click)="slideto(indexOfelement)" aria-current="true" aria-label="Slide 1" *ngFor="let data of currentProdService.productTypeOPS; index as indexOfelement;">
+              <img
+                src="{{data.imageurl}}"
+                alt="{{data.papertype}}"
+                class="small-img-prod"
+              />
+            </div>
 
-          <div class="col-3 mt-1" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-current="true" aria-label="Slide 2">
-            <img
-              src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/13a.webp"
-              alt="Gallery image 4"
-              class="small-img-prod"
-            />
-          </div>
-
-          <div class="col-3 mt-1" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-current="true" aria-label="Slide 3">
-            <img
-              src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/14a.webp"
-              alt="Gallery image 4"
-              class="small-img-prod"
-            />
-          </div>
-
-
-          <div class="col-3 mt-1" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-current="true" aria-label="Slide 4">
-            <img
-              src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/14a.webp"
-              alt="Gallery image 4"
-              class="small-img-prod"
-            />
-          </div>
         </div>
       </div>
     </div>
@@ -74,7 +42,7 @@
     <div class="col-md-6 mt-3">
       <!-- prod header start -->
       <div class="prod-header">
-        <h2 class="prod-tittle">A4 Paper Printing</h2>
+        <h2 class="prod-tittle">{{currentProd.producttitle}}</h2>
         <span><i class="bi bi-star-fill" style="color: #FFC107;"></i><strong> 246 reviews</strong></span>
       </div>
       <!-- end prod header -->
@@ -83,11 +51,7 @@
       <div class="prod-description mt-4">
         <h3>Description</h3>
         <p [ngClass]="{'desc-collapsed': extendDesc}" id="somedsec" #proddesc>
-          We provide printing on A4 paper. 
-          You can choose the type of A4 paper available. 
-          Print your document with the settings according to your wishes, 
-          we will print it with the best quality according to your preferences.
-          
+          {{currentProd.productdescription}}          
         </p>
         <p class="extend-description" (click)="moredetails()">More Details</p>
       </div>
@@ -102,13 +66,13 @@
           <!-- color -->
           <div class="color-form mt-2">
             <label class="order-label">Color</label>
-            <div class="input-color-form mt-1"
-              [ngClass]="{'is-valid': orderform.controls['color'].valid}"
-            >
-              <input type="radio" class="btn-check" name="color" id="color-grayscale" value="Grayscale" formControlName="color" checked>
-              <label class="btn btn-outline-dark me-2 mt-1" for="color-grayscale">Grayscale</label>
-              <input type="radio" class="btn-check" name="color" id="color-fullcolor" value="Full Color" formControlName="color">
-              <label class="btn btn-outline-dark me-2 mt-1" for="color-fullcolor">Full Color</label>
+            <div class="input-color-form mt-1 d-flex align-content-start flex-wrap"
+              [ngClass]="{'is-valid': orderform.controls['color'].valid}" 
+            >        
+              <div *ngFor="let data of currentProdService.printColorsOPS; index as indexOfelement;">
+                <input type="radio" class="btn-check" name="color" id="color-type-{{indexOfelement}}" value="{{data.colortype}}" formControlName="color"  >
+                <label class="btn btn-outline-dark me-2 mt-1" for="color-type-{{indexOfelement}}">{{data.colortype}}</label>
+              </div>
             </div>
             <div class="valid-feedback mt-1">
               Print color is {{this.color.value}}
@@ -118,15 +82,13 @@
           <!-- papertype -->
           <div class="paper-form mt-2">
             <label class="order-label">Paper Type</label>
-            <div class="input-paper-form mt-1"
+            <div class="input-paper-form mt-1 d-flex align-content-start flex-wrap"
               [ngClass]="{'is-valid': orderform.controls['papertype'].valid}"
             >
-              <input type="radio" class="btn-check" name="papertype" id="paper-type-1" value="A4 100 grams" formControlName="papertype" checked>
-              <label class="btn btn-outline-dark me-2 mt-1" for="paper-type-1">A4 100 grams</label>
-              <input type="radio" class="btn-check" name="papertype" id="paper-type-2" value="A4 80 grams" formControlName="papertype">
-              <label class="btn btn-outline-dark me-2 mt-1" for="paper-type-2">A4 80 grams</label>
-              <input type="radio" class="btn-check" name="papertype" id="paper-type-3" value="A4 70 grams" formControlName="papertype">
-              <label class="btn btn-outline-dark me-2 mt-1" for="paper-type-3">A4 70 grams</label>
+              <div *ngFor="let data of currentProdService.productTypeOPS; index as indexOfelement;">
+                <input type="radio" class="btn-check" name="papertype" id="paper-type-{{indexOfelement}}" value="{{data.papertype}}" formControlName="papertype" >
+                <label class="btn btn-outline-dark me-2 mt-1" for="paper-type-{{indexOfelement}}">{{data.papertype}}</label>
+              </div>
             </div>
             <div class="valid-feedback mt-1">
               Print Paper type is {{this.papertype.value}}
@@ -136,15 +98,13 @@
           <!-- quality -->
           <div class="quality-form mt-2">
             <label class="order-label">Print Quality</label>
-            <div class="input-quality-form mt-1"
+            <div class="input-quality-form mt-1 d-flex align-content-start flex-wrap"
               [ngClass]="{'is-valid': orderform.controls['quality'].valid}"
             >
-              <input type="radio" class="btn-check" name="quality" id="quality-1" value="Draft" formControlName="quality">
-              <label class="btn btn-outline-dark me-2 mt-1" for="quality-1">Draft</label>
-              <input type="radio" class="btn-check" name="quality" id="quality-2" value="Normal" formControlName="quality">
-              <label class="btn btn-outline-dark me-2 mt-1" for="quality-2">Normal</label>
-              <input type="radio" class="btn-check" name="quality" id="quality-3" value="High" formControlName="quality">
-              <label class="btn btn-outline-dark me-2 mt-1" for="quality-3">High</label>
+            <div *ngFor="let data of currentProdService.printQualityOPS; index as indexOfelement;">
+              <input type="radio" class="btn-check" name="quality" id="quality-{{indexOfelement}}" value="{{data.printquality}}" formControlName="quality">
+              <label class="btn btn-outline-dark me-2 mt-1" for="quality-{{indexOfelement}}">{{data.printquality}}</label>
+            </div>
             </div>
             <div class="valid-feedback mt-1">
               Print quality is {{this.quality.value}}

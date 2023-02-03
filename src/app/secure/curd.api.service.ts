@@ -77,4 +77,17 @@ export class CurdApiService {
   checkpdfpages(datas: any){
     return this.http.post(`${this.apiurl}/calcpages`, datas);
   }
+
+  // retrieve all the products which are registered into the system
+  getAllOpsProduct(){
+    return this.http.get(`${this.apiurl}/ops-prod`)
+  }
+
+  getProductById(data: any){
+    return this.http.get(`${this.apiurl}/ops-prod/${data}`)
+  }
+
+  getAllMerchant(){
+    return this.http.get(`${this.apiurl}/show-merchant`)
+  }
 }

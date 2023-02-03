@@ -21,6 +21,10 @@ import { ChangedpasswordComponent } from './user/customer/api/changedpassword/ch
 import { MerchantpageComponent } from './merchant/merchantpage/merchantpage.component';
 import { DetailsproductComponent } from './merchant/detailsproduct/detailsproduct.component';
 import { DashboardComponent } from './developer/dashboard/dashboard.component';
+import { MerchantComponent } from './developer/merchant/merchant.component';
+import { AdminprintingComponent } from './developer/adminprinting/adminprinting.component';
+import { MerchantproductComponent } from './developer/merchantproduct/merchantproduct.component';
+import { NotFoundComponent } from './core/errorpage/not-found/not-found.component';
 
 
 @NgModule({
@@ -37,6 +41,10 @@ import { DashboardComponent } from './developer/dashboard/dashboard.component';
     MerchantpageComponent,
     DetailsproductComponent,
     DashboardComponent,
+    MerchantComponent,
+    AdminprintingComponent,
+    MerchantproductComponent,
+    NotFoundComponent,
 
   ],
   imports: [

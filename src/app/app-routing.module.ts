@@ -9,6 +9,10 @@ import { ChangedpasswordComponent } from './user/customer/api/changedpassword/ch
 import { MerchantpageComponent } from './merchant/merchantpage/merchantpage.component';
 import { DetailsproductComponent } from './merchant/detailsproduct/detailsproduct.component';
 import { DashboardComponent } from './developer/dashboard/dashboard.component';
+import { MerchantComponent } from './developer/merchant/merchant.component';
+import { AdminprintingComponent } from './developer/adminprinting/adminprinting.component';
+import { MerchantproductComponent } from './developer/merchantproduct/merchantproduct.component';
+import { NotFoundComponent } from './core/errorpage/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -38,8 +42,24 @@ const routes: Routes = [
   }, {
     path: 'developer/dashboard',
     component: DashboardComponent
+  }, {
+    path: 'developer/dashboard/merchant',
+    component: MerchantComponent
+  }, {
+    path: 'developer/dashboard/adminprinting',
+    component: AdminprintingComponent
+  }, {
+    path: 'developer/dashboard/merchantproduct',
+    component: MerchantproductComponent
+  }, 
+
+
+  // end error page
+  { 
+    path: '404', component: NotFoundComponent 
+  }, { 
+    path: '**', redirectTo: '404' 
   }
-  
 ];
 
 @NgModule({

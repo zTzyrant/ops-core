@@ -1,0 +1,55 @@
+body{
+    font-family: "Open Sans", sans-serif;
+}
+
+.min-height-300{
+    min-height: 300px !important;
+}
+
+.bg-ops{
+    background-color: #07484A !important;
+}
+
+.card{
+    border-radius: 1rem;
+}
+
+.nav-link-sz{
+    padding: 1rem !important;
+    font-size: 0.925rem !important;
+} 
+
+.icon > .bi{
+    font-size: 1.2rem !important;
+}
+
+.showNavMenu{
+    transform: translateX(0) !important;
+}
+
+.brand-color{
+    color: #07484A !important;
+}
+
+.nav-link{
+    border-radius: 0.375rem !important;
+}
+
+.nav-link:hover:not(.active){
+    background-color: #07484A !important;
+    color: #fff !important;
+}
+
+.nav-link:hover:not(.active) i {
+    color: #fff !important;
+}
+
+.card, .card-header{
+    border: none;
+}
+
+.card, .sidenav, .dropdown-menu.show {
+    box-shadow: 0 0 2rem 0 rgb(136, 152, 170) !important;
+}
+
+.meheight {height: 400px;}

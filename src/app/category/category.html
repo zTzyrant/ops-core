@@ -25,13 +25,13 @@
       <div class="d-flex flex-column">
         <div class="d-flex flex-row flex-wrap">
 
-          <div class="flex-fill p-3 itemsloc" *ngFor="let data of datas | async">
-            <a href="view/merch/{{data.productID}}">
-              <img src="{{data.imageurl}}" class="itemsimageops" alt="Item">
+          <div class="flex-fill p-3 itemsloc" *ngFor="let data of allProduct ">
+            <a href="view/{{data.productOPS.merchantname}}/{{data.productOPS.productid}}">
+              <img src="{{data.productService.productTypeOPS[0].imageurl}}" class="itemsimageops" alt="Item">
               <div class="col-9 textareaforitems">
-                <div>{{data.productTitle}}</div>
-                <div>Rp. {{data.price}}</div>
-                <div>Star | sold 20</div>
+                <div>{{data.productOPS.producttitle}}</div>
+                <div>Rp. {{data.productService.productTypeOPS[0].paperprice}}</div>
+                <div><i class="bi bi-star-fill" style="color: #FFC107;"></i> unset | unset</div>
               </div>
             </a>
           </div>

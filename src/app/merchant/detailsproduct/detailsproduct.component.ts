@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CurdApiService } from 'src/app/secure/curd.api.service';
 
@@ -7,7 +8,7 @@ import { CurdApiService } from 'src/app/secure/curd.api.service';
   selector: 'app-detailsproduct',
   templateUrl: './detailsproduct.html',
   styleUrls: ['./detailsproduct.css',
-  ]
+  ],
 })
 export class DetailsproductComponent {
   extendDesc = false
@@ -17,23 +18,59 @@ export class DetailsproductComponent {
   totalpages: any = null
   msgpages: any = "Calculate pdf pages."
 
+  allProduct: any
+  productidquery: any
+
+  currentProd: any = ''
+  currentProdService: any = ''
+
+  itemsmall = -1
+
+  selectedPaper = 1
+  maxorederCopies = 1
+
   constructor(
+    private route: ActivatedRoute,
     public fb: FormBuilder,
     private curdService: CurdApiService,
     private toast : ToastrService
-  ){
+  ){    
     this.orderformValidator()
+    
+    // call prod id from route link
+    let tempQuery: any
+    tempQuery = this.route.snapshot.params
+    this.productidquery = tempQuery.productid
+    this.curdService.getProductById(this.productidquery).subscribe(result => {
+      this.allProduct = result
+      this.allProduct.forEach((datas: any) => {        
+        this.currentProd = datas.productOPS
+        this.currentProdService = datas.productService
+        
+        // set default value
+        this.orderform.controls['color'].setValue(this.currentProdService.printColorsOPS[0].colortype)
+        this.orderform.controls['papertype'].setValue(this.currentProdService.productTypeOPS[0].papertype)
+        this.orderform.controls['quality'].setValue(this.currentProdService.printQualityOPS[0].printquality)
+      });
+    })
+
   }
 
+  slideto(dat:any){
+    var myCarousel = document.getElementById('carouselExampleIndicators')
+    var carousel = new bootstrap.Carousel(myCarousel)
+    carousel.to(dat)
+  }
   ngAfterViewInit(){
     logme()
+    
   }
   
   orderformValidator() {
     this.orderform = this.fb.group({
-      color: ['Grayscale'],
-      papertype: ['A4 100 grams'],
-      quality: ['Draft'],
+      color: ['', [Validators.required]],
+      papertype: ['', [Validators.required]],
+      quality: ['', [Validators.required]],
       copies: ['1', [Validators.required, Validators.min(1)]],
       inputedfile: ['']
     

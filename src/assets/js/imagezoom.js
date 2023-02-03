@@ -55,7 +55,6 @@ function imageZoom(imgID, resultID) {
 }
 
 function logme(){
-  console.log('online');
 
   var e = document.getElementById('somedsec');
   console.log(`${e.offsetHeight} ${e.scrollHeight}`);
