@@ -13,6 +13,10 @@ import { CurdApiService } from './secure/curd.api.service';
 //toastr
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+
+// ngx material timepicker
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+
 import { LoginComponent } from './user/customer/login/login.component';
 import { HeaderComponent } from './core/header/header.component';
 import { ProfileComponent } from './user/customer/profile/profile.component';
@@ -54,6 +58,7 @@ import { NotFoundComponent } from './core/errorpage/not-found/not-found.componen
     ReactiveFormsModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
+    NgxMaterialTimepickerModule,
   ],
   providers: [
     CurdApiService,

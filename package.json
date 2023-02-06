@@ -27,6 +27,7 @@
     "datatables.net": "^1.13.1",
     "datatables.net-dt": "^1.13.1",
     "jquery": "^3.6.3",
+    "ngx-material-timepicker": "^5.5.2",
     "ngx-toastr": "^16.0.1",
     "pdfjs-dist": "^3.2.146",
     "rxjs": "~7.5.0",

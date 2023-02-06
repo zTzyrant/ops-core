@@ -90,4 +90,12 @@ export class CurdApiService {
   getAllMerchant(){
     return this.http.get(`${this.apiurl}/show-merchant`)
   }
+
+  uploadordermerchlogo(datas: any){
+    return this.http.post(`${this.apiurl}/uploadlogomerchant`, datas);
+  }
+
+  submitNewMerchant(datas: any){
+    return this.http.post(`${this.apiurl}/registermerchant`, datas)
+  }
 }

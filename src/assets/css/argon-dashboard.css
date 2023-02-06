@@ -958,10 +958,12 @@
 
 .dropdown-menu{
   z-index: -1 !important;
+  visibility: hidden;
 }
 
 .dropdown-menu.show{
   z-index: 1000 !important;
+  visibility: visible;
 }
 
 @media (min-width: 992px) {
@@ -1544,11 +1546,10 @@
 
 label,
 .form-label {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: #344767;
-  margin-left: 0.25rem;
+  color: #2e3d58;
 }
 
 .form-control.is-invalid:focus {

@@ -73,8 +73,8 @@
         <div class="container-fluid py-1 px-3">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-              <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" >Developer</a></li>
-              <li class="breadcrumb-item text-sm text-white active" aria-current="Developer">Dashboard</li>
+              <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" >Dashboard</a></li>
+              <li class="breadcrumb-item text-sm text-white active" aria-current="Developer">Merchant</li>
             </ol>
             <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
           </nav>
@@ -211,13 +211,14 @@
                                     <td>{{dat.addressid}}</td>
                                     <td><button class="btn bg-outline-primary" style="margin: auto;">Edit</button>
                                     <button class="btn bg-outline-danger" style="margin: auto;">Delete</button></td>
-
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+
+
             <div class="col-lg-3 mb-lg-0 mb-4">
                 <div class="card z-index-2 h-100">
                         <div class="card-header pb-0 pt-3 bg-transparent">
@@ -228,6 +229,404 @@
                     </div>
                 </div>
             </div>  
+        </div>
+
+        <!-- merchant input -->
+        <div class="row mt-4">
+          <div class="col-lg-9 mb-lg-0">
+            <div class="card z-index-2 h-100">
+                <div class="card-header pb-0 pt-3 bg-transparent">
+                  <h6 class="text-capitalize">Register Merchant</h6>
+                </div>
+                <div class="card-body">
+                  <form [formGroup]="newMerchantForm">
+                    <!-- Merchant -->
+                    <h6 class="text-capitalize">Merchant Information</h6>
+                    <div class="row g-3">
+                      <div class="col-6  ">
+                        <label>Merchant Name</label>
+                        <input 
+                          type="text" 
+                          class="form-control" 
+                          placeholder="Merchant Name" 
+                          formControlName="merchantname"
+                          [ngClass]="{
+                            'is-invalid': (newMerchantForm.controls['merchantname'].invalid && (newMerchantForm.controls['merchantname'].dirty || newMerchantForm.controls['merchantname'].touched)), 
+                            'is-valid': newMerchantForm.controls['merchantname'].valid}"
+                        >
+                        <div class="invalid-feedback">
+                          <div *ngIf="merchantname.errors?.['required']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Please input this field.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6 ">
+                        <label>Open Time</label>
+                        <input 
+                          class="form-control cursor-pointer" 
+                          placeholder="Open Time" 
+                          [ngxTimepicker]="opentimeinp" 
+                          readonly 
+                          formControlName="opentime" 
+                          [format]="24"
+                          [ngClass]="{
+                            'is-invalid': (newMerchantForm.controls['opentime'].invalid && (newMerchantForm.controls['opentime'].dirty || newMerchantForm.controls['opentime'].touched)), 
+                            'is-valid': newMerchantForm.controls['opentime'].valid}"
+                        >
+                        <ngx-material-timepicker #opentimeinp [theme]="darkTheme"></ngx-material-timepicker>
+                        <div class="invalid-feedback">
+                          <div *ngIf="opentime.errors?.['required']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Please input this field.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <label>Close Time</label>
+                        <input 
+                          class="form-control cursor-pointer" 
+                          placeholder="Close Time" 
+                          [ngxTimepicker]="closetimeinp" 
+                          readonly 
+                          formControlName="closetime"  
+                          [format]="24"
+                          [ngClass]="{
+                            'is-invalid': (newMerchantForm.controls['closetime'].invalid && (newMerchantForm.controls['closetime'].dirty || newMerchantForm.controls['closetime'].touched)), 
+                            'is-valid': newMerchantForm.controls['closetime'].valid}"
+                        >
+                        <ngx-material-timepicker #closetimeinp [theme]="darkTheme"></ngx-material-timepicker>
+                        <div class="invalid-feedback">
+                          <div *ngIf="closetime.errors?.['required']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Please input this field.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <label>Merchant Logo</label>
+                        <input 
+                          type="file" 
+                          class="form-control"  
+                          placeholder="Merchant Logo" 
+                          formControlName="merchantlogo"  
+                          accept="image/png, image/jpeg" 
+                          (change)="tease($event)"
+                          [ngClass]="{
+                            'is-invalid': (newMerchantForm.controls['merchantlogo'].invalid && (newMerchantForm.controls['merchantlogo'].dirty || newMerchantForm.controls['merchantlogo'].touched)), 
+                            'is-valid': newMerchantForm.controls['merchantlogo'].valid}"
+                        >
+                        <div class="invalid-feedback">
+                          <div *ngIf="merchantlogo.errors?.['required']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Please input this field.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Merchant -->
+
+                    <!-- Merchant address -->
+                    <h6 class="text-capitalize mt-4">Merchant Address</h6>
+                    <div class="row g-3">
+                      <div class="col-6  ">
+                        <label>Full Address</label>
+                        <input 
+                          type="text" 
+                          class="form-control" 
+                          placeholder="Full Address"  
+                          formControlName="fulladdress"
+                          [ngClass]="{
+                            'is-invalid': (newMerchantForm.controls['fulladdress'].invalid && (newMerchantForm.controls['fulladdress'].dirty || newMerchantForm.controls['fulladdress'].touched)), 
+                            'is-valid': newMerchantForm.controls['fulladdress'].valid}"
+                        >
+                        <div class="invalid-feedback">
+                          <div *ngIf="fulladdress.errors?.['required']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Please input this field.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6 ">
+                        <label>City</label>
+                        <input 
+                          type="text" 
+                          class="form-control" 
+                          placeholder="City" 
+                          formControlName="city"
+                          [ngClass]="{
+                            'is-invalid': (newMerchantForm.controls['city'].invalid && (newMerchantForm.controls['city'].dirty || newMerchantForm.controls['city'].touched)), 
+                            'is-valid': newMerchantForm.controls['city'].valid}"
+                        >
+                        <div class="invalid-feedback">
+                          <div *ngIf="city.errors?.['required']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Please input this field.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <label>Post Code</label>
+                        <input 
+                          type="text" 
+                          class="form-control" 
+                          placeholder="Post Code" 
+                          formControlName="postcode"
+                          [ngClass]="{
+                            'is-invalid': (newMerchantForm.controls['postcode'].invalid && (newMerchantForm.controls['postcode'].dirty || newMerchantForm.controls['postcode'].touched)), 
+                            'is-valid': newMerchantForm.controls['postcode'].valid}" 
+                        >
+                        <div class="invalid-feedback">
+                          <div *ngIf="postcode.errors?.['required']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Please input this field.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <label>Contact Phone</label>
+                        <input
+                          type="number" 
+                          class="form-control"  
+                          placeholder="Phone Number" 
+                          formControlName="phoneaddress"
+                          [ngClass]="{
+                            'is-invalid': (newMerchantForm.controls['phoneaddress'].invalid && (newMerchantForm.controls['phoneaddress'].dirty || newMerchantForm.controls['phoneaddress'].touched)), 
+                            'is-valid': newMerchantForm.controls['phoneaddress'].valid}" 
+                        >
+                        <div class="invalid-feedback">
+                          <div *ngIf="phoneaddress.errors?.['required']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Please input this field.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <label>Aditional Information</label>
+                        <textarea 
+                          class="form-control" 
+                          cols="30" 
+                          rows="5" 
+                          formControlName="note"></textarea>
+                      </div>
+                    </div>
+                    <!-- End Merchant address -->
+                    <!-- Merchant address -->
+                    <h6 class="text-capitalize mt-4">Merchant Owner</h6>
+                    <div class="row g-3">
+                      <div class="col-6">
+                        <label>Username</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Username"
+                          formControlName="username"
+                          (change)="checkusername()"
+                          [ngClass]="{
+                            'is-invalid': (newMerchantForm.controls['username'].invalid && (newMerchantForm.controls['username'].dirty || newMerchantForm.controls['username'].touched) || usernameUsed === true), 
+                            'is-valid': newMerchantForm.controls['username'].valid}"
+                        >
+                        <div class="invalid-feedback">
+                          <div *ngIf="username.errors?.['required']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Username is required.
+                          </div>
+                          <div *ngIf="username.errors?.['minlength']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Username shouldn't be less than 5 words.
+                          </div>
+                          <div *ngIf="usernameUsed === true">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Username Already used
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-6 ">
+                        <label>Password</label>
+                        <div class="input-group"
+                          [ngClass]="{
+                            'is-invalid': newMerchantForm.controls['password'].invalid && (newMerchantForm.controls['password'].dirty || newMerchantForm.controls['password'].touched), 
+                            'is-valid': newMerchantForm.controls['password'].valid}" 
+                        >
+
+                          <input 
+                            name="password" 
+                            class="form-control ps1x" 
+                            formControlName="password" 
+                            placeholder="Password"
+                            [type]="passwordinputtype ? 'password' : 'text'"
+                            [ngClass]="{
+                              'is-invalid': newMerchantForm.controls['password'].invalid && (newMerchantForm.controls['password'].dirty || newMerchantForm.controls['password'].touched), 
+                              'is-valid': newMerchantForm.controls['password'].valid
+                            }"        
+                            maxlength="255"
+                          >
+                          <div class="form-control-icon cstareapass input-group-text" (click)="tooglepassword()">
+                            <i class="bi bi-eye-slash " *ngIf="passwordinputtype"></i>
+                            <i class="bi bi-eye" *ngIf="!passwordinputtype"></i>
+                          </div>
+                        </div>
+                        <div class="invalid-feedback">
+                          <div *ngIf="password.errors?.['required']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Password is required.
+                          </div>
+                          <div *ngIf="password.errors?.['minlength']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Password shouldn't be less than 6 words.
+                          </div>
+                          <div *ngIf="password.errors?.['strongNumber']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Password should contain at least 1 number.
+                          </div>
+                          <div *ngIf="password.errors?.['strongUpper']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Password should contain at least 1 uppercase.
+                          </div>
+                      </div>  
+                      </div>
+
+                      <div class="col-6">
+                        <label>Full Name</label>
+                        <input 
+                          type="text" 
+                          class="form-control" 
+                          placeholder="Full Name" 
+                          formControlName="fullname"
+                          [ngClass]="{
+                            'is-invalid': newMerchantForm.controls['fullname'].invalid && (newMerchantForm.controls['fullname'].dirty || newMerchantForm.controls['fullname'].touched), 
+                            'is-valid': newMerchantForm.controls['fullname'].valid}"
+                        >
+                        
+                        <div class="invalid-feedback">
+                          <div *ngIf="fullname.errors?.['required']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Full Name is required.
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="col-6">
+                        <label>Email</label>
+                        <input 
+                          type="Email" 
+                          class="form-control"  
+                          placeholder="Email" 
+                          formControlName="email"
+                          (change)="checkEmail()"
+                          [ngClass]="{
+                            'is-invalid': newMerchantForm.controls['email'].invalid && (newMerchantForm.controls['email'].dirty || newMerchantForm.controls['email'].touched) || emailUsed === true, 
+                            'is-valid': newMerchantForm.controls['email'].valid}"
+                          >
+                        <div class="invalid-feedback">
+                          <div *ngIf="email.errors?.['required']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Email is required.
+                          </div>
+                          <div *ngIf="email.errors?.['isemail']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Please enter valid email.
+                          </div>
+                          <div *ngIf="emailUsed === true">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Email Already used
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-6">
+                        <label>Gender</label>
+                        <select 
+                          class="form-select" 
+                          formControlName="gender"
+                          [ngClass]="{
+                            'is-invalid': newMerchantForm.controls['gender'].invalid && (newMerchantForm.controls['gender'].dirty || newMerchantForm.controls['gender'].touched), 
+                            'is-valid': newMerchantForm.controls['gender'].valid}"
+                          >
+                            <option selected value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                          </select>
+                        <div class="invalid-feedback">
+                            <div *ngIf="gender.errors?.['required']">
+                                <i class="bi bi-exclamation-octagon"></i>
+                                Please select gender.
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="col-6">
+                        <label>Phone</label>
+                        <input 
+                          type="text" 
+                          class="form-control"  
+                          placeholder="Phone Number" 
+                          formControlName="phone"
+                          (change)="checkPhone()"
+                          [ngClass]="{
+                            'is-invalid': newMerchantForm.controls['phone'].invalid && (newMerchantForm.controls['phone'].dirty || newMerchantForm.controls['phone'].touched) || phoneUsed === true, 
+                            'is-valid': newMerchantForm.controls['phone'].valid}"
+                        >
+                        <div class="invalid-feedback">
+                          <div *ngIf="phone.errors?.['required']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Please input phone number.
+                          </div>
+                          <div *ngIf="phone.errors?.['pattern']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Please input valid phone number.
+                          </div>
+                          <div *ngIf="phoneUsed === true">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Phone Already used
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-6">
+                        <label>Position</label>
+                        <input 
+                          type="text" 
+                          class="form-control" 
+                          value="Owner" 
+                          placeholder="Position" 
+                          readonly 
+                          formControlName="position">
+                      </div>
+
+                      <div class="col-6">
+                        <label>Card ID</label>
+                        <input 
+                          type="text" 
+                          class="form-control"  
+                          placeholder="Card ID" 
+                          formControlName="cardid"
+                          [ngClass]="{
+                            'is-invalid': newMerchantForm.controls['cardid'].invalid && (newMerchantForm.controls['cardid'].dirty || newMerchantForm.controls['cardid'].touched), 
+                            'is-valid': newMerchantForm.controls['cardid'].valid}"
+                          >
+                        <div class="invalid-feedback">
+                          <div *ngIf="cardid.errors?.['required']">
+                              <i class="bi bi-exclamation-octagon"></i>
+                              Please input card id.
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                    <!-- End Merchant address -->
+                    <!-- Submit Button -->
+                    <div class="row g-3 mt-2">
+                      <div class="col text-end">
+                        <button class="btn" style="background-color: #07484A; color: #fff;" (click)="testlog()">Sumbit</button>
+                      </div>
+                    </div>
+                    <!-- End Submit Button -->
+                  </form>
+                </div>
+            </div>
+        </div>
         </div>
       </div>
     </main>
