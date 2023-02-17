@@ -53,7 +53,7 @@ const routes: Routes = [
     path: 'developer/dashboard/merchantproduct',
     component: MerchantproductComponent
   }, {
-    path: 'developer/dashoard/login',
+    path: 'developer/login',
     component: LogindeveloperComponent
   },
 
