@@ -13,6 +13,7 @@ import { MerchantComponent } from './developer/merchant/merchant.component';
 import { AdminprintingComponent } from './developer/adminprinting/adminprinting.component';
 import { MerchantproductComponent } from './developer/merchantproduct/merchantproduct.component';
 import { NotFoundComponent } from './core/errorpage/not-found/not-found.component';
+import { LogindeveloperComponent } from './developer/login/logindeveloper.component';
 
 const routes: Routes = [
   {
@@ -51,7 +52,10 @@ const routes: Routes = [
   }, {
     path: 'developer/dashboard/merchantproduct',
     component: MerchantproductComponent
-  }, 
+  }, {
+    path: 'developer/dashoard/login',
+    component: LogindeveloperComponent
+  },
 
 
   // end error page

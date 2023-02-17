@@ -206,7 +206,7 @@
                                     <td>{{dat.datecreated}}</td>
                                     <td>{{dat.opentime}}</td>
                                     <td>{{dat.closetime}}</td>
-                                    <td>{{dat.merchantlogo}}</td>
+                                    <td><img class="icon-mecrh" src="{{dat.merchantlogo}}" alt="Image Merch"></td>
                                     <td>{{dat.ownerid}}</td>
                                     <td>{{dat.addressid}}</td>
                                     <td><button class="btn bg-outline-primary" style="margin: auto;">Edit</button>
@@ -244,14 +244,43 @@
                     <h6 class="text-capitalize">Merchant Information</h6>
                     <div class="row g-3">
                       <div class="col-6  ">
+                        <label>Merchant Username</label>
+                        <input 
+                          type="text" 
+                          class="form-control" 
+                          placeholder="Merchant Username" 
+                          formControlName="merchantuname"
+                          (change)="checkMerchantName()"
+                          [ngClass]="{
+                            'is-invalid': (newMerchantForm.controls['merchantuname'].invalid && (newMerchantForm.controls['merchantuname'].dirty || newMerchantForm.controls['merchantuname'].touched) || merchUsed === true), 
+                            'is-valid': newMerchantForm.controls['merchantuname'].valid}"
+                        >
+                        <div class="invalid-feedback">
+                          <div *ngIf="merchantuname.errors?.['required']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Please input this field.
+                          </div>
+                          <div *ngIf="merchUsed === true">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            This merchant name already used.
+                          </div>
+                          <div *ngIf="merchantuname.errors?.['whitespace']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Merchant Username cannot contain whitespace.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-6  ">
                         <label>Merchant Name</label>
                         <input 
                           type="text" 
                           class="form-control" 
                           placeholder="Merchant Name" 
                           formControlName="merchantname"
+
                           [ngClass]="{
-                            'is-invalid': (newMerchantForm.controls['merchantname'].invalid && (newMerchantForm.controls['merchantname'].dirty || newMerchantForm.controls['merchantname'].touched)), 
+                            'is-invalid': (newMerchantForm.controls['merchantname'].invalid && (newMerchantForm.controls['merchantname'].dirty || newMerchantForm.controls['merchantname'].touched) ), 
                             'is-valid': newMerchantForm.controls['merchantname'].valid}"
                         >
                         <div class="invalid-feedback">
@@ -259,6 +288,7 @@
                             <i class="bi bi-exclamation-octagon"></i>
                             Please input this field.
                           </div>
+
                         </div>
                       </div>
                       <div class="col-6 ">
@@ -303,7 +333,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-12">
                         <label>Merchant Logo</label>
                         <input 
                           type="file" 

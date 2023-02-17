@@ -58,3 +58,15 @@ body{
 .cstareapass .bi{
     cursor: pointer;
 }
+
+.icon-mecrh{
+    width: 50px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media only screen and (max-width: 500px) {
+    form .row{flex-direction: column;}
+    form .col-6 {width: 100%;}
+  }

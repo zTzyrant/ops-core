@@ -1,0 +1,8 @@
+.card-header, .card-footer{
+    background-color: transparent;
+    border: none;
+}
+
+.card {
+    border-radius: 10px;
+}

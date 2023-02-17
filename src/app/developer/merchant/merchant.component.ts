@@ -20,16 +20,15 @@ export class MerchantComponent {
   showNav = false
   merchData: any
   newMerchantForm: any
-  datenow = new Date();
-  fs = new Intl.DateTimeFormat("fr-CA", {year: "numeric", month: "2-digit", day: "2-digit"})
 
   userDatas: any
 
 
   // check used data e.g. username email phone for user
-  usernameUsed = false
+  usernameUsed = undefined
   emailUsed = false
   phoneUsed = false  
+  merchUsed = false
 
   // type input password
   passwordinputtype = true
@@ -54,21 +53,31 @@ export class MerchantComponent {
     private curdService: CurdApiService,
     private toast : ToastrService
   ){
-    
+    $(document).ready(function () {
+      $('#listmerchant').DataTable({
+        scrollX: true,
+      });
+    });
     this.merchantListDat()
     this.reactiveForm()
     this.getAllRegisterdUser()
   }
 
   testlog(){
-    console.log(this.merchantlogo);
     // if(this.newMerchantForm.invalid){
     //   this.toast.error('Please check your inputed data !', 'Form data cannot be null')
     //   this.newMerchantForm.markAllAsTouched();
     //   return 
     // }
 
-    if(this.usernameUsed === false && this.emailUsed === false && this.phoneUsed === false){
+    this.merchantListDat()
+    this.getAllRegisterdUser()
+    this.checkusername()
+    this.checkEmail()
+    this.checkPhone()
+    this.checkMerchantName()
+
+    if(this.usernameUsed === false && this.emailUsed === false && this.phoneUsed === false && this.merchUsed === false){
       Swal.fire({
         title: 'Submit New Merchant ?',
         text: 'Make sure all information already correct.',
@@ -85,12 +94,17 @@ export class MerchantComponent {
 
           this.curdService.uploadordermerchlogo(formData).subscribe((res: any) => {
             this.merchantLogoUrl = res.resUpload.filePath
+            console.log(res.resUpload.filePath);
+            
             this.newMerchantForm.value.merchantlogo = this.merchantLogoUrl
             const encryptPassword = CryptoJS.HmacSHA256(this.password.value, environment.keyEncrypt)
             this.newMerchantForm.value.password = CryptoJS.enc.Base64.stringify(encryptPassword)
             // 
             ////// blm di kasih kondisi merchant dengan nama yang sama
-            // 
+            // blm di kasih btn hilang kalo form invalid
+            
+            console.log(this.newMerchantForm.value);
+            
             this.curdService.submitNewMerchant(this.newMerchantForm.value).subscribe((dat:any) => {
               if(dat === 1){
                 this.toast.success("Success Register New Merchant")
@@ -102,8 +116,8 @@ export class MerchantComponent {
       })
   
     } else {
-      let message = (this.usernameUsed) ? 'Username' : (this.emailUsed) ? 'Email' : 'Phone Number';
-      this.toast.error(`${message} Already used!`);
+      let message = (this.usernameUsed) ? 'Username' : (this.emailUsed) ? 'Email' : (this.merchUsed) ? 'Merchant Mame' : 'Phone Number';
+      this.toast.error(`${message} Already used !`);
     }
   }
 
@@ -123,7 +137,12 @@ export class MerchantComponent {
         this.toast.info('Please put files size less than 5MB only !')
       }
     }
-    
+  }
+
+
+  noWhitespaceValidator(control: FormControl) {
+    const isSpace = (control.value || '').match(/\s/g);
+    return isSpace ? {'whitespace': true} : null;
   }
 
   ngAfterViewInit(){
@@ -139,12 +158,7 @@ export class MerchantComponent {
   merchantListDat(){
     this.curdService.getAllMerchant().subscribe(res => {
       this.merchData = res
-      console.log(this.merchData);
-      $(document).ready(function () {
-        $('#listmerchant').DataTable({
-          scrollX: true,
-        });
-      });
+      
     })
   }
 
@@ -156,8 +170,8 @@ export class MerchantComponent {
   // Reactive Form areas only
   reactiveForm(){
     this.newMerchantForm = this.fb.group({
+      merchantuname: ['', [Validators.required, this.noWhitespaceValidator]],
       merchantname: ['', Validators.required], 
-      datenow: [`${this.fs.format(this.datenow)}`], 
       opentime: ['', Validators.required], 
       closetime: ['', Validators.required], 
       merchantlogo: ['', Validators.required],
@@ -180,6 +194,7 @@ export class MerchantComponent {
   }
 
   // Merchant Information get areas only
+  get merchantuname() {return this.newMerchantForm.get('merchantuname')}
   get merchantname(){return this.newMerchantForm.get('merchantname')}
   get opentime(){return this.newMerchantForm.get('opentime')}
   get closetime(){return this.newMerchantForm.get('closetime')}
@@ -231,6 +246,7 @@ export class MerchantComponent {
   }
 
   checkusername(){
+    
     let usedIs: any = false
     this.userDatas.forEach((dat:any) => {
       if(dat.username === this.username.value)
@@ -255,5 +271,14 @@ export class MerchantComponent {
         usedIs = true
     });
     this.phoneUsed = usedIs
+  }
+
+  checkMerchantName(){
+    let usedIs: any = false
+    this.merchData.forEach((dat:any) => {
+      if(dat.merchantuname === this.merchantuname.value)
+        usedIs = true
+    });
+    this.merchUsed = usedIs
   }
 }
