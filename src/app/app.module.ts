@@ -29,6 +29,7 @@ import { MerchantComponent } from './developer/merchant/merchant.component';
 import { AdminprintingComponent } from './developer/adminprinting/adminprinting.component';
 import { MerchantproductComponent } from './developer/merchantproduct/merchantproduct.component';
 import { NotFoundComponent } from './core/errorpage/not-found/not-found.component';
+import { FooterComponent } from './core/footer/footer.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { NotFoundComponent } from './core/errorpage/not-found/not-found.componen
     AdminprintingComponent,
     MerchantproductComponent,
     NotFoundComponent,
+    FooterComponent,
 
   ],
   imports: [
