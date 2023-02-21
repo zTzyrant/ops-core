@@ -53,22 +53,17 @@ export class MerchantComponent {
     private curdService: CurdApiService,
     private toast : ToastrService
   ){
-    $(document).ready(function () {
-      $('#listmerchant').DataTable({
-        scrollX: true,
-      });
-    });
     this.merchantListDat()
     this.reactiveForm()
     this.getAllRegisterdUser()
   }
 
   testlog(){
-    // if(this.newMerchantForm.invalid){
-    //   this.toast.error('Please check your inputed data !', 'Form data cannot be null')
-    //   this.newMerchantForm.markAllAsTouched();
-    //   return 
-    // }
+    if(this.newMerchantForm.invalid){
+      this.toast.error('Please check your inputed data !', 'Form data cannot be null')
+      this.newMerchantForm.markAllAsTouched();
+      return 
+    }
 
     this.merchantListDat()
     this.getAllRegisterdUser()
@@ -158,8 +153,14 @@ export class MerchantComponent {
   merchantListDat(){
     this.curdService.getAllMerchant().subscribe(res => {
       this.merchData = res
-      
+      $(document).ready(function () {
+        $('#listmerchant').DataTable().destroy()
+        $('#listmerchant').DataTable({
+          scrollX: true,
+        });
+      });
     })
+    
   }
 
   // gett all registerd usr
@@ -182,8 +183,8 @@ export class MerchantComponent {
       phoneaddress: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], 
       note: [''],
      
-      username: ['', [Validators.required, Validators.minLength(5)]], 
-      password: ['', [Validators.required, this.strongNumber, this.strongUpper,  Validators.minLength(6)]], 
+      username: ['', [Validators.required, Validators.minLength(5), this.noWhitespaceValidator]], 
+      password: ['', [Validators.required, this.strongNumber, this.strongUpper,  Validators.minLength(6), this.noWhitespaceValidator]], 
       fullname: ['', Validators.required], 
       email: ['', [Validators.required, this.regexValidemail]], 
       gender: ['', Validators.required], 

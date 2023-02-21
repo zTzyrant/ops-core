@@ -193,7 +193,6 @@
                                     <th>Date Created</th>
                                     <th>Open</th>
                                     <th>Close</th>
-                                    <th>Logo</th>
                                     <th>Owner Id</th>
                                     <th>Address Id</th>
                                     <th>Action</th>
@@ -206,7 +205,6 @@
                                     <td>{{dat.datecreated}}</td>
                                     <td>{{dat.opentime}}</td>
                                     <td>{{dat.closetime}}</td>
-                                    <td><img class="icon-mecrh" src="{{dat.merchantlogo}}" alt="Image Merch"></td>
                                     <td>{{dat.ownerid}}</td>
                                     <td>{{dat.addressid}}</td>
                                     <td><button class="btn bg-outline-primary" style="margin: auto;">Edit</button>
@@ -469,6 +467,10 @@
                             <i class="bi bi-exclamation-octagon"></i>
                             Username Already used
                           </div>
+                          <div *ngIf="username.errors?.['whitespace']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Username cannot contain whitespace.
+                          </div>
                         </div>
                       </div>
 
@@ -513,6 +515,10 @@
                           <div *ngIf="password.errors?.['strongUpper']">
                             <i class="bi bi-exclamation-octagon"></i>
                             Password should contain at least 1 uppercase.
+                          </div>
+                          <div *ngIf="password.errors?.['whitespace']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Password cannot contain whitespace.
                           </div>
                       </div>  
                       </div>
@@ -649,7 +655,7 @@
                     <!-- Submit Button -->
                     <div class="row g-3 mt-2">
                       <div class="col text-end">
-                        <button class="btn" style="background-color: #07484A; color: #fff;" (click)="testlog()">Sumbit</button>
+                        <button class="btn" style="background-color: #07484A; color: #fff;" (click)="testlog()" [disabled]="newMerchantForm.invalid">Sumbit</button>
                       </div>
                     </div>
                     <!-- End Submit Button -->
