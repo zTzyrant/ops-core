@@ -94,9 +94,6 @@ export class MerchantComponent {
             this.newMerchantForm.value.merchantlogo = this.merchantLogoUrl
             const encryptPassword = CryptoJS.HmacSHA256(this.password.value, environment.keyEncrypt)
             this.newMerchantForm.value.password = CryptoJS.enc.Base64.stringify(encryptPassword)
-            // 
-            ////// blm di kasih kondisi merchant dengan nama yang sama
-            // blm di kasih btn hilang kalo form invalid
             
             console.log(this.newMerchantForm.value);
             
