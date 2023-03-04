@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import 'datatables.net'
+import { DevService } from 'src/app/secure/auth/dev.service';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dev.dashboard.html',
@@ -12,6 +14,10 @@ import 'datatables.net'
 export class DashboardComponent {
   showNav = false
 
+  constructor (
+    private devService: DevService,
+  ) { }
+
   ngOnInit(){
     $(document).ready(function () {
         $('#example').DataTable({scrollX: true});
@@ -21,4 +27,6 @@ export class DashboardComponent {
   setShowNav(){
     this.showNav = !this.showNav
   }
+
+  signDevOut(){ this.devService.destroyDevSid() }
 }

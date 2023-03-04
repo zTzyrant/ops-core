@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { DevService } from 'src/app/secure/auth/dev.service';
 import { CurdApiService } from 'src/app/secure/curd.api.service';
 
 @Component({
@@ -20,12 +21,15 @@ export class MerchantproductComponent {
   constructor(
     public fb: FormBuilder,
     private curdService: CurdApiService,
-    private toast : ToastrService
+    private toast : ToastrService,
+    private devService: DevService
   ){
     this.testform = this.fb.group({
       goekbong: ['']
     })
   }
+
+  signDevOut(){ this.devService.destroyDevSid() }
 
   tease(){
     console.log(this.testform.value);

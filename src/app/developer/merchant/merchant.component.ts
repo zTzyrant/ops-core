@@ -6,6 +6,7 @@ import { CurdApiService } from 'src/app/secure/curd.api.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import * as CryptoJS from 'crypto-js'
+import { DevService } from 'src/app/secure/auth/dev.service';
 
 @Component({
   selector: 'app-merchant',
@@ -51,7 +52,8 @@ export class MerchantComponent {
   constructor(
     public fb: FormBuilder,
     private curdService: CurdApiService,
-    private toast : ToastrService
+    private toast : ToastrService,
+    private devService: DevService
   ){
     this.merchantListDat()
     this.reactiveForm()
@@ -157,7 +159,6 @@ export class MerchantComponent {
         });
       });
     })
-    
   }
 
   // gett all registerd usr
@@ -279,4 +280,6 @@ export class MerchantComponent {
     });
     this.merchUsed = usedIs
   }
+
+  signDevOut(){ this.devService.destroyDevSid() }
 }

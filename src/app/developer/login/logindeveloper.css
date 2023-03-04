@@ -5,4 +5,9 @@
 
 .card {
     border-radius: 10px;
+    --bs-card-border-color: none;  
+}
+
+.passinvalid{
+    padding-right: 2.2rem;
 }

@@ -63,6 +63,15 @@
             </a>
           </li>
           
+          <li class="nav-item">
+            <a class="nav-link nav-link-sz" (click)="this.signDevOut()">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-door-open brand-color text-dark text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Sign Out</span>
+            </a>
+          </li>
+
         </ul>
       </div>
   
@@ -178,27 +187,70 @@
       <div class="container-fluid py-4">
 
         <div class="row">
-            <div class="col-lg-9 mb-lg-0 mb-4">
-                <div class="card z-index-2 h-100">
-                    <div class="card-header pb-0 pt-3 bg-transparent">
-                        <h6 class="text-capitalize">Tables</h6>
-                        
-                    </div>
-                    <div class="card-body">
-                        a
-                    </div>
+          <div class="col-lg-9 mb-lg-0 mb-4">
+            <div class="card z-index-2 h-100">
+                <div class="card-header pb-0 pt-3 bg-transparent">
+                  <h6 class="text-capitalize">Merchant</h6>
+                </div>
+                <div class="card-body">
+                  <select class="form-select" name="selectedMerchant" #selectedmerch (change)="tesae()">
+                    <option value="-1">Select Merchant</option>
+                    <option value="{{data.merchantid}}"  *ngFor="let data of merchData" >{{data.merchantname}}</option>
+                  </select>
                 </div>
             </div>
-            <div class="col-lg-3 mb-lg-0 mb-4">
-                <div class="card z-index-2 h-100">
-                        <div class="card-header pb-0 pt-3 bg-transparent">
-                        <h6 class="text-capitalize">Account Information</h6>
-                    </div>
-                    <div class="card-body">
-                        a
-                    </div>
+          </div>
+          
+          <div class="col-lg-3 mb-lg-0 mb-4">
+            <div class="card z-index-2 h-100">
+                    <div class="card-header pb-0 pt-3 bg-transparent">
+                    <h6 class="text-capitalize">Account Information</h6>
                 </div>
-            </div>  
+                <div class="card-body">
+                    a
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4" *ngIf="merchSelected">
+          <div class="col-lg-9 mb-lg-0">
+            <div class="card z-index-2 h-100">
+                <div class="card-header pb-0 pt-3 bg-transparent">
+                  <h6 class="text-capitalize">Selected Merchant: {{merchData[getSelecetedIndex()].merchantname}}</h6>
+                </div>
+                <div class="card-body">
+                  <table id="listmerchantadmin" class="table table-borderless" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Username</th>
+                            <th>Full Name</th>
+                            <th>Gender</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Card ID</th>
+                            <th>Position</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dat of merchAdminDatas">
+                            <td>{{dat.userid}}</td>
+                            <td>{{dat.username}}</td>
+                            <td>{{dat.fullname}}</td>
+                            <td>{{dat.gender}}</td>
+                            <td>{{dat.email}}</td>
+                            <td>{{dat.phone}}</td>
+                            <td>{{dat.cardid}}</td>
+                            <td>{{dat.position}}</td>
+                            <td><button class="btn btn-outline-primary" style="margin: auto;">View</button>
+                        </tr>
+                    </tbody>
+                </table>
+               </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
