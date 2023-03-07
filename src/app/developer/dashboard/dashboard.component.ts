@@ -25,7 +25,6 @@ export class DashboardComponent {
   ngOnInit(){
     if(localStorage.getItem('__$DEV__TOKEN__')){
       this.devService.checkSessionDeveloper().subscribe((result: any) => {
-        console.log(result)
         if(result !== 1){
           this.router.navigate(['../developer/login'])
           localStorage.removeItem('__$DEV__TOKEN__')
