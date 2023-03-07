@@ -31,7 +31,8 @@ import { MerchantproductComponent } from './developer/merchantproduct/merchantpr
 import { NotFoundComponent } from './core/errorpage/not-found/not-found.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { LogindeveloperComponent } from './developer/login/logindeveloper.component';
-
+import { DevGuard } from './secure/auth/dev.guard';
+import { DevService } from './secure/auth/dev.service';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,7 @@ import { LogindeveloperComponent } from './developer/login/logindeveloper.compon
     NgxMaterialTimepickerModule,
   ],
   providers: [
-    CurdApiService,
+    CurdApiService, DevGuard, DevService
   ],
   bootstrap: [AppComponent]
 })
