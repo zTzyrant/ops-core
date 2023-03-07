@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import * as CryptoJS from 'crypto-js'
 import { DevService } from 'src/app/secure/auth/dev.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-merchant',
@@ -53,8 +54,20 @@ export class MerchantComponent {
     public fb: FormBuilder,
     private curdService: CurdApiService,
     private toast : ToastrService,
+    private router: Router,
     private devService: DevService
   ){
+    if(localStorage.getItem('__$DEV__TOKEN__')){
+      this.devService.checkSessionDeveloper().subscribe((result: any) => {
+        console.log(result)
+        if(result === 1)
+          this.router.navigate(['../developer/dashboard'])
+        else {
+          localStorage.removeItem('__$DEV__TOKEN__')
+          this.toast.error('Invalid Login Token', 'Please Login Again')  
+        }
+      }) 
+    }
     this.merchantListDat()
     this.reactiveForm()
     this.getAllRegisterdUser()

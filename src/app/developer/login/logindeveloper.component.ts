@@ -31,7 +31,13 @@ export class LogindeveloperComponent{
   ngOnInit(){
     if(localStorage.getItem('__$DEV__TOKEN__')){
       this.devService.checkSessionDeveloper().subscribe((result: any) => {
-        this.router.navigate(['../developer/dashboard'])
+        console.log(result)
+        if(result === 1)
+          this.router.navigate(['../developer/dashboard'])
+        else {
+          localStorage.removeItem('__$DEV__TOKEN__')
+          this.toast.error('Invalid Login Token', 'Please Login Again')  
+        }
       }) 
     }
   }
