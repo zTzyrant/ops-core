@@ -9,3 +9,7 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     appearance: textfield;
 }
+
+.timepicker-backdrop-overlay {z-index: 10000 !important;}
+
+.timepicker-overlay {z-index: 10001 !important;}
