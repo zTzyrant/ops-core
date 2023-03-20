@@ -198,26 +198,30 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
+                                    <th>Username</th>
                                     <th>Name</th>
                                     <th>Date Created</th>
                                     <th>Open</th>
                                     <th>Close</th>
-                                    <th>Owner Id</th>
-                                    <th>Address Id</th>
+                                    <th>City</th>
+                                    <th>Admin Total</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let dat of merchData">
-                                    <td>{{dat.merchantid}}</td>
-                                    <td>{{dat.merchantname}}</td>
-                                    <td>{{dat.datecreated}}</td>
-                                    <td>{{dat.opentime}}</td>
-                                    <td>{{dat.closetime}}</td>
-                                    <td>{{dat.ownerid}}</td>
-                                    <td>{{dat.addressid}}</td>
-                                    <td><button class="btn bg-outline-primary" style="margin: auto;">Edit</button>
-                                    <button class="btn bg-outline-danger" style="margin: auto;">Delete</button></td>
+                                <tr *ngFor="let dat of merchData; let idxmerch = index">
+                                    <td>{{dat.merchdatas.merchantid}}</td>
+                                    <td>{{dat.merchdatas.merchantuname}}</td>
+                                    <td>{{dat.merchdatas.merchantname}}</td>
+                                    <td>{{dat.merchdatas.datecreated}}</td>
+                                    <td>{{dat.merchdatas.opentime}}</td>
+                                    <td>{{dat.merchdatas.closetime}}</td>
+                                    <td>{{dat.merchdatas.city}}</td>
+                                    <td>{{dat.admin.total}}</td>
+                                    <td>
+                                      <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#ModalEditMerchantInfo" (click)="reqViewMerchant(dat.merchdatas.merchantid)">Edit</button>
+                                      <button class="btn btn-danger" (click)="deleteMerchant({merchantid: dat.merchdatas.merchantid, addressid: dat.merchdatas.addressid})">Delete</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -320,10 +324,10 @@
                         </div>
                       </div>
                       <div class="col-6">
-                        <label>Close Time</label>
+                        <label>Closed TIme</label>
                         <input 
                           class="form-control cursor-pointer" 
-                          placeholder="Close Time" 
+                          placeholder="Closed TIme" 
                           [ngxTimepicker]="closetimeinp" 
                           readonly 
                           formControlName="closetime"  
@@ -423,7 +427,7 @@
                       <div class="col-6">
                         <label>Contact Phone</label>
                         <input
-                          type="number" 
+                          type="text" 
                           class="form-control"  
                           placeholder="Phone Number" 
                           formControlName="phoneaddress"
@@ -435,6 +439,10 @@
                           <div *ngIf="phoneaddress.errors?.['required']">
                             <i class="bi bi-exclamation-octagon"></i>
                             Please input this field.
+                          </div>
+                          <div *ngIf="phoneaddress.errors?.['pattern']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Please input valid number only.
                           </div>
                         </div>
                       </div>
@@ -675,4 +683,245 @@
         </div>
       </div>
     </main>
+    <div class="modal fade" id="ModalEditMerchantInfo">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Merchant Information</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="edMerchantForm">
+              <input type="text" formControlName="merchantid" hidden readonly>
+              <input type="text" formControlName="addressid" hidden readonly>
+
+              <div class="mb-3">
+                <label for="edmerchname" class="col-form-label">Username</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edmerchname" 
+                  formControlName="edmerchuname"
+                  (change)="checkUpdatedUsername()"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['edmerchuname'].invalid && 
+                      (edMerchantForm.controls['edmerchuname'].dirty || 
+                      edMerchantForm.controls['edmerchuname'].touched) || newmerchUsed === true), 
+                    'is-valid': edMerchantForm.controls['edmerchuname'].valid}"
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchuname').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                  <div *ngIf="newmerchUsed === true">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    This merchant name already used.
+                  </div>
+                  <div *ngIf="edMerchantForm.get('edmerchuname').errors?.['whitespace']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Merchant Username cannot contain whitespace.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="edmerchname" class="col-form-label">Full Name</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edmerchname" 
+                  formControlName="edmerchname"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['edmerchname'].invalid && 
+                      (edMerchantForm.controls['edmerchname'].dirty || 
+                      edMerchantForm.controls['edmerchname'].touched)), 
+                    'is-valid': edMerchantForm.controls['edmerchname'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchname').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="edmerchdate" class="col-form-label">Date Created</label>
+                <input 
+                  type="date" 
+                  class="form-control" 
+                  id="edmerchdate"
+                  formControlName="edmerchdate"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['edmerchdate'].invalid && 
+                      (edMerchantForm.controls['edmerchdate'].dirty || 
+                      edMerchantForm.controls['edmerchdate'].touched)), 
+                    'is-valid': edMerchantForm.controls['edmerchdate'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchdate').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="edmerchopen" class="col-form-label">Open Time</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edmerchopen"
+                  formControlName="edmerchopen"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['edmerchopen'].invalid && 
+                      (edMerchantForm.controls['edmerchopen'].dirty || 
+                      edMerchantForm.controls['edmerchopen'].touched)), 
+                    'is-valid': edMerchantForm.controls['edmerchopen'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchopen').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="edmerchclose" class="col-form-label">Closed TIme</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edmerchclose"
+                  formControlName="edmerchclose"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['edmerchclose'].invalid && 
+                      (edMerchantForm.controls['edmerchclose'].dirty || 
+                      edMerchantForm.controls['edmerchclose'].touched)), 
+                    'is-valid': edMerchantForm.controls['edmerchclose'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchclose').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+
+              </div>
+              <div class="mb-3">
+                <label for="edmerchantlogo" class="col-form-label">Merchant Logo</label>
+                <div class="text-center">
+                  <label for="edmerchantlogo">
+                    <img [src]="imgMerchLinkTemp" alt="Merchant Logo" width="100px" height="100px" style="border-radius: 10px;">
+                  </label>
+                  <br>
+                  <small class="font-monospace" *ngIf="isImagechages === false">Click image for update merchant image.</small>
+                  <small class="font-monospace" *ngIf="isImagechages === true">Click <a>reset</a> to undo changes.</small>
+                </div>
+                <input 
+                  type="file" 
+                  class="form-control"
+                  id="edmerchantlogo"  
+                  formControlName="edmerchantlogo"  
+                  accept="image/png, image/jpeg" 
+                  (change)="editMerchlogos($event); isImagechages = true"
+                  hidden
+                >
+                <input type="button" class="form-control" [hidden]="isImagechages === false" value="Reset image" (click)="resetEditImg(); isImagechages = false">
+              </div>
+              
+              <div class="mb-3">
+                <label for="edmerchaddress" class="col-form-label">Full Address</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edmerchaddress"
+                  formControlName="edmerchaddress"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['edmerchaddress'].invalid && 
+                      (edMerchantForm.controls['edmerchaddress'].dirty || 
+                      edMerchantForm.controls['edmerchaddress'].touched)), 
+                    'is-valid': edMerchantForm.controls['edmerchaddress'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchaddress').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="edmerchcity" class="col-form-label">City</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edmerchcity"
+                  formControlName="edmerchcity"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['edmerchcity'].invalid && 
+                      (edMerchantForm.controls['edmerchcity'].dirty || 
+                      edMerchantForm.controls['edmerchcity'].touched)), 
+                    'is-valid': edMerchantForm.controls['edmerchcity'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchcity').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="edmerchpostcode" class="col-form-label">Post Code</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edmerchpostcode"
+                  formControlName="edmerchpostcode"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['edmerchpostcode'].invalid && 
+                      (edMerchantForm.controls['edmerchpostcode'].dirty || 
+                      edMerchantForm.controls['edmerchpostcode'].touched)), 
+                    'is-valid': edMerchantForm.controls['edmerchpostcode'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchpostcode').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="edmerchtcp" class="col-form-label">Contact Phone</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edmerchtcp"
+                  formControlName="edmerchtcp"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['edmerchtcp'].invalid && 
+                      (edMerchantForm.controls['edmerchtcp'].dirty || 
+                      edMerchantForm.controls['edmerchtcp'].touched)), 
+                    'is-valid': edMerchantForm.controls['edmerchtcp'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchtcp').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                  <div *ngIf="edMerchantForm.get('edmerchtcp').errors?.['pattern']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input valid number only.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="edmerchtinfo" class="col-form-label" (click)="submitEditMerchant()">Aditional Information</label>
+                <textarea class="form-control" id="edmerchtinfo" formControlName="edmerchtinfo"></textarea>    
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="submitEditMerchant()">Submit Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>

@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import * as CryptoJS from 'crypto-js'
 import { DevService } from 'src/app/secure/auth/dev.service';
 import { Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-merchant',
@@ -31,7 +32,6 @@ export class MerchantComponent {
   emailUsed = false
   phoneUsed = false  
   merchUsed = false
-
   // type input password
   passwordinputtype = true
   tooglepassword(){
@@ -55,7 +55,8 @@ export class MerchantComponent {
     private curdService: CurdApiService,
     private toast : ToastrService,
     private router: Router,
-    private devService: DevService
+    private devService: DevService,
+    private sanitizer: DomSanitizer
   ){
     if(localStorage.getItem('__$DEV__TOKEN__')){
       this.devService.checkSessionDeveloper().subscribe((result: any) => {
@@ -69,7 +70,32 @@ export class MerchantComponent {
     this.merchantListDat()
     this.reactiveForm()
     this.getAllRegisterdUser()
+    this.editMerchReactiveForm()
   }
+
+  deleteMerchant(index : any){
+    Swal.fire({
+      title: 'Delete Merchant ?',
+      text: 'By deleting this merchant with delete all following merchant data.',
+      icon: 'error',
+      showCancelButton: true,
+      confirmButtonText: 'Confirm',
+      confirmButtonColor: '#dc3545',
+      cancelButtonColor: '#07484A'
+    }).then((result) => {
+      if(result){
+        this.devService.deleteMerchant(index).subscribe((res: any) => {
+          if(res === 1)
+            Swal.fire('Success', 'Successfully Delete Merchant', 'success')
+          else
+          Swal.fire('Error', 'Internal Server Error Please contact developer', 'success')
+        })
+      }
+    })
+    
+    
+  }
+
 
   testlog(){
     if(this.newMerchantForm.invalid){
@@ -121,8 +147,7 @@ export class MerchantComponent {
       })
   
     } else {
-      let message = (this.usernameUsed) ? 'Username' : (this.emailUsed) ? 'Email' : (this.merchUsed) ? 'Merchant Mame' : 'Phone Number';
-      this.toast.error(`${message} Already used !`);
+      this.toast.error(`Please Check your inputed value before submit !`);
     }
   }
 
@@ -161,7 +186,7 @@ export class MerchantComponent {
 
   // get all merchant to datatables
   merchantListDat(){
-    this.curdService.getAllMerchant().subscribe(res => {
+    this.curdService.getAllMerchant().subscribe((res: any) => {
       this.merchData = res
       $(document).ready(function () {
         $('#listmerchant').DataTable().destroy()
@@ -256,12 +281,11 @@ export class MerchantComponent {
   }
 
   checkusername(){
-    
     let usedIs: any = false
     this.userDatas.forEach((dat:any) => {
       if(dat.username === this.username.value)
         usedIs = true
-    });
+    });    
     this.usernameUsed = usedIs
   }
 
@@ -286,11 +310,153 @@ export class MerchantComponent {
   checkMerchantName(){
     let usedIs: any = false
     this.merchData.forEach((dat:any) => {
-      if(dat.merchantuname === this.merchantuname.value)
+      if(dat.merchdatas.merchantuname === this.newMerchantForm.get('merchantuname').value)
         usedIs = true
     });
     this.merchUsed = usedIs
   }
 
   signDevOut(){ this.devService.destroyDevSid() }
+
+  // View Merchant details
+
+  // Declaration Edit Merchant
+  isViewMerch = false
+  selectedMerchId: any = null
+  selectedMerchDatas: any
+  edMerchantForm: any
+  imgMerchLinkTemp: any
+  imgLinkedTemp: any
+  isImagechages = false
+
+  newmerchUsed = false
+
+  checkUpdatedUsername(){
+    let usedIs: any = false
+    this.merchData.forEach((dat:any) => {
+      if(dat.merchdatas.merchantuname === this.edMerchantForm.get('edmerchuname').value)
+        usedIs = true
+    });
+    this.newmerchUsed = usedIs
+  }
+
+  reqViewMerchant(meID: any){
+    this.selectedMerchId = meID
+    this.isViewMerch = true
+    
+    this.devService.viewMerchantInfo(meID).subscribe((dat: any) => {
+      if(dat.statusCode === '1'){
+        console.log("Iamtrying");
+        this.imgMerchLinkTemp = this.imgLinkedTemp = dat.data[0].merchantlogo
+        this.edMerchantForm.setValue({
+          merchantid: `${dat.data[0].merchantid}`,
+          addressid: `${dat.data[0].addressid}`,
+
+          edmerchuname: `${dat.data[0].merchantuname}`,
+          edmerchname: `${dat.data[0].merchantname}`,
+          edmerchdate: `${dat.data[0].datecreated}`, 
+          edmerchopen: `${dat.data[0].opentime}`, 
+          edmerchclose: `${dat.data[0].closetime}`, 
+          edmerchantlogo: '',
+
+          edmerchaddress: `${dat.data[0].fulladdress}`, 
+          edmerchcity: `${dat.data[0].city}`, 
+          edmerchpostcode: `${dat.data[0].postcode}`, 
+          edmerchtcp: `${dat.data[0].phoneAddress}`, 
+          edmerchtinfo: `${dat.data[0].note}`,
+        })
+
+      } else {
+        console.log('Invalidcart');
+      }
+    })
+  }
+
+  // Lines of codes Edit Merchant
+  editMerchReactiveForm(){
+    this.edMerchantForm = this.fb.group({
+      merchantid: ['', [Validators.required]],
+      addressid: ['', [Validators.required]],
+
+      edmerchuname: ['', [Validators.required, this.noWhitespaceValidator]],
+      edmerchname: ['', Validators.required],
+      edmerchdate: ['', Validators.required], 
+      edmerchopen: ['', Validators.required], 
+      edmerchclose: ['', Validators.required], 
+      edmerchantlogo: [''],
+      // blm ada logo , validasi cek semuanya!
+      edmerchaddress: ['', Validators.required], 
+      edmerchcity: ['', Validators.required], 
+      edmerchpostcode: ['', Validators.required], 
+      edmerchtcp: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], 
+      edmerchtinfo: [''],
+    })
+  }
+
+
+  resetEditImg(){
+    this.edMerchantForm.get('edmerchantlogo').reset()
+    this.file = null
+    this.imgMerchLinkTemp = this.imgLinkedTemp
+  }
+
+  editMerchlogos(event: any){
+    this.file = event.target.files[0]
+    console.log(this.file);
+    
+    if(this.file.type != 'image/png' && this.file.type != 'image/jpeg'){
+      this.edMerchantForm.get('edmerchantlogo').reset()
+      this.file = null
+      this.toast.info('following type is jpeg jpg png', 'Please put correct files only !')
+    }
+    else {
+      if(event.target.files[0].size >= 5242880){
+        this.edMerchantForm.get('edmerchantlogo').reset()
+        this.file = null
+        this.toast.info('Please put files size less than 5MB only !')
+      }
+      console.log(`url: ${URL.createObjectURL(this.file)}`);
+      this.imgMerchLinkTemp = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.file))
+    }
+  }
+
+  submitEditMerchant(){
+    if(this.edMerchantForm.invalid || this.newmerchUsed === true){
+      this.toast.error('Please check your inputed data !', 'Form data cannot be null')
+      this.toast.info('Merchant data has been reset to default')
+      this.reqViewMerchant(this.selectedMerchId)
+      return 
+    }
+    // upload image
+    let formData = new FormData();
+    formData.set("anyfilesnames", this.file)
+    if(this.isImagechages === true){
+      this.curdService.uploadordermerchlogo(formData).subscribe((res: any) => {
+        this.merchantLogoUrl = res.resUpload.filePath
+        this.edMerchantForm.value.edmerchantlogo = this.merchantLogoUrl
+        // logging file
+        console.log(res.resUpload.filePath)
+        this.devService.updateMerchanInfo(this.edMerchantForm.value).subscribe((res: any) => {
+          if(res.statusCode === '1'){
+            Swal.fire('Success', `Successfully Update Merchant Information for Merchant ID: ${this.edMerchantForm.value.merchantid}`, 'success')
+          } else {
+            Swal.fire('Error', `Internal Server Error`, 'error')
+          }
+        })
+      })
+    } else {
+      this.devService.updateMerchanInfo(this.edMerchantForm.value).subscribe((res: any) => {
+        if(res.statusCode === '1'){
+          Swal.fire('Success', `Successfully Update Merchant Information for Merchant ID: ${this.edMerchantForm.value.merchantid}`, 'success')
+        } else {
+          Swal.fire('Error', `Internal Server Error`, 'error')
+        }
+      })
+    }
+
+  }
 }
+// aku sudah bisa delete
+// kalo delete address > merchant > admin printing > product > product type & printquality & product color type
+// user perlu self delete
+

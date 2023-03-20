@@ -12,7 +12,7 @@ export class DevService {
   apiurl = environment.apiurl;
   constructor(
     private router: Router,
-    private http: HttpClient
+    public http: HttpClient
   ) { }
 
   checkSessionDeveloper(){
@@ -20,7 +20,6 @@ export class DevService {
   }
 
   destroyDevSid(){
-    
     Swal.fire({
       title: 'Are you sure?',
       text: "You will be signed out!",
@@ -37,5 +36,20 @@ export class DevService {
         })
       }
     })
+  }
+
+  // Dashboard Merchant View Merchant Details by id
+  viewMerchantInfo(datas: any){
+    return this.http.get(`${this.apiurl}/show-merchant/details/${datas}`)
+  }
+
+  // Developer Delete Merchant
+  deleteMerchant(datas: any){
+    return this.http.post(`${this.apiurl}/unchanges/developer/delete/merchant`, datas)
+  }
+
+  // Developer Update Merchant
+  updateMerchanInfo(datas: any){
+    return this.http.put(`${this.apiurl}/changes/develepor/update/merchant`, datas)
   }
 }
