@@ -195,7 +195,7 @@
                 <div class="card-body">
                   <select class="form-select" name="selectedMerchant" #selectedmerch (change)="tesae()">
                     <option value="-1">Select Merchant</option>
-                    <option value="{{data.merchantid}}"  *ngFor="let data of merchData" >{{data.merchantname}}</option>
+                    <option value="{{data.merchdatas.merchantid}}"  *ngFor="let data of merchData" >{{data.merchdatas.merchantname}}</option>
                   </select>
                 </div>
             </div>
@@ -217,7 +217,7 @@
           <div class="col-lg-9 mb-lg-0">
             <div class="card z-index-2 h-100">
                 <div class="card-header pb-0 pt-3 bg-transparent">
-                  <h6 class="text-capitalize">Selected Merchant: {{merchData[getSelecetedIndex()].merchantname}}</h6>
+                  <h6 class="text-capitalize">Selected Merchant: {{merchData[getSelecetedIndex()].merchdatas.merchantname}}</h6>
                 </div>
                 <div class="card-body">
                   <table id="listmerchantadmin" class="table table-borderless" style="width:100%">
