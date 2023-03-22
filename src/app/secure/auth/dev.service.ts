@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class DevService {
   apiurl = environment.apiurl;
   constructor(
     private router: Router,
-    public http: HttpClient
+    public http: HttpClient,
+    private toast : ToastrService,
   ) { }
 
   checkSessionDeveloper(){
@@ -51,5 +53,22 @@ export class DevService {
   // Developer Update Merchant
   updateMerchanInfo(datas: any){
     return this.http.put(`${this.apiurl}/changes/develepor/update/merchant`, datas)
+  }
+
+  // validate login
+  checkValidLoginDev(datas: any){
+    this.checkSessionDeveloper().subscribe((result: any) => {
+      console.log(result);
+      
+      if(result.statQuo !== '1'){
+        this.router.navigate(['../developer/login'])
+        localStorage.removeItem('__$DEV__TOKEN__')
+        this.toast.error('Invalid Login Token', 'Please Login Again')
+      } else {
+        localStorage.setItem('_____$DevDatas_____', JSON.stringify(result.datax[0]))
+        console.log(localStorage.getItem('_____$DevDatas_____'));
+        
+      }
+    })
   }
 }
