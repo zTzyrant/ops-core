@@ -43,6 +43,11 @@ export class LogindeveloperComponent{
   }
 
   loginDeveloper(){
+    if(this.logindevFormNew.invalid){
+      this.toast.error('Please check your inputed data !', 'Form data cannot be null')
+      this.logindevFormNew.markAllAsTouched();
+      return 
+    }
     
     this.logindevFormNew.value.password = this.curdService.encryptPassword(this.logindevFormNew.value.password)
     this.curdService.requestDEVlogin(this.logindevFormNew.value).subscribe((datas:any) => {
