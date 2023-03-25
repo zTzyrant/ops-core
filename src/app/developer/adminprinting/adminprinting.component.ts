@@ -36,6 +36,7 @@ export class AdminprintingComponent {
     }
     this.merchantListDat()
     this.adminNewForm()
+    this.adminEditForm()
     // gett all registerd usr
     this.getuserdatas()
 
@@ -62,6 +63,7 @@ export class AdminprintingComponent {
     this.merchSelected = false
     this.touchedSelected = event.target.value
     this.newAdminForm.get('merchantid').setValue(event.target.value)
+    this.editAdminForm.get('merchantid').setValue(event.target.value)
     this.generateAdminTables(event.target.value)
   }
 
@@ -84,27 +86,7 @@ export class AdminprintingComponent {
     })
   }
 
-  // Create Admin Form
-  newAdminForm: any
-  usernameUsed = false
-  emailUsed = false
-  phoneUsed = false
-  passwordinputtype = true
-
-  adminNewForm(){
-    this.newAdminForm = this.fb.group({
-      merchantid: ['', [Validators.required]],
-      username: ['', [Validators.required, Validators.minLength(5), this.noWhitespaceValidator]], 
-      password: ['', [Validators.required, this.strongNumber, this.strongUpper,  Validators.minLength(6), this.noWhitespaceValidator]], 
-      fullname: ['', Validators.required], 
-      email: ['', [Validators.required, Validators.pattern(/^[\w-\.+]+@([\w-]+\.)+[\w-]{2,100}$/)]], 
-      gender: ['', Validators.required], 
-      phone: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], 
-      position: ['', Validators.required], 
-      cardid: ['', Validators.required]
-    })
-  }
-  
+  // Validator
   checkusername(){
     let usedIs: any = false
     this.userDatas.forEach((dat:any) => {
@@ -156,6 +138,68 @@ export class AdminprintingComponent {
     return isSpace ? {'whitespace': true} : null;
   }
 
+  editcheckusername(){
+    let usedIs: any = false
+    this.userDatas.forEach((dat:any) => {
+      if(dat.username === this.editAdminForm.get('username').value){
+        usedIs = true
+        if(this.editArrayIndex && this.merchAdminDatas[this.editArrayIndex].username === this.editAdminForm.get('username').value){
+          usedIs = false  
+        }
+      }
+    });    
+    this.editusernameUsed = usedIs
+  }
+
+  editcheckEmail(){
+    let usedIs: any = false
+    this.userDatas.forEach((dat:any) => {
+      if(dat.email === this.editAdminForm.get('email').value){
+        usedIs = true
+        if(this.editArrayIndex && this.merchAdminDatas[this.editArrayIndex].email === this.editAdminForm.get('email').value){
+          usedIs = false  
+        }
+      }
+    });
+    
+    this.editemailUsed = usedIs
+  }
+
+  editcheckPhone(){
+    let usedIs: any = false
+    this.userDatas.forEach((dat:any) => {
+      if(dat.phone === this.editAdminForm.get('phone').value){
+        usedIs = true
+        if(this.editArrayIndex && this.merchAdminDatas[this.editArrayIndex].phone === this.editAdminForm.get('phone').value){
+          usedIs = false  
+        }
+      }
+    });
+    this.editphoneUsed = usedIs
+  }
+  // end validator
+
+  // Create Admin Form
+  newAdminForm: any
+  usernameUsed = false
+  emailUsed = false
+  phoneUsed = false
+  passwordinputtype = true
+
+  adminNewForm(){
+    this.newAdminForm = this.fb.group({
+      merchantid: ['', [Validators.required]],
+      username: ['', [Validators.required, Validators.minLength(5), this.noWhitespaceValidator]], 
+      password: ['', [Validators.required, this.strongNumber, this.strongUpper,  Validators.minLength(6), this.noWhitespaceValidator]], 
+      fullname: ['', Validators.required], 
+      email: ['', [Validators.required, Validators.pattern(/^[\w-\.+]+@([\w-]+\.)+[\w-]{2,100}$/)]], 
+      gender: ['', Validators.required], 
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], 
+      position: ['', Validators.required], 
+      cardid: ['', Validators.required]
+    })
+  }
+
   submitForm(){
     this.newAdminForm.value.password = this.curdService.encryptPassword(this.newAdminForm.value.password)
     console.log(this.newAdminForm.value)
@@ -176,7 +220,6 @@ export class AdminprintingComponent {
         if(res === 1){
           this.toast.success('Successfully submit new admin')
           this.getuserdatas()
-          this.merchantListDat()
           this.generateAdminTables(this.touchedSelected)
         } else {
           this.toast.error('Internal Server Error')
@@ -195,8 +238,8 @@ export class AdminprintingComponent {
 
   deleteAdmin(idadmin: any){
     Swal.fire({
-      title: 'Delete Merchant ?',
-      text: 'By deleting this merchant with delete all following merchant data.',
+      title: 'Delete Admin Merchant ?',
+      text: 'By deleting this admin merchant this data cannot be restored.',
       icon: 'error',
       showCancelButton: true,
       confirmButtonText: 'Confirm',
@@ -207,11 +250,7 @@ export class AdminprintingComponent {
         this.devService.deleteMerchantAdmin({userid: idadmin}).subscribe((res: any) => {
           if(res === 1){
             this.getuserdatas()
-            this.checkusername()
-            this.checkEmail()
-            this.checkPhone()
             this.getuserdatas()
-            this.merchantListDat()
             this.generateAdminTables(this.touchedSelected)
             Swal.fire('Success', 'Successfully Delete Merchant', 'success')
 
@@ -222,5 +261,64 @@ export class AdminprintingComponent {
       }
     })
     
+  }
+
+  // dev edit admin
+  editAdminForm: any
+  editusernameUsed = false
+  editemailUsed = false
+  editphoneUsed = false
+  editpasswordinputtype = true
+  editUserId: any
+  editArrayIndex: any
+  adminEditForm(){
+    this.editAdminForm = this.fb.group({
+      userid: ['', [Validators.required]],
+      merchantid: ['', [Validators.required]],
+      username: ['', [Validators.required, Validators.minLength(5), this.noWhitespaceValidator]], 
+      fullname: ['', Validators.required], 
+      email: ['', [Validators.required, Validators.pattern(/^[\w-\.+]+@([\w-]+\.)+[\w-]{2,100}$/)]], 
+      gender: ['', Validators.required], 
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], 
+      position: ['', Validators.required], 
+      cardid: ['', Validators.required]
+    })
+  }
+  
+  editSetFormValue(indx: any, userid: any){
+    this.editUserId = userid
+    this.editArrayIndex = indx
+    this.editAdminForm.setValue({
+      userid: `${userid}`,
+      merchantid: `${this.editAdminForm.value.merchantid}`,
+      username: `${this.merchAdminDatas[indx].username}`,
+      fullname: `${this.merchAdminDatas[indx].fullname}`,
+      email: `${this.merchAdminDatas[indx].email}`,
+      gender: `${this.merchAdminDatas[indx].gender}`,
+      phone: `${this.merchAdminDatas[indx].phone}`,
+      position: `${this.merchAdminDatas[indx].position}`,
+      cardid: `${this.merchAdminDatas[indx].cardid}`
+    })
+  }
+
+  submitEditForm(){
+    if(this.editAdminForm.invalid){
+      this.toast.error('Please check your inputed data !', 'Form data cannot be null')
+      this.toast.info('All data was reset to default')
+      this.editSetFormValue(this.editArrayIndex, this.editUserId)
+      return 
+    }
+
+    this.devService.updateMerchantAdmin(this.editAdminForm.value).subscribe((res:any) => {
+      console.log(res);
+      if(res === 1){
+        this.getuserdatas()
+        this.getuserdatas()
+        this.generateAdminTables(this.touchedSelected)
+        this.toast.success("Successfully update admin information")
+      } else {
+        this.toast.error('Internal server error')
+      }
+    })
   }
 }

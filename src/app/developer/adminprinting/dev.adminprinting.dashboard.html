@@ -234,7 +234,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let dat of merchAdminDatas">
+                      <tr *ngFor="let dat of merchAdminDatas; index as indx">
                         <td>{{dat.adminprintingid}}</td>
                         <td>{{dat.username}}</td>
                         <td>{{dat.fullname}}</td>
@@ -244,7 +244,7 @@
                         <td>{{dat.cardid}}</td>
                         <td>{{dat.position}}</td>
                         <td>
-                          <button class="btn btn-primary me-2">Edit</button>
+                          <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#ModalEditMerchantInfo" (click)="editSetFormValue(indx, dat.userid)">Edit</button>
                           <button class="btn btn-danger" (click)="deleteAdmin(dat.userid)">Delete</button>
                         </td>
                       </tr>
@@ -301,7 +301,7 @@
                         </div>
                       </div>
                       <div class="col-md-6">
-                          <label for="password">Password</label>
+                        <label for="password">Password</label>
                         <div class="form-group input-group"
                           [ngClass]="{
                             'is-invalid': newAdminForm.controls['password'].invalid && (
@@ -445,7 +445,7 @@
                                 newAdminForm.controls['phone'].dirty || 
                                 newAdminForm.controls['phone'].touched) || 
                                 phoneUsed === true, 
-                              'is-valid': newAdminForm.controls['phone'].valid}"
+                              'is-valid': newAdminForm.controls['phone'].valid && phoneUsed === false}"
                           >
                           <div class="invalid-feedback">
                             <div *ngIf="newAdminForm.controls['phone'].errors?.['required']">
@@ -534,15 +534,224 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5">Merchant Information</h1>
+            <h1 class="modal-title fs-5">Merchant Admin Information</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            
+            <form [formGroup]="editAdminForm">
+              <div class="row mb-2">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="editusername">Username</label>
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      id="editusername" 
+                      formControlName="username"
+                      (input)="editcheckusername()"
+                      [ngClass]="{
+                        'is-invalid': (editAdminForm.controls['username'].invalid && (
+                          editAdminForm.controls['username'].dirty || 
+                          editAdminForm.controls['username'].touched) || editusernameUsed === true
+                        ), 
+                        'is-valid': editAdminForm.controls['username'].valid && editusernameUsed === false}"
+                    >
+                    <div class="invalid-feedback">
+                      <div *ngIf="editAdminForm.get('username').errors?.['required']">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Username is required.
+                      </div>
+                      <div *ngIf="editAdminForm.get('username').errors?.['minlength']">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Username shouldn't be less than 5 words.
+                      </div>
+                      <div *ngIf="editusernameUsed === true">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Username Already used
+                      </div>
+                      <div *ngIf="editAdminForm.get('username').errors?.['whitespace']">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Username cannot contain whitespace.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <label for="editpassword">Password</label>
+                  <a href="/gateway/forgotpassword">
+                    <input type="button" class="form-control" id="editpassword" value="Forgotten your password?">
+                  </a>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="editfullname">Full Name</label>
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      id="editfullname" 
+                      formControlName="fullname"
+                      [ngClass]="{
+                        'is-invalid': editAdminForm.controls['fullname'].invalid && (
+                          editAdminForm.controls['fullname'].dirty || 
+                          editAdminForm.controls['fullname'].touched), 
+                        'is-valid': editAdminForm.controls['fullname'].valid}"
+                    >
+                    <div class="invalid-feedback">
+                      <div *ngIf="editAdminForm.get('fullname').errors?.['required']">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Full Name is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="editemail">Email</label>
+                    <input 
+                      type="email" 
+                      class="form-control" 
+                      id="editemail" 
+                      (input)="editcheckEmail()"
+                      formControlName="email"
+                      [ngClass]="{
+                        'is-invalid': editAdminForm.controls['email'].invalid && (
+                          editAdminForm.controls['email'].dirty || 
+                          editAdminForm.controls['email'].touched) ||
+                          editemailUsed === true, 
+                        'is-valid': editAdminForm.controls['email'].valid && editemailUsed === false}"
+                    >
+                    <div class="invalid-feedback">
+                      <div *ngIf="editAdminForm.controls['email'].errors?.['required']">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Email is required.
+                      </div>
+                      <div *ngIf="editAdminForm.controls['email'].errors?.['pattern']">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Please enter valid email.
+                      </div>
+                      <div *ngIf="editemailUsed === true">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Email Already used
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="editgender">Gender</label>
+                    <select 
+                      class="form-select" 
+                      id="editgender" 
+                      formControlName="gender"
+                      [ngClass]="{
+                        'is-invalid': editAdminForm.controls['gender'].invalid && (
+                          editAdminForm.controls['gender'].dirty || 
+                          editAdminForm.controls['gender'].touched), 
+                        'is-valid': editAdminForm.controls['gender'].valid}"
+                    >
+                      <option value="" hidden>Select Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                    <div class="invalid-feedback">
+                      <div *ngIf="editAdminForm.controls['gender'].errors?.['required']">
+                          <i class="bi bi-exclamation-octagon"></i>
+                          Please select gender.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="editphone">Phone</label>
+                    <input 
+                      type="tel" 
+                      class="form-control" 
+                      id="editphone"
+                      (input)="editcheckPhone()"
+                      formControlName="phone"
+                      [ngClass]="{
+                        'is-invalid': editAdminForm.controls['phone'].invalid && (
+                          editAdminForm.controls['phone'].dirty || 
+                          editAdminForm.controls['phone'].touched) || 
+                          editphoneUsed === true, 
+                        'is-valid': editAdminForm.controls['phone'].valid && editphoneUsed === false}"
+                    >
+                    <div class="invalid-feedback">
+                      <div *ngIf="editAdminForm.controls['phone'].errors?.['required']">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Please input phone number.
+                      </div>
+                      <div *ngIf="editAdminForm.controls['phone'].errors?.['pattern']">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Please input valid phone number.
+                      </div>
+                      <div *ngIf="editphoneUsed === true">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Phone Already used
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="editposition">Position</label>
+                    <select 
+                      class="form-select" 
+                      id="editposition" 
+                      formControlName="position"
+                      [ngClass]="{
+                        'is-invalid': editAdminForm.controls['position'].invalid && (
+                          editAdminForm.controls['position'].dirty || 
+                          editAdminForm.controls['position'].touched),
+                        'is-valid': editAdminForm.controls['position'].valid}"
+                    >
+                      <option value="" hidden>Select Position</option>
+                      <option value="Manager">Manager</option>
+                      <option value="Admin">Admin</option>
+                    </select>
+                    <div class="invalid-feedback">
+                      <div *ngIf="editAdminForm.controls['position'].errors?.['required']">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Please select position.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="editcardid">Card ID</label>
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      id="editcardid" 
+                      formControlName="cardid"
+                      [ngClass]="{
+                        'is-invalid': editAdminForm.controls['cardid'].invalid && (
+                          editAdminForm.controls['cardid'].dirty || 
+                          editAdminForm.controls['cardid'].touched),
+                        'is-valid': editAdminForm.controls['cardid'].valid}"
+                    >
+                    <div class="invalid-feedback">
+                      <div *ngIf="editAdminForm.controls['cardid'].errors?.['required']">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Please input card id.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Submit Changes</button>
+            <button type="button" class="btn btn-primary" (click)="submitEditForm()" [disabled]="editAdminForm.invalid">Submit Changes</button>
           </div>
         </div>
       </div>

@@ -75,11 +75,16 @@ export class DevService {
 
   // developer submit new admin
   postNewAdmin(datas: any){
-    return this.http.post(`${this.apiurl}/changes/developer/post/merchant`, datas)
+    return this.http.post(`${this.apiurl}/changes/developer/post/merchant/admin`, datas)
   }
 
   // developer delete admin
   deleteMerchantAdmin(datas: any){
     return this.http.post(`${this.apiurl}/unchanges/developer/delete/merchant/admin`, datas)
+  }
+
+  // developer update admin
+  updateMerchantAdmin(datas: any){
+    return this.http.put(`${this.apiurl}/changes/developer/update/merchant/admin`, datas)
   }
 }
