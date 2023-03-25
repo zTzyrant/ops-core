@@ -52,7 +52,7 @@ export class DevService {
 
   // Developer Update Merchant
   updateMerchanInfo(datas: any){
-    return this.http.put(`${this.apiurl}/changes/develepor/update/merchant`, datas)
+    return this.http.put(`${this.apiurl}/changes/developer/update/merchant`, datas)
   }
 
   // validate login
@@ -70,5 +70,16 @@ export class DevService {
         
       }
     })
+    
+  }
+
+  // developer submit new admin
+  postNewAdmin(datas: any){
+    return this.http.post(`${this.apiurl}/changes/developer/post/merchant`, datas)
+  }
+
+  // developer delete admin
+  deleteMerchantAdmin(datas: any){
+    return this.http.post(`${this.apiurl}/unchanges/developer/delete/merchant/admin`, datas)
   }
 }

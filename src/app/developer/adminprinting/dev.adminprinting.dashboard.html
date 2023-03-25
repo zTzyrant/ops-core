@@ -193,9 +193,9 @@
                   <h6 class="text-capitalize">Merchant</h6>
                 </div>
                 <div class="card-body">
-                  <select class="form-select" name="selectedMerchant" #selectedmerch (change)="tesae()">
-                    <option value="-1">Select Merchant</option>
-                    <option value="{{data.merchdatas.merchantid}}"  *ngFor="let data of merchData" >{{data.merchdatas.merchantname}}</option>
+                  <select class="form-select" (change)="selectedMerchGoods($event)">
+                    <option value="-1" hidden>Select Merchant</option>
+                    <option value="{{data.merchdatas.merchantid}}" *ngFor="let data of merchData" >{{data.merchdatas.merchantname}}, Admin total: {{data.admin.total}}</option>
                   </select>
                 </div>
             </div>
@@ -217,41 +217,334 @@
           <div class="col-lg-9 mb-lg-0">
             <div class="card z-index-2 h-100">
                 <div class="card-header pb-0 pt-3 bg-transparent">
-                  <h6 class="text-capitalize">Selected Merchant: {{merchData[getSelecetedIndex()].merchdatas.merchantname}}</h6>
                 </div>
                 <div class="card-body">
                   <table id="listmerchantadmin" class="table table-borderless" style="width:100%">
                     <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Username</th>
-                            <th>Full Name</th>
-                            <th>Gender</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Card ID</th>
-                            <th>Position</th>
-                            <th>Action</th>
-                        </tr>
+                      <tr>
+                        <th>Id</th>
+                        <th>Username</th>
+                        <th>Full Name</th>
+                        <th>Gender</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Card ID</th>
+                        <th>Position</th>
+                        <th>Action</th>
+                      </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let dat of merchAdminDatas">
-                            <td>{{dat.userid}}</td>
-                            <td>{{dat.username}}</td>
-                            <td>{{dat.fullname}}</td>
-                            <td>{{dat.gender}}</td>
-                            <td>{{dat.email}}</td>
-                            <td>{{dat.phone}}</td>
-                            <td>{{dat.cardid}}</td>
-                            <td>{{dat.position}}</td>
-                            <td><button class="btn btn-outline-primary" style="margin: auto;">View</button>
-                        </tr>
+                      <tr *ngFor="let dat of merchAdminDatas">
+                        <td>{{dat.adminprintingid}}</td>
+                        <td>{{dat.username}}</td>
+                        <td>{{dat.fullname}}</td>
+                        <td>{{dat.gender}}</td>
+                        <td>{{dat.email}}</td>
+                        <td>{{dat.phone}}</td>
+                        <td>{{dat.cardid}}</td>
+                        <td>{{dat.position}}</td>
+                        <td>
+                          <button class="btn btn-primary me-2">Edit</button>
+                          <button class="btn btn-danger" (click)="deleteAdmin(dat.userid)">Delete</button>
+                        </td>
+                      </tr>
                     </tbody>
-                </table>
+                  </table>
                </div>
             </div>
           </div>
         </div>
+
+        <div class="row mt-4" *ngIf="merchSelected">
+          <div class="col-lg-9 mb-lg-0">
+            <div class="card z-index-2 h-100">
+                <div class="card-header pb-0 pt-3 bg-transparent">
+                  <h6 class="text-capitalize">Register New Admin</h6>
+                </div>
+                <div class="card-body">
+                  <form [formGroup]="newAdminForm">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="username">Username</label>
+                          <input 
+                            type="text" 
+                            class="form-control" 
+                            id="username" 
+                            formControlName="username"
+                            (input)="checkusername()"
+                            [ngClass]="{
+                              'is-invalid': (newAdminForm.controls['username'].invalid && (
+                                newAdminForm.controls['username'].dirty || 
+                                newAdminForm.controls['username'].touched) || usernameUsed === true
+                              ), 
+                              'is-valid': newAdminForm.controls['username'].valid && usernameUsed === false}"
+                          >
+                          <div class="invalid-feedback">
+                            <div *ngIf="newAdminForm.get('username').errors?.['required']">
+                              <i class="bi bi-exclamation-octagon"></i>
+                              Username is required.
+                            </div>
+                            <div *ngIf="newAdminForm.get('username').errors?.['minlength']">
+                              <i class="bi bi-exclamation-octagon"></i>
+                              Username shouldn't be less than 5 words.
+                            </div>
+                            <div *ngIf="usernameUsed === true">
+                              <i class="bi bi-exclamation-octagon"></i>
+                              Username Already used
+                            </div>
+                            <div *ngIf="newAdminForm.get('username').errors?.['whitespace']">
+                              <i class="bi bi-exclamation-octagon"></i>
+                              Username cannot contain whitespace.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                          <label for="password">Password</label>
+                        <div class="form-group input-group"
+                          [ngClass]="{
+                            'is-invalid': newAdminForm.controls['password'].invalid && (
+                              newAdminForm.controls['password'].dirty || 
+                              newAdminForm.controls['password'].touched), 
+                            'is-valid': newAdminForm.controls['password'].valid}" 
+                        >
+                          <input 
+                            [type]="passwordinputtype ? 'password' : 'text'"
+                            class="form-control" 
+                            id="password" 
+                            formControlName="password"
+                            [ngClass]="{
+                              'is-invalid': newAdminForm.controls['password'].invalid && (
+                                newAdminForm.controls['password'].dirty || 
+                                newAdminForm.controls['password'].touched), 
+                              'is-valid': newAdminForm.controls['password'].valid}" 
+                          >
+                          <div class="form-control-icon cstareapass input-group-text" (click)="passwordinputtype = !passwordinputtype">
+                            <i class="bi bi-eye-slash " *ngIf="!passwordinputtype"></i>
+                            <i class="bi bi-eye" *ngIf="passwordinputtype"></i>
+                          </div>
+                        </div>
+                        <div class="invalid-feedback">
+                          <div *ngIf="newAdminForm.get('password').errors?.['required']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Password is required.
+                          </div>
+                          <div *ngIf="newAdminForm.get('password').errors?.['minlength']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Password shouldn't be less than 6 words.
+                          </div>
+                          <div *ngIf="newAdminForm.get('password').errors?.['strongNumber']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Password should contain at least 1 number.
+                          </div>
+                          <div *ngIf="newAdminForm.get('password').errors?.['strongUpper']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Password should contain at least 1 uppercase.
+                          </div>
+                          <div *ngIf="newAdminForm.get('password').errors?.['whitespace']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Password cannot contain whitespace.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="fullname">Full Name</label>
+                          <input 
+                            type="text" 
+                            class="form-control" 
+                            id="fullname" 
+                            formControlName="fullname"
+                            [ngClass]="{
+                              'is-invalid': newAdminForm.controls['fullname'].invalid && (
+                                newAdminForm.controls['fullname'].dirty || 
+                                newAdminForm.controls['fullname'].touched), 
+                              'is-valid': newAdminForm.controls['fullname'].valid}"
+                          >
+                          <div class="invalid-feedback">
+                            <div *ngIf="newAdminForm.get('fullname').errors?.['required']">
+                              <i class="bi bi-exclamation-octagon"></i>
+                              Full Name is required.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="email">Email</label>
+                          <input 
+                            type="email" 
+                            class="form-control" 
+                            id="email" 
+                            (input)="checkEmail()"
+                            formControlName="email"
+                            [ngClass]="{
+                              'is-invalid': newAdminForm.controls['email'].invalid && (
+                                newAdminForm.controls['email'].dirty || 
+                                newAdminForm.controls['email'].touched) ||
+                                emailUsed === true, 
+                              'is-valid': newAdminForm.controls['email'].valid && emailUsed === false}"
+                          >
+                          <div class="invalid-feedback">
+                            <div *ngIf="newAdminForm.controls['email'].errors?.['required']">
+                              <i class="bi bi-exclamation-octagon"></i>
+                              Email is required.
+                            </div>
+                            <div *ngIf="newAdminForm.controls['email'].errors?.['pattern']">
+                              <i class="bi bi-exclamation-octagon"></i>
+                              Please enter valid email.
+                            </div>
+                            <div *ngIf="emailUsed === true">
+                              <i class="bi bi-exclamation-octagon"></i>
+                              Email Already used
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="gender">Gender</label>
+                          <select 
+                            class="form-select" 
+                            id="gender" 
+                            formControlName="gender"
+                            [ngClass]="{
+                              'is-invalid': newAdminForm.controls['gender'].invalid && (
+                                newAdminForm.controls['gender'].dirty || 
+                                newAdminForm.controls['gender'].touched), 
+                              'is-valid': newAdminForm.controls['gender'].valid}"
+                          >
+                            <option value="" hidden>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                          </select>
+                          <div class="invalid-feedback">
+                            <div *ngIf="newAdminForm.controls['gender'].errors?.['required']">
+                                <i class="bi bi-exclamation-octagon"></i>
+                                Please select gender.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="phone">Phone</label>
+                          <input 
+                            type="tel" 
+                            class="form-control" 
+                            id="phone"
+                            (input)="checkPhone()"
+                            formControlName="phone"
+                            [ngClass]="{
+                              'is-invalid': newAdminForm.controls['phone'].invalid && (
+                                newAdminForm.controls['phone'].dirty || 
+                                newAdminForm.controls['phone'].touched) || 
+                                phoneUsed === true, 
+                              'is-valid': newAdminForm.controls['phone'].valid}"
+                          >
+                          <div class="invalid-feedback">
+                            <div *ngIf="newAdminForm.controls['phone'].errors?.['required']">
+                              <i class="bi bi-exclamation-octagon"></i>
+                              Please input phone number.
+                            </div>
+                            <div *ngIf="newAdminForm.controls['phone'].errors?.['pattern']">
+                              <i class="bi bi-exclamation-octagon"></i>
+                              Please input valid phone number.
+                            </div>
+                            <div *ngIf="phoneUsed === true">
+                              <i class="bi bi-exclamation-octagon"></i>
+                              Phone Already used
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="position">Position</label>
+                          <select 
+                            class="form-select" 
+                            id="position" 
+                            formControlName="position"
+                            [ngClass]="{
+                              'is-invalid': newAdminForm.controls['position'].invalid && (
+                                newAdminForm.controls['position'].dirty || 
+                                newAdminForm.controls['position'].touched),
+                              'is-valid': newAdminForm.controls['position'].valid}"
+                          >
+                            <option value="" hidden>Select Position</option>
+                            <option value="Manager">Manager</option>
+                            <option value="Admin">Admin</option>
+                          </select>
+                          <div class="invalid-feedback">
+                            <div *ngIf="newAdminForm.controls['position'].errors?.['required']">
+                              <i class="bi bi-exclamation-octagon"></i>
+                              Please select position.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="cardid">Card ID</label>
+                          <input 
+                            type="text" 
+                            class="form-control" 
+                            id="cardid" 
+                            formControlName="cardid"
+                            [ngClass]="{
+                              'is-invalid': newAdminForm.controls['cardid'].invalid && (
+                                newAdminForm.controls['cardid'].dirty || 
+                                newAdminForm.controls['cardid'].touched),
+                              'is-valid': newAdminForm.controls['cardid'].valid}"
+                          >
+                          <div class="invalid-feedback">
+                            <div *ngIf="newAdminForm.controls['cardid'].errors?.['required']">
+                              <i class="bi bi-exclamation-octagon"></i>
+                              Please input card id.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Submit Button -->
+                    <div class="row g-3 mt-2">
+                      <div class="col text-end">
+                        <button class="btn" style="background-color: #07484A; color: #fff;" (click)="submitForm()">Sumbit</button>
+                      </div>
+                    </div>
+                    <!-- End Submit Button -->
+                  </form>
+                  
+                  
+               </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </main>
+    <div class="modal fade" id="ModalEditMerchantInfo">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Merchant Information</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Submit Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
