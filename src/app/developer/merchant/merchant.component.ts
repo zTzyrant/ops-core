@@ -78,7 +78,7 @@ export class MerchantComponent {
       confirmButtonColor: '#dc3545',
       cancelButtonColor: '#07484A'
     }).then((result) => {
-      if(result){
+      if(result.isConfirmed){
         this.devService.deleteMerchant(index).subscribe((res: any) => {
           if(res === 1)
             Swal.fire('Success', 'Successfully Delete Merchant', 'success')
@@ -451,7 +451,3 @@ export class MerchantComponent {
 
   }
 }
-// aku sudah bisa delete
-// kalo delete address > merchant > admin printing > product > product type & printquality & product color type
-// user perlu self delete
-

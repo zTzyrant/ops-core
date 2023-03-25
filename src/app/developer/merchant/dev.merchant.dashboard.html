@@ -498,7 +498,6 @@
                             'is-invalid': newMerchantForm.controls['password'].invalid && (newMerchantForm.controls['password'].dirty || newMerchantForm.controls['password'].touched), 
                             'is-valid': newMerchantForm.controls['password'].valid}" 
                         >
-
                           <input 
                             name="password" 
                             class="form-control ps1x" 
@@ -537,7 +536,7 @@
                             <i class="bi bi-exclamation-octagon"></i>
                             Password cannot contain whitespace.
                           </div>
-                      </div>  
+                        </div>  
                       </div>
 
                       <div class="col-6">
@@ -594,7 +593,9 @@
                           class="form-select" 
                           formControlName="gender"
                           [ngClass]="{
-                            'is-invalid': newMerchantForm.controls['gender'].invalid && (newMerchantForm.controls['gender'].dirty || newMerchantForm.controls['gender'].touched), 
+                            'is-invalid': newMerchantForm.controls['gender'].invalid && (
+                              newMerchantForm.controls['gender'].dirty || 
+                              newMerchantForm.controls['gender'].touched), 
                             'is-valid': newMerchantForm.controls['gender'].valid}"
                           >
                             <option selected value="">Select Gender</option>
