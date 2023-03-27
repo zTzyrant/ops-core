@@ -107,4 +107,11 @@ export class CurdApiService {
     return this.http.post(`${this.apiurl}/secure/net/login`, datas)
   }
   
+  getAllCategoryProd(){
+    return this.http.get(`${this.apiurl}/product/category`)
+  }
+
+  getAllLocationProd(){
+    return this.http.get(`${this.apiurl}/product/location`)
+  }
 }
