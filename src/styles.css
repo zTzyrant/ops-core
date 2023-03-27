@@ -2,6 +2,10 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 @import 'ngx-toastr/toastr';
 
+*, html, body {
+  scroll-behavior: smooth !important;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
