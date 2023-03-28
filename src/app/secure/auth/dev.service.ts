@@ -87,4 +87,13 @@ export class DevService {
   updateMerchantAdmin(datas: any){
     return this.http.put(`${this.apiurl}/changes/developer/update/merchant/admin`, datas)
   }
+
+  // Developer Get Mechant Produt
+  getAllMerchantProduct(){
+    return this.http.get(`${this.apiurl}/show/merchant/product/total`)
+  }
+
+  getMerchantProductDetails(datas: any){
+    return this.http.get(`${this.apiurl}/show/merchant/product/detail/${datas}`)
+  }
 }
