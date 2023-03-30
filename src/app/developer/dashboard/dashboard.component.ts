@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import 'datatables.net'
+import { ToastrService } from 'ngx-toastr';
+import { DevService } from 'src/app/secure/auth/dev.service';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dev.dashboard.html',
@@ -12,7 +16,16 @@ import 'datatables.net'
 export class DashboardComponent {
   showNav = false
 
+  constructor (
+    private devService: DevService,
+    private router: Router,
+    private toast : ToastrService,
+  ) { }
+
   ngOnInit(){
+    if(localStorage.getItem('__$DEV__TOKEN__')){
+      this.devService.checkValidLoginDev(localStorage.getItem('__$DEV__TOKEN__'))
+    }
     $(document).ready(function () {
         $('#example').DataTable({scrollX: true});
     });
@@ -21,4 +34,6 @@ export class DashboardComponent {
   setShowNav(){
     this.showNav = !this.showNav
   }
+
+  signDevOut(){ this.devService.destroyDevSid() }
 }

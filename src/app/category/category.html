@@ -8,16 +8,13 @@
       <div>Filter</div>
       <div>
         <select class="form-select" aria-label="Sort by paper type">
-          <option selected>Paper Type</option>
-          <option value="A4">A4</option>
-          <option value="F4">F4</option>
-          <option value="A6">A6</option>
+          <option value="-1" selected>Paper Type</option>
+          <option value="{{dat.category}}" *ngFor="let dat of allCategory">{{dat.category}}</option>
         </select>
         <select class="form-select" aria-label="Sort by Location">
-          <option selected>Location</option>
-          <option value="Denpasar">Denpasar</option>
-          <option value="Badung">Badung</option>
-          <option value="Tabanan">Tabanan</option>
+          <option value="-1" selected>Location</option>
+          <option value="{{dat.city}}" *ngFor="let dat of allLocation">{{dat.city}}</option>
+
         </select>
       </div>
     </div>

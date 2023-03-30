@@ -4,7 +4,7 @@
     <!-- Start main product image -->
     <div class="col-md-5">
       <div class="ecommerce-gallery">
-        <div class="row py-3 shadow-5">
+        <div class="row shadow-5">
           <div class="col-12 mb-1" >
             <div class="lightbox frame-pic">
               <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="false">
@@ -25,14 +25,17 @@
             </div>
           </div>
 
-            <div class="areas-small-img mt-1" (click)="slideto(indexOfelement)" aria-current="true" aria-label="Slide 1" *ngFor="let data of currentProdService.productTypeOPS; index as indexOfelement;">
-              <img
-                src="{{data.imageurl}}"
-                alt="{{data.papertype}}"
-                class="small-img-prod"
-              />
-            </div>
+            
 
+        </div>
+        <div class="d-flex flex-wrap">
+          <div class="me-1 areas-small-img mt-1" (click)="slideto(indexOfelement)" aria-current="true" aria-label="Slide 1" *ngFor="let data of currentProdService.productTypeOPS; index as indexOfelement;">
+            <img
+              src="{{data.imageurl}}"
+              alt="{{data.papertype}}"
+              class="small-img-prod"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -59,7 +62,7 @@
     
       <!-- Start Form Order -->
       <div class="order-areas">
-        <form [formGroup]="orderform">
+        <form [formGroup]="orderform" (change)="getIndexOfDatas()">
 
           <!-- Ini yang harus di generate untuk radio button nanti name -> id -> value -->
 
@@ -159,11 +162,67 @@
   
 
           <div class="orderpannel my-4">
-            <div class="d-flex justify-content-between">
-              <div style="align-self: center">Rp. 700,00/pages</div>
-              <div><button class="btn btn-outline-dark btn-submit">Request Order</button></div>
-            </div>
+            <div class="card">
+              <div class="card-body mx-4">
+                <div class="container">
+                  <p class="mt-5 mb-3 text-center fw-semibold" style="font-size: 1.4rem;">Order Information</p>
+                  <div class="row">
+                    <ul class="list-unstyled">
+                      <li class="text-black">John Doe</li>
+                      <li class="text-black mt-1">{{dateNowOrder | date:'longDate'}}</li>
+                    </ul>
+                  </div>
+                  
+                  <div class="row">
+                    <hr>
+                    <div class="col-xl-10">
+                      <p>{{this.papertype.value}}</p>
+                    </div>
+                    <div class="col-xl-2">
+                      <p class="float-end">Rp. {{selectTypeFee}}</p>
+                    </div>
+                  </div>
 
+                  <div class="row">
+                    <hr>
+                    <div class="col-xl-10">
+                      <p>{{this.color.value}}</p>
+                    </div>
+                    <div class="col-xl-2">
+                      <p class="float-end">Rp. {{selectColorFee}}</p>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <hr>
+                    <div class="col-xl-10">
+                      <p>{{this.quality.value}}</p>
+                    </div>
+                    <div class="col-xl-2">
+                      <p class="float-end">Rp. {{selectQualityFee}}</p>
+                    </div>
+                  </div>
+
+                  <div class="row text-black">
+                    <hr style="border: 2px solid black;">
+                    <div class="col-xl-6">
+                      <p>{{this.copies.value}} x {{totalpages}} Pages</p>
+                    </div>
+                    <div class="col-xl-6">
+                      <p class="float-end fw-bold">Total: Rp. {{totalPrice * totalpages}}
+                        <!-- total price masih blm * totalpage (maasih manual) -->
+                      </p>
+                    </div>
+                    <hr style="border: 2px solid black;">
+                  </div>
+
+                  <div class="float-end my-2">
+                    <button class="btn btn-outline-dark btn-submit">Submit Order</button>
+                  </div>
+            
+                </div>
+              </div>
+            </div>
           </div>
         </form>
       </div>

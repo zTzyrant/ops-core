@@ -63,6 +63,15 @@
             </a>
           </li>
           
+          <li class="nav-item">
+            <a class="nav-link nav-link-sz" (click)="this.signDevOut()">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-door-open brand-color text-dark text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Sign Out</span>
+            </a>
+          </li>
+
         </ul>
       </div>
   
@@ -81,7 +90,7 @@
           <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center cursor-pointer">
               <i class="bi bi-person-circle text-white"></i>
-              <span class="ms-2 text-white">Hazzzardd</span>
+              <span class="ms-2 text-white">{{devDatas.username}}</span>
             </div>
             <ul class="navbar-nav  justify-content-end">
               <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -176,35 +185,150 @@
         </div>
       </nav>
       <div class="container-fluid py-4">
-
         <div class="row">
-            <div class="col-lg-9 mb-lg-0 mb-4">
-                <div class="card z-index-2 h-100">
-                    <div class="card-header pb-0 pt-3 bg-transparent">
-                        <h6 class="text-capitalize">Tables</h6>
-                        
-                    </div>
-                    <div class="card-body">
-                        a
-                    </div>
+          <div class="col-lg-9 mb-lg-0 mb-4">
+            <div class="card z-index-2 h-100">
+                <div class="card-header pb-0 pt-3 bg-transparent">
+                  <h6 class="text-capitalize">Merchant</h6>
+                </div>
+                <div class="card-body">
+                  <select class="form-select" (change)="selectedMerchGoods($event)">
+                    <option value="-1" hidden>Select Merchant</option>
+                    <option value="{{data.merchdatas.merchantid}}" *ngFor="let data of merchData" >{{data.merchdatas.merchantname}}, Total Product: {{data.prod.total}}</option>
+                  </select>
                 </div>
             </div>
-            <div class="col-lg-3 mb-lg-0 mb-4">
-                <div class="card z-index-2 h-100">
-                        <div class="card-header pb-0 pt-3 bg-transparent">
-                        <h6 class="text-capitalize">Account Information</h6>
-                    </div>
-                    <div class="card-body">
-                        <form [formGroup]="testform">
-                          <input type="text" placeholder="test" formControlName="goekbong">
-                          <input type="text" placeholder="test" >
-                          <button (click)="tease()">assa</button>
-                        </form>
-                        <button (click)="teaseq()">assa</button>
+          </div>
 
-                    </div>
-                </div>
-            </div>  
+          <div class="col-lg-3 mb-lg-0 mb-4">
+            <div class="card z-index-2 h-100">
+              <div class="card-header pb-0 pt-3 bg-transparent">
+              <h6 class="text-capitalize">Account Information</h6>
+            </div>
+            <div class="card-body">
+              a
+            </div>
+            </div>
+          </div>  
+
+        </div>
+
+        <div class="row mt-4" *ngIf="merchSelected">
+          <div class="col-lg-9 mb-lg-0">
+            <div class="card z-index-2 h-100">
+              <div class="card-header pb-0 pt-3 bg-transparent">
+                <h6 class="text-capitalize">Product</h6>
+              </div>
+              <div class="card-body">
+                <select class="form-select" (change)="selectProduct($event)">
+                  <option value="-1" hidden>Select Product</option>
+                  <option value="{{indx}}" *ngFor="let data of productSelected; index as indx" >Product ID:{{data.productOPS.productid}}, Product: {{data.productOPS.producttitle}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4" *ngIf="prodSelected">
+          <div class="col-lg-9 mb-lg-0">
+            <div class="card z-index-2 h-100">
+              <div class="card-header pb-0 pt-3 bg-transparent">
+                <h6 class="text-capitalize">Paper Type</h6>
+              </div>
+              <div class="card-body">
+                <table id="listPaper" class="table table-borderless" style="width:100%">
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Paper Type</th>
+                      <th>Category</th>
+                      <th>Quantity</th>
+                      <th>Paper Price</th>
+                      <th>Image</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let dat of productSelected[this.selectedProductIndex].productService.productTypeOPS; index as indx">
+                      <td>{{dat.productypeid}}</td>
+                      <td>{{dat.papertype}}</td>
+                      <td>{{dat.category}}</td>
+                      <td>{{dat.quantity}}</td>
+                      <td>{{dat.paperprice}}</td>
+                      <td><img src="{{dat.imageurl}}" alt="Prodcut-{{indx}}" height="50px" width="50px"></td>
+                      <td>
+                        <button class="btn btn-primary me-2" >Edit</button>
+                        <button class="btn btn-danger" >Delete</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4" *ngIf="prodSelected">
+          <div class="col-lg-9 mb-lg-0">
+            <div class="card z-index-2 h-100">
+              <div class="card-header pb-0 pt-3 bg-transparent">
+                <h6 class="text-capitalize">Color Type</h6>
+              </div>
+              <div class="card-body">
+                <table id="listColor" class="table table-borderless" style="width:100%">
+                  <thead>
+                    <tr>
+                      <th>Color Type</th>
+                      <th>Color Fee</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let dat of productSelected[this.selectedProductIndex].productService.printColorsOPS; index as indx">
+                      <td>{{dat.colortype}}</td>
+                      <td>{{dat.colorfee}}</td>
+                      <td>
+                        <button class="btn btn-primary me-2" >Edit</button>
+                        <button class="btn btn-danger" >Delete</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <button>Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4" *ngIf="prodSelected">
+          <div class="col-lg-9 mb-lg-0">
+            <div class="card z-index-2 h-100">
+              <div class="card-header pb-0 pt-3 bg-transparent">
+                <h6 class="text-capitalize">Print Quality</h6>
+              </div>
+              <div class="card-body">
+                <table id="listQuality" class="table table-borderless" style="width:100%">
+                  <thead>
+                    <tr>
+                      <th>Print Quality</th>
+                      <th>Print Quality Fee</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let dat of productSelected[this.selectedProductIndex].productService.printQualityOPS; index as indx">
+                      <td>{{dat.printquality}}</td>
+                      <td>{{dat.printqualityfee}}</td>
+                      <td>
+                        <button class="btn btn-primary me-2" >Edit</button>
+                        <button class="btn btn-danger" >Delete</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>

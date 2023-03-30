@@ -30,7 +30,9 @@ import { AdminprintingComponent } from './developer/adminprinting/adminprinting.
 import { MerchantproductComponent } from './developer/merchantproduct/merchantproduct.component';
 import { NotFoundComponent } from './core/errorpage/not-found/not-found.component';
 import { FooterComponent } from './core/footer/footer.component';
-
+import { LogindeveloperComponent } from './developer/login/logindeveloper.component';
+import { DevGuard } from './secure/auth/dev.guard';
+import { DevService } from './secure/auth/dev.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,7 @@ import { FooterComponent } from './core/footer/footer.component';
     MerchantproductComponent,
     NotFoundComponent,
     FooterComponent,
-
+    LogindeveloperComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +65,7 @@ import { FooterComponent } from './core/footer/footer.component';
     NgxMaterialTimepickerModule,
   ],
   providers: [
-    CurdApiService,
+    CurdApiService, DevGuard, DevService
   ],
   bootstrap: [AppComponent]
 })

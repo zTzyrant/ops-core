@@ -12,6 +12,8 @@ import { CurdApiService } from '../secure/curd.api.service';
 export class CategoryComponent{
   datas: any
   allProduct: any
+  allCategory: any
+  allLocation: any
 
   constructor(
     private http: HttpClient,
@@ -21,12 +23,26 @@ export class CategoryComponent{
   }
 
   ngOnInit(): void {
-    this.datas = this.http.get('assets/productfake.json')
-    console.log(this.datas.product);
-    this.curdService.getAllOpsProduct().subscribe(result => {
-      this.allProduct = result
-      console.log(this.allProduct);
-      
+    this.getAllProduct()
+    this.getAllCategory()
+    this.getAllLocation()
+  }
+
+  getAllProduct(){
+    this.curdService.getAllOpsProduct().subscribe((res:any) => {
+      this.allProduct = res
+    })
+  }
+
+  getAllCategory(){
+    this.curdService.getAllCategoryProd().subscribe((res:any) => {
+      this.allCategory = res
+    })
+  }
+
+  getAllLocation(){
+    this.curdService.getAllLocationProd().subscribe((res:any) => {
+      this.allLocation = res
     })
   }
 

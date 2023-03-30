@@ -98,4 +98,20 @@ export class CurdApiService {
   submitNewMerchant(datas: any){
     return this.http.post(`${this.apiurl}/registermerchant`, datas)
   }
+
+  getalladminprinting(datas: any){
+    return this.http.get(`${this.apiurl}/get-merchantadmin/${datas}`)
+  }
+
+  requestDEVlogin(datas: any){
+    return this.http.post(`${this.apiurl}/secure/net/login`, datas)
+  }
+  
+  getAllCategoryProd(){
+    return this.http.get(`${this.apiurl}/product/category`)
+  }
+
+  getAllLocationProd(){
+    return this.http.get(`${this.apiurl}/product/location`)
+  }
 }

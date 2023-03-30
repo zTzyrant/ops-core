@@ -66,7 +66,9 @@
             ],
             "allowedCommonJsDependencies": [
               "sweetalert2",
-              "crypto-js"
+              "crypto-js",
+              "jquery",
+              "luxon"
            ]
           },
           "configurations": {

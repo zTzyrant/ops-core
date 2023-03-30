@@ -16,6 +16,10 @@ import { NotFoundComponent } from './core/errorpage/not-found/not-found.componen
 import { LogindeveloperComponent } from './developer/login/logindeveloper.component';
 import { FooterComponent } from './core/footer/footer.component';
 
+
+// GUARD
+import { DevGuard } from './secure/auth/dev.guard';
+
 const routes: Routes = [
   {
     path: 'homes',
@@ -43,16 +47,20 @@ const routes: Routes = [
     component: DetailsproductComponent
   }, {
     path: 'developer/dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [DevGuard]
   }, {
     path: 'developer/dashboard/merchant',
-    component: MerchantComponent
+    component: MerchantComponent,
+    canActivate: [DevGuard]
   }, {
     path: 'developer/dashboard/adminprinting',
-    component: AdminprintingComponent
+    component: AdminprintingComponent,
+    canActivate: [DevGuard]
   }, {
     path: 'developer/dashboard/merchantproduct',
-    component: MerchantproductComponent
+    component: MerchantproductComponent,
+    canActivate: [DevGuard]
   }, {
     path: 'developer/login',
     component: LogindeveloperComponent
