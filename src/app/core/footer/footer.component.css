@@ -1,0 +1,93 @@
+a{
+    text-decoration: none;
+}
+
+.footer-top{
+    background: #07484A;
+    padding: 10px 7%;
+    width: 100%;
+    height: 45%;
+    top: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: sticky;
+    z-index: 10;
+}
+.footer-bottom{
+    background: #043133;
+    padding: 10px 7%;
+    width: 100%;
+    top: 0px;
+    color: #ffffff7b;
+    text-align: center;
+    
+}
+#text-1{
+    width: 66px;
+    height: 43px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+#text-2{
+    text-align: justify;
+}
+.brandopstag{
+    width: 66px;
+    height: 43px;
+    left: 0px;
+    top: 0px;
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 43px;
+    color: #FFFFFF;
+}
+.contact{
+    height: 35px;
+    left: 0px;
+    top: 0px;
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 43px;
+    color: #FFFFFF;
+}
+.sub-head{
+    color: #FFFFFF;
+}
+.desc{
+    color: #FFFFFF;
+    opacity: 75%;
+}
+.map-1{
+    width: 35%;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+    color: #FFFFFF;
+}
+.but{
+    border-radius: 100%;
+}
+.instagram{
+    color: #FFFFFF;
+}
+.instagram:hover{
+    color: #fb3958;
+}
+.email{
+    color: #FFFFFF;
+}
+.email:hover{
+    color: #cfad62;
+}
+.website{
+    color: #FFFFFF;
+}
+.website:hover{
+    color: #1c27ff;
+}
