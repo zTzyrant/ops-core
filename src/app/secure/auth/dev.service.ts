@@ -34,6 +34,7 @@ export class DevService {
       if (result.isConfirmed) {
         Swal.fire('Awww', 'Successfully signed out', 'success').then(() => {
           localStorage.removeItem('__$DEV__TOKEN__')
+          localStorage.removeItem('_____$DevDatas_____')
           return this.router.navigate(['/developer/login'])
         })
       }
@@ -88,7 +89,7 @@ export class DevService {
     return this.http.put(`${this.apiurl}/changes/developer/update/merchant/admin`, datas)
   }
 
-  // Developer Get Mechant Produt
+  // developer Get Mechant Produt
   getAllMerchantProduct(){
     return this.http.get(`${this.apiurl}/show/merchant/product/total`)
   }
@@ -96,4 +97,54 @@ export class DevService {
   getMerchantProductDetails(datas: any){
     return this.http.get(`${this.apiurl}/show/merchant/product/detail/${datas}`)
   }
+
+  getMerchantProductDetailsById(datas: any){
+    return this.http.get(`${this.apiurl}/show/merchant/product/details/${datas}`)
+  }
+
+  // developer submit new product
+  postNewProduct(datas: any){
+    return this.http.post(`${this.apiurl}/changes/developer/post/merchant/product`, datas)
+  }
+
+  // developer upload product type images merchant
+  uploadImagesProductType(datas: any){
+    return this.http.post(`${this.apiurl}/changes/developer/post/merchant/product/image`, datas)
+  }
+
+  // developer insert product type merchant
+  postNewProductType(datas: any){
+    return this.http.post(`${this.apiurl}/changes/developer/post/merchant/product/types`, datas)
+  }
+
+  // developer insert print color product
+  postNewPrintColor(datas: any){
+    return this.http.post(`${this.apiurl}/changes/developer/post/merchant/product/color`, datas)
+  }
+
+  // developer insert print quality product
+  postNewPrintQuality(datas: any){
+    return this.http.post(`${this.apiurl}/changes/developer/post/merchant/product/quality`, datas)
+  }
+
+  // developer delete product
+  deleteProductById(id: any){
+    return this.http.delete(`${this.apiurl}/unchanges/developer/post/merchant/product/${id}`)
+  }
+  
+  // developer delete product type
+  deleteProductTypeById(id: any){
+    return this.http.delete(`${this.apiurl}/unchanges/developer/post/merchant/product/type/${id}`)
+  }
+
+  // developer delete print color
+  deletePrintColorById(id: any){
+    return this.http.delete(`${this.apiurl}/unchanges/developer/post/merchant/product/print/color/${id}`)
+  }
+
+  // developer delete print quality
+  deletePrintQualityById(id: any){
+    return this.http.delete(`${this.apiurl}/unchanges/developer/post/merchant/product/print/quality/${id}`)
+  }
+
 }

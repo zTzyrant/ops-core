@@ -194,7 +194,7 @@
                 <div class="card-body">
                   <select class="form-select" (change)="selectedMerchGoods($event)">
                     <option value="-1" hidden>Select Merchant</option>
-                    <option value="{{data.merchdatas.merchantid}}" *ngFor="let data of merchData" >{{data.merchdatas.merchantname}}, Total Product: {{data.prod.total}}</option>
+                    <option value="{{data.merchdatas.merchantid}}" *ngFor="let data of merchData" >Merchant Id: {{data.merchdatas.merchantid}}, {{data.merchdatas.merchantname}}, Total Product: {{data.prod.total}}</option>
                   </select>
                 </div>
             </div>
@@ -213,22 +213,61 @@
 
         </div>
 
-        <div class="row mt-4" *ngIf="merchSelected">
+        <!-- Product Tables -->
+        <div class="row mt-4" *ngIf="productSelected">
           <div class="col-lg-9 mb-lg-0">
             <div class="card z-index-2 h-100">
               <div class="card-header pb-0 pt-3 bg-transparent">
-                <h6 class="text-capitalize">Product</h6>
+                <h6 class="text-capitalize">Edit Product</h6>
               </div>
               <div class="card-body">
-                <select class="form-select" (change)="selectProduct($event)">
+                <table id="listProduct" class="table table-borderless" style="width:100%">
+                  <thead>
+                    <tr>
+                      <th class="text-center">No</th>
+                      <th class="text-center">Product Title</th>
+                      <th class="text-center">Product Description</th>
+                      <th class="text-center">Category</th>
+                      <th class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of productSelected; index as indx">
+                      <td class="text-center">{{indx+1}}</td>
+                      <td class="text-center">{{data.productOPS.producttitle}}</td>
+                      <td class="text-center text-wrap">{{data.productOPS.productdescription}}</td>
+                      <td class="text-center">{{data.productOPS.category}}</td>
+                      <td class="text-center">
+                        <button class="btn btn-primary me-2" >Edit</button>
+                        <button class="btn btn-danger" (click)="deleteProduct(data.productOPS.productid)">Delete</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Select Product -->
+        <div class="row mt-4" *ngIf="productSelected">
+          <div class="col-lg-9 mb-lg-0">
+            <div class="card z-index-2 h-100">
+              <div class="card-header pb-0 pt-3 bg-transparent">
+                <h6 class="text-capitalize">View Details Product</h6>
+              </div>
+              <div class="card-body">
+                <label for="prods">Select Product</label>
+                <select id="prods" class="form-select" (change)="selectProduct($event)">
                   <option value="-1" hidden>Select Product</option>
-                  <option value="{{indx}}" *ngFor="let data of productSelected; index as indx" >Product ID:{{data.productOPS.productid}}, Product: {{data.productOPS.producttitle}}</option>
+                  <option value="{{data.productOPS.productid}}" *ngFor="let data of productSelected; index as indx" >Product Id:{{data.productOPS.productid}}, Product: {{data.productOPS.producttitle}}</option>
                 </select>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Product Type Tables -->
         <div class="row mt-4" *ngIf="prodSelected">
           <div class="col-lg-9 mb-lg-0">
             <div class="card z-index-2 h-100">
@@ -239,67 +278,72 @@
                 <table id="listPaper" class="table table-borderless" style="width:100%">
                   <thead>
                     <tr>
-                      <th>Id</th>
-                      <th>Paper Type</th>
-                      <th>Category</th>
-                      <th>Quantity</th>
-                      <th>Paper Price</th>
-                      <th>Image</th>
-                      <th>Action</th>
+                      <th class="text-center">No</th>
+                      <th class="text-center">Paper Type</th>
+                      <th class="text-center">Category</th>
+                      <th class="text-center">Quantity</th>
+                      <th class="text-center">Paper Price</th>
+                      <th class="text-center">Image</th>
+                      <th class="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let dat of productSelected[this.selectedProductIndex].productService.productTypeOPS; index as indx">
-                      <td>{{dat.productypeid}}</td>
-                      <td>{{dat.papertype}}</td>
-                      <td>{{dat.category}}</td>
-                      <td>{{dat.quantity}}</td>
-                      <td>{{dat.paperprice}}</td>
-                      <td><img src="{{dat.imageurl}}" alt="Prodcut-{{indx}}" height="50px" width="50px"></td>
-                      <td>
+                    <tr *ngFor="let dat of productArr[0].productService.productTypeOPS; index as indx">
+                      <td class="text-center">{{indx+1}}</td>
+                      <td class="text-center">{{dat.papertype}}</td>
+                      <td class="text-center">{{dat.category}}</td>
+                      <td class="text-center">{{dat.quantity}}</td>
+                      <td class="text-center">{{dat.paperprice}}</td>
+                      <td class="text-center"><img src="{{dat.imageurl}}" alt="Prodcut-{{indx}}" height="50px" width="50px"></td>
+                      <td class="text-center">
                         <button class="btn btn-primary me-2" >Edit</button>
-                        <button class="btn btn-danger" >Delete</button>
+                        <button class="btn btn-danger" (click)="deleteProductType(dat.productypeid)">Delete</button>
                       </td>
                     </tr>
                   </tbody>
                 </table>
+                <button class="btn btn-outline-primary float-end mt-3"  data-bs-toggle="modal" data-bs-target="#prodTypeModal">Insert Paper</button>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Product Print Color Tables -->
         <div class="row mt-4" *ngIf="prodSelected">
           <div class="col-lg-9 mb-lg-0">
             <div class="card z-index-2 h-100">
               <div class="card-header pb-0 pt-3 bg-transparent">
-                <h6 class="text-capitalize">Color Type</h6>
+                <h6 class="text-capitalize">Color Option</h6>
               </div>
               <div class="card-body">
                 <table id="listColor" class="table table-borderless" style="width:100%">
                   <thead>
                     <tr>
-                      <th>Color Type</th>
-                      <th>Color Fee</th>
-                      <th>Action</th>
+                      <th class="text-center">No</th>
+                      <th class="text-center">Color Type</th>
+                      <th class="text-center">Color Fee</th>
+                      <th class="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let dat of productSelected[this.selectedProductIndex].productService.printColorsOPS; index as indx">
-                      <td>{{dat.colortype}}</td>
-                      <td>{{dat.colorfee}}</td>
-                      <td>
+                    <tr *ngFor="let dat of productArr[0].productService.printColorsOPS; index as indx">
+                      <td class="text-center">{{indx+1}}</td>
+                      <td class="text-center">{{dat.colortype}}</td>
+                      <td class="text-center">{{dat.colorfee}}</td>
+                      <td class="text-center">
                         <button class="btn btn-primary me-2" >Edit</button>
-                        <button class="btn btn-danger" >Delete</button>
+                        <button class="btn btn-danger" (click)="deletePrintColor(dat.colortypeid)">Delete</button>
                       </td>
                     </tr>
                   </tbody>
                 </table>
-                <button>Add</button>
+                <button class="btn btn-outline-primary float-end mt-3" data-bs-toggle="modal" data-bs-target="#colorModal">Insert Color</button>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Product Print Color Quality -->
         <div class="row mt-4" *ngIf="prodSelected">
           <div class="col-lg-9 mb-lg-0">
             <div class="card z-index-2 h-100">
@@ -310,26 +354,385 @@
                 <table id="listQuality" class="table table-borderless" style="width:100%">
                   <thead>
                     <tr>
-                      <th>Print Quality</th>
-                      <th>Print Quality Fee</th>
-                      <th>Action</th>
+                      <th class="text-center">No</th>
+                      <th class="text-center">Print Quality</th>
+                      <th class="text-center">Quality Fee</th>
+                      <th class="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let dat of productSelected[this.selectedProductIndex].productService.printQualityOPS; index as indx">
-                      <td>{{dat.printquality}}</td>
-                      <td>{{dat.printqualityfee}}</td>
-                      <td>
+                    <tr *ngFor="let dat of productArr[0].productService.printQualityOPS; index as indx">
+                      <td class="text-center">{{indx+1}}</td>
+                      <td class="text-center">{{dat.printquality}}</td>
+                      <td class="text-center">{{dat.printqualityfee}}</td>
+                      <td class="text-center">
                         <button class="btn btn-primary me-2" >Edit</button>
-                        <button class="btn btn-danger" >Delete</button>
+                        <button class="btn btn-danger" (click)="deletePrintQuality(dat.printqualityid)">Delete</button>
                       </td>
                     </tr>
                   </tbody>
                 </table>
+                <button class="btn btn-outline-primary float-end mt-3" data-bs-toggle="modal" data-bs-target="#qualityModal">Insert Quality</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4" *ngIf="merchSelected">
+          <div class="col-lg-9 mb-lg-0">
+            <div class="card z-index-2 h-100">
+              <div class="card-header pb-0 pt-3 bg-transparent">
+                <h6 class="text-capitalize">Insert New Product</h6>
+              </div>
+              <div class="card-body">
+                <form [formGroup]="insertProdForm">
+                  <div class="mb-3">
+                    <label for="producttitle" class="form-label">Product Title</label>
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      id="producttitle" 
+                      formControlName="producttitle"
+                      [ngClass]="{
+                        'is-invalid': (insertProdForm.controls['producttitle'].invalid && (
+                          insertProdForm.controls['producttitle'].dirty || 
+                          insertProdForm.controls['producttitle'].touched)), 
+                        'is-valid': insertProdForm.controls['producttitle'].valid}"
+                    >
+                    <div class="invalid-feedback">
+                      <div *ngIf="insertProdForm.controls['producttitle'].errors?.['required']">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Please input this field.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="productdescription" class="form-label">Product Description</label>
+                    <textarea 
+                      class="form-control" 
+                      id="productdescription" 
+                      formControlName="productdescription"
+                      [ngClass]="{
+                        'is-invalid': (insertProdForm.controls['productdescription'].invalid && (
+                          insertProdForm.controls['productdescription'].dirty || 
+                          insertProdForm.controls['productdescription'].touched)), 
+                        'is-valid': insertProdForm.controls['productdescription'].valid}"
+                    >
+                    </textarea>
+                    <div class="invalid-feedback">
+                      <div *ngIf="insertProdForm.controls['productdescription'].errors?.['required']">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Please input this field.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <select 
+                      class="form-select" 
+                      id="category" 
+                      formControlName="category"
+                      [ngClass]="{
+                        'is-invalid': (insertProdForm.controls['category'].invalid && (
+                          insertProdForm.controls['category'].dirty || 
+                          insertProdForm.controls['category'].touched))}"
+                    >
+                      <option value="" hidden>Choose category</option>
+                      <option value="Printing">Printing</option>
+                    </select>
+                    <div class="invalid-feedback">
+                      <div *ngIf="insertProdForm.controls['category'].errors?.['required']">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Please input this field.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <button type="submit" class="btn btn-primary float-end" (click)="submitProduct()">Submit</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- Modal Insert Product Type -->
+      <div class="modal fade" id="prodTypeModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Insert Paper Type</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="insertProductTpyeForm">
+                <div class="mb-3">
+                  <label for="productTitle" class="form-label">Product Title</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="productTitle" 
+                    formControlName="producttitle"
+                    [ngClass]="{
+                      'is-invalid': (insertProductTpyeForm.controls['producttitle'].invalid && (
+                        insertProductTpyeForm.controls['producttitle'].dirty || 
+                        insertProductTpyeForm.controls['producttitle'].touched)), 
+                      'is-valid': insertProductTpyeForm.controls['producttitle'].valid}"
+                  >
+                  <div class="invalid-feedback">
+                    <div *ngIf="insertProductTpyeForm.controls['producttitle'].errors?.['required']">
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Please input this field.
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="category" class="form-label">Category</label>
+                  <select 
+                    class="form-select" 
+                    id="category" 
+                    formControlName="category"
+                    [ngClass]="{
+                      'is-invalid': (insertProductTpyeForm.controls['category'].invalid && (
+                        insertProductTpyeForm.controls['category'].dirty || 
+                        insertProductTpyeForm.controls['category'].touched)), 
+                      'is-valid': insertProductTpyeForm.controls['category'].valid}"
+                  >
+                    <option value="" disabled selected>Select category</option>
+                    <option value="A3">A3</option>
+                    <option value="A4">A4</option>
+                    <option value="A5">A5</option>
+                    <option value="B5">B5</option>
+                    <option value="F4">F4</option>
+                    <option value="Letter">Letter</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    <div *ngIf="insertProductTpyeForm.controls['category'].errors?.['required']">
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Please input this field.
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="quantity" class="form-label">Quantity</label>
+                  <input 
+                    type="number" 
+                    class="form-control" 
+                    id="quantity" 
+                    formControlName="quantity"
+                    [ngClass]="{
+                      'is-invalid': (insertProductTpyeForm.controls['quantity'].invalid && (
+                        insertProductTpyeForm.controls['quantity'].dirty || 
+                        insertProductTpyeForm.controls['quantity'].touched)), 
+                      'is-valid': insertProductTpyeForm.controls['quantity'].valid}"
+                  >
+                  <div class="invalid-feedback">
+                    <div *ngIf="insertProductTpyeForm.controls['quantity'].errors?.['required']">
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Please input this field.
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="paperPrice" class="form-label">Paper Price</label>
+                  <div 
+                    class="input-group"
+                    [ngClass]="{
+                      'is-invalid': (insertProductTpyeForm.controls['paperprice'].invalid && (
+                        insertProductTpyeForm.controls['paperprice'].dirty || 
+                        insertProductTpyeForm.controls['paperprice'].touched)), 
+                      'is-valid': insertProductTpyeForm.controls['paperprice'].valid}"
+                  >
+                    <span class="input-group-text">Rp.</span>
+                    <input 
+                      type="number" 
+                      class="form-control" 
+                      id="paperPrice" 
+                      formControlName="paperprice"
+                      [ngClass]="{
+                        'is-invalid': (insertProductTpyeForm.controls['paperprice'].invalid && (
+                          insertProductTpyeForm.controls['paperprice'].dirty || 
+                          insertProductTpyeForm.controls['paperprice'].touched)), 
+                        'is-valid': insertProductTpyeForm.controls['paperprice'].valid}"
+                    >
+                    <span class="input-group-text">.00</span>
+                  </div>
+                  <div class="invalid-feedback">
+                    <div *ngIf="insertProductTpyeForm.controls['paperprice'].errors?.['required']">
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Please input this field.
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="image" class="form-label">Image</label>
+                  <input 
+                    type="file" 
+                    class="form-control" 
+                    id="image"
+                    formControlName="imageProduct"
+                    accept="image/png, image/jpeg" 
+                    (change)="tease($event)"
+                  >
+                  
+                  <button class="mt-3 form-control" *ngIf="imageProductTypeForm" (click)="this.insertProductTpyeForm.get('merchantid').setValue('')">Reset Image</button>
+                </div>
+              </form>              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" (click)="submitProductType()">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Insert Color -->
+      <div class="modal fade" id="colorModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Insert Color Printing</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="insertProductColorForm">
+                <div class="mb-3">
+                  <label for="colortype" class="form-label">Color Type</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="colortype" 
+                    formControlName="colortype"
+                    [ngClass]="{
+                      'is-invalid': (insertProductColorForm.controls['colortype'].invalid && (
+                        insertProductColorForm.controls['colortype'].dirty || 
+                        insertProductColorForm.controls['colortype'].touched)), 
+                      'is-valid': insertProductColorForm.controls['colortype'].valid}"
+                  >
+                  <div class="invalid-feedback">
+                    <div *ngIf="insertProductColorForm.controls['colortype'].errors?.['required']">
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Please input this field.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="colorfee" class="form-label">Color Fee</label>
+                  <div 
+                    class="input-group"
+                    [ngClass]="{
+                      'is-invalid': (insertProductColorForm.controls['colorfee'].invalid && (
+                        insertProductColorForm.controls['colorfee'].dirty || 
+                        insertProductColorForm.controls['colorfee'].touched)), 
+                      'is-valid': insertProductColorForm.controls['colorfee'].valid}"
+                  >
+                    <span class="input-group-text">Rp.</span>
+                    <input 
+                      type="number" 
+                      class="form-control" 
+                      id="colorfee" 
+                      formControlName="colorfee"
+                      [ngClass]="{
+                        'is-invalid': (insertProductColorForm.controls['colorfee'].invalid && (
+                          insertProductColorForm.controls['colorfee'].dirty || 
+                          insertProductColorForm.controls['colorfee'].touched)), 
+                        'is-valid': insertProductColorForm.controls['colorfee'].valid}"
+                    >
+                    <span class="input-group-text">.00</span>
+                  </div>
+                  <div class="invalid-feedback">
+                    <div *ngIf="insertProductColorForm.controls['colorfee'].errors?.['required']">
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Please input this field with valid format.
+                    </div>
+                  </div>
+                </div>
+
+              </form>              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" (click)="submitPrintColor()">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Insert Quality -->
+      <div class="modal fade" id="qualityModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Insert Quality Printing</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="insertProductQualityForm">
+                <div class="mb-3">
+                  <label for="printquality" class="form-label">Print Quality</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="printquality" 
+                    formControlName="printquality"
+                    [ngClass]="{
+                      'is-invalid': (insertProductQualityForm.controls['printquality'].invalid && (
+                        insertProductQualityForm.controls['printquality'].dirty || 
+                        insertProductQualityForm.controls['printquality'].touched)), 
+                      'is-valid': insertProductQualityForm.controls['printquality'].valid}"
+                  >
+                  <div class="invalid-feedback">
+                    <div *ngIf="insertProductQualityForm.controls['printquality'].errors?.['required']">
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Please input this field.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="printqualityfee" class="form-label">Quality Fee</label>
+                  <div 
+                    class="input-group"
+                    [ngClass]="{
+                      'is-invalid': (insertProductQualityForm.controls['printqualityfee'].invalid && (
+                        insertProductQualityForm.controls['printqualityfee'].dirty || 
+                        insertProductQualityForm.controls['printqualityfee'].touched)), 
+                      'is-valid': insertProductQualityForm.controls['printqualityfee'].valid}"
+                  >
+                    <span class="input-group-text">Rp.</span>
+                    <input 
+                      type="number" 
+                      class="form-control" 
+                      id="printqualityfee" 
+                      formControlName="printqualityfee"
+                      [ngClass]="{
+                        'is-invalid': (insertProductQualityForm.controls['printqualityfee'].invalid && (
+                          insertProductQualityForm.controls['printqualityfee'].dirty || 
+                          insertProductQualityForm.controls['printqualityfee'].touched)), 
+                        'is-valid': insertProductQualityForm.controls['printqualityfee'].valid}"
+                    >
+                    <span class="input-group-text">.00</span>
+                  </div>
+                  <div class="invalid-feedback">
+                    <div *ngIf="insertProductQualityForm.controls['printqualityfee'].errors?.['required']">
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Please input this field with valid format.
+                    </div>
+                  </div>
+                </div>
+
+              </form>              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" (click)="submitPrintQuality()">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </main>
   </body>

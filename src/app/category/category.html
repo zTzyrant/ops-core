@@ -1,7 +1,4 @@
 <app-header></app-header>
-
-<app-login></app-login>
-
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-2 sidebar">
@@ -22,7 +19,7 @@
       <div class="d-flex flex-column">
         <div class="d-flex flex-row flex-wrap">
 
-          <div class="flex-fill p-3 itemsloc" *ngFor="let data of allProduct ">
+          <div class="flex-fill p-3 itemsloc" *ngFor="let data of allProduct">
             <a href="view/{{data.productOPS.merchantuname}}/{{data.productOPS.productid}}">
               <img src="{{data.productService.productTypeOPS[0].imageurl}}" class="itemsimageops" alt="Item">
               <div class="col-9 textareaforitems">
