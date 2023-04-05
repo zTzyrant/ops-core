@@ -147,4 +147,19 @@ export class DevService {
     return this.http.delete(`${this.apiurl}/unchanges/developer/post/merchant/product/print/quality/${id}`)
   }
 
+  updateProductById(datas: any){
+    return this.http.post(`${this.apiurl}/changes/developer/update/merchant/product`, datas)
+  }
+
+  updateProductTypeById(datas: any){
+    return this.http.post(`${this.apiurl}/changes/developer/update/merchant/product/type`, datas)
+  }
+
+  updatePrintColorById(datas: any){
+    return this.http.post(`${this.apiurl}/changes/developer/update/merchant/product/print/color`, datas)
+  }
+
+  updatePrintQualityById(datas: any){
+    return this.http.post(`${this.apiurl}/changes/developer/update/merchant/product/print/quality`, datas)
+  }
 }

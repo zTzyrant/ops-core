@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DevService } from 'src/app/secure/auth/dev.service';
 import { CurdApiService } from 'src/app/secure/curd.api.service';
 import Swal from 'sweetalert2';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-merchantproduct',
@@ -31,7 +32,8 @@ export class MerchantproductComponent {
     private curdService: CurdApiService,
     private toast : ToastrService,
     private router: Router,
-    private devService: DevService
+    private devService: DevService,
+    private sanitizer: DomSanitizer
   ){
     if(localStorage.getItem('__$DEV__TOKEN__')){
       this.devService.checkValidLoginDev(localStorage.getItem('__$DEV__TOKEN__'))
@@ -43,6 +45,10 @@ export class MerchantproductComponent {
     this.productTypeForm()
     this.productColorForm()
     this.productQualityForm()
+    this.updateProduct()
+    this.updateProductType()
+    this.updateProductColor()
+    this.updatePrintQuality()
   }
 
   signDevOut(){ this.devService.destroyDevSid() }
@@ -60,6 +66,7 @@ export class MerchantproductComponent {
     this.merchSelectedIndex = event.target.value
     this.getProduct(this.merchSelectedIndex)
     this.insertProdForm.get('merchantid').setValue(event.target.value)
+    this.insertProductTypeForm.get('merchantid').setValue(event.target.value)
 
   }
 
@@ -123,8 +130,8 @@ export class MerchantproductComponent {
   selectProduct(event: any){
     this.getProductById(event.target.value)
     this.selectedProductIndex = event.target.value
-    this.insertProductTpyeForm.get('merchantid').setValue(event.target.value)
-    this.insertProductTpyeForm.get('productid').setValue(event.target.value)
+    
+    this.insertProductTypeForm.get('productid').setValue(event.target.value)
     this.insertProductColorForm.get('productid').setValue(event.target.value)
     this.insertProductQualityForm.get('productid').setValue(event.target.value)
 
@@ -167,12 +174,12 @@ export class MerchantproductComponent {
   }
 
   // Form Insert Product Type
-  insertProductTpyeForm:any
+  insertProductTypeForm:any
   imageProductTypeForm: any
 
 
   productTypeForm(){
-    this.insertProductTpyeForm = this.fb.group({
+    this.insertProductTypeForm = this.fb.group({
       merchantid: ['', Validators.required],
       productid: ['', Validators.required],
 
@@ -185,8 +192,8 @@ export class MerchantproductComponent {
   }
 
   submitProductType(){
-    if(this.insertProductTpyeForm.invalid) {
-      this.insertProductTpyeForm.markAllAsTouched()
+    if(this.insertProductTypeForm.invalid) {
+      this.insertProductTypeForm.markAllAsTouched()
       this.toast.error('Please check your inputed data !', 'Form data cannot be null')
       return
     }
@@ -195,9 +202,9 @@ export class MerchantproductComponent {
     formData.set("anyfilesnames", this.imageProductTypeForm)
     this.devService.uploadImagesProductType(formData).subscribe((res:any) => {
       if(res.resUpload.statusCode === 202){
-        this.insertProductTpyeForm.value.imageProduct = res.resUpload.filePath
-        console.log(this.insertProductTpyeForm.value)
-        this.devService.postNewProductType(this.insertProductTpyeForm.value).subscribe((res:any) => {
+        this.insertProductTypeForm.value.imageProduct = res.resUpload.filePath
+        console.log(this.insertProductTypeForm.value)
+        this.devService.postNewProductType(this.insertProductTypeForm.value).subscribe((res:any) => {
           if(res === 1){
             this.merchantListDat()
             this.merchSelected = false
@@ -404,6 +411,236 @@ export class MerchantproductComponent {
             Swal.fire('', 'Internal Server Error', 'error')
           }
         })
+      }
+    })
+  }
+
+  // update product
+  updateProductForm: any
+  tempUpdateProduct: any
+  selectUpdateProduct(data: any){
+    this.tempUpdateProduct = data
+    console.log(data);
+    
+    this.updateProductForm.get('productid').setValue(data.productid)
+    this.updateProductForm.get('producttitle').setValue(data.producttitle)
+    this.updateProductForm.get('productdescription').setValue(data.productdescription)
+    this.updateProductForm.get('category').setValue(data.category)
+  }
+
+  updateProduct(){
+    this.updateProductForm = this.fb.group({
+      productid: ['', Validators.required],
+      producttitle: ['', Validators.required],
+      productdescription: ['', Validators.required],
+      saf: [''],
+      category: ['', [Validators.required]]
+    })
+  }
+
+  submitUpdateProduct(){
+    if(this.updateProductForm.invalid){
+      this.updateProductForm.markAllAsTouched()
+      this.selectUpdateProduct(this.tempUpdateProduct)
+      this.toast.error('Please check your inputed data !', 'Form data cannot be null')
+      return
+    }
+    this.devService.updateProductById(this.updateProductForm.value).subscribe((res:any) => {
+      if(res === 1){
+        this.merchantListDat()
+        this.merchSelected = false
+        this.prodSelected = false
+        this.productSelected = undefined
+        this.toast.success("Successfully Update Product");
+      } else {
+        this.toast.error("Internal Server Error While Update Data")
+      }
+    })
+  }
+
+
+  // update product type
+  updateProductTypeForm: any
+  tempUpdateProductType: any
+  tempImageProduct: any = ''
+  isImagechages = false
+  updateIMGProductTypeImage: any
+
+  selectUpdateProductType(data: any){
+    this.tempImageProduct = data.imageurl
+    
+    this.tempUpdateProductType = data
+    this.updateProductTypeForm.get('productypeid').setValue(data.productypeid)
+    this.updateProductTypeForm.get('producttitle').setValue(data.papertype)
+    this.updateProductTypeForm.get('category').setValue(data.category)
+    this.updateProductTypeForm.get('paperprice').setValue(data.paperprice)
+    this.updateProductTypeForm.get('quantity').setValue(data.quantity)
+    
+  }
+
+  updateProductType(){
+    this.updateProductTypeForm = this.fb.group({
+      productypeid: ['', Validators.required],
+      producttitle: ['', Validators.required],
+      category: ['', Validators.required],
+      paperprice: ['', Validators.required],
+      quantity: ['', Validators.required],
+      imageurl: ['']
+    })
+  }
+
+  submitUpdateProductType(){
+    if(this.updateProductTypeForm.invalid){
+      this.updateProductTypeForm.markAllAsTouched()
+      this.selectUpdateProductType(this.tempUpdateProductType)
+      this.isImagechages = false
+      this.updateIMGProductTypeImage = null
+      this.toast.error('Please check your inputed data !', 'Form data cannot be null')
+      return
+    }
+    if(this.updateIMGProductTypeImage){
+      let formData = new FormData();
+      formData.set("anyfilesnames", this.updateIMGProductTypeImage)
+      this.devService.uploadImagesProductType(formData).subscribe((res:any) => {
+        if(res.resUpload.statusCode === 202){
+          this.updateProductTypeForm.value.imageurl = res.resUpload.filePath
+          console.log(this.updateProductTypeForm.value)
+          this.devService.updateProductTypeById(this.updateProductTypeForm.value).subscribe((res:any) => {
+            if(res === 1){
+              this.merchantListDat()
+              this.merchSelected = false
+              this.prodSelected = false
+              this.productSelected = undefined
+              this.toast.success("Success Insert New Product Type");
+            } else {
+              this.toast.error("Internal Server Error While Update Data")
+            }
+          })
+        } else {
+          this.toast.error("Internal Server Error While Upload Images")
+        }
+      })
+      
+    } else {
+      this.devService.updateProductTypeById(this.updateProductTypeForm.value).subscribe((res:any) => {
+        if(res === 1){
+          this.merchantListDat()
+          this.merchSelected = false
+          this.prodSelected = false
+          this.productSelected = undefined
+          this.toast.success("Success Insert New Product Type");
+        } else {
+          this.toast.error("Internal Server Error While Update Data")
+        }
+      })
+    }
+
+  }
+
+  updateTease(event: any){
+    this.updateIMGProductTypeImage = event.target.files[0]
+    console.log(this.updateIMGProductTypeImage);
+    if(this.updateIMGProductTypeImage.type != 'image/png' && this.updateIMGProductTypeImage.type != 'image/jpeg'){
+      this.toast.info('following type is jpeg jpg png', 'Please put correct files only !')
+      this.tempImageProduct = this.tempUpdateProductType.imageurl
+    }
+    else {
+      if(event.target.files[0].size >= 5242880){
+        this.tempImageProduct = this.tempUpdateProductType.imageurl
+        this.toast.info('Please put files size less than 5MB only !')
+      }
+      this.updateIMGProductTypeImage = event.target.files[0]
+      this.tempImageProduct = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(event.target.files[0]))
+    }
+  }
+
+  resetImageUpdateProductType(){
+    this.tempImageProduct = this.tempUpdateProductType.imageurl
+    this.updateProductTypeForm.get('imageurl').reset()
+    this.isImagechages = false
+  }
+
+  // update product print color
+  updateProductColorForm:any
+  tempUpdatePrintColor: any
+
+  selectUpdatePrintColor(data: any){
+    this.tempUpdatePrintColor = data
+    
+    this.updateProductColorForm.get('colortypeid').setValue(data.colortypeid)
+    this.updateProductColorForm.get('colortype').setValue(data.colortype)
+    this.updateProductColorForm.get('colorfee').setValue(data.colorfee)
+  }
+
+  updateProductColor(){
+    this.updateProductColorForm = this.fb.group({
+      colortypeid: ['', Validators.required],
+
+      colortype: ['', Validators.required],
+      colorfee: ['', Validators.required]
+    })
+  }
+
+  submitUpdatePrintColor(){
+    if(this.updateProductColorForm.invalid) {
+      this.updateProductColorForm.markAllAsTouched()
+      this.selectUpdatePrintColor(this.tempUpdatePrintColor)
+      this.toast.error('Please check your inputed data !', 'Form data cannot be null')
+      return
+    }
+    
+
+    this.devService.updatePrintColorById(this.updateProductColorForm.value).subscribe((res:any) => {
+      if(res === 1){
+        this.merchantListDat()
+        this.merchSelected = false
+        this.prodSelected = false
+        this.productSelected = undefined
+        this.toast.success("Success Insert New Product Type");
+      } else {
+        this.toast.error("Internal Server Error While Update Data")
+      }
+    })
+  }
+
+  // Update Product print Quality
+  updatePrintQualityForm:any
+  tempUpdatePrintQuality: any
+
+  selectUpdatePrintQuality(data: any){
+    this.tempUpdatePrintQuality = data
+    
+    this.updatePrintQualityForm.get('printqualityid').setValue(data.printqualityid)
+    this.updatePrintQualityForm.get('printquality').setValue(data.printquality)
+    this.updatePrintQualityForm.get('printqualityfee').setValue(data.printqualityfee)
+  }
+
+  updatePrintQuality(){
+    this.updatePrintQualityForm = this.fb.group({
+      printqualityid: ['', Validators.required],
+
+      printquality: ['', Validators.required],
+      printqualityfee: ['', Validators.required]
+    })
+  }
+
+  submitUpdatePrintQuality(){
+    if(this.updatePrintQualityForm.invalid) {
+      this.updatePrintQualityForm.markAllAsTouched()
+      this.selectUpdatePrintQuality(this.tempUpdatePrintQuality)
+      this.toast.error('Please check your inputed data !', 'Form data cannot be null')
+      return
+    }
+
+    this.devService.updatePrintQualityById(this.updatePrintQualityForm.value).subscribe((res:any) => {
+      if(res === 1){
+        this.merchantListDat()
+        this.merchSelected = false
+        this.prodSelected = false
+        this.productSelected = undefined
+        this.toast.success("Success Insert New Print Quality");
+      } else {
+        this.toast.error("Internal Server Error While Insert Data")
       }
     })
   }
