@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 export class HeaderComponent {
   apilogin = JSON.parse(localStorage.getItem('logindatas')!);
   meUIuser = 0
+  public filterTerm!: string;
   // log for logged user
   
   constructor(){
@@ -19,6 +20,10 @@ export class HeaderComponent {
         this.meUIuser = 0
       }
     }
+  }
+
+  changeFilter(){
+    window.location.href = `/search/${this.filterTerm}`;
   }
 
   signout(){

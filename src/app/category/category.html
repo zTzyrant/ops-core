@@ -1,25 +1,28 @@
-<app-header></app-header>
+<app-header>
+  
+</app-header>
+
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-2 sidebar">
       <div>Filter</div>
       <div>
-        <select class="form-select" aria-label="Sort by paper type">
+        <select class="form-select" aria-label="Sort by paper type" (change)="getProductByPaper($event)">
           <option value="-1" selected>Paper Type</option>
           <option value="{{dat.category}}" *ngFor="let dat of allCategory">{{dat.category}}</option>
         </select>
-        <select class="form-select" aria-label="Sort by Location">
+        <select class="form-select" aria-label="Sort by Location" (change)="getProductByCity($event)">
           <option value="-1" selected>Location</option>
           <option value="{{dat.city}}" *ngFor="let dat of allLocation">{{dat.city}}</option>
 
         </select>
       </div>
     </div>
-    <div class="col-md-9 marketplace">
+    <div class="col-md-9 marketplace" >
       <div class="d-flex flex-column">
-        <div class="d-flex flex-row flex-wrap">
+        <div class="d-flex flex-row flex-wrap" *ngIf="productGrab">
 
-          <div class="flex-fill p-3 itemsloc" *ngFor="let data of allProduct">
+          <div class="flex-fill p-3 itemsloc" *ngFor="let data of allProduct| filter: searchFilter">
             <a href="view/{{data.productOPS.merchantuname}}/{{data.productOPS.productid}}">
               <img src="{{data.productService.productTypeOPS[0].imageurl}}" class="itemsimageops" alt="Item">
               <div class="col-9 textareaforitems">

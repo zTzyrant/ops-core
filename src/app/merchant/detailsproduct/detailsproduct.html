@@ -120,11 +120,11 @@
             <div class="input-copies-form mt-1"
               [ngClass]="{'is-invalid': orderform.controls['copies'].invalid  && (orderform.controls['copies'].dirty || orderform.controls['copies'].touched), 'is-valid': orderform.controls['copies'].valid}"
             >
-              <label class="btn btn-outline-dark me-2 mt-1" (click)="numofcopies(0)">-</label>
+              <label class="btn btn-outline-dark me-2 mt-1" (click)="numofcopies(0); getIndexOfDatas()">-</label>
               <input type="number" class="copies-areas me-2 mt-1" id="number-of-copies" formControlName="copies"
                 [ngClass]="{'is-invalid': orderform.controls['copies'].invalid  && (orderform.controls['copies'].dirty || orderform.controls['copies'].touched)}"
               >
-              <label class="btn btn-outline-dark me-2 mt-1" (click)="numofcopies(1)">+</label>
+              <label class="btn btn-outline-dark me-2 mt-1" (click)="numofcopies(1); getIndexOfDatas()">+</label>
 
             </div>
             <div class="valid-feedback mt-1">
@@ -153,77 +153,89 @@
             <div class="mt-1" *ngIf="this.file">
               {{this.msgpages}}
               
-              <div class="mt-1">
+              <div class="mt-1 mb-4">
                 <label class="btn btn-outline-dark me-2 mt-1" (click)="resetfile()" *ngIf="this.statsFiles === null">Reset</label>
-                <label class="btn btn-outline-dark me-2 mt-1 btn-submit" (click)="uploadfilefromoutside()" *ngIf="this.statsFiles === null">Submit</label>
+                <!-- jan lupa ntar ganti submit pdf nya -->
+                <!-- <label class="btn btn-outline-dark me-2 mt-1 btn-submit" (click)="uploadfilefromoutside()" *ngIf="this.statsFiles === null">Submit</label> -->
+                <label class="btn btn-outline-dark me-2 mt-1 btn-submit" data-bs-toggle="modal" data-bs-target="#viewTransactionInfo">View Transaction Details</label>
               </div>
             </div>
           </div>
   
-
-          <div class="orderpannel my-4">
-            <div class="card">
-              <div class="card-body mx-4">
-                <div class="container">
-                  <p class="mt-5 mb-3 text-center fw-semibold" style="font-size: 1.4rem;">Order Information</p>
-                  <div class="row">
-                    <ul class="list-unstyled">
-                      <li class="text-black">John Doe</li>
-                      <li class="text-black mt-1">{{dateNowOrder | date:'longDate'}}</li>
-                    </ul>
-                  </div>
-                  
-                  <div class="row">
-                    <hr>
-                    <div class="col-xl-10">
-                      <p>{{this.papertype.value}}</p>
+          <div class="modal fade" id="viewTransactionInfo" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="card">
+                    <div class="card-body mx-4">
+                      <div class="container">
+                        <p class="mt-5 mb-3 text-center fw-semibold" style="font-size: 1.4rem;">Transaction Information</p>
+                        <div class="row">
+                          <ul class="list-unstyled">
+                            <li class="text-black">John Doe</li>
+                            <li class="text-black mt-1">{{dateNowOrder | date:'longDate'}}</li>
+                          </ul>
+                        </div>
+                        
+                        <div class="row">
+                          <hr>
+                          <div class="col-xl-10">
+                            <p>{{this.papertype.value}}</p>
+                          </div>
+                          <div class="col-xl-2">
+                            <p class="float-end">Rp. {{selectTypeFee}}</p>
+                          </div>
+                        </div>
+      
+                        <div class="row">
+                          <hr>
+                          <div class="col-xl-10">
+                            <p>{{this.color.value}}</p>
+                          </div>
+                          <div class="col-xl-2">
+                            <p class="float-end">Rp. {{selectColorFee}}</p>
+                          </div>
+                        </div>
+      
+                        <div class="row">
+                          <hr>
+                          <div class="col-xl-10">
+                            <p>{{this.quality.value}}</p>
+                          </div>
+                          <div class="col-xl-2">
+                            <p class="float-end">Rp. {{selectQualityFee}}</p>
+                          </div>
+                        </div>
+      
+                        <div class="row text-black">
+                          <hr style="border: 2px solid black;">
+                          <div class="col-xl-6">
+                            <p>{{this.copies.value}} x {{totalpages}} Pages</p>
+                          </div>
+                          <div class="col-xl-6">
+                            <p class="float-end fw-bold">Total: Rp. {{totalPrice * totalpages}}
+                              <!-- total price masih blm * totalpage (maasih manual) -->
+                            </p>
+                          </div>
+                          <hr style="border: 2px solid black;">
+                        </div>
+      
+                      </div>
                     </div>
-                    <div class="col-xl-2">
-                      <p class="float-end">Rp. {{selectTypeFee}}</p>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <hr>
-                    <div class="col-xl-10">
-                      <p>{{this.color.value}}</p>
-                    </div>
-                    <div class="col-xl-2">
-                      <p class="float-end">Rp. {{selectColorFee}}</p>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <hr>
-                    <div class="col-xl-10">
-                      <p>{{this.quality.value}}</p>
-                    </div>
-                    <div class="col-xl-2">
-                      <p class="float-end">Rp. {{selectQualityFee}}</p>
-                    </div>
-                  </div>
-
-                  <div class="row text-black">
-                    <hr style="border: 2px solid black;">
-                    <div class="col-xl-6">
-                      <p>{{this.copies.value}} x {{totalpages}} Pages</p>
-                    </div>
-                    <div class="col-xl-6">
-                      <p class="float-end fw-bold">Total: Rp. {{totalPrice * totalpages}}
-                        <!-- total price masih blm * totalpage (maasih manual) -->
-                      </p>
-                    </div>
-                    <hr style="border: 2px solid black;">
-                  </div>
-
-                  <div class="float-end my-2">
-                    <button class="btn btn-outline-dark btn-submit">Submit Order</button>
-                  </div>
-            
+                  </div>           
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-dark me-2" data-bs-dismiss="modal">Close</button>
+                  <button class="btn btn-outline-dark btn-submit">Submit Order</button>
                 </div>
               </div>
             </div>
           </div>
+
+          
         </form>
       </div>
       <!-- End Form Order -->

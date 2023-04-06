@@ -28,6 +28,9 @@ const routes: Routes = [
     path:'',
     component: CategoryComponent
   }, {
+    path:'search/:search',
+    component: CategoryComponent
+  }, {
     path: 'register',
     component: RegisterComponent
   }, {

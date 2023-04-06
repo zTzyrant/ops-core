@@ -9,8 +9,8 @@
     
     <div class="searchcatops">
         <div class="input-group" onsubmit="console.log('submited')">
-            <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2" onfocus="">
-            <span class="input-group-text" id="basic-addon2" ><i class="bi bi-search" style="color: #07484A;"></i></span>
+            <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2" onfocus="" [(ngModel)]="filterTerm" (keyup.enter)="changeFilter()">
+            <span class="input-group-text" id="basic-addon2" (click)="changeFilter()"><i class="bi bi-search" style="color: #07484A;"></i></span>
         </div> 
     </div>
     <div class="chartops">
@@ -39,8 +39,8 @@
     </a>
     <div class="searchcatops">
         <div class="input-group" onsubmit="console.log('submited')">
-            <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
-            <span class="input-group-text" id="basic-addon2" ><i class="bi bi-search" style="color: #07484A;"></i></span>
+            <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2" [(ngModel)]="filterTerm" (keyup.enter)="changeFilter()">
+            <span class="input-group-text" id="basic-addon2" ><i class="bi bi-search" style="color: #07484A;" (click)="changeFilter()"></i></span>
         </div> 
     </div>
     <div class="chartops">

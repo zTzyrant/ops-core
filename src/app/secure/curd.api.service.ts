@@ -9,8 +9,17 @@ import * as CryptoJS from 'crypto-js';
 export class CurdApiService {
   datas: any;
   apiurl = environment.apiurl;
+  filterProd! : string
   constructor(private http: HttpClient) { }
 
+  getFilterProd(){    
+    return this.filterProd
+  }
+
+  setFilterProd(data: any){
+    console.log('seted');
+    this.filterProd = data
+  }
 
   // Get All username
   getUsersname(){
@@ -81,6 +90,14 @@ export class CurdApiService {
   // retrieve all the products which are registered into the system
   getAllOpsProduct(){
     return this.http.get(`${this.apiurl}/ops-prod`)
+  }
+
+  getProductByCity(data: any){
+    return this.http.get(`${this.apiurl}/ops-prod/city/${data}`)
+  }
+
+  getProductByCategory(data: any){
+    return this.http.get(`${this.apiurl}/ops-prod/category/${data}`)
   }
 
   getProductById(data: any){
