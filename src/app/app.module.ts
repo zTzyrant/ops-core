@@ -7,7 +7,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CategoryComponent } from './category/category.component';
 import { RegisterComponent } from './user/customer/register/register.component'
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CurdApiService } from './secure/curd.api.service';
 
 //toastr
@@ -33,6 +33,7 @@ import { FooterComponent } from './core/footer/footer.component';
 import { LogindeveloperComponent } from './developer/login/logindeveloper.component';
 import { DevGuard } from './secure/auth/dev.guard';
 import { DevService } from './secure/auth/dev.service';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -57,12 +58,14 @@ import { DevService } from './secure/auth/dev.service';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
     NgxMaterialTimepickerModule,
+    Ng2SearchPipeModule,
   ],
   providers: [
     CurdApiService, DevGuard, DevService

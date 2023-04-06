@@ -29,6 +29,7 @@
     "datatables.net-dt": "^1.13.1",
     "jquery": "^3.6.3",
     "jsonwebtoken": "^9.0.0",
+    "ng2-search-filter": "^0.5.1",
     "ngx-material-timepicker": "^5.5.2",
     "ngx-toastr": "^16.0.1",
     "pdfjs-dist": "^3.2.146",
