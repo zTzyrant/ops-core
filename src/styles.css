@@ -6,6 +6,10 @@
   scroll-behavior: smooth !important;
 }
 
+.bgopsColor{
+  background-color: #07484A;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

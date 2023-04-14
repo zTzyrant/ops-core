@@ -10,7 +10,6 @@ a{
     top: 0px;
     display: flex;
     flex-direction: row;
-    align-items: center;
     position: sticky;
     z-index: 10;
 }
@@ -20,8 +19,6 @@ a{
     width: 100%;
     top: 0px;
     color: #ffffff7b;
-    text-align: center;
-    
 }
 #text-1{
     width: 66px;
@@ -49,7 +46,6 @@ a{
     height: 35px;
     left: 0px;
     top: 0px;
-    font-family: 'Playfair Display';
     font-style: normal;
     font-weight: 800;
     font-size: 32px;
@@ -64,11 +60,10 @@ a{
     opacity: 75%;
 }
 .map-1{
-    width: 35%;
-    flex: none;
-    order: 2;
-    flex-grow: 0;
-    color: #FFFFFF;
+    max-width: 400px;
+    width: 100%;
+    margin-left: auto; 
+    margin-right: auto;
 }
 .but{
     border-radius: 100%;
@@ -91,3 +86,9 @@ a{
 .website:hover{
     color: #1c27ff;
 }
+
+@media only screen and (max-width: 1314px) {
+    .xFrame{
+        max-width: 100%;
+    }
+  }
