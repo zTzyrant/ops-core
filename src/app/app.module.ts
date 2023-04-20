@@ -34,6 +34,12 @@ import { LogindeveloperComponent } from './developer/login/logindeveloper.compon
 import { DevGuard } from './secure/auth/dev.guard';
 import { DevService } from './secure/auth/dev.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { MerchAdminprintingComponent } from './merchant/panel/merch.adminprinting/merch.adminprinting.component';
+import { MerchLoginComponent } from './merchant/panel/merch.login/merch.login.component';
+import { MerchProductComponent } from './merchant/panel/merch.product/merch.product.component';
+import { MerchDashboardComponent } from './merchant/panel/merch.dashboard/merchdashboard.component';
+import { MerchantApiService } from './secure/merchant/merchant.api.service';
+import { MerchantGuard } from './secure/merchant/merchant.guard';
 
 @NgModule({
   declarations: [
@@ -54,7 +60,12 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     MerchantproductComponent,
     NotFoundComponent,
     FooterComponent,
-    LogindeveloperComponent
+    LogindeveloperComponent,
+    FooterComponent,
+    MerchDashboardComponent,
+    MerchAdminprintingComponent,
+    MerchLoginComponent,
+    MerchProductComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +79,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     Ng2SearchPipeModule,
   ],
   providers: [
-    CurdApiService, DevGuard, DevService
+    CurdApiService, DevGuard, DevService, MerchantApiService, MerchantGuard
   ],
   bootstrap: [AppComponent]
 })

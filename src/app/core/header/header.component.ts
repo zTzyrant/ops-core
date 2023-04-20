@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CurdApiService } from 'src/app/secure/curd.api.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,9 +11,10 @@ export class HeaderComponent {
   apilogin = JSON.parse(localStorage.getItem('logindatas')!);
   meUIuser = 0
   public filterTerm!: string;
+  chartStatus = false
   // log for logged user
   
-  constructor(){
+  constructor(private curdService: CurdApiService){
     if(this.apilogin){
       if(this.apilogin.fields[0].devid){
         this.meUIuser = 1
@@ -24,6 +26,10 @@ export class HeaderComponent {
 
   changeFilter(){
     window.location.href = `/search/${this.filterTerm}`;
+  }
+
+  setChartNotif(dat: any){
+    this.chartStatus = dat
   }
 
   signout(){
@@ -38,7 +44,7 @@ export class HeaderComponent {
       if (result.isConfirmed) {
         Swal.fire('Successfully signed out!', '', 'success').then(() => {
           localStorage.removeItem('logindatas')
-          location.href = '/';
+          location.reload()
         })
         
       }

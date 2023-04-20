@@ -10,7 +10,16 @@ export class CurdApiService {
   datas: any;
   apiurl = environment.apiurl;
   filterProd! : string
+  consNotif = false
   constructor(private http: HttpClient) { }
+
+  setNotif(dat: any){
+    this.consNotif = false
+  }
+
+  getNotif(){
+    return this.consNotif
+  }
 
   getFilterProd(){    
     return this.filterProd

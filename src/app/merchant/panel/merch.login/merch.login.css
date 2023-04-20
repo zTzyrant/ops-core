@@ -1,0 +1,13 @@
+.card-header, .card-footer{
+    background-color: transparent;
+    border: none;
+}
+
+.card {
+    border-radius: 10px;
+    --bs-card-border-color: none;  
+}
+
+.passinvalid{
+    padding-right: 2.2rem;
+}

@@ -59,8 +59,6 @@ export class DevService {
   // validate login
   checkValidLoginDev(datas: any){
     this.checkSessionDeveloper().subscribe((result: any) => {
-      console.log(result);
-      
       if(result.statQuo !== '1'){
         this.router.navigate(['../developer/login'])
         localStorage.removeItem('__$DEV__TOKEN__')
@@ -68,10 +66,8 @@ export class DevService {
       } else {
         localStorage.setItem('_____$DevDatas_____', JSON.stringify(result.datax[0]))
         console.log(localStorage.getItem('_____$DevDatas_____'));
-        
       }
     })
-    
   }
 
   // developer submit new admin

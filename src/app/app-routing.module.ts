@@ -19,6 +19,11 @@ import { FooterComponent } from './core/footer/footer.component';
 
 // GUARD
 import { DevGuard } from './secure/auth/dev.guard';
+import { MerchDashboardComponent } from './merchant/panel/merch.dashboard/merchdashboard.component';
+import { MerchAdminprintingComponent } from './merchant/panel/merch.adminprinting/merch.adminprinting.component';
+import { MerchLoginComponent } from './merchant/panel/merch.login/merch.login.component';
+import { MerchProductComponent } from './merchant/panel/merch.product/merch.product.component';
+import { MerchantGuard } from './secure/merchant/merchant.guard';
 
 const routes: Routes = [
   {
@@ -67,9 +72,22 @@ const routes: Routes = [
   }, {
     path: 'developer/login',
     component: LogindeveloperComponent
-  },{
+  }, {
     path: 'footer',
     component: FooterComponent
+  }, {
+    path: 'merchant/admin/dashboard',
+    component: MerchDashboardComponent,
+    canActivate: [MerchantGuard]
+  }, {
+    path: 'merchant/admin/dashboard/adminprinting',
+    component: MerchAdminprintingComponent,
+  }, {
+    path: 'merchant/admin/dashboard/merchantproduct',
+    component: MerchProductComponent,
+  }, {
+    path: 'merchant/admin/login',
+    component: MerchLoginComponent
   },
 
   // end error page

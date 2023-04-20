@@ -2,13 +2,13 @@
   
 </app-header>
 
-<div class="container mt-4">
+<div class="container mt-4 min-vh-100">
   <div class="row">
     <div class="col-md-2 sidebar">
       <div>Filter</div>
       <div>
         <select class="form-select" aria-label="Sort by paper type" (change)="getProductByPaper($event)">
-          <option value="-1" selected>Paper Type</option>
+          <option value="-1" selected>Product Type</option>
           <option value="{{dat.category}}" *ngFor="let dat of allCategory">{{dat.category}}</option>
         </select>
         <select class="form-select" aria-label="Sort by Location" (change)="getProductByCity($event)">
@@ -38,3 +38,5 @@
     </div>
   </div>
 </div>
+
+<app-footer></app-footer>

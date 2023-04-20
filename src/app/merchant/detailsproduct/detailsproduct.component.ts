@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CurdApiService } from 'src/app/secure/curd.api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-detailsproduct',
@@ -35,7 +36,7 @@ export class DetailsproductComponent {
     private route: ActivatedRoute,
     public fb: FormBuilder,
     private curdService: CurdApiService,
-    private toast : ToastrService
+    private toast : ToastrService,
   ){    
     this.orderformValidator()
     this.getProdFromParam()
@@ -151,7 +152,6 @@ export class DetailsproductComponent {
   }
 
   uploadfilefromoutside(){
-    this.file
     let formData = new FormData();
     formData.set("anyfilesnames", this.file)
     this.curdService.uploadorderpdf(formData).subscribe(res => {
@@ -166,6 +166,40 @@ export class DetailsproductComponent {
     })
   }
 
+  submitOrder(){
+    if(!localStorage.getItem('logindatas')){
+      this.toast.error('Please login before submit order')
+      let loginModal: any = new (window as any).bootstrap.Modal(
+        document.getElementById("loginModalConsumer")
+      );
+
+      var myModalEl = document.getElementById('viewTransactionInfo');
+      var orderModal = bootstrap.Modal.getInstance(myModalEl)
+
+      loginModal.show()
+      orderModal.hide();
+    } else {
+      let formData = new FormData();
+      formData.set("anyfilesnames", this.file)
+      this.curdService.uploadorderpdf(formData).subscribe(res => {
+        let somz:any = res
+        if(somz.resUpload.statusCode === 202){
+          this.setVale(somz.resUpload.filePath)
+          var myModalEl = document.getElementById('viewTransactionInfo');
+          var orderModal = bootstrap.Modal.getInstance(myModalEl)
+          orderModal.hide();
+
+          this.orderform.value.inputedfile = somz.resUpload.filePath
+          localStorage.setItem('orderdata', this.orderform.value)
+          Swal.fire('Success!', 'Successfully add order to chart', 'success')
+          this.curdService.setNotif(false)
+        } else {
+          this.statsFiles = null
+          this.toast.error('Internal server error')
+        }
+      })
+    }
+  }
 
   setTotalPages(numpages: any){
     this.totalpages = numpages

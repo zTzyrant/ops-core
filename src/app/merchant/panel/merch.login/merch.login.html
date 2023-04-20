@@ -1,0 +1,81 @@
+<section class="vh-100" style="background-color: #07484a; background-size: 100%;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-4">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
+            <div class="d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+
+                <form [formGroup]="logindevFormNew" (ngSubmit)="loginDeveloper()">
+
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    <img src="../../../assets/image/bannerops.png" style="border-radius: 10px;" alt="OPS Core Logo"  width="100%">
+                  </div>
+
+                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+                  <div class="form-outline mb-4">
+                    <input 
+                      type="text" 
+                      id="formusername" 
+                      class="form-control form-control-lg" 
+                      formControlName="username"
+                      [ngClass]="{'is-invalid': (logindevFormNew.controls['username'].invalid && (logindevFormNew.controls['username'].dirty || logindevFormNew.controls['username'].touched)), 
+                        'is-valid': logindevFormNew.controls['username'].valid}"
+                    >
+                    <label class="form-label" for="formusername">Username</label>
+                    <div class="invalid-feedback">
+                      <div *ngIf="logindevFormNew.controls['username'].errors?.['required']">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Please input this field.
+                      </div>
+                      <div *ngIf="logindevFormNew.controls['username'].errors?.['whitespace']">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Username cannot contain whitespace.
+                      </div> 
+                    </div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <div class="input-group"
+                      [ngClass]="{'is-invalid': (logindevFormNew.controls['password'].invalid && (logindevFormNew.controls['password'].dirty || logindevFormNew.controls['password'].touched)), 
+                        'is-valid': logindevFormNew.controls['password'].valid}"
+                    >
+                      <input 
+                        type="password" 
+                        class="form-control form-control-lg passinvalid" 
+                        id="formpasswrd" 
+                        formControlName="password"
+                        [ngClass]="{'is-invalid': (logindevFormNew.controls['password'].invalid && (logindevFormNew.controls['password'].dirty || logindevFormNew.controls['password'].touched)), 
+                          'is-valid': logindevFormNew.controls['password'].valid}"
+                      >
+                      <span class="input-group-text" ><i class="bi bi-eye-fill"></i></span>
+                    </div>
+                    <label class="form-label" for="formpasswrd">Password</label> 
+                    <div class="invalid-feedback">
+                      <div *ngIf="logindevFormNew.controls['password'].errors?.['required']">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Please input this field.
+                      </div>
+                      <div *ngIf="logindevFormNew.controls['password'].errors?.['whitespace']">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        Passowrd cannot contain whitespace.
+                      </div> 
+                    </div>
+                  </div>
+
+                  <div class="pt-1 mb-2">
+                    <button class="btn btn-dark btn-lg w-100 btn-block" type="submit">Login</button>
+                  </div>
+                  <a class="small text-muted" href="#!">Forgot password?</a>
+
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

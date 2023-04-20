@@ -20,13 +20,13 @@
         <div class="dropdown">
             <i class="bi bi-list" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Login</a></li>
+              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModalConsumer">Login</a></li>
               <li><a class="dropdown-item" href="/register">Sign Up</a></li>
             </ul>
         </div>
     </div>
     <div class="categorynotlog">
-        <button type="button" class="btn log001" data-bs-toggle="modal" data-bs-target="#exampleModal">Login</button>
+        <button type="button" class="btn log001" data-bs-toggle="modal" data-bs-target="#loginModalConsumer">Login</button>
         <button type="button" class="btn sign001" routerLink="/register">Sign Up</button>
     </div>
 </div>
@@ -44,7 +44,11 @@
         </div> 
     </div>
     <div class="chartops">
-        <i class="bi bi-cart-fill"></i>
+        <i class="bi bi-cart-fill position-relative">
+            <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger rounded-circle" hidden>
+                <span class="visually-hidden">New alerts</span>
+            </span>   
+        </i>
     </div>
     <div class="notifcatops">
         <i class="bi bi-bell-fill"></i>

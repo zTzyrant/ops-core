@@ -1,0 +1,1102 @@
+<body class="g-sidenav-show   bg-gray-100">
+  <div class="min-height-300 bg-ops position-absolute w-100"></div>
+  <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main" data-color="primary" [ngClass]="{'showNavMenu': this.showNav === true}">
+    <div class="sidenav-header">
+      <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+      <a class="navbar-brand m-0" href="/">
+        <img src="../../../assets/image/appicon-ops-color.png" class="navbar-brand-img h-100" alt="ops_logo">
+        <span class="ms-1 font-weight-bold">Merchant Dashboard</span>
+      </a>
+    </div>
+    <hr class="horizontal dark mt-0">
+    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+      <ul class="navbar-nav">
+        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">OPS Menu</h6>
+
+        <li class="nav-item">
+          <a class="nav-link nav-link-sz" routerLink="/merchant/admin/dashboard/">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="bi bi-tv brand-color text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Dashboard</span>
+          </a>
+        </li>
+
+        <li class="nav-item mt-3">
+          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Manage OPS</h6>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link nav-link-sz" routerLink="/merchant/admin/dashboard/adminprinting">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="bi bi-person-bounding-box brand-color text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Admin Printing</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-sz active" routerLink="/merchant/admin/dashboard/merchantproduct">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="bi bi-box-seam-fill brand-color text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Merchant Product</span>
+          </a>
+        </li>
+        
+        <li class="nav-item mt-3">
+          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link nav-link-sz" href="./pages/profile.html">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="bi bi-person-badge brand-color text-dark text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Profile</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link nav-link-sz" (click)="this.signDevOut()">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="bi bi-door-open brand-color text-dark text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Sign Out</span>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+
+  </aside>
+  <main class="main-content position-relative border-radius-lg ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" >Dashboard</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="Developer">Merchant Product</li>
+          </ol>
+          <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center cursor-pointer">
+            <i class="bi bi-person-circle text-white"></i>
+            <span class="ms-2 text-white">{{devDatas.username}}</span>
+          </div>
+          <ul class="navbar-nav  justify-content-end">
+            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+              <a  class="nav-link text-white p-0" id="iconNavbarSidenav">
+                <div class="sidenav-toggler-inner cursor-pointer" (click)="setShowNav()">
+                  <i class="sidenav-toggler-line bg-white"></i>
+                  <i class="sidenav-toggler-line bg-white"></i>
+                  <i class="sidenav-toggler-line bg-white"></i>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item px-3 d-flex align-items-center">
+              <a  class="nav-link text-white p-0">
+                <i class="bi bi-gear-fill fixed-plugin-button-nav cursor-pointer"></i>
+              </a>
+            </li>
+            <li class="nav-item dropdown pe-2 d-flex align-items-center">
+              <a  class="nav-link text-white p-0 " id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-bell-fill cursor-pointer"></i>
+              </a>
+              <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" >
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <img src="../../../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold">New message</span> from Laur
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          13 minutes ago
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" >
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <img src="../../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold">New album</span> by Travis Scott
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          1 day
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item border-radius-md" >
+                    <div class="d-flex py-1">
+                      <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
+                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                          <title>credit-card</title>
+                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                              <g transform="translate(1716.000000, 291.000000)">
+                                <g transform="translate(453.000000, 454.000000)">
+                                  <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
+                                  <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                                </g>
+                              </g>
+                            </g>
+                          </g>
+                        </svg>
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          Payment successfully completed
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          2 days
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-lg-9 mb-lg-0 mb-4">
+          <div class="card z-index-2 h-100">
+              <div class="card-header pb-0 pt-3 bg-transparent">
+                <h6 class="text-capitalize">Merchant</h6>
+              </div>
+              <div class="card-body">
+                <select class="form-select" (change)="selectedMerchGoods($event)">
+                  <option value="-1" hidden>Select Merchant</option>
+                  <option value="{{data.merchdatas.merchantid}}" *ngFor="let data of merchData" >Merchant Id: {{data.merchdatas.merchantid}}, {{data.merchdatas.merchantname}}, Total Product: {{data.prod.total}}</option>
+                </select>
+              </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 mb-lg-0 mb-4">
+          <div class="card z-index-2 h-100">
+            <div class="card-header pb-0 pt-3 bg-transparent">
+            <h6 class="text-capitalize">Account Information</h6>
+          </div>
+          <div class="card-body">
+            a
+          </div>
+          </div>
+        </div>  
+
+      </div>
+
+      <!-- Product Tables -->
+      <div class="row mt-4" *ngIf="productSelected">
+        <div class="col-lg-9 mb-lg-0">
+          <div class="card z-index-2 h-100">
+            <div class="card-header pb-0 pt-3 bg-transparent">
+              <h6 class="text-capitalize">Edit Product</h6>
+            </div>
+            <div class="card-body">
+              <table id="listProduct" class="table table-borderless" style="width:100%">
+                <thead>
+                  <tr>
+                    <th class="text-center">No</th>
+                    <th class="text-center">Product Title</th>
+                    <th class="text-center">Product Description</th>
+                    <th class="text-center">Category</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of productSelected; index as indx">
+                    <td class="text-center">{{indx+1}}</td>
+                    <td class="text-center">{{data.productOPS.producttitle}}</td>
+                    <td class="text-center text-wrap">{{data.productOPS.productdescription}}</td>
+                    <td class="text-center">{{data.productOPS.category}}</td>
+                    <td class="text-center">
+                      <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#updateProduct" (click)="selectUpdateProduct(data.productOPS)">Edit</button>
+                      <button class="btn btn-danger" (click)="deleteProduct(data.productOPS.productid)">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Select Product -->
+      <div class="row mt-4" *ngIf="productSelected">
+        <div class="col-lg-9 mb-lg-0">
+          <div class="card z-index-2 h-100">
+            <div class="card-header pb-0 pt-3 bg-transparent">
+              <h6 class="text-capitalize">View Details Product</h6>
+            </div>
+            <div class="card-body">
+              <label for="prods">Select Product</label>
+              <select id="prods" class="form-select" (change)="selectProduct($event)">
+                <option value="-1" hidden>Select Product</option>
+                <option value="{{data.productOPS.productid}}" *ngFor="let data of productSelected; index as indx" >Product Id:{{data.productOPS.productid}}, Product: {{data.productOPS.producttitle}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Type Tables -->
+      <div class="row mt-4" *ngIf="prodSelected">
+        <div class="col-lg-9 mb-lg-0">
+          <div class="card z-index-2 h-100">
+            <div class="card-header pb-0 pt-3 bg-transparent">
+              <h6 class="text-capitalize">Paper Type</h6>
+            </div>
+            <div class="card-body">
+              <table id="listPaper" class="table table-borderless" style="width:100%">
+                <thead>
+                  <tr>
+                    <th class="text-center">No</th>
+                    <th class="text-center">Paper Type</th>
+                    <th class="text-center">Category</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-center">Paper Price</th>
+                    <th class="text-center">Image</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dat of productArr[0].productService.productTypeOPS; index as indx">
+                    <td class="text-center">{{indx+1}}</td>
+                    <td class="text-center">{{dat.papertype}}</td>
+                    <td class="text-center">{{dat.category}}</td>
+                    <td class="text-center">{{dat.quantity}}</td>
+                    <td class="text-center">{{dat.paperprice}}</td>
+                    <td class="text-center"><img src="{{dat.imageurl}}" alt="Prodcut-{{indx}}" height="50px" width="50px"></td>
+                    <td class="text-center">
+                      <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#updateProductType" (click)="selectUpdateProductType(dat)">Edit</button>
+                      <button class="btn btn-danger" (click)="deleteProductType(dat.productypeid)">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="btn btn-outline-primary float-end mt-3"  data-bs-toggle="modal" data-bs-target="#prodTypeModal">Insert Paper</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Print Color Tables -->
+      <div class="row mt-4" *ngIf="prodSelected">
+        <div class="col-lg-9 mb-lg-0">
+          <div class="card z-index-2 h-100">
+            <div class="card-header pb-0 pt-3 bg-transparent">
+              <h6 class="text-capitalize">Color Option</h6>
+            </div>
+            <div class="card-body">
+              <table id="listColor" class="table table-borderless" style="width:100%">
+                <thead>
+                  <tr>
+                    <th class="text-center">No</th>
+                    <th class="text-center">Color Type</th>
+                    <th class="text-center">Color Fee</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dat of productArr[0].productService.printColorsOPS; index as indx">
+                    <td class="text-center">{{indx+1}}</td>
+                    <td class="text-center">{{dat.colortype}}</td>
+                    <td class="text-center">{{dat.colorfee}}</td>
+                    <td class="text-center">
+                      <button class="btn btn-primary me-2"  data-bs-toggle="modal" data-bs-target="#UpdateColorModal" (click)="selectUpdatePrintColor(dat)">Edit</button>
+                      <button class="btn btn-danger" (click)="deletePrintColor(dat.colortypeid)">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="btn btn-outline-primary float-end mt-3" data-bs-toggle="modal" data-bs-target="#colorModal">Insert Color</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Print Quality Tables -->
+      <div class="row mt-4" *ngIf="prodSelected">
+        <div class="col-lg-9 mb-lg-0">
+          <div class="card z-index-2 h-100">
+            <div class="card-header pb-0 pt-3 bg-transparent">
+              <h6 class="text-capitalize">Print Quality</h6>
+            </div>
+            <div class="card-body">
+              <table id="listQuality" class="table table-borderless" style="width:100%">
+                <thead>
+                  <tr>
+                    <th class="text-center">No</th>
+                    <th class="text-center">Print Quality</th>
+                    <th class="text-center">Quality Fee</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dat of productArr[0].productService.printQualityOPS; index as indx">
+                    <td class="text-center">{{indx+1}}</td>
+                    <td class="text-center">{{dat.printquality}}</td>
+                    <td class="text-center">{{dat.printqualityfee}}</td>
+                    <td class="text-center">
+                      <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#UpdateQualityModal" (click)="selectUpdatePrintQuality(dat)">Edit</button>
+                      <button class="btn btn-danger" (click)="deletePrintQuality(dat.printqualityid)">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="btn btn-outline-primary float-end mt-3" data-bs-toggle="modal" data-bs-target="#qualityModal">Insert Quality</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Insert Product -->
+      <div class="row mt-4" *ngIf="merchSelected">
+        <div class="col-lg-9 mb-lg-0">
+          <div class="card z-index-2 h-100">
+            <div class="card-header pb-0 pt-3 bg-transparent">
+              <h6 class="text-capitalize">Insert New Product</h6>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="insertProdForm">
+                <div class="mb-3">
+                  <label for="producttitle" class="form-label">Product Title</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="producttitle" 
+                    formControlName="producttitle"
+                    [ngClass]="{
+                      'is-invalid': (insertProdForm.controls['producttitle'].invalid && (
+                        insertProdForm.controls['producttitle'].dirty || 
+                        insertProdForm.controls['producttitle'].touched)), 
+                      'is-valid': insertProdForm.controls['producttitle'].valid}"
+                  >
+                  <div class="invalid-feedback">
+                    <div *ngIf="insertProdForm.controls['producttitle'].errors?.['required']">
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Please input this field.
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="productdescription" class="form-label">Product Description</label>
+                  <textarea 
+                    class="form-control" 
+                    id="productdescription" 
+                    formControlName="productdescription"
+                    [ngClass]="{
+                      'is-invalid': (insertProdForm.controls['productdescription'].invalid && (
+                        insertProdForm.controls['productdescription'].dirty || 
+                        insertProdForm.controls['productdescription'].touched)), 
+                      'is-valid': insertProdForm.controls['productdescription'].valid}"
+                  >
+                  </textarea>
+                  <div class="invalid-feedback">
+                    <div *ngIf="insertProdForm.controls['productdescription'].errors?.['required']">
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Please input this field.
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="category" class="form-label">Category</label>
+                  <select 
+                    class="form-select" 
+                    id="category" 
+                    formControlName="category"
+                    [ngClass]="{
+                      'is-invalid': (insertProdForm.controls['category'].invalid && (
+                        insertProdForm.controls['category'].dirty || 
+                        insertProdForm.controls['category'].touched))}"
+                  >
+                    <option value="" hidden>Choose category</option>
+                    <option value="Printing">Printing</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    <div *ngIf="insertProdForm.controls['category'].errors?.['required']">
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Please input this field.
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <button type="submit" class="btn btn-primary float-end" (click)="submitProduct()">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Insert Product Type -->
+    <div class="modal fade" id="prodTypeModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Insert Paper Type</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="insertProductTypeForm">
+              <div class="mb-3">
+                <label for="productTitle" class="form-label">Product Title</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="productTitle" 
+                  formControlName="producttitle"
+                  [ngClass]="{
+                    'is-invalid': (insertProductTypeForm.controls['producttitle'].invalid && (
+                      insertProductTypeForm.controls['producttitle'].dirty || 
+                      insertProductTypeForm.controls['producttitle'].touched)), 
+                    'is-valid': insertProductTypeForm.controls['producttitle'].valid}"
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="insertProductTypeForm.controls['producttitle'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select 
+                  class="form-select" 
+                  id="category" 
+                  formControlName="category"
+                  [ngClass]="{
+                    'is-invalid': (insertProductTypeForm.controls['category'].invalid && (
+                      insertProductTypeForm.controls['category'].dirty || 
+                      insertProductTypeForm.controls['category'].touched)), 
+                    'is-valid': insertProductTypeForm.controls['category'].valid}"
+                >
+                  <option value="" disabled selected>Select category</option>
+                  <option value="A3">A3</option>
+                  <option value="A4">A4</option>
+                  <option value="A5">A5</option>
+                  <option value="B5">B5</option>
+                  <option value="F4">F4</option>
+                  <option value="Letter">Letter</option>
+                </select>
+                <div class="invalid-feedback">
+                  <div *ngIf="insertProductTypeForm.controls['category'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="quantity" class="form-label">Quantity</label>
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  id="quantity" 
+                  formControlName="quantity"
+                  [ngClass]="{
+                    'is-invalid': (insertProductTypeForm.controls['quantity'].invalid && (
+                      insertProductTypeForm.controls['quantity'].dirty || 
+                      insertProductTypeForm.controls['quantity'].touched)), 
+                    'is-valid': insertProductTypeForm.controls['quantity'].valid}"
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="insertProductTypeForm.controls['quantity'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="paperPrice" class="form-label">Paper Price</label>
+                <div 
+                  class="input-group"
+                  [ngClass]="{
+                    'is-invalid': (insertProductTypeForm.controls['paperprice'].invalid && (
+                      insertProductTypeForm.controls['paperprice'].dirty || 
+                      insertProductTypeForm.controls['paperprice'].touched)), 
+                    'is-valid': insertProductTypeForm.controls['paperprice'].valid}"
+                >
+                  <span class="input-group-text">Rp.</span>
+                  <input 
+                    type="number" 
+                    class="form-control" 
+                    id="paperPrice" 
+                    formControlName="paperprice"
+                    [ngClass]="{
+                      'is-invalid': (insertProductTypeForm.controls['paperprice'].invalid && (
+                        insertProductTypeForm.controls['paperprice'].dirty || 
+                        insertProductTypeForm.controls['paperprice'].touched)), 
+                      'is-valid': insertProductTypeForm.controls['paperprice'].valid}"
+                  >
+                  <span class="input-group-text">.00</span>
+                </div>
+                <div class="invalid-feedback">
+                  <div *ngIf="insertProductTypeForm.controls['paperprice'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input 
+                  type="file" 
+                  class="form-control" 
+                  id="image"
+                  formControlName="imageProduct"
+                  accept="image/png, image/jpeg" 
+                  (change)="tease($event)"
+                >
+                
+                <button class="mt-3 form-control" *ngIf="insertProductTypeForm.get('imageProduct').value" (click)="insertProductTypeForm.get('imageProduct').reset()">Reset Image</button>
+              </div>
+            </form>              
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="submitProductType()">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Insert Color -->
+    <div class="modal fade" id="colorModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Insert Color Printing</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="insertProductColorForm">
+              <div class="mb-3">
+                <label for="colortype" class="form-label">Color Type</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="colortype" 
+                  formControlName="colortype"
+                  [ngClass]="{
+                    'is-invalid': (insertProductColorForm.controls['colortype'].invalid && (
+                      insertProductColorForm.controls['colortype'].dirty || 
+                      insertProductColorForm.controls['colortype'].touched)), 
+                    'is-valid': insertProductColorForm.controls['colortype'].valid}"
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="insertProductColorForm.controls['colortype'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="colorfee" class="form-label">Color Fee</label>
+                <div 
+                  class="input-group"
+                  [ngClass]="{
+                    'is-invalid': (insertProductColorForm.controls['colorfee'].invalid && (
+                      insertProductColorForm.controls['colorfee'].dirty || 
+                      insertProductColorForm.controls['colorfee'].touched)), 
+                    'is-valid': insertProductColorForm.controls['colorfee'].valid}"
+                >
+                  <span class="input-group-text">Rp.</span>
+                  <input 
+                    type="number" 
+                    class="form-control" 
+                    id="colorfee" 
+                    formControlName="colorfee"
+                    [ngClass]="{
+                      'is-invalid': (insertProductColorForm.controls['colorfee'].invalid && (
+                        insertProductColorForm.controls['colorfee'].dirty || 
+                        insertProductColorForm.controls['colorfee'].touched)), 
+                      'is-valid': insertProductColorForm.controls['colorfee'].valid}"
+                  >
+                  <span class="input-group-text">.00</span>
+                </div>
+                <div class="invalid-feedback">
+                  <div *ngIf="insertProductColorForm.controls['colorfee'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field with valid format.
+                  </div>
+                </div>
+              </div>
+
+            </form>              
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="submitPrintColor()">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Insert Quality -->
+    <div class="modal fade" id="qualityModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Insert Quality Printing</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="insertProductQualityForm">
+              <div class="mb-3">
+                <label for="printquality" class="form-label">Print Quality</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="printquality" 
+                  formControlName="printquality"
+                  [ngClass]="{
+                    'is-invalid': (insertProductQualityForm.controls['printquality'].invalid && (
+                      insertProductQualityForm.controls['printquality'].dirty || 
+                      insertProductQualityForm.controls['printquality'].touched)), 
+                    'is-valid': insertProductQualityForm.controls['printquality'].valid}"
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="insertProductQualityForm.controls['printquality'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="printqualityfee" class="form-label">Quality Fee</label>
+                <div 
+                  class="input-group"
+                  [ngClass]="{
+                    'is-invalid': (insertProductQualityForm.controls['printqualityfee'].invalid && (
+                      insertProductQualityForm.controls['printqualityfee'].dirty || 
+                      insertProductQualityForm.controls['printqualityfee'].touched)), 
+                    'is-valid': insertProductQualityForm.controls['printqualityfee'].valid}"
+                >
+                  <span class="input-group-text">Rp.</span>
+                  <input 
+                    type="number" 
+                    class="form-control" 
+                    id="printqualityfee" 
+                    formControlName="printqualityfee"
+                    [ngClass]="{
+                      'is-invalid': (insertProductQualityForm.controls['printqualityfee'].invalid && (
+                        insertProductQualityForm.controls['printqualityfee'].dirty || 
+                        insertProductQualityForm.controls['printqualityfee'].touched)), 
+                      'is-valid': insertProductQualityForm.controls['printqualityfee'].valid}"
+                  >
+                  <span class="input-group-text">.00</span>
+                </div>
+                <div class="invalid-feedback">
+                  <div *ngIf="insertProductQualityForm.controls['printqualityfee'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field with valid format.
+                  </div>
+                </div>
+              </div>
+
+            </form>              
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="submitPrintQuality()">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Update Product -->
+    <div class="modal fade" id="updateProduct" tabindex="-1" >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Upate Product</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="updateProductForm">
+              <div class="mb-3">
+                <label for="producttitle" class="form-label">Product Title</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="producttitle" 
+                  formControlName="producttitle"
+                  [ngClass]="{
+                    'is-invalid': (updateProductForm.controls['producttitle'].invalid && (
+                      updateProductForm.controls['producttitle'].dirty || 
+                      updateProductForm.controls['producttitle'].touched)), 
+                    'is-valid': updateProductForm.controls['producttitle'].valid}"
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="updateProductForm.controls['producttitle'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="productdescription" class="form-label">Product Description</label>
+                <textarea 
+                  class="form-control" 
+                  formControlName="productdescription"
+                  [ngClass]="{
+                    'is-invalid': (updateProductForm.controls['productdescription'].invalid && (
+                      updateProductForm.controls['productdescription'].dirty || 
+                      updateProductForm.controls['productdescription'].touched)), 
+                    'is-valid': updateProductForm.controls['productdescription'].valid}"
+                >
+                </textarea>
+                <div class="invalid-feedback">
+                  <div *ngIf="updateProductForm.controls['productdescription'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select 
+                  class="form-select" 
+                  id="category" 
+                  formControlName="category"
+                  [ngClass]="{
+                    'is-invalid': (updateProductForm.controls['category'].invalid && (
+                      updateProductForm.controls['category'].dirty || 
+                      updateProductForm.controls['category'].touched))}"
+                >
+                  <option value="" hidden>Choose category</option>
+                  <option value="Printing">Printing</option>
+                </select>
+                <div class="invalid-feedback">
+                  <div *ngIf="updateProductForm.controls['category'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+            </form>              
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="submitUpdateProduct()">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Update Product Type -->
+    <div class="modal fade" id="updateProductType" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Upate Product Type</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="updateProductTypeForm">
+              <div class="mb-3">
+                <label for="productTitle" class="form-label">Product Type</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="productTitle" 
+                  formControlName="producttitle"
+                  [ngClass]="{
+                    'is-invalid': (updateProductTypeForm.controls['producttitle'].invalid && (
+                      updateProductTypeForm.controls['producttitle'].dirty || 
+                      insertProductTypeForm.controls['producttitle'].touched)), 
+                    'is-valid': updateProductTypeForm.controls['producttitle'].valid}"
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="updateProductTypeForm.controls['producttitle'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select 
+                  class="form-select" 
+                  id="category" 
+                  formControlName="category"
+                  [ngClass]="{
+                    'is-invalid': (updateProductTypeForm.controls['category'].invalid && (
+                      updateProductTypeForm.controls['category'].dirty || 
+                      updateProductTypeForm.controls['category'].touched)), 
+                    'is-valid': updateProductTypeForm.controls['category'].valid}"
+                >
+                  <option value="" disabled selected>Select category</option>
+                  <option value="A3">A3</option>
+                  <option value="A4">A4</option>
+                  <option value="A5">A5</option>
+                  <option value="B5">B5</option>
+                  <option value="F4">F4</option>
+                  <option value="Letter">Letter</option>
+                </select>
+                <div class="invalid-feedback">
+                  <div *ngIf="updateProductTypeForm.controls['category'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="quantity" class="form-label">Quantity</label>
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  id="quantity" 
+                  formControlName="quantity"
+                  [ngClass]="{
+                    'is-invalid': (updateProductTypeForm.controls['quantity'].invalid && (
+                      updateProductTypeForm.controls['quantity'].dirty || 
+                      updateProductTypeForm.controls['quantity'].touched)), 
+                    'is-valid': updateProductTypeForm.controls['quantity'].valid}"
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="updateProductTypeForm.controls['quantity'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="paperPrice" class="form-label">Paper Price</label>
+                <div 
+                  class="input-group"
+                  [ngClass]="{
+                    'is-invalid': (updateProductTypeForm.controls['paperprice'].invalid && (
+                      updateProductTypeForm.controls['paperprice'].dirty || 
+                      updateProductTypeForm.controls['paperprice'].touched)), 
+                    'is-valid': updateProductTypeForm.controls['paperprice'].valid}"
+                >
+                  <span class="input-group-text">Rp.</span>
+                  <input 
+                    type="number" 
+                    class="form-control" 
+                    id="paperPrice" 
+                    formControlName="paperprice"
+                    [ngClass]="{
+                      'is-invalid': (updateProductTypeForm.controls['paperprice'].invalid && (
+                        updateProductTypeForm.controls['paperprice'].dirty || 
+                        updateProductTypeForm.controls['paperprice'].touched)), 
+                      'is-valid': updateProductTypeForm.controls['paperprice'].valid}"
+                  >
+                  <span class="input-group-text">.00</span>
+                </div>
+                <div class="invalid-feedback">
+                  <div *ngIf="updateProductTypeForm.controls['paperprice'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="imageProduct" class="form-label">Image Product Type</label>
+                <div class="text-center">
+                  <label for="imageProduct">
+                    <img [src]="tempImageProduct" 
+                      alt="Merchant Logo" 
+                      width="100px" 
+                      height="100px" 
+                      style="border-radius: 10px;"
+                    >
+                  </label>
+                  <br>
+                  <small class="font-monospace" *ngIf="!isImagechages">Click image for update merchant image.</small>
+                  <small class="font-monospace" *ngIf="isImagechages">Click reset to undo changes.</small>
+                </div>
+                <input 
+                    type="file" 
+                    class="form-control" 
+                    id="imageProduct"
+                    formControlName="imageurl"
+                    accept="image/png, image/jpeg" 
+                    (change)="updateTease($event); isImagechages = true"
+                    hidden
+                  >
+                <input type="button" class="form-control" *ngIf="isImagechages" value="Reset image" (click)="resetImageUpdateProductType()">
+              </div>
+            </form>              
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="submitUpdateProductType()">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Update Print Color -->
+    <div class="modal fade" id="UpdateColorModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Update Color Printing</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="updateProductColorForm">
+              <div class="mb-3">
+                <label for="colortype" class="form-label">Color Type</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="colortype" 
+                  formControlName="colortype"
+                  [ngClass]="{
+                    'is-invalid': (updateProductColorForm.controls['colortype'].invalid && (
+                      updateProductColorForm.controls['colortype'].dirty || 
+                      updateProductColorForm.controls['colortype'].touched)), 
+                    'is-valid': updateProductColorForm.controls['colortype'].valid}"
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="updateProductColorForm.controls['colortype'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="colorfee" class="form-label">Color Fee</label>
+                <div 
+                  class="input-group"
+                  [ngClass]="{
+                    'is-invalid': (updateProductColorForm.controls['colorfee'].invalid && (
+                      updateProductColorForm.controls['colorfee'].dirty || 
+                      updateProductColorForm.controls['colorfee'].touched)), 
+                    'is-valid': updateProductColorForm.controls['colorfee'].valid}"
+                >
+                  <span class="input-group-text">Rp.</span>
+                  <input 
+                    type="number" 
+                    class="form-control" 
+                    id="colorfee" 
+                    formControlName="colorfee"
+                    [ngClass]="{
+                      'is-invalid': (updateProductColorForm.controls['colorfee'].invalid && (
+                        updateProductColorForm.controls['colorfee'].dirty || 
+                        updateProductColorForm.controls['colorfee'].touched)), 
+                      'is-valid': updateProductColorForm.controls['colorfee'].valid}"
+                  >
+                  <span class="input-group-text">.00</span>
+                </div>
+                <div class="invalid-feedback">
+                  <div *ngIf="updateProductColorForm.controls['colorfee'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field with valid format.
+                  </div>
+                </div>
+              </div>
+
+            </form>              
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="submitUpdatePrintColor()">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Update Quality -->
+    <div class="modal fade" id="UpdateQualityModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Update Quality Printing</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="updatePrintQualityForm">
+              <div class="mb-3">
+                <label for="printquality" class="form-label">Print Quality</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="printquality" 
+                  formControlName="printquality"
+                  [ngClass]="{
+                    'is-invalid': (updatePrintQualityForm.controls['printquality'].invalid && (
+                      updatePrintQualityForm.controls['printquality'].dirty || 
+                      updatePrintQualityForm.controls['printquality'].touched)), 
+                    'is-valid': updatePrintQualityForm.controls['printquality'].valid}"
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="updatePrintQualityForm.controls['printquality'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="printqualityfee" class="form-label">Quality Fee</label>
+                <div 
+                  class="input-group"
+                  [ngClass]="{
+                    'is-invalid': (updatePrintQualityForm.controls['printqualityfee'].invalid && (
+                      updatePrintQualityForm.controls['printqualityfee'].dirty || 
+                      updatePrintQualityForm.controls['printqualityfee'].touched)), 
+                    'is-valid': updatePrintQualityForm.controls['printqualityfee'].valid}"
+                >
+                  <span class="input-group-text">Rp.</span>
+                  <input 
+                    type="number" 
+                    class="form-control" 
+                    id="printqualityfee" 
+                    formControlName="printqualityfee"
+                    [ngClass]="{
+                      'is-invalid': (updatePrintQualityForm.controls['printqualityfee'].invalid && (
+                        updatePrintQualityForm.controls['printqualityfee'].dirty || 
+                        updatePrintQualityForm.controls['printqualityfee'].touched)), 
+                      'is-valid': updatePrintQualityForm.controls['printqualityfee'].valid}"
+                  >
+                  <span class="input-group-text">.00</span>
+                </div>
+                <div class="invalid-feedback">
+                  <div *ngIf="updatePrintQualityForm.controls['printqualityfee'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field with valid format.
+                  </div>
+                </div>
+              </div>
+
+            </form>              
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="submitUpdatePrintQuality()">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</body>

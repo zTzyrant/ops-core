@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="container mt-4">
+<div class="container mt-4 min-vh-100">
   <div class="row">
     <!-- Start main product image -->
     <div class="col-md-5">
@@ -145,7 +145,7 @@
 
 
           <!-- file to upload -->
-          <div class="color-form mt-2">
+          <div class="color-form mt-2 mb-4">
             <label class="order-label">File to print</label>
             <div class="input-color-form mt-1">
               <input class="form-control filesareas" type="file" accept=".pdf" formControlName="inputedfile" id="filefromoutside" (change)="tease($event)">
@@ -182,30 +182,30 @@
                         
                         <div class="row">
                           <hr>
-                          <div class="col-xl-10">
+                          <div class="col-xl-8">
                             <p>{{this.papertype.value}}</p>
                           </div>
-                          <div class="col-xl-2">
+                          <div class="col-xl-4">
                             <p class="float-end">Rp. {{selectTypeFee}}</p>
                           </div>
                         </div>
       
                         <div class="row">
                           <hr>
-                          <div class="col-xl-10">
+                          <div class="col-xl-8">
                             <p>{{this.color.value}}</p>
                           </div>
-                          <div class="col-xl-2">
+                          <div class="col-xl-4">
                             <p class="float-end">Rp. {{selectColorFee}}</p>
                           </div>
                         </div>
       
                         <div class="row">
                           <hr>
-                          <div class="col-xl-10">
+                          <div class="col-xl-8">
                             <p>{{this.quality.value}}</p>
                           </div>
-                          <div class="col-xl-2">
+                          <div class="col-xl-4">
                             <p class="float-end">Rp. {{selectQualityFee}}</p>
                           </div>
                         </div>
@@ -229,7 +229,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-outline-dark me-2" data-bs-dismiss="modal">Close</button>
-                  <button class="btn btn-outline-dark btn-submit">Submit Order</button>
+                  <button class="btn btn-outline-dark btn-submit" (click)="submitOrder()">Submit Order</button>
                 </div>
               </div>
             </div>
@@ -244,3 +244,5 @@
     <!-- end main product details -->
   </div>
 </div>
+
+<app-footer></app-footer>
