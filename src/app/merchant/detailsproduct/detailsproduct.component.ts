@@ -32,6 +32,8 @@ export class DetailsproductComponent {
 
   filesformData: any
 
+  apilogin = JSON.parse(localStorage.getItem('logindatas')!);
+
   constructor(
     private route: ActivatedRoute,
     public fb: FormBuilder,
@@ -75,11 +77,13 @@ export class DetailsproductComponent {
     this.qualityselectedIndx = this.currentProdService.printQualityOPS.findIndex(findQuality)
     this.selectQualityFee = this.currentProdService.printQualityOPS[this.qualityselectedIndx].printqualityfee
 
-    console.log(this.orderform.value);
     
     this.totalPrice = (this.selectColorFee + this.selectTypeFee + this.selectQualityFee) * parseInt(this.copies.value)
-    console.log(this.totalpages);
     
+    
+    this.orderform.controls['consumerid'].setValue(this.apilogin.fields[0].userid)
+    this.orderform.controls['totalquantity'].setValue(this.orderform.controls['copies'].value * this.totalpages)
+
   }
 
   slideto(dat:any){
@@ -95,14 +99,22 @@ export class DetailsproductComponent {
   
   orderformValidator() {
     this.orderform = this.fb.group({
-      color: ['', [Validators.required]],
-      papertype: ['', [Validators.required]],
-      quality: ['', [Validators.required]],
       copies: ['1', [Validators.required, Validators.min(1)]],
-      inputedfile: ['']
+      pages: ['', Validators.required],
+      totalquantity: ['', Validators.required],
+      totalcost: ['', Validators.required],
+      color: ['', [Validators.required]],
+      quality: ['', [Validators.required]],
+      papertype: ['', [Validators.required]],
+      inputedfile: ['', [Validators.required]],
+      orderNote: [''],
+      consumerid: ['', Validators.required],
+      productid: ['', Validators.required]
     
     });
-
+    if(this.apilogin){ 
+      this.orderform.controls['consumerid'].setValue(this.apilogin.fields[0].userid)
+    }
   }
 
   moredetails() {
@@ -137,6 +149,7 @@ export class DetailsproductComponent {
       this.curdService.checkpdfpages(this.filesformData).subscribe((res: any) => {
         if(res.resUpload.statusCode === 200 ){
           this.totalpages = res.resUpload.totalPages
+          this.orderform.controls['pages'].setValue(res.resUpload.totalPages)
           this.msgpages = `Your file has ${res.resUpload.totalPages} pages.`
         } else {
           this.toast.error('Internal server error', 'Please select another files')
@@ -181,23 +194,46 @@ export class DetailsproductComponent {
     } else {
       let formData = new FormData();
       formData.set("anyfilesnames", this.file)
-      this.curdService.uploadorderpdf(formData).subscribe(res => {
-        let somz:any = res
-        if(somz.resUpload.statusCode === 202){
-          this.setVale(somz.resUpload.filePath)
-          var myModalEl = document.getElementById('viewTransactionInfo');
-          var orderModal = bootstrap.Modal.getInstance(myModalEl)
-          orderModal.hide();
+      this.getIndexOfDatas()
+      this.orderform.controls['totalcost'].setValue(this.totalPrice * this.totalpages)
+      this.orderform.controls['productid'].setValue(this.route.snapshot.params['productid'])
 
-          this.orderform.value.inputedfile = somz.resUpload.filePath
-          localStorage.setItem('orderdata', this.orderform.value)
-          Swal.fire('Success!', 'Successfully add order to chart', 'success')
-          this.curdService.setNotif(false)
-        } else {
-          this.statsFiles = null
-          this.toast.error('Internal server error')
+      console.log(this.orderform.value);
+      Swal.fire({
+        title: 'Do you want to save this order to shopping cart?',
+        showCancelButton: true,
+        confirmButtonColor: '#07484A',
+        confirmButtonText: 'Save',
+        icon: 'question',
+        cancelButtonColor: 'red'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.curdService.uploadorderpdf(formData).subscribe(res => {
+            let somz:any = res
+            if(somz.resUpload.statusCode === 202){
+              this.setVale(somz.resUpload.filePath)
+              var myModalEl = document.getElementById('viewTransactionInfo');
+              var orderModal = bootstrap.Modal.getInstance(myModalEl)
+              orderModal.hide();
+    
+              this.orderform.value.inputedfile = somz.resUpload.filePath
+              this.curdService.saveOrderToCart(this.orderform.value).subscribe((res: any) => {
+                if(res === 1){
+                  Swal.fire('Success', 'Successfully save order data to cart', 'success')
+                } else {
+                  this.toast.error('Internal server error', 'Please save new order')
+                }
+              })
+
+            } else {
+              this.statsFiles = null
+              this.toast.error('Internal server error')
+            }
+          })
         }
       })
+
+      
     }
   }
 

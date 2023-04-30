@@ -57,7 +57,11 @@ a{
     order: 2;
     margin-left: 1rem;
     font-size: 25px;
-    color: #07484A;
+    color: #07484A !important;
+}
+
+.chartops a {
+    color: #07484A !important;
 }
 
 .categorynotlog{

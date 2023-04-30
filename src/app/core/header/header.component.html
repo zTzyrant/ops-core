@@ -13,9 +13,6 @@
             <span class="input-group-text" id="basic-addon2" (click)="changeFilter()"><i class="bi bi-search" style="color: #07484A;"></i></span>
         </div> 
     </div>
-    <div class="chartops">
-        <i class="bi bi-cart-fill" style="color: #07484A;"></i>
-    </div>
     <div class="listifmobileops">
         <div class="dropdown">
             <i class="bi bi-list" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
@@ -44,11 +41,13 @@
         </div> 
     </div>
     <div class="chartops">
-        <i class="bi bi-cart-fill position-relative">
-            <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger rounded-circle" hidden>
-                <span class="visually-hidden">New alerts</span>
-            </span>   
-        </i>
+        <a href="/cart/{{chartUser}}">
+            <i class="bi bi-cart-fill position-relative">
+                <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger rounded-circle" hidden>
+                    <span class="visually-hidden">New alerts</span>
+                </span>   
+            </i>
+        </a>
     </div>
     <div class="notifcatops">
         <i class="bi bi-bell-fill"></i>

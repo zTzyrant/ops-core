@@ -24,6 +24,8 @@ import { MerchAdminprintingComponent } from './merchant/panel/merch.adminprintin
 import { MerchLoginComponent } from './merchant/panel/merch.login/merch.login.component';
 import { MerchProductComponent } from './merchant/panel/merch.product/merch.product.component';
 import { MerchantGuard } from './secure/merchant/merchant.guard';
+import { CartComponent } from './user/customer/cart/cart.component';
+import { CustomerGuard } from './secure/customer/customer.guard';
 
 const routes: Routes = [
   {
@@ -88,6 +90,10 @@ const routes: Routes = [
   }, {
     path: 'merchant/admin/login',
     component: MerchLoginComponent
+  }, {
+    path: 'cart/:username',
+    component: CartComponent,
+    canActivate: [CustomerGuard]
   },
 
   // end error page

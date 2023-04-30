@@ -140,4 +140,16 @@ export class CurdApiService {
   getAllLocationProd(){
     return this.http.get(`${this.apiurl}/product/location`)
   }
+
+  saveOrderToCart(datas: any){
+    return this.http.post(`${this.apiurl}/save/order/to/cart`, datas)
+  }
+
+  deleteOrderFromCart(datas: any){
+    return this.http.post(`${this.apiurl}/delete/order/from/cart`, datas)
+  }
+
+  getCustomerCart(datas: any){
+    return this.http.get(`${this.apiurl}/customer/view/cart/${datas}`)
+  }
 }

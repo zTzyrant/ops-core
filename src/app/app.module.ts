@@ -40,6 +40,9 @@ import { MerchProductComponent } from './merchant/panel/merch.product/merch.prod
 import { MerchDashboardComponent } from './merchant/panel/merch.dashboard/merchdashboard.component';
 import { MerchantApiService } from './secure/merchant/merchant.api.service';
 import { MerchantGuard } from './secure/merchant/merchant.guard';
+import { CartComponent } from './user/customer/cart/cart.component';
+import { SafePipe } from './safe.pipe';
+import { ShipmentComponent } from './user/customer/shipment/shipment.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,10 @@ import { MerchantGuard } from './secure/merchant/merchant.guard';
     MerchDashboardComponent,
     MerchAdminprintingComponent,
     MerchLoginComponent,
-    MerchProductComponent
+    MerchProductComponent,
+    CartComponent,
+    SafePipe,
+    ShipmentComponent
   ],
   imports: [
     BrowserModule,

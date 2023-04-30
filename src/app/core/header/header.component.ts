@@ -12,10 +12,12 @@ export class HeaderComponent {
   meUIuser = 0
   public filterTerm!: string;
   chartStatus = false
+  chartUser: any
   // log for logged user
   
   constructor(private curdService: CurdApiService){
     if(this.apilogin){
+      this.chartUser = this.apilogin.fields[0].userid
       if(this.apilogin.fields[0].devid){
         this.meUIuser = 1
       } else{

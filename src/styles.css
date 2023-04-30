@@ -18,6 +18,30 @@ input[type=number] {
     appearance: textfield;
 }
 
+.btnops{
+  border: none !important;
+  background: #07484A !important;
+  color: white;
+}
+
+.btnops:hover{
+  background: #043233 !important;
+  color: white;
+}
+
+.btnops:hover{
+  background: #043233 !important;
+  color: white;
+}
+
+.btnops:focus-visible{
+  box-shadow: none !important;
+}
+
+.form-check-input:checked{
+  background-color: #07484A !important;
+  border-color: #07484A !important; 
+}
 .timepicker-backdrop-overlay {z-index: 10000 !important;}
 
 .timepicker-overlay {z-index: 10001 !important;}
