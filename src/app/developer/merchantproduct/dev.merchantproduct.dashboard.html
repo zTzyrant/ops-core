@@ -272,17 +272,18 @@
           <div class="col-lg-9 mb-lg-0">
             <div class="card z-index-2 h-100">
               <div class="card-header pb-0 pt-3 bg-transparent">
-                <h6 class="text-capitalize">Paper Type</h6>
+                <h6 class="text-capitalize">Product Type</h6>
               </div>
               <div class="card-body">
                 <table id="listPaper" class="table table-borderless" style="width:100%">
                   <thead>
                     <tr>
                       <th class="text-center">No</th>
-                      <th class="text-center">Paper Type</th>
+                      <th class="text-center">Product Type</th>
                       <th class="text-center">Category</th>
+                      <th class="text-center">Weight</th>
                       <th class="text-center">Quantity</th>
-                      <th class="text-center">Paper Price</th>
+                      <th class="text-center">Product Type Price</th>
                       <th class="text-center">Image</th>
                       <th class="text-center">Action</th>
                     </tr>
@@ -292,6 +293,7 @@
                       <td class="text-center">{{indx+1}}</td>
                       <td class="text-center">{{dat.papertype}}</td>
                       <td class="text-center">{{dat.category}}</td>
+                      <td class="text-center">{{dat.weight}}</td>
                       <td class="text-center">{{dat.quantity}}</td>
                       <td class="text-center">{{dat.paperprice}}</td>
                       <td class="text-center"><img src="{{dat.imageurl}}" alt="Prodcut-{{indx}}" height="50px" width="50px"></td>
@@ -302,7 +304,7 @@
                     </tr>
                   </tbody>
                 </table>
-                <button class="btn btn-outline-primary float-end mt-3"  data-bs-toggle="modal" data-bs-target="#prodTypeModal">Insert Paper</button>
+                <button class="btn btn-outline-primary float-end mt-3"  data-bs-toggle="modal" data-bs-target="#prodTypeModal">Insert Product Type</button>
               </div>
             </div>
           </div>
@@ -313,7 +315,7 @@
           <div class="col-lg-9 mb-lg-0">
             <div class="card z-index-2 h-100">
               <div class="card-header pb-0 pt-3 bg-transparent">
-                <h6 class="text-capitalize">Color Option</h6>
+                <h6 class="text-capitalize">Color Options</h6>
               </div>
               <div class="card-body">
                 <table id="listColor" class="table table-borderless" style="width:100%">
@@ -343,20 +345,20 @@
           </div>
         </div>
 
-        <!-- Product Print Quality Tables -->
+        <!-- Product Options Tables -->
         <div class="row mt-4" *ngIf="prodSelected">
           <div class="col-lg-9 mb-lg-0">
             <div class="card z-index-2 h-100">
               <div class="card-header pb-0 pt-3 bg-transparent">
-                <h6 class="text-capitalize">Print Quality</h6>
+                <h6 class="text-capitalize">Other Options</h6>
               </div>
               <div class="card-body">
                 <table id="listQuality" class="table table-borderless" style="width:100%">
                   <thead>
                     <tr>
                       <th class="text-center">No</th>
-                      <th class="text-center">Print Quality</th>
-                      <th class="text-center">Quality Fee</th>
+                      <th class="text-center">Options Title</th>
+                      <th class="text-center">Options Fee</th>
                       <th class="text-center">Action</th>
                     </tr>
                   </thead>
@@ -372,7 +374,7 @@
                     </tr>
                   </tbody>
                 </table>
-                <button class="btn btn-outline-primary float-end mt-3" data-bs-toggle="modal" data-bs-target="#qualityModal">Insert Quality</button>
+                <button class="btn btn-outline-primary float-end mt-3" data-bs-toggle="modal" data-bs-target="#qualityModal">Insert Options</button>
               </div>
             </div>
           </div>
@@ -463,7 +465,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5">Insert Paper Type</h1>
+              <h1 class="modal-title fs-5">Insert Product Type</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
@@ -516,6 +518,28 @@
                   </div>
                 </div>
                 <div class="mb-3">
+                  <label for="weight" class="form-label">Weight (gr)</label>
+                  <br>
+                  <small class="text-muted" ><span class="text-danger">*</span> Guide for calculate paper weight on <a href="/calculator/paper" target="_blank">here</a>.</small>
+                  <input 
+                    type="number" 
+                    class="form-control" 
+                    id="weight" 
+                    formControlName="weight"
+                    [ngClass]="{
+                      'is-invalid': (insertProductTypeForm.controls['weight'].invalid && (
+                        insertProductTypeForm.controls['weight'].dirty || 
+                        insertProductTypeForm.controls['weight'].touched)), 
+                      'is-valid': insertProductTypeForm.controls['weight'].valid}"
+                  >
+                  <div class="invalid-feedback">
+                    <div *ngIf="insertProductTypeForm.controls['quantity'].errors?.['required']">
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Please input this field.
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
                   <label for="quantity" class="form-label">Quantity</label>
                   <input 
                     type="number" 
@@ -536,7 +560,7 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="paperPrice" class="form-label">Paper Price</label>
+                  <label for="paperPrice" class="form-label">Product Type Price</label>
                   <div 
                     class="input-group"
                     [ngClass]="{
@@ -662,18 +686,18 @@
         </div>
       </div>
 
-      <!-- Modal Insert Quality -->
+      <!-- Modal Insert Options -->
       <div class="modal fade" id="qualityModal" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5">Insert Quality Printing</h1>
+              <h1 class="modal-title fs-5">Insert Options Printing</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
               <form [formGroup]="insertProductQualityForm">
                 <div class="mb-3">
-                  <label for="printquality" class="form-label">Print Quality</label>
+                  <label for="printquality" class="form-label">Options Title</label>
                   <input 
                     type="text" 
                     class="form-control" 
@@ -694,7 +718,7 @@
                 </div>
 
                 <div class="mb-3">
-                  <label for="printqualityfee" class="form-label">Quality Fee</label>
+                  <label for="printqualityfee" class="form-label">Options Fee</label>
                   <div 
                     class="input-group"
                     [ngClass]="{
@@ -873,6 +897,28 @@
                   </div>
                 </div>
                 <div class="mb-3">
+                  <label for="weight" class="form-label">Weight (gr)</label>
+                  <br>
+                  <small class="text-muted" ><span class="text-danger">*</span> Guide for calculate paper weight on <a href="/calculator/paper" target="_blank">here</a>.</small>
+                  <input 
+                    type="number" 
+                    class="form-control" 
+                    id="weight" 
+                    formControlName="weight"
+                    [ngClass]="{
+                      'is-invalid': (updateProductTypeForm.controls['weight'].invalid && (
+                        updateProductTypeForm.controls['weight'].dirty || 
+                        updateProductTypeForm.controls['weight'].touched)), 
+                      'is-valid': updateProductTypeForm.controls['weight'].valid}"
+                  >
+                  <div class="invalid-feedback">
+                    <div *ngIf="updateProductTypeForm.controls['quantity'].errors?.['required']">
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Please input this field.
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
                   <label for="quantity" class="form-label">Quantity</label>
                   <input 
                     type="number" 
@@ -893,7 +939,7 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="paperPrice" class="form-label">Paper Price</label>
+                  <label for="paperPrice" class="form-label">Product Type Price</label>
                   <div 
                     class="input-group"
                     [ngClass]="{
@@ -1032,18 +1078,18 @@
         </div>
       </div>
 
-      <!-- Modal Update Quality -->
+      <!-- Modal Update Options -->
       <div class="modal fade" id="UpdateQualityModal" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5">Update Quality Printing</h1>
+              <h1 class="modal-title fs-5">Update Options Printing</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
               <form [formGroup]="updatePrintQualityForm">
                 <div class="mb-3">
-                  <label for="printquality" class="form-label">Print Quality</label>
+                  <label for="printquality" class="form-label">Options Title</label>
                   <input 
                     type="text" 
                     class="form-control" 
@@ -1064,7 +1110,7 @@
                 </div>
 
                 <div class="mb-3">
-                  <label for="printqualityfee" class="form-label">Quality Fee</label>
+                  <label for="printqualityfee" class="form-label">Options Fee</label>
                   <div 
                     class="input-group"
                     [ngClass]="{

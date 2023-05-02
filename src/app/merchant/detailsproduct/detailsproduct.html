@@ -84,7 +84,7 @@
           
           <!-- papertype -->
           <div class="paper-form mt-2">
-            <label class="order-label">Paper Type</label>
+            <label class="order-label">Product Type</label>
             <div class="input-paper-form mt-1 d-flex align-content-start flex-wrap"
               [ngClass]="{'is-valid': orderform.controls['papertype'].valid}"
             >
@@ -94,13 +94,13 @@
               </div>
             </div>
             <div class="valid-feedback mt-1">
-              Print Paper type is {{this.papertype.value}}
+              Product Type is {{this.papertype.value}}
             </div>
           </div>
 
           <!-- quality -->
           <div class="quality-form mt-2">
-            <label class="order-label">Print Quality</label>
+            <label class="order-label">Option</label>
             <div class="input-quality-form mt-1 d-flex align-content-start flex-wrap"
               [ngClass]="{'is-valid': orderform.controls['quality'].valid}"
             >
@@ -110,7 +110,7 @@
             </div>
             </div>
             <div class="valid-feedback mt-1">
-              Print quality is {{this.quality.value}}
+              Selected option is {{this.quality.value}}
             </div>
           </div>
           
@@ -225,7 +225,13 @@
                           </div>
                           <div class="col-xl-6">
                             <p class="float-end fw-bold">Total: Rp. {{totalPrice * totalpages}}
-                              <!-- total price masih blm * totalpage (maasih manual) -->
+                            </p>
+                          </div>
+                          <div class="col-xl-6">
+                            <p>{{this.orderform.controls['copies'].value * this.totalpages}} x {{selectedWeigth}} gr</p>
+                          </div>
+                          <div class="col-xl-6">
+                            <p class="float-end fw-bold">Weigth: {{selectedWeigth * this.orderform.controls['copies'].value * this.totalpages}} gr
                             </p>
                           </div>
                           <hr style="border: 2px solid black;">

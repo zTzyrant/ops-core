@@ -196,7 +196,8 @@ export class MerchProductComponent {
       category: ['', Validators.required],
       paperprice: ['', Validators.required],
       quantity: ['', Validators.required],
-      imageProduct: ['', Validators.required]
+      imageProduct: ['', Validators.required],
+      weight: ['', Validators.required]
     })
   }
 
@@ -443,7 +444,7 @@ export class MerchProductComponent {
       producttitle: ['', Validators.required],
       productdescription: ['', Validators.required],
       saf: [''],
-      category: ['', [Validators.required]]
+      category: ['', [Validators.required]],
     })
   }
 
@@ -483,6 +484,7 @@ export class MerchProductComponent {
     this.updateProductTypeForm.get('producttitle').setValue(data.papertype)
     this.updateProductTypeForm.get('category').setValue(data.category)
     this.updateProductTypeForm.get('paperprice').setValue(data.paperprice)
+    this.updateProductTypeForm.get('weight').setValue(data.weight)
     this.updateProductTypeForm.get('quantity').setValue(data.quantity)
     
   }
@@ -494,7 +496,8 @@ export class MerchProductComponent {
       category: ['', Validators.required],
       paperprice: ['', Validators.required],
       quantity: ['', Validators.required],
-      imageurl: ['']
+      imageurl: [''],
+      weight: ['', Validators.required]
     })
   }
 

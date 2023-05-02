@@ -31,6 +31,7 @@ export class DetailsproductComponent {
   maxorederCopies = 1
 
   filesformData: any
+  selectedWeigth: any
 
   apilogin = JSON.parse(localStorage.getItem('logindatas')!);
 
@@ -72,6 +73,7 @@ export class DetailsproductComponent {
     const findProductType = (x: any) => x.papertype === this.papertype.value
     this.paperSelectedIndx = this.currentProdService.productTypeOPS.findIndex(findProductType)
     this.selectTypeFee = this.currentProdService.productTypeOPS[this.paperSelectedIndx].paperprice
+    this.selectedWeigth = this.currentProdService.productTypeOPS[this.paperSelectedIndx].weight
 
     const findQuality = (x: any) => x.printquality === this.quality.value
     this.qualityselectedIndx = this.currentProdService.printQualityOPS.findIndex(findQuality)

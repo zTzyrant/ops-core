@@ -11,6 +11,7 @@ export class CurdApiService {
   apiurl = environment.apiurl;
   filterProd! : string
   consNotif = false
+  orderDataUser: any
   constructor(private http: HttpClient) { }
 
   setNotif(dat: any){
@@ -151,5 +152,25 @@ export class CurdApiService {
 
   getCustomerCart(datas: any){
     return this.http.get(`${this.apiurl}/customer/view/cart/${datas}`)
+  }
+
+  setOrderDataUser(datas: any){
+    this.orderDataUser = datas
+  }
+
+  getOrderDataUser(){
+    return this.orderDataUser
+  }
+
+  insertNewAddress(datas: any){
+    return this.http.post(`${this.apiurl}/customer/insert/address`, datas)
+  }
+
+  getAllAddress(datas: any){
+    return this.http.get(`${this.apiurl}/customer/view/address/${datas}`)
+  }
+
+  getTest(){
+    return this.http.get(`https://api.github.com/users?per_page=10`)
   }
 }
