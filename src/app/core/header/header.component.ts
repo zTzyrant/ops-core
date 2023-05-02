@@ -18,6 +18,7 @@ export class HeaderComponent {
   constructor(private curdService: CurdApiService){
     if(this.apilogin){
       this.chartUser = this.apilogin.fields[0].userid
+      this.curdService.checkloginlegal()
       if(this.apilogin.fields[0].devid){
         this.meUIuser = 1
       } else{
