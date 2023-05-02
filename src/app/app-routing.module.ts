@@ -26,6 +26,8 @@ import { MerchProductComponent } from './merchant/panel/merch.product/merch.prod
 import { MerchantGuard } from './secure/merchant/merchant.guard';
 import { CartComponent } from './user/customer/cart/cart.component';
 import { CustomerGuard } from './secure/customer/customer.guard';
+import { ShipmentComponent } from './user/customer/shipment/shipment.component';
+import { CalculatePaperWeightComponent } from './core/calculate-paper-weight/calculate-paper-weight.component';
 
 const routes: Routes = [
   {
@@ -91,9 +93,16 @@ const routes: Routes = [
     path: 'merchant/admin/login',
     component: MerchLoginComponent
   }, {
-    path: 'cart/:username',
+    path: 'cart',
     component: CartComponent,
     canActivate: [CustomerGuard]
+  }, {
+    path: 'cart/shipment',
+    component: ShipmentComponent,
+    canActivate: [CustomerGuard]
+  }, {
+    path: 'calculator/paper',
+    component: CalculatePaperWeightComponent,
   },
 
   // end error page

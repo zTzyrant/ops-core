@@ -43,6 +43,8 @@ import { MerchantGuard } from './secure/merchant/merchant.guard';
 import { CartComponent } from './user/customer/cart/cart.component';
 import { SafePipe } from './safe.pipe';
 import { ShipmentComponent } from './user/customer/shipment/shipment.component';
+import { AddAddressComponent } from './user/customer/add/address/add.address.component';
+import { CalculatePaperWeightComponent } from './core/calculate-paper-weight/calculate-paper-weight.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,9 @@ import { ShipmentComponent } from './user/customer/shipment/shipment.component';
     MerchProductComponent,
     CartComponent,
     SafePipe,
-    ShipmentComponent
+    ShipmentComponent,
+    AddAddressComponent,
+    CalculatePaperWeightComponent
   ],
   imports: [
     BrowserModule,

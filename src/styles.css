@@ -18,6 +18,10 @@ input[type=number] {
     appearance: textfield;
 }
 
+.textops{
+  color: #07484A !important;
+}
+
 .btnops{
   border: none !important;
   background: #07484A !important;
@@ -29,9 +33,14 @@ input[type=number] {
   color: white;
 }
 
-.btnops:hover{
+.btnops-outline{
+  border: 1px solid #07484A !important;
+  color: #07484A !important;
+}
+
+.btnops-outline:hover{
   background: #043233 !important;
-  color: white;
+  color: white !important;
 }
 
 .btnops:focus-visible{
@@ -41,6 +50,13 @@ input[type=number] {
 .form-check-input:checked{
   background-color: #07484A !important;
   border-color: #07484A !important; 
+}
+
+.range-OPS::-webkit-slider-thumb, .range-OPS::-moz-range-thumb {
+  background-color: #07484A !important;
+}
+.range-OPS:focus, .range-OPS:focus::-webkit-slider-thumb, .range-OPS:focus::-moz-range-thumb {
+  box-shadow: none !important;
 }
 .timepicker-backdrop-overlay {z-index: 10000 !important;}
 

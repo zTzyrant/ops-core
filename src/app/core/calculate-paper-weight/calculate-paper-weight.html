@@ -1,0 +1,101 @@
+<app-header></app-header>
+<div class="container mt-4 mb-5 vh-100">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-lg">
+          <div class="card-body">
+            <h3 class="card-title text-center mb-4">Paper Weight Calculator</h3>
+
+
+            <div class="text-center">
+                <h3 class="mb-0">{{(totalWeight).toFixed(2)}} gr</h3>
+                <span class="text-muted">PER COPY</span>
+            </div>
+        
+            <form>
+                <div class="form-group">
+                    <div class="d-flex pt-2">
+                        <div>
+                            <p>
+                            <b>Width</b>
+                            </p>
+                        </div>
+                        <div class="ms-auto">
+                            <p >
+                            cm
+                            </p>
+                        </div>
+                    </div>
+                    <input type="text" (input)="valWidth($event)" class="form-control" min="0" max="100" [value]="width">
+                    <input type="range" (input)="valWidth($event)" class="form-range range-OPS" min="0" max="100" step="1" [value]="width">
+                </div>
+                <div class="form-group">
+                    <div class="d-flex pt-2">
+                        <div>
+                            <p>
+                            <b>Height</b>
+                            </p>
+                        </div>
+                        <div class="ms-auto">
+                            <p >
+                            cm
+                            </p>
+                        </div>
+                    </div>
+                    <input type="text" (input)="valHeight($event)" class="form-control" min="0" max="100" [value]="height">
+                    <input type="range" (input)="valHeight($event)" class="form-range range-OPS" min="0" max="100" step="1" [value]="height">
+                </div>
+                <div class="form-group">
+                    <div class="d-flex pt-2">
+                        <div>
+                            <p>
+                            <b>Weight</b>
+                            </p>
+                        </div>
+                        <div class="ms-auto">
+                            <p >
+                            g/m<sup>2</sup>/ gsm
+                            </p>
+                        </div>
+                    </div>
+                    <input type="text" (input)="valWeight($event)" class="form-control" min="0" max="1000" [value]="weight">
+                    <input type="range" (input)="valWeight($event)" class="form-range range-OPS" min="0" max="1000" step="1" [value]="weight">
+                </div>
+                <div class="form-group">
+                    <div class="d-flex pt-2">
+                        <div>
+                            <p>
+                            <b>Quantity</b>
+                            </p>
+                        </div>
+                        <div class="ms-auto">
+                            <p >
+                            cm
+                            </p>
+                        </div>
+                    </div>
+                    <input type="number" (input)="valQuantity($event)" class="form-control" min="1" max="1000000" [value]="quantity">
+                    <input type="range" (input)="valQuantity($event)" class="form-range range-OPS" min="1" max="1000000" step="1" [value]="quantity">
+                </div>
+            </form>
+            <div class="mt-3">
+                <h6>Common Paper Size</h6>
+                <button type="button" class="btn btn-outline-primary my-2 me-2 btnops-outline" (click)="paperDefault('A1')">A1</button>
+                <button type="button" class="btn btn-outline-primary my-2 me-2 btnops-outline" (click)="paperDefault('A2')">A2</button>
+                <button type="button" class="btn btn-outline-primary my-2 me-2 btnops-outline" (click)="paperDefault('A3')">A3</button>
+                <button type="button" class="btn btn-outline-primary my-2 me-2 btnops-outline" (click)="paperDefault('A4 100 gr')">A4 100 gr</button>
+                <button type="button" class="btn btn-outline-primary my-2 me-2 btnops-outline" (click)="paperDefault('A4 80 gr')">A4 80 gr</button>
+                <button type="button" class="btn btn-outline-primary my-2 me-2 btnops-outline" (click)="paperDefault('A4 70 gr')">A4 70 gr</button>
+                <button type="button" class="btn btn-outline-primary my-2 me-2 btnops-outline" (click)="paperDefault('F4')">F4</button>
+                <button type="button" class="btn btn-outline-primary my-2 me-2 btnops-outline" (click)="paperDefault('A5')">A5</button>
+                <button type="button" class="btn btn-outline-primary my-2 me-2 btnops-outline" (click)="paperDefault('A6')">A6</button>
+            </div>
+            <div class="my-4 text-center">
+                <p class="text-muted">Created by OPS Team</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<app-footer></app-footer>
