@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CurdApiService } from 'src/app/secure/curd.api.service';
 import Swal from 'sweetalert2';
@@ -15,11 +15,11 @@ import Swal from 'sweetalert2';
 export class CartComponent {
   apilogin = JSON.parse(localStorage.getItem('logindatas')!);
   cartProd: any
-  chekoutArray: any = []
   totalToPay = 0
-
+  arrayCart: any = []
+  
   constructor(
-    private route: ActivatedRoute,
+    private route: Router,
     public fb: FormBuilder,
     private curdService: CurdApiService,
     private toast : ToastrService,
@@ -36,7 +36,7 @@ export class CartComponent {
     return dast
   }
 
-  deleteOrder(id: any){
+  deleteOrder(id: any, indexArr: any){
     
 
     Swal.fire({
@@ -50,11 +50,9 @@ export class CartComponent {
     }).then((result) => {
       this.curdService.deleteOrderFromCart({orderid: id}).subscribe((res: any) => {
         if(res === 1){
-          for (let index = 0; index < this.cartProd.fields.length; index++) {
-            if(this.cartProd.fields[index].orderid === id) {
-              this.totalToPay = this.totalToPay - this.cartProd.fields[index].totalcost
-            }
-          }
+          this.arrayCart.splice(this.arrayCart.findIndex((x: any) => x.orderid === id), 1);
+          this.totalToPay = this.totalToPay - this.cartProd.fields[indexArr].totalcost
+
           this.toast.success('Order deleted')
           this.cartProd = null
           this.getAllCartFromInside()
@@ -73,23 +71,19 @@ export class CartComponent {
   }
 
   addToCartCheckout(id: any, indexArr: any){
-    if(this.chekoutArray.findIndex((x: any) => x === id) < 0){
-      this.chekoutArray.push(id)
+    if(this.arrayCart.findIndex((x: any) => x.orderid === id) < 0){
       this.totalToPay = this.totalToPay + this.cartProd.fields[indexArr].totalcost
+      this.arrayCart.push(this.cartProd.fields[indexArr])
     } else {
-      this.chekoutArray.splice(this.chekoutArray.findIndex((x: any) => x === id), 1);
+      this.arrayCart.splice(this.arrayCart.findIndex((x: any) => x.orderid === id), 1);
       this.totalToPay = this.totalToPay - this.cartProd.fields[indexArr].totalcost
     }
-    console.log(this.chekoutArray);
+    console.log(this.arrayCart);
     
   }
 
   submitOrder(){
-    console.log(this.cartProd.fields);
-    
-    console.log(this.cartProd.fields.findIndex((orderid: any) => orderid === '5'));
-
-    
-    
+    this.curdService.setOrderDataUser({ totalPayment: this.totalToPay,  cartOrder: this.arrayCart})
+    this.route.navigateByUrl('/cart/shipment')
   }
 }

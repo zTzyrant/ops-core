@@ -1,0 +1,22 @@
+
+.merchant-city-inline{
+    color: #6D7588;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: Open Sauce One, "Nunito Sans", -apple-system, sans-serif;
+    margin-left: 1.73rem !important;
+}
+
+.img-product{
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    width: 100%;
+}
+
+
+
+@media screen and (max-width: 767px) {
+    .img-product {
+        height: 150px;
+    }
+}

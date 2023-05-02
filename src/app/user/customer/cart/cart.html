@@ -13,6 +13,7 @@
                   <div class="col">
                     
                     <p class="mb-0"><input class="form-check-input" type="checkbox" style="font-size: 1.2rem;" (click)="addToCartCheckout(dat.orderid, index)"><strong class="ms-2">{{dat.merchantname}}</strong></p>
+                    <P class="merchant-city-inline">{{dat.city}}</P>
                   </div>
                   <div class="row">
                     
@@ -21,7 +22,7 @@
                     <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                       <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
                         <img src="{{dat.imageurl}}"
-                          style="aspect-ratio: 1/1;object-fit: contain;width: 100%;" alt="{{dat.productype}} image" />
+                          class="img-product" alt="{{dat.productype}} image" />
                         <a href="#!">
                           <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                         </a>
@@ -34,7 +35,7 @@
                       <p class="mb-0">Quality: <strong>{{dat.printingquality}}</strong></p>
                       <p>Files: <a href="{{dat.fileprintingurl}}" target="_blank">Open</a></p>
                       <button type="button" class="btn btn-primary btn-sm me-1 mb-2"
-                        title="Remove item" (click)="deleteOrder(dat.orderid)">
+                        title="Remove item" (click)="deleteOrder(dat.orderid, index)">
                         <i class="bi bi-trash-fill"></i>
                       </button>
                       <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
@@ -58,7 +59,7 @@
                     </div>
                   </div>
       
-                  <hr class="my-4"/>
+                  <hr class="mt-4 mb-0"/>
                 </div>
               </div>
               <div class="card mb-4">
@@ -66,18 +67,11 @@
               <div class="card mb-4 mb-lg-0">
                 <div class="card-body">
                   <p><strong>We accept</strong></p>
-                  <img class="me-2" width="45px"
-                    src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
-                    alt="Visa" />
-                  <img class="me-2" width="45px"
-                    src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
-                    alt="American Express" />
-                  <img class="me-2" width="45px"
-                    src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
-                    alt="Mastercard" />
-                  <img class="me-2" width="45px"
-                    src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.webp"
-                    alt="PayPal acceptance mark" />
+                  <img src="../../../../assets/img/Virtual Account/logo-bca.png" class="me-2" width="45px" alt="logo-bca" loading="lazy">
+                  <img src="../../../../assets/img/Virtual Account/logo-bni.png" class="me-2" width="45px" alt="logo-bni" loading="lazy">
+                  <img src="../../../../assets/img/Virtual Account/logo-bri.png" class="me-2" width="45px" alt="logo-bri" loading="lazy">
+                  <img src="../../../../assets/img/Virtual Account/logo-alfamart.png" class="me-2" width="45px" alt="logo-alfamart" loading="lazy">
+                  <img src="../../../../assets/img/Virtual Account/logo-Indomaret.png" class="me-2" width="45px" alt="logo-indomaret" loading="lazy">
                 </div>
               </div>
             </div>
