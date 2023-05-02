@@ -1,0 +1,182 @@
+<app-header></app-header>
+<app-AddAddress (getAllAddress)="getAllAddress()"></app-AddAddress>
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container py-5">
+      <div class="card">
+        <div class="card-body">
+          <div class="row d-flex justify-content-center pb-5">
+            <div class="col-md-7 col-xl-5 mb-4 mb-md-0">
+              <div class="py-4 d-flex flex-row">
+                <h5><span class="bi bi-shield-check pe-2 textops"></span><b>ELIGIBLE</b> |</h5>
+                <span class="ps-2">Pay</span>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex pt-2">
+                  <div>
+                    <p>
+                      <b>Shipping Option</b>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="rounded d-flex" style="background-color: #f8f9fa;">
+                  <select class="form-select" (change)="setDeliverOption($event)">
+                    <option value="1">Delivery</option>
+                    <option value="0">Pickup</option>
+                  </select>
+                </div>
+              </div>
+
+              <div *ngIf="deliverOption !== '0'">
+
+                <div class="d-flex pt-2">
+                  <div>
+                    <p>
+                      <b>Shipping Address</b>
+                    </p>
+                  </div>
+                  <div class="ms-auto">
+                    <p class="text-primary user-select-none shipphov" role="button" data-bs-toggle="modal" data-bs-target="#modalAddAdress">
+                      <i class="bi bi-plus-circle pe-1"></i>Add adderss for shipping
+                    </p>
+                  </div>
+                </div>
+
+                <p (click)="logAddress()">
+                  <span class="text-danger">*</span> Select your shipping address or add the new one.
+                </p>
+                <div class="rounded d-flex" style="background-color: #f8f9fa;">
+                  <select class="form-select">
+                      <option value="-1" hidden>Select Address</option>
+                      <ng-container *ngIf="collectionAddress">
+                        <option value="{{dat.addressid}}" *ngFor="let dat of collectionAddress.fields">{{dat.fulladdress}}, {{dat.city}}</option>
+                      </ng-container>
+                  </select>
+                </div>
+
+                <hr/>
+
+                <div class="pt-2">
+                  <div class="d-flex pb-2">
+                    <div>
+                      <p>
+                        <b>Payment Option</b>
+                      </p>
+                    </div>
+                  </div>
+
+                  <form class="pb-3" [formGroup]="insertTransactionForm" (change)="geko()">
+
+                    <div class="d-flex flex-row pb-3">
+                      <div class="d-flex align-items-center pe-2">
+                        <input class="form-check-input" type="radio" formControlName="paymentradio" id="paymentradio1" 
+                          value="bcava"/>
+                      </div>
+                      <label for="paymentradio1" class="rounded border d-flex flex-wrap justify-content-center w-100 p-3 align-items-center">
+                        <p class="mb-0">
+                          <img src="../../../../assets/img/Virtual Account/logo-bca.png" class="img-payment" alt="logo-bca" loading="lazy">
+                        </p>
+                        <div class="ms-auto"><b>BCA Virtual Account</b></div>
+                      </label>
+                    </div>
+    
+                    <div class="d-flex flex-row pb-3">
+                      <div class="d-flex align-items-center pe-2">
+                        <input class="form-check-input" type="radio" formControlName="paymentradio" id="paymentradio2"
+                        value="bniva" />
+                      </div>
+                      <label for="paymentradio2" class="rounded border d-flex flex-wrap justify-content-center w-100 p-3 align-items-center">
+                        <p class="mb-0">
+                          <img src="../../../../assets/img/Virtual Account/logo-bni.png" class="img-payment" alt="logo-bni" loading="lazy">
+                        </p>
+                        <div class="ms-auto"><b>BNI Virtual Account</b></div>
+                      </label>
+                    </div>
+                  
+                    <div class="d-flex flex-row pb-3">
+                      <div class="d-flex align-items-center pe-2">
+                        <input class="form-check-input" type="radio" formControlName="paymentradio" id="paymentradio3"
+                          value="briva" />
+                      </div>
+                      <label for="paymentradio3" class="rounded border d-flex flex-wrap justify-content-center w-100 p-3 align-items-center">
+                        <p class="mb-0">
+                          <img src="../../../../assets/img/Virtual Account/logo-bri.png" class="img-payment" alt="logo-bri" loading="lazy">
+                        </p>
+                        <div class="ms-auto"><b>BRI Virtual Account</b></div>
+                      </label>
+                    </div>
+
+                    <div class="d-flex flex-row pb-3">
+                      <div class="d-flex align-items-center pe-2">
+                        <input class="form-check-input" type="radio" formControlName="paymentradio" id="paymentradio4"
+                          value="alfamart" />
+                      </div>
+                      <label for="paymentradio4" class="rounded border d-flex flex-wrap justify-content-center w-100 p-3 align-items-center">
+                        <p class="mb-0">
+                          <img src="../../../../assets/img/Virtual Account/logo-alfamart.png" class="img-payment" alt="logo-alfamart" loading="lazy">
+                        </p>
+                        <div class="ms-auto"><b>Alfamart</b></div>
+                      </label>
+                    </div>
+
+                    <div class="d-flex flex-row pb-3">
+                      <div class="d-flex align-items-center pe-2">
+                        <input class="form-check-input" type="radio" formControlName="paymentradio" id="paymentradio5"
+                          value="indomaret" />
+                      </div>
+                      <label for="paymentradio5" class="rounded border d-flex flex-wrap justify-content-center w-100 p-3 align-items-center">
+                        <p class="mb-0">
+                          <img src="../../../../assets/img/Virtual Account/logo-Indomaret.png" class="img-payment" alt="logo-indomaret" loading="lazy">
+                        </p>
+                        <div class="ms-auto"><b>Indomaret</b></div>
+                      </label>
+                    </div>
+
+                  </form>
+
+                </div>
+                <input type="button" value="Proceed to payment" class="btn btn-primary btn-block btn-lg btnops w-100" />
+            
+              </div>
+            </div>
+  
+            <div class="col-md-5 col-xl-4 offset-xl-1">
+              <div class="py-4 d-flex justify-content-end shipphov">
+                <h6><a href="/">Cancel and return to website</a></h6>
+              </div>
+              <div class="rounded d-flex flex-column p-2" style="background-color: #f8f9fa;" *ngIf="trueCart">
+                <div class="p-2 me-3">
+                  <h4>Order Recap</h4>
+                </div>
+                <div class="border-top px-2 mx-2"></div>
+                <div class="p-2 d-flex">
+                  <div class="col-8"><b>Order Data</b></div>
+                </div>
+                <ng-template ngFor let-dat [ngForOf]="afterCart">
+                  <div class="p-2 d-flex" *ngFor="let affdat of dat">
+                    <div class="col-8">{{affdat.papertype}} ({{affdat.totalquantity}})</div>
+                    <div class="ms-auto">+ Rp. {{affdat.totalcost.toLocaleString('id-RP')}}</div>
+                  </div>
+                  <div class="border-top px-2 mx-2"></div>
+                </ng-template>
+                <div class="p-2 d-flex">
+                  <div class="col-8"><b>Shipping to</b></div>
+                </div>
+                <ng-template ngFor let-dat [ngForOf]="shippingTo">
+                  <div class="p-2 d-flex">
+                    <div class="col-8">{{dat.city}} ({{dat.totalquantity}})</div>
+                    <div class="ms-auto">+ Rp. {{dat.totalcost.toLocaleString('id-RP')}}</div>
+                  </div>
+                </ng-template>
+                <div class="border-top px-2 mx-2"></div>
+                <div class="p-2 d-flex pt-3">
+                  <div class="col-8"><b>Total</b></div>
+                  <div class="ms-auto"><b class="text-success">Rp. {{totalCostShipping.toLocaleString('id-RP')}}</b></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

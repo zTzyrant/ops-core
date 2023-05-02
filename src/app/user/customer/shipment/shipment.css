@@ -1,0 +1,19 @@
+.shipphov:hover, .shipphov a:hover{
+    color: #002c6f !important;
+}
+
+.img-payment{
+    aspect-ratio: 16 / 9 !important;
+    object-fit: contain !important;
+    width: 100% !important;
+    height: 50px;
+}
+
+
+
+@media screen and (max-width: 400px){
+	.flex-wrap .ms-auto{
+        margin-left: 0 !important;
+        text-align: center;
+    }
+}
