@@ -38,7 +38,7 @@ input[type=number] {
   color: #07484A !important;
 }
 
-.btnops-outline:hover{
+.btnops-outline:hover, .btnops-outline:active{
   background: #043233 !important;
   color: white !important;
 }
