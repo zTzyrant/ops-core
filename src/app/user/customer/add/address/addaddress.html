@@ -1,0 +1,105 @@
+<div class="modal fade" id="modalAddAdress" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalAddAdressLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalAddAdressLabel">Insert Address</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="insertAddressForm">
+            <div class="row g-3">
+                <div class="col-12">
+                <label>Full Address</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Full Address"  
+                    formControlName="fulladdress"
+                    [ngClass]="{
+                    'is-invalid': (insertAddressForm.controls['fulladdress'].invalid && (insertAddressForm.controls['fulladdress'].dirty || insertAddressForm.controls['fulladdress'].touched)), 
+                    'is-valid': insertAddressForm.controls['fulladdress'].valid}"
+                >
+                <div class="invalid-feedback">
+                    <div *ngIf="insertAddressForm.controls['fulladdress'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                    </div>
+                </div>
+                </div>
+                <div class="col-6 ">
+                <label>City</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="City" 
+                    formControlName="city"
+                    [ngClass]="{
+                    'is-invalid': (insertAddressForm.controls['city'].invalid && (insertAddressForm.controls['city'].dirty || insertAddressForm.controls['city'].touched)), 
+                    'is-valid': insertAddressForm.controls['city'].valid}"
+                >
+                <div class="invalid-feedback">
+                    <div *ngIf="insertAddressForm.controls['city'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                    </div>
+                </div>
+                </div>
+                <div class="col-6">
+                <label>Post Code</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Post Code" 
+                    formControlName="postcode"
+                    [ngClass]="{
+                    'is-invalid': (insertAddressForm.controls['postcode'].invalid && (insertAddressForm.controls['postcode'].dirty || insertAddressForm.controls['postcode'].touched)), 
+                    'is-valid': insertAddressForm.controls['postcode'].valid}" 
+                >
+                <div class="invalid-feedback">
+                    <div *ngIf="insertAddressForm.controls['postcode'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                    </div>
+                </div>
+                </div>
+                <div class="col-12">
+                <label>Contact Phone</label>
+                <input
+                    type="text" 
+                    class="form-control"  
+                    placeholder="Phone Number" 
+                    formControlName="phoneaddress"
+                    [ngClass]="{
+                    'is-invalid': (insertAddressForm.controls['phoneaddress'].invalid && (insertAddressForm.controls['phoneaddress'].dirty || insertAddressForm.controls['phoneaddress'].touched)), 
+                    'is-valid': insertAddressForm.controls['phoneaddress'].valid}" 
+                >
+                <div class="invalid-feedback">
+                    <div *ngIf="insertAddressForm.controls['phoneaddress'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                    </div>
+                    <div *ngIf="insertAddressForm.controls['phoneaddress'].errors?.['pattern']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input valid number only.
+                    </div>
+                </div>
+                </div>
+                <div class="col-12">
+                <label>Aditional Information</label>
+                <textarea 
+                    class="form-control" 
+                    cols="30" 
+                    rows="5" 
+                    formControlName="note"></textarea>
+                </div>
+            </div>
+        </form>
+        
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btnops" (click)="insertNewAddress()">Insert Address</button>
+    </div>
+    </div>
+</div>
+</div>
