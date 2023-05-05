@@ -231,7 +231,7 @@
                             <p>{{this.orderform.controls['copies'].value * this.totalpages}} x {{selectedWeigth}} gr</p>
                           </div>
                           <div class="col-xl-6">
-                            <p class="float-end fw-bold">Weigth: {{selectedWeigth * this.orderform.controls['copies'].value * this.totalpages}} gr
+                            <p class="float-end fw-bold">Weigth: {{(selectedWeigth * this.orderform.controls['copies'].value * this.totalpages).toFixed(2)}} gr
                             </p>
                           </div>
                           <hr style="border: 2px solid black;">

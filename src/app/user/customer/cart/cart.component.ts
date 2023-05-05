@@ -52,8 +52,7 @@ export class CartComponent {
         this.curdService.deleteOrderFromCart({orderid: id}).subscribe((res: any) => {
           if(res === 1){
             this.arrayCart.splice(this.arrayCart.findIndex((x: any) => x.orderid === id), 1);
-            this.totalToPay = this.totalToPay - this.cartProd.fields[indexArr].totalcost
-  
+            this.totalToPay = 0
             this.toast.success('Order deleted')
             this.cartProd = null
             this.getAllCartFromInside()

@@ -170,8 +170,8 @@ export class CurdApiService {
     return this.http.get(`${this.apiurl}/customer/view/address/${datas}`)
   }
 
-  getCostShipping(origin: any, destination: any, weight: any){
-    return this.http.get(`${this.apiurl}/shipping/cost?origin_city=${origin}&destination_city=${destination}&weight=${weight}`)
+  getCostShipping(origin: any, destination: any, weight: any, option: any){
+    return this.http.get(`${this.apiurl}/shipping/cost?origin_city=${origin}&destination_city=${destination}&weight=${weight}&option=${option}`)
   }
   
   deleteAddress(id: any){
@@ -180,5 +180,9 @@ export class CurdApiService {
 
   updateAddress(datas: any){
     return this.http.post(`${this.apiurl}/customer/update/address/`, datas)
+  }
+
+  request_payment_midtrans(datas: any){
+    return this.http.post(`${this.apiurl}/secure/consumer/payment`, datas)
   }
 }

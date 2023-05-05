@@ -50,14 +50,12 @@
                           <label class="form-label" for="form1">Quantity</label>
                           <input value="{{dat.numofcopies}} x {{dat.pages}}" type="text" class="form-control" readonly/>
                         </div>
-      
-
                       </div>
                       <p class="text-start">
                         <strong>Rp. {{dat.totalcost.toLocaleString('id-RP')}}</strong>
                       </p>
                       <p class="text-start">
-                        <strong>{{dat.weight}} gr</strong>
+                        <strong>{{((dat.weight * dat.pages) * dat.numofcopies).toFixed(2)}} gr</strong>
                       </p>
                     </div>
                   </div>

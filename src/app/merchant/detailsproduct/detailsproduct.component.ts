@@ -111,7 +111,8 @@ export class DetailsproductComponent {
       inputedfile: ['', [Validators.required]],
       orderNote: [''],
       consumerid: ['', Validators.required],
-      productid: ['', Validators.required]
+      productid: ['', Validators.required],
+      totalweight: ['', Validators.required]
     
     });
     if(this.apilogin){ 
@@ -199,6 +200,7 @@ export class DetailsproductComponent {
       this.getIndexOfDatas()
       this.orderform.controls['totalcost'].setValue(this.totalPrice * this.totalpages)
       this.orderform.controls['productid'].setValue(this.route.snapshot.params['productid'])
+      this.orderform.controls['totalweight'].setValue((this.selectedWeigth * this.orderform.controls['copies'].value * this.totalpages).toFixed(2))
 
       console.log(this.orderform.value);
       Swal.fire({
