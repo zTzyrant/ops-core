@@ -24,7 +24,7 @@
 
           <div class="flex-fill p-3 itemsloc" *ngFor="let data of allProduct| filter: searchFilter">
             <a href="view/{{data.productOPS.merchantuname}}/{{data.productOPS.productid}}">
-              <img src="{{data.productService.productTypeOPS[0].imageurl}}" class="itemsimageops" alt="Item">
+              <img src="{{data.productService.productTypeOPS[0].imageurl}}" class="itemsimageops" alt="Item" loading="lazy">
               <div class="col-9 textareaforitems">
                 <div>{{data.productOPS.producttitle}}</div>
                 <div>Rp. {{data.productService.productTypeOPS[0].paperprice}}</div>

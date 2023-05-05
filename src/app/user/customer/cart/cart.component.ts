@@ -48,18 +48,20 @@ export class CartComponent {
       confirmButtonColor: '#dc3545',
       cancelButtonColor: '#07484A'
     }).then((result) => {
-      this.curdService.deleteOrderFromCart({orderid: id}).subscribe((res: any) => {
-        if(res === 1){
-          this.arrayCart.splice(this.arrayCart.findIndex((x: any) => x.orderid === id), 1);
-          this.totalToPay = this.totalToPay - this.cartProd.fields[indexArr].totalcost
-
-          this.toast.success('Order deleted')
-          this.cartProd = null
-          this.getAllCartFromInside()
-        }
-        else
-          this.toast.success('Something error on server side')
-      })
+      if (result.isConfirmed) {
+        this.curdService.deleteOrderFromCart({orderid: id}).subscribe((res: any) => {
+          if(res === 1){
+            this.arrayCart.splice(this.arrayCart.findIndex((x: any) => x.orderid === id), 1);
+            this.totalToPay = this.totalToPay - this.cartProd.fields[indexArr].totalcost
+  
+            this.toast.success('Order deleted')
+            this.cartProd = null
+            this.getAllCartFromInside()
+          }
+          else
+            this.toast.success('Something error on server side')
+        })
+      }
     })
   }
 

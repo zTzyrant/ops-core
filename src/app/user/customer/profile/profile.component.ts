@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CurdApiService } from 'src/app/secure/curd.api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -23,6 +24,8 @@ export class ProfileComponent {
     private toast : ToastrService
   ){
     this.validManageProfile()
+    this.editFormAddAddress()
+    this.getAllAddress()
     
     this.formUpdateProfile.controls['fullname'].disable();
     this.formUpdateProfile.controls['gender'].disable();
@@ -119,4 +122,98 @@ export class ProfileComponent {
     this.formUpdateProfile.controls['gender'].disable();
     
   }
+
+  editAddressForm: any
+  collectionAddress: any
+  selectedAddressDatas: any
+  deleteButtonId: any
+
+  getAllAddress(){
+    this.collectionAddress = null
+    this.selectedAddressDatas = null
+    this.curdService.getAllAddress(this.jsonData.fields[0].userid).subscribe((res: any) => {
+      if(res.statQuo === 1){
+        this.collectionAddress = res.fields
+      } else {
+        this.toast.error('Something Went Wrong Please Contact Customer Support!')
+      }
+    })
+  }
+
+  selectedAddress(event: any){
+    this.selectedAddressDatas = undefined
+    
+    this.collectionAddress.forEach((element: any) => {
+      if(element.addressid === parseInt(event.target.value)){
+        this.selectedAddressDatas = element
+        this.setEditableAddress()
+      }
+    });
+  }
+
+  setEditableAddress(){
+    this.editAddressForm.controls['userid'].setValue(this.selectedAddressDatas.userid);
+    this.editAddressForm.controls['addressid'].setValue(this.selectedAddressDatas.addressid);
+    this.editAddressForm.controls['fulladdress'].setValue(this.selectedAddressDatas.fulladdress);
+    this.editAddressForm.controls['city'].setValue(this.selectedAddressDatas.city);
+    this.editAddressForm.controls['postcode'].setValue(this.selectedAddressDatas.postcode);
+    this.editAddressForm.controls['phoneaddress'].setValue(this.selectedAddressDatas.phoneAddress);
+    this.editAddressForm.controls['note'].setValue(this.selectedAddressDatas.note);
+    this.deleteButtonId = this.selectedAddressDatas.addressid
+  }
+
+  editFormAddAddress(){
+    this.editAddressForm = this.fb.group({
+      userid: ['', Validators.required],
+      addressid: ['', Validators.required],
+      fulladdress: ['', Validators.required], 
+      city: ['', Validators.required], 
+      postcode: ['', Validators.required], 
+      phoneaddress: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], 
+      note: [''],
+    })
+  }
+
+  deleteAddress(id:any) {
+    Swal.fire({
+      title: 'Delete ?',
+      text: 'Are you sure want to delete this address data ?',
+      icon: 'error',
+      showCancelButton: true,
+      confirmButtonText: 'Confirm',
+      confirmButtonColor: '#dc3545',
+      cancelButtonColor: '#07484A'
+    }).then((result) => {
+      if(result.isConfirmed){
+        this.curdService.deleteAddress({id: id}).subscribe((res: any) => {
+          if(res === 1){
+            this.getAllAddress()
+            this.toast.success('Address Deleted')
+          } else {
+            this.toast.error('Something Went Wrong Please Contact Customer Support!')
+          }
+        })
+      }
+    })
+  }
+
+  submitEditAddress(){
+    if(this.editAddressForm.invalid){
+      this.toast.error('Please fill all the fields')
+      this.toast.info('Data reset to default')
+      this.setEditableAddress()
+      return
+    }
+
+    this.curdService.updateAddress(this.editAddressForm.value).subscribe((res: any) => {
+      if(res === 1){
+        this.getAllAddress()
+        this.toast.success('Address Updated')
+      } else {
+        this.toast.error('Something Went Wrong Please Contact Customer Support!')
+      }
+    })
+
+  }
+
 }

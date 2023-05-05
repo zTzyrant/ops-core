@@ -31,3 +31,7 @@ button.nav-link.active{
 .form-control{
     height: 3rem;
 }
+
+textarea.form-control{
+    height: 100px;
+}

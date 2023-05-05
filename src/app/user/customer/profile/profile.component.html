@@ -11,7 +11,7 @@
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#consumer-address" type="button" role="tab" aria-controls="consumer-address" aria-selected="false" disabled>
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#consumer-address" type="button" role="tab" aria-controls="consumer-address" aria-selected="false">
                         Address
                     </button>
                 </li>
@@ -106,7 +106,118 @@
                 <!-- Tab Address -->
                 <div class="tab-pane fade" id="consumer-address" role="tabpanel" aria-labelledby="consumer-address" tabindex="0">
                     <div class="card-body">
-                        Address tab
+                        <div class="mb-4">
+                            <div class="d-flex pt-2">
+                                <div>
+                                    <label for="selected-address" class="form-label"><b>Select Address</b></label>
+                                </div>
+                                <div class="ms-auto">
+                                  <p class="text-primary user-select-none shipphov" role="button" data-bs-toggle="modal" data-bs-target="#modalAddAdress">
+                                    <i class="bi bi-plus-circle pe-1"></i>Add address for shipping
+                                  </p>
+                                </div>
+                            </div>
+                            <select name="" id="selected-address" class="form-select" (change)="selectedAddress($event)" *ngIf="collectionAddress">
+                                <option value="-1" hidden>Select Address</option>
+                                <option value="{{dat.addressid}}" *ngFor="let dat of collectionAddress">{{dat.fulladdress}}, {{dat.city}}, {{dat.postcode}}</option>
+                            </select>
+                        </div>
+                        <div class="mb-4" *ngIf="selectedAddressDatas">
+                            <p><b>Edit Address</b></p>
+                            <form [formGroup]="editAddressForm">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                    <label>Full Address</label>
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        placeholder="Full Address"  
+                                        formControlName="fulladdress"
+                                        [ngClass]="{
+                                        'is-invalid': (editAddressForm.controls['fulladdress'].invalid && (editAddressForm.controls['fulladdress'].dirty || editAddressForm.controls['fulladdress'].touched)), 
+                                        'is-valid': editAddressForm.controls['fulladdress'].valid}"
+                                    >
+                                    <div class="invalid-feedback">
+                                        <div *ngIf="editAddressForm.controls['fulladdress'].errors?.['required']">
+                                        <i class="bi bi-exclamation-octagon"></i>
+                                        Please input this field.
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-6 ">
+                                    <label>City</label>
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        placeholder="City" 
+                                        formControlName="city"
+                                        [ngClass]="{
+                                        'is-invalid': (editAddressForm.controls['city'].invalid && (editAddressForm.controls['city'].dirty || editAddressForm.controls['city'].touched)), 
+                                        'is-valid': editAddressForm.controls['city'].valid}"
+                                    >
+                                    <div class="invalid-feedback">
+                                        <div *ngIf="editAddressForm.controls['city'].errors?.['required']">
+                                        <i class="bi bi-exclamation-octagon"></i>
+                                        Please input this field.
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-6">
+                                    <label>Post Code</label>
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        placeholder="Post Code" 
+                                        formControlName="postcode"
+                                        [ngClass]="{
+                                        'is-invalid': (editAddressForm.controls['postcode'].invalid && (editAddressForm.controls['postcode'].dirty || editAddressForm.controls['postcode'].touched)), 
+                                        'is-valid': editAddressForm.controls['postcode'].valid}" 
+                                    >
+                                    <div class="invalid-feedback">
+                                        <div *ngIf="editAddressForm.controls['postcode'].errors?.['required']">
+                                        <i class="bi bi-exclamation-octagon"></i>
+                                        Please input this field.
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-12">
+                                    <label>Contact Phone</label>
+                                    <input
+                                        type="text" 
+                                        class="form-control"  
+                                        placeholder="Phone Number" 
+                                        formControlName="phoneaddress"
+                                        [ngClass]="{
+                                        'is-invalid': (editAddressForm.controls['phoneaddress'].invalid && (editAddressForm.controls['phoneaddress'].dirty || editAddressForm.controls['phoneaddress'].touched)), 
+                                        'is-valid': editAddressForm.controls['phoneaddress'].valid}" 
+                                    >
+                                    <div class="invalid-feedback">
+                                        <div *ngIf="editAddressForm.controls['phoneaddress'].errors?.['required']">
+                                        <i class="bi bi-exclamation-octagon"></i>
+                                        Please input this field.
+                                        </div>
+                                        <div *ngIf="editAddressForm.controls['phoneaddress'].errors?.['pattern']">
+                                        <i class="bi bi-exclamation-octagon"></i>
+                                        Please input valid number only.
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-12">
+                                    <label>Aditional Information</label>
+                                    <textarea 
+                                        class="form-control" 
+                                        rows="3" 
+                                        formControlName="note"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white" *ngIf="selectedAddressDatas"> 
+                        <div class="float-end">
+                            <button type="button" class="btn btn-danger my-2 me-2" (click)="deleteAddress(this.deleteButtonId)">Delete</button>
+                            <button type="submit" class="btn cusopssub my-2 me-2" (click)="submitEditAddress()" [disabled]="this.editAddressForm.invalid">Submit Changes</button>
+                        </div>
                     </div>
                 </div>
                 <!-- End-of-Tab Address -->
@@ -114,3 +225,5 @@
         </div>
     </div>
 </div>
+
+<app-AddAddress (getAllAddress)="getAllAddress()"></app-AddAddress>

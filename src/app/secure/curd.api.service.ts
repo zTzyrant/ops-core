@@ -170,7 +170,15 @@ export class CurdApiService {
     return this.http.get(`${this.apiurl}/customer/view/address/${datas}`)
   }
 
-  getTest(){
-    return this.http.get(`https://api.github.com/users?per_page=10`)
+  getCostShipping(origin: any, destination: any, weight: any){
+    return this.http.get(`${this.apiurl}/shipping/cost?origin_city=${origin}&destination_city=${destination}&weight=${weight}`)
+  }
+  
+  deleteAddress(id: any){
+    return this.http.post(`${this.apiurl}/customer/delete/address/`, id)
+  }
+
+  updateAddress(datas: any){
+    return this.http.post(`${this.apiurl}/customer/update/address/`, datas)
   }
 }
