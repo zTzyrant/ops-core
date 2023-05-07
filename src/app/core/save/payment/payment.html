@@ -21,7 +21,6 @@
 				</div>
 				  <div class="card shadow-0 border mb-4">
 					  <div class="card-body">
-						  <!-- tinggal ngasih data pay terus auto subscribe dalam beberapa detik tapi kalo udah success gak usah sub teros -->
 						  <div class="d-flex justify-content-between align-items-center mb-4">
 							  <p class="fw-normal mb-0">Pay Before</p>
 							  <p class="ms-auto fw-normal mb-0">{{responese_midtrans.expiry_time}}</p>
@@ -52,28 +51,28 @@
 					<div class="card-body">
 						<div class="row">
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-								<p class="mb-0 fw-semibold">Product</p>
+								<p class="mb-0 small fw-semibold">Product</p>
 							</div>
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-								<p class="text-muted mb-0 small">Color</p>
+								<p class="mb-0 small fw-semibold">Color</p>
 							</div>
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-								<p class="text-muted mb-0 small">Option</p>
+								<p class="mb-0 small fw-semibold">Option</p>
 							</div>
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-								<p class="text-muted mb-0 small">Quantity</p>
+								<p class="mb-0 small fw-semibold">Quantity</p>
 							</div>
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-								<p class="text-muted mb-0 small">Weight</p>
+								<p class="mb-0 small fw-semibold">Weight</p>
 							</div>
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-								<p class="text-muted mb-0 small">Costs</p>
+								<p class="mb-0 small fw-semibold">Costs</p>
 							</div>
 						</div>
 						<hr class="w-100">
 						<div class="row">
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-								<p class="mb-0 fw-semibold">{{dat.order.productype}}</p>
+								<p class="mb-0 small fw-semibold">{{dat.order.productype}}</p>
 							</div>
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
 								<p class="text-muted mb-0 small">{{dat.order.colortype}}</p>
@@ -94,24 +93,35 @@
 						<hr class="w-100">
 						<div class="row">
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-								<p class="mb-0 fw-semibold ">Status</p>
+								<p class="mb-0 small fw-semibold ">Status</p>
 							</div>
 							<div class="col-md-8">
 							</div>
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-								<span class="float-end btn btn-danger btn-sm mb-1 fw-semibold">{{dat.order.orderStatus}}</span>
+								<span class="float-end btn btn-danger btn-sm mb-1 fw-semibold small">{{dat.order.orderStatus}}</span>
 							</div>
 						</div>
 						<hr class="w-100">
 						<div class="row">
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-								<p class="mb-0 fw-semibold ">Contact</p>
+								<p class="mb-0 small fw-semibold">Merchant</p>
+							</div>
+							<div class="col-md-8"></div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small fw-semibold">{{dat.merchant_info[0].merchantname}}</p>
+							</div>
+						</div>
+						<hr class="w-100">
+						<div class="row">
+							
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small fw-semibold ">Contact</p>
 							</div>
 							<div class="col-md-8">
 							</div>
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
 								<a href="https://api.whatsapp.com/send?phone={{dat.merchant_info[0].phoneAddress}}&text=OPS%20Order%20Id%20{{dat.order.orderid}}" target="_blank">
-									<span class="float-end btn btn-success btn-sm mb-1 fw-semibold">Whatsapp</span>
+									<span class="float-end btn btn-success btn-sm mb-1 fw-semibold small">Whatsapp</span>
 								</a>
 								
 							</div>
