@@ -60,6 +60,7 @@ export class DetailsproductComponent {
       this.orderform.controls['color'].setValue(this.currentProdService.printColorsOPS[0].colortype)
       this.orderform.controls['papertype'].setValue(this.currentProdService.productTypeOPS[0].papertype)
       this.orderform.controls['quality'].setValue(this.currentProdService.printQualityOPS[0].printquality)
+      this.orderform.controls['merchantid'].setValue(this.currentProd.merchantid)
       this.getIndexOfDatas()
     })
   }
@@ -112,7 +113,8 @@ export class DetailsproductComponent {
       orderNote: [''],
       consumerid: ['', Validators.required],
       productid: ['', Validators.required],
-      totalweight: ['', Validators.required]
+      totalweight: ['', Validators.required],
+      merchantid: ['', Validators.required]
     
     });
     if(this.apilogin){ 

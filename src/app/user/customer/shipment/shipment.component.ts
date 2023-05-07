@@ -205,6 +205,13 @@ export class ShipmentComponent {
   
   postPayment(){
     let request_payment: any
+    let deliver_With: any
+    if(this.deliverOption === '1'){
+      deliver_With = "Delivery"      
+    } else {
+      deliver_With = "Pick Up"
+    }
+
     if(this.insertTransactionForm.value.paymentradio === 'alfamart' || this.insertTransactionForm.value.paymentradio === 'Indomaret'){
       request_payment = {
         "payment_type": "cstore",
@@ -240,21 +247,35 @@ export class ShipmentComponent {
           "order_id": Math.floor(Date.now() / 1000),
           "gross_amount": this.totalCostShipping
         },
-        "item_details_ops": {collection_order: this.afterCart}
+        "item_details_ops": {collection_order: this.afterCart},
+        "shippingOptions": deliver_With
       }
     }
+
+    let true_submit = false
+
     if(this.shippingCost.length < 1){
       if(this.deliverOption === '0'){
-        this.curdService.request_payment_midtrans(request_payment).subscribe((res: any) => {
-          console.log(res);
-        })
+        true_submit = true
       }
     } else {
-      this.curdService.request_payment_midtrans(request_payment).subscribe((res: any) => {
-        console.log(res);
-      })
+      true_submit = true
     }
-    
+
+    if(true_submit){
+      this.curdService.request_payment_midtrans(request_payment).subscribe((res: any) => {
+        if(res.statusQuo === '1'){
+          this.toast.success("Successfully request payment")
+          location.href = `/shop/payment/${res.transaction_id}`;
+        } else {
+          this.toast.error("Internal server error")
+        }
+      })
+    } else {
+      this.toast.info('Please select payment or address correctly')
+    }
+
+
   }
 
 }

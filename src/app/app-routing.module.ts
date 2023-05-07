@@ -28,6 +28,8 @@ import { CartComponent } from './user/customer/cart/cart.component';
 import { CustomerGuard } from './secure/customer/customer.guard';
 import { ShipmentComponent } from './user/customer/shipment/shipment.component';
 import { CalculatePaperWeightComponent } from './core/calculate-paper-weight/calculate-paper-weight.component';
+import { PaymentComponent } from './core/save/payment/payment.component';
+import { details_orderComponent } from './order/view/details/details_order.component';
 
 const routes: Routes = [
   {
@@ -103,6 +105,12 @@ const routes: Routes = [
   }, {
     path: 'calculator/paper',
     component: CalculatePaperWeightComponent,
+  }, {
+    path: 'shop/payment/:id',
+    component: PaymentComponent,
+  }, {
+    path: 'order/view/:id',
+    component: details_orderComponent,
   },
 
   // end error page

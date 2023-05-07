@@ -45,6 +45,8 @@ import { SafePipe } from './safe.pipe';
 import { ShipmentComponent } from './user/customer/shipment/shipment.component';
 import { AddAddressComponent } from './user/customer/add/address/add.address.component';
 import { CalculatePaperWeightComponent } from './core/calculate-paper-weight/calculate-paper-weight.component';
+import { PaymentComponent } from './core/save/payment/payment.component';
+import { details_orderComponent } from './order/view/details/details_order.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,9 @@ import { CalculatePaperWeightComponent } from './core/calculate-paper-weight/cal
     SafePipe,
     ShipmentComponent,
     AddAddressComponent,
-    CalculatePaperWeightComponent
+    CalculatePaperWeightComponent,
+    PaymentComponent,
+    details_orderComponent
   ],
   imports: [
     BrowserModule,

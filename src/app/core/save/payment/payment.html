@@ -1,0 +1,145 @@
+<app-header></app-header>
+
+<section class="vh-100" *ngIf="viewTransactionSection">
+	<div class="container py-5">
+	  <div class="mx-auto" >
+		<div class="">
+		  <div class="card" style="border-radius: 10px;">
+			<div class="card-header px-4 py-5 d-flex">
+			  <h5 class="mb-0 textops font-monospace"><b>Thanks for your Order ! </b></h5>
+			  <button class="ms-auto btn btnops btn-primary" title="Get Update Transaction" (click)="get_transaction_datas()">Update Pages</button>
+			</div>
+			<div class="card-body p-4">
+				<div class="d-flex justify-content-between align-items-center mb-4">
+				  <p class="lead fw-normal mb-0" style="color: #07484A;">Payment</p>
+				  <p class="ms-auto fw-normal mb-0 btn btn-sm" title="Payment Status" 
+					  [ngClass]="{'btn-warning': toUpperCase(responese_midtrans.transaction_status) === 'PENDING', 
+						  'btn-success': toUpperCase(responese_midtrans.transaction_status) === 'SETTLEMENT',
+						  'btn-danger': toUpperCase(responese_midtrans.transaction_status) === 'EXPIRE'
+					  }"
+				  >{{toUpperCase(responese_midtrans.transaction_status)}}</p>
+				</div>
+				  <div class="card shadow-0 border mb-4">
+					  <div class="card-body">
+						  <!-- tinggal ngasih data pay terus auto subscribe dalam beberapa detik tapi kalo udah success gak usah sub teros -->
+						  <div class="d-flex justify-content-between align-items-center mb-4">
+							  <p class="fw-normal mb-0">Pay Before</p>
+							  <p class="ms-auto fw-normal mb-0">{{responese_midtrans.expiry_time}}</p>
+						  </div>
+						  <div class="d-flex justify-content-between align-items-center mb-4">
+							  <p class="fw-normal mb-0 ">Payment Method</p>
+							  <p class="ms fw-normal mb-0">{{toUpperCase(payment_code.pay_type)}}</p>
+						  </div>
+						  <div class="d-flex justify-content-between align-items-center mb-4">
+							  <p class="fw-normal mb-0">Payment Codes</p>
+							  <p class="ms-auto fw-normal mb-0">{{toUpperCase(payment_code.codes)}}</p>
+						  </div>
+						  <div class="d-flex justify-content-between align-items-center mb-4">
+							  <p class="fw-normal mb-0">Total Payment</p>
+							  <p class="ms-auto fw-normal mb-0">Rp. {{responese_midtrans.gross_amount.toLocaleString('id-RP')}}</p>
+						  </div>
+					  </div>
+				  </div>
+  
+			  </div>
+			<hr>
+			<div class="card-body p-4">
+			  <div class="d-flex justify-content-between align-items-center mb-4">
+				<p class="lead fw-normal mb-0" style="color: #07484A;">Orders</p>
+			  </div>
+
+				<div class="card shadow-0 border mb-4" *ngFor="let dat of orders_datas">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 fw-semibold">Product</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="text-muted mb-0 small">Color</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="text-muted mb-0 small">Option</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="text-muted mb-0 small">Quantity</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="text-muted mb-0 small">Weight</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="text-muted mb-0 small">Costs</p>
+							</div>
+						</div>
+						<hr class="w-100">
+						<div class="row">
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 fw-semibold">{{dat.order.productype}}</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="text-muted mb-0 small">{{dat.order.colortype}}</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="text-muted mb-0 small">{{dat.order.printingquality}}</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="text-muted mb-0 small">{{dat.order.totalquantity}}</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="text-muted mb-0 small">{{dat.order.totalWeight}} gr</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="text-muted mb-0 small">{{dat.order.totalcost.toLocaleString('id-RP')}}</p>
+							</div>
+						</div>
+						<hr class="w-100">
+						<div class="row">
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 fw-semibold ">Status</p>
+							</div>
+							<div class="col-md-8">
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<span class="float-end btn btn-danger btn-sm mb-1 fw-semibold">{{dat.order.orderStatus}}</span>
+							</div>
+						</div>
+						<hr class="w-100">
+						<div class="row">
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 fw-semibold ">Contact</p>
+							</div>
+							<div class="col-md-8">
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<a href="https://api.whatsapp.com/send?phone={{dat.merchant_info[0].phoneAddress}}&text=OPS%20Order%20Id%20{{dat.order.orderid}}" target="_blank">
+									<span class="float-end btn btn-success btn-sm mb-1 fw-semibold">Whatsapp</span>
+								</a>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+
+			  <div class="d-flex justify-content-between pt-2">
+				<p class="fw-bold mb-0">Transaction Details</p>
+			  </div>
+  
+			  <div class="d-flex justify-content-between">
+				<p class="text-muted mb-0">Transaction Time : {{transaction_datas.dateTransaction}} {{transaction_datas.timeTransaction}}</p>
+			  </div>
+  
+			  <div class="d-flex justify-content-between mb-5">
+				<p class="text-muted mb-0">Transaction Status : <span class="float-end btn btn-danger btn-sm mb-1 fw-semibold">{{toUpperCase(transaction_datas.transactionStatus)}}</span></p>
+			  </div>
+			</div>
+			<div class="card-footer border-0 px-4 py-2"
+			  style="background-color: #07484A; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+			</div>
+		  </div>
+		</div>
+
+	  </div>
+	</div>
+
+	<app-footer></app-footer>
+
+</section>

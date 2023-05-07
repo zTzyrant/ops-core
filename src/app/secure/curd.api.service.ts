@@ -185,4 +185,8 @@ export class CurdApiService {
   request_payment_midtrans(datas: any){
     return this.http.post(`${this.apiurl}/secure/consumer/payment`, datas)
   }
+
+  get_payment_status(id_transaction: any){
+    return this.http.get(`${this.apiurl}/secure/consumer/payment/status/${id_transaction}`)
+  }
 }
