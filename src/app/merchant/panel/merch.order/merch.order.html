@@ -1,0 +1,489 @@
+<body class="g-sidenav-show bg-gray-100">
+    <div class="min-height-300 bg-ops position-absolute w-100"></div>
+    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main" data-color="primary" [ngClass]="{'showNavMenu': this.showNav === true}">
+      <div class="sidenav-header">
+        <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+        <a class="navbar-brand m-0" href="/">
+          <img src="../../../assets/image/appicon-ops-color.png" class="navbar-brand-img h-100" alt="ops_logo">
+          <span class="ms-1 font-weight-bold">Merchant Dashboard</span>
+        </a>
+      </div>
+      <hr class="horizontal dark mt-0">
+      <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+        <ul class="navbar-nav">
+          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">OPS Menu</h6>
+  
+          <li class="nav-item">
+            <a class="nav-link nav-link-sz" routerLink="/merchant/admin/dashboard/">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-tv brand-color text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Dashboard</span>
+            </a>
+          </li>
+  
+          <li class="nav-item mt-3">
+            <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Manage OPS</h6>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-sz" routerLink="/merchant/admin/dashboard/merchant">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-basket2 brand-color text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Merchant</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-sz" routerLink="/merchant/admin/dashboard/adminprinting">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-person-bounding-box brand-color text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Admin Printing</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-sz" routerLink="/merchant/admin/dashboard/merchantproduct">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-box-seam-fill brand-color text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Merchant Product</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-sz active" routerLink="/merchant/admin/dashboard/incomingorder">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-mailbox2 brand-color text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Incoming Order</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-sz" routerLink="/merchant/admin/dashboard/salesreport">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-clipboard-data brand-color text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Sales Report</span>
+            </a>
+          </li>
+          
+          <li class="nav-item mt-3">
+            <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
+          </li>
+  
+          <li class="nav-item">
+            <a class="nav-link nav-link-sz" href="./pages/profile.html">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-person-badge brand-color text-dark text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Profile</span>
+            </a>
+          </li>
+  
+          <li class="nav-item">
+            <a class="nav-link nav-link-sz" (click)="this.signDevOut()">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-door-open brand-color text-dark text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Sign Out</span>
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+  
+    </aside>
+    <main class="main-content position-relative border-radius-lg ">
+      <!-- Navbar -->
+      <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+        <div class="container-fluid py-1 px-3">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+              <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" >Dashboard</a></li>
+              <li class="breadcrumb-item text-sm text-white active" aria-current="Developer">Incoming Order</li>
+            </ol>
+            <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
+          </nav>
+          <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center cursor-pointer">
+              <i class="bi bi-person-circle text-white"></i>
+              <span class="ms-2 text-white">Hazzzardd</span>
+            </div>
+            <ul class="navbar-nav  justify-content-end">
+              <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                <a class="nav-link text-white p-0" id="iconNavbarSidenav">
+                  <div class="sidenav-toggler-inner cursor-pointer" (click)="setShowNav()">
+                    <i class="sidenav-toggler-line bg-white"></i>
+                    <i class="sidenav-toggler-line bg-white"></i>
+                    <i class="sidenav-toggler-line bg-white"></i>
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item px-3 d-flex align-items-center">
+                <a class="nav-link text-white p-0">
+                  <i class="bi bi-gear-fill fixed-plugin-button-nav cursor-pointer"></i>
+                </a>
+              </li>
+              <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                <a class="nav-link text-white p-0 " id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-bell-fill cursor-pointer"></i>
+                </a>
+                <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                  <li class="mb-2">
+                    <a class="dropdown-item border-radius-md" >
+                      <div class="d-flex py-1">
+                        <div class="my-auto">
+                          <img src="../../../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="text-sm font-weight-normal mb-1">
+                            <span class="font-weight-bold">New message</span> from Laur
+                          </h6>
+                          <p class="text-xs text-secondary mb-0">
+                            <i class="fa fa-clock me-1"></i>
+                            13 minutes ago
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="mb-2">
+                    <a class="dropdown-item border-radius-md" >
+                      <div class="d-flex py-1">
+                        <div class="my-auto">
+                          <img src="../../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="text-sm font-weight-normal mb-1">
+                            <span class="font-weight-bold">New album</span> by Travis Scott
+                          </h6>
+                          <p class="text-xs text-secondary mb-0">
+                            <i class="fa fa-clock me-1"></i>
+                            1 day
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item border-radius-md" >
+                      <div class="d-flex py-1">
+                        <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
+                          <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>credit-card</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                              <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                <g transform="translate(1716.000000, 291.000000)">
+                                  <g transform="translate(453.000000, 454.000000)">
+                                    <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
+                                    <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                                  </g>
+                                </g>
+                              </g>
+                            </g>
+                          </svg>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="text-sm font-weight-normal mb-1">
+                            Payment successfully completed
+                          </h6>
+                          <p class="text-xs text-secondary mb-0">
+                            <i class="fa fa-clock me-1"></i>
+                            2 days
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="container-fluid py-4">
+
+        <div class="row">
+            <div class="col-lg-9 mb-lg-0 mb-4">
+                <div class="card z-index-2 h-100">
+                    <div class="card-header pb-0 pt-3 bg-transparent">
+                        <h6 class="text-capitalize">Incoming Order</h6>
+                        <div class="card-body">
+                            <table id="listoforders" class="table table-borderless" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Product</th>
+                                        <th>Files</th>
+                                        <th>Quantity</th>
+                                        <th>Costs</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="orderDatas_progress.length > 0">
+                                    <tr *ngFor="let dat of orderDatas_progress; let no = index">
+                                        <td>{{dat.orderid}}</td>
+                                        <td>{{dat.productype}}</td>
+                                        <td><a href="{{dat.fileprintingurl}}" target="_blank">Open</a></td>
+                                        <td>{{dat.totalquantity}}</td>
+                                        <td>Rp. {{dat.totalcost.toLocaleString('id-RP')}}</td>
+                                        <td>
+                                          <button class="btn btn-sm" 
+                                            [ngClass]="{'btn-danger': dat.orderStatus === 'Waiting', 'btn-info': dat.orderStatus === 'On Process', 'btn-success': dat.orderStatus === 'Done'}"
+                                          >
+                                            {{dat.orderStatus}}
+                                          </button>
+                                        </td>
+                                        <td>{{dat.dateTransaction}}</td>
+                                        <td>{{dat.timeTransaction}}</td>
+                                        <td>
+                                          <button class="btn btn-primary me-2 btn-sm" data-bs-toggle="modal" data-bs-target="#view_order_details" (click)="view_order_details(dat)">View</button>
+                                         <a href="https://wa.me/{{dat.phone}}?text=Hello {{dat.fullname}}, I am from {{dat.merchantname}} a OPS Merchant, Want to confirm the order with id {{dat.orderid}}" class="btn btn-success btn-sm me-2 text-decoration-none text-light" target="_blank">Contact</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 mb-lg-0 mb-4">
+              <div class="card z-index-2 h-100">
+                      <div class="card-header pb-0 pt-3 bg-transparent">
+                      <h6 class="text-capitalize">Account Information</h6>
+                  </div>
+                  <div class="card-body">
+                      a
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-lg-9 mb-lg-0 mt-4 mb-4">
+              <div class="card z-index-2 h-100">
+                  <div class="card-header pb-0 pt-3 bg-transparent">
+                      <h6 class="text-capitalize">Done Order</h6>
+                      <div class="card-body" *ngIf="orderDatas_done.length > 0">
+                          <table id="listoforders_done" class="table table-borderless" style="width:100%" >
+                              <thead>
+                                  <tr>
+                                      <th>Id</th>
+                                      <th>Product</th>
+                                      <th>Files</th>
+                                      <th>Quantity</th>
+                                      <th>Costs</th>
+                                      <th>Status</th>
+                                      <th>Date</th>
+                                      <th>Time</th>
+                                      <th>Action</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let dat of orderDatas_done; let no = index">
+                                      <td>{{dat.orderid}}</td>
+                                      <td>{{dat.productype}}</td>
+                                      <td><a href="{{dat.fileprintingurl}}" target="_blank">Open</a></td>
+                                      <td>{{dat.totalquantity}}</td>
+                                      <td>Rp. {{dat.totalcost.toLocaleString('id-RP')}}</td>
+                                      <td>
+                                        <button class="btn btn-sm" 
+                                          [ngClass]="{'btn-danger': dat.orderStatus === 'Waiting', 'btn-info': dat.orderStatus === 'On Process', 'btn-success': dat.orderStatus === 'Done'}"
+                                        >
+                                          {{dat.orderStatus}}
+                                        </button>
+                                      </td>
+                                      <td>{{dat.dateTransaction}}</td>
+                                      <td>{{dat.timeTransaction}}</td>
+                                      <td>
+                                        <button class="btn btn-primary me-2 btn-sm" data-bs-toggle="modal" data-bs-target="#view_order_details" (click)="view_order_details(dat)">View</button>
+                                       <a href="https://wa.me/{{dat.phone}}?text=Hello {{dat.fullname}}, I am from {{dat.merchantname}} a OPS Merchant, Want to confirm the order with id {{dat.orderid}}" class="btn btn-success btn-sm me-2 text-decoration-none text-light" target="_blank">Contact</a>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+                  <div class="card-body">
+
+                  </div>
+              </div>
+            </div>
+
+             
+        </div>
+      </div>
+    </main>
+
+    <div class="modal fade" id="view_order_details" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="view_order_details" aria-hidden="true">
+      <div class="modal-dialog modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="view_order_detailsLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="form_update_order">
+              <div class="row" *ngIf="view_order_data">
+                <div class="col-md-12">
+                  <h5 class="title">Order Data</h5>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-control-label">Product</label>
+                    <input class="form-control" type="text" value="{{view_order_data.productype}}" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Color</label>
+                    <input class="form-control" type="text" value="{{view_order_data.colortype}}" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Quality</label>
+                    <input class="form-control" type="text" value="{{view_order_data.printingquality}}" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Pages</label>
+                    <input class="form-control" type="text" value="{{view_order_data.pages}}" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Number Of Copy</label>
+                    <input class="form-control" type="text" value="{{view_order_data.numofcopies}}" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Total Quantity</label>
+                    <input class="form-control" type="text" value="{{view_order_data.totalquantity}}" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Order File</label>
+                    <a href="{{view_order_data.fileprintingurl}}" class="text-decoration-none" target="_blank">
+                      <input class="form-control" type="button" value="Open" readonly>
+                    </a>
+                  </div>
+                  <div class="form-group" *ngIf="view_order_data.shippingOptions === 'Delivery'">
+                    <label class="form-control-label">Shipping Via</label>
+                    <input class="form-control" type="text" value="JNE {{view_order_data.shippingvia}}" disabled>
+                  </div>
+                </div>
+                
+                <div class="col-md-6">
+                  
+                  <div class="form-group">
+                    <label class="form-control-label">Order Note</label>
+                    <textarea class="form-control" type="text" rows="1" value="{{view_order_data.ordernote}}" disabled></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Status</label>
+                    <select class="form-select" formControlName="order_status">
+                      <option value="{{view_order_data.orderStatus}}" hidden>{{view_order_data.orderStatus}}</option>
+                      <option value="Waiting">Waiting</option>
+                      <option value="On Process">On Process</option>
+                      <option value="Done">Done</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Total Costs</label>
+                    <input class="form-control" type="text" value="{{view_order_data.totalcost}}" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Total Weight</label>
+                    <input class="form-control" type="text" value="{{view_order_data.totalWeight}} gr" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Date Transaction</label>
+                    <input class="form-control" type="text" value="{{view_order_data.dateTransaction}}" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Time Transaction</label>
+                    <input class="form-control" type="text" value="{{view_order_data.timeTransaction}}" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Shipping</label>
+                    <input class="form-control" type="text" value="{{view_order_data.shippingOptions}}" disabled>
+                  </div>
+                  <div class="form-group" *ngIf="view_order_data.shippingOptions === 'Delivery'">
+                    <label for="shiprecip" class="form-control-label">Shipping Receipt</label>
+                    <input id="shiprecip" class="form-control" formControlName="shipping_receipt" type="text" value="{{view_order_data.shippingreceipt}}">
+                  </div>
+                </div>
+                <div class="col-md-12" *ngIf="view_order_data.shippingOptions !== 'Delivery'">
+                  <div class="form-group">
+                    <label for="shiprecip" class="form-control-label">Shipping Receipt</label>
+                    <input id="shiprecip" class="form-control" formControlName="shipping_receipt" type="text" value="{{view_order_data.shippingreceipt}}">
+                  </div>
+                </div>
+
+                <div
+                  [ngClass]="{
+                    'col-md-12': view_order_data.shippingOptions === 'Pick Up',
+                    'col-md-6': view_order_data.shippingOptions !== 'Pick Up'
+                  }"
+                >
+                  <div class="me-auto">
+                    <h5 class="title">Customer Data</h5>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Direct Contact</label>
+                    <a href="https://wa.me/{{view_order_data.phone}}?text=Hello {{view_order_data.fullname}}, I am from {{view_order_data.merchantname}} a OPS Merchant, Want to confirm the order with id {{view_order_data.orderid}}" target="_blank">
+                      <input class="form-control btn btn-outline-success " type="button" value="Whatsapp">
+                    </a>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Fullname</label>
+                    <input class="form-control" type="text" value="{{view_order_data.fullname}}" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Gender</label>
+                    <input class="form-control" type="text" value="{{view_order_data.gender}}" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Email</label>
+                    <input class="form-control" type="text" value="{{view_order_data.email}}" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Phone</label>
+                    <input class="form-control" type="text" value="{{view_order_data.phone}}" disabled>
+                  </div>
+                </div>
+
+                <div class="col-md-6" *ngIf="view_order_data.shippingOptions !== 'Pick Up'">
+                  <div class="me-auto">
+                    <h5 class="title">Customer Address</h5>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Full Address</label>
+                    <input class="form-control" type="text" value="{{view_order_data.fulladdress}}" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">City</label>
+                    <input class="form-control" type="text" value="{{view_order_data.city}}" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Post Code</label>
+                    <input class="form-control" type="text" value="{{view_order_data.postcode}}" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Phone Address</label>
+                    <input class="form-control" type="text" value="{{view_order_data.phoneAddress}}" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label">Address Note</label>
+                    <textarea class="form-control" type="text" rows="1" value="{{view_order_data.note}}" disabled></textarea>
+                  </div>
+
+                </div>
+              </div>
+            </form>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="perform_update_order(view_order_data)">Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+</body>
