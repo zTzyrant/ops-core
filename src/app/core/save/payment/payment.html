@@ -35,7 +35,7 @@
 						  </div>
 						  <div class="d-flex justify-content-between align-items-center mb-4">
 							  <p class="fw-normal mb-0">Total Payment</p>
-							  <p class="ms-auto fw-normal mb-0">Rp. {{responese_midtrans.gross_amount.toLocaleString('id-RP')}}</p>
+							  <p class="ms-auto fw-normal mb-0">Rp. {{transaction_datas.costs.toLocaleString('id-RP')}}</p>
 						  </div>
 					  </div>
 				  </div>
@@ -72,7 +72,7 @@
 						<hr class="w-100">
 						<div class="row">
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-								<p class="mb-0 small fw-semibold">{{dat.order.productype}}</p>
+								<a href="{{dat.order.fileprintingurl}}" target="_blank" title="View Files"><p class="mb-0 small fw-semibold">{{dat.order.productype}}</p></a>
 							</div>
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
 								<p class="text-muted mb-0 small">{{dat.order.colortype}}</p>

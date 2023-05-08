@@ -1,0 +1,502 @@
+<body class="g-sidenav-show   bg-gray-100">
+    <div class="min-height-300 bg-ops position-absolute w-100"></div>
+    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main" data-color="primary" [ngClass]="{'showNavMenu': this.showNav === true}">
+      <div class="sidenav-header">
+        <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+        <a class="navbar-brand m-0" href="/">
+          <img src="../../../assets/image/appicon-ops-color.png" class="navbar-brand-img h-100" alt="ops_logo">
+          <span class="ms-1 font-weight-bold">Merchant Dashboard</span>
+        </a>
+      </div>
+      <hr class="horizontal dark mt-0">
+      <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+        <ul class="navbar-nav">
+          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">OPS Menu</h6>
+  
+          <li class="nav-item">
+            <a class="nav-link nav-link-sz" routerLink="/merchant/admin/dashboard/">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-tv brand-color text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Dashboard</span>
+            </a>
+          </li>
+  
+          <li class="nav-item mt-3">
+            <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Manage OPS</h6>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-sz active" routerLink="/merchant/admin/dashboard/merchant">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-basket2 brand-color text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Merchant</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-sz" routerLink="/merchant/admin/dashboard/adminprinting">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-person-bounding-box brand-color text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Admin Printing</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-sz" routerLink="/merchant/admin/dashboard/merchantproduct">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-box-seam-fill brand-color text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Merchant Product</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-sz" routerLink="/merchant/admin/dashboard/incomingorder">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-mailbox2 brand-color text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Incoming Order</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-sz" routerLink="/merchant/admin/dashboard/salesreport">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-clipboard-data brand-color text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Sales Report</span>
+            </a>
+          </li>
+          
+          <li class="nav-item mt-3">
+            <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
+          </li>
+  
+          <li class="nav-item">
+            <a class="nav-link nav-link-sz" href="./pages/profile.html">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-person-badge brand-color text-dark text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Profile</span>
+            </a>
+          </li>
+  
+          <li class="nav-item">
+            <a class="nav-link nav-link-sz" (click)="this.signDevOut()">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-door-open brand-color text-dark text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Sign Out</span>
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+  
+    </aside>
+    <main class="main-content position-relative border-radius-lg ">
+      <!-- Navbar -->
+      <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+        <div class="container-fluid py-1 px-3">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+              <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" >Dashboard</a></li>
+              <li class="breadcrumb-item text-sm text-white active" aria-current="Developer">Merchant</li>
+            </ol>
+            <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
+          </nav>
+          <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center cursor-pointer">
+              <i class="bi bi-person-circle text-white"></i>
+              <span class="ms-2 text-white">Hazzzardd</span>
+            </div>
+            <ul class="navbar-nav  justify-content-end">
+              <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                <a  class="nav-link text-white p-0" id="iconNavbarSidenav">
+                  <div class="sidenav-toggler-inner cursor-pointer" (click)="setShowNav()">
+                    <i class="sidenav-toggler-line bg-white"></i>
+                    <i class="sidenav-toggler-line bg-white"></i>
+                    <i class="sidenav-toggler-line bg-white"></i>
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item px-3 d-flex align-items-center">
+                <a  class="nav-link text-white p-0">
+                  <i class="bi bi-gear-fill fixed-plugin-button-nav cursor-pointer"></i>
+                </a>
+              </li>
+              <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                <a  class="nav-link text-white p-0 " id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-bell-fill cursor-pointer"></i>
+                </a>
+                <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                  <li class="mb-2">
+                    <a class="dropdown-item border-radius-md" >
+                      <div class="d-flex py-1">
+                        <div class="my-auto">
+                          <img src="../../../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="text-sm font-weight-normal mb-1">
+                            <span class="font-weight-bold">New message</span> from Laur
+                          </h6>
+                          <p class="text-xs text-secondary mb-0">
+                            <i class="fa fa-clock me-1"></i>
+                            13 minutes ago
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="mb-2">
+                    <a class="dropdown-item border-radius-md" >
+                      <div class="d-flex py-1">
+                        <div class="my-auto">
+                          <img src="../../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="text-sm font-weight-normal mb-1">
+                            <span class="font-weight-bold">New album</span> by Travis Scott
+                          </h6>
+                          <p class="text-xs text-secondary mb-0">
+                            <i class="fa fa-clock me-1"></i>
+                            1 day
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item border-radius-md" >
+                      <div class="d-flex py-1">
+                        <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
+                          <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>credit-card</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                              <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                <g transform="translate(1716.000000, 291.000000)">
+                                  <g transform="translate(453.000000, 454.000000)">
+                                    <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
+                                    <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                                  </g>
+                                </g>
+                              </g>
+                            </g>
+                          </svg>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="text-sm font-weight-normal mb-1">
+                            Payment successfully completed
+                          </h6>
+                          <p class="text-xs text-secondary mb-0">
+                            <i class="fa fa-clock me-1"></i>
+                            2 days
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="container-fluid py-4">
+
+        <div class="row">
+            <div class="col-lg-9 mb-lg-0 mb-4">
+                <div class="card z-index-2 h-100">
+                    <div class="card-header pb-0 pt-3 bg-transparent">
+                        <h6 class="text-capitalize">Merchant</h6>
+                        
+                    </div>
+                    <div class="card-body">
+                        <table id="listmerchant" class="table table-borderless" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Username</th>
+                                    <th>Name</th>
+                                    <th>Date Created</th>
+                                    <th>Open</th>
+                                    <th>Close</th>
+                                    <th>City</th>
+                                    <th>Admin Total</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let dat of merchData; let idxmerch = index">
+                                    <td>{{dat.merchdatas.merchantid}}</td>
+                                    <td>{{dat.merchdatas.merchantuname}}</td>
+                                    <td>{{dat.merchdatas.merchantname}}</td>
+                                    <td>{{dat.merchdatas.datecreated}}</td>
+                                    <td>{{dat.merchdatas.opentime}}</td>
+                                    <td>{{dat.merchdatas.closetime}}</td>
+                                    <td>{{dat.merchdatas.city}}</td>
+                                    <td>{{dat.admin.total}}</td>
+                                    <td>
+                                      <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#ModalEditMerchantInfo" (click)="reqViewMerchant(dat.merchdatas.merchantid)">Edit</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 mb-lg-0 mb-4">
+                <div class="card z-index-2 h-100">
+                        <div class="card-header pb-0 pt-3 bg-transparent">
+                        <h6 class="text-capitalize">Account Information</h6>
+                    </div>
+                    <div class="card-body">
+                        a
+                    </div>
+                </div>
+            </div>  
+        </div>
+      </div>
+    </main>
+    <div class="modal fade" id="ModalEditMerchantInfo">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Merchant Information</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="edMerchantForm">
+              <input type="text" formControlName="merchantid" hidden readonly>
+              <input type="text" formControlName="addressid" hidden readonly>
+
+              <div class="mb-3">
+                <label for="edmerchname" class="col-form-label">Username</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edmerchname" 
+                  formControlName="edmerchuname"
+                  (change)="checkUpdatedUsername()"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['edmerchuname'].invalid && 
+                      (edMerchantForm.controls['edmerchuname'].dirty || 
+                      edMerchantForm.controls['edmerchuname'].touched) || newmerchUsed === true), 
+                    'is-valid': edMerchantForm.controls['edmerchuname'].valid}"
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchuname').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                  <div *ngIf="newmerchUsed === true">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    This merchant name already used.
+                  </div>
+                  <div *ngIf="edMerchantForm.get('edmerchuname').errors?.['whitespace']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Merchant Username cannot contain whitespace.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="edmerchname" class="col-form-label">Full Name</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edmerchname" 
+                  formControlName="edmerchname"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['edmerchname'].invalid && 
+                      (edMerchantForm.controls['edmerchname'].dirty || 
+                      edMerchantForm.controls['edmerchname'].touched)), 
+                    'is-valid': edMerchantForm.controls['edmerchname'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchname').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="edmerchdate" class="col-form-label">Date Created</label>
+                <input 
+                  type="date" 
+                  class="form-control" 
+                  id="edmerchdate"
+                  formControlName="edmerchdate"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['edmerchdate'].invalid && 
+                      (edMerchantForm.controls['edmerchdate'].dirty || 
+                      edMerchantForm.controls['edmerchdate'].touched)), 
+                    'is-valid': edMerchantForm.controls['edmerchdate'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchdate').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="edmerchopen" class="col-form-label">Open Time</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edmerchopen"
+                  formControlName="edmerchopen"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['edmerchopen'].invalid && 
+                      (edMerchantForm.controls['edmerchopen'].dirty || 
+                      edMerchantForm.controls['edmerchopen'].touched)), 
+                    'is-valid': edMerchantForm.controls['edmerchopen'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchopen').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="edmerchclose" class="col-form-label">Closed TIme</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edmerchclose"
+                  formControlName="edmerchclose"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['edmerchclose'].invalid && 
+                      (edMerchantForm.controls['edmerchclose'].dirty || 
+                      edMerchantForm.controls['edmerchclose'].touched)), 
+                    'is-valid': edMerchantForm.controls['edmerchclose'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchclose').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+
+              </div>
+              <div class="mb-3">
+                <label for="edmerchantlogo" class="col-form-label">Merchant Logo</label>
+                <div class="text-center">
+                  <label for="edmerchantlogo">
+                    <img [src]="imgMerchLinkTemp" alt="Merchant Logo" width="100px" height="100px" style="border-radius: 10px;">
+                  </label>
+                  <br>
+                  <small class="font-monospace" *ngIf="isImagechages === false">Click image for update merchant image.</small>
+                  <small class="font-monospace" *ngIf="isImagechages === true">Click <a>reset</a> to undo changes.</small>
+                </div>
+                <input 
+                  type="file" 
+                  class="form-control"
+                  id="edmerchantlogo"  
+                  formControlName="edmerchantlogo"  
+                  accept="image/png, image/jpeg" 
+                  (change)="editMerchlogos($event); isImagechages = true"
+                  hidden
+                >
+                <input type="button" class="form-control" [hidden]="isImagechages === false" value="Reset image" (click)="resetEditImg(); isImagechages = false">
+              </div>
+              
+              <div class="mb-3">
+                <label for="edmerchaddress" class="col-form-label">Full Address</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edmerchaddress"
+                  formControlName="edmerchaddress"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['edmerchaddress'].invalid && 
+                      (edMerchantForm.controls['edmerchaddress'].dirty || 
+                      edMerchantForm.controls['edmerchaddress'].touched)), 
+                    'is-valid': edMerchantForm.controls['edmerchaddress'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchaddress').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="edmerchcity" class="col-form-label">City</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edmerchcity"
+                  formControlName="edmerchcity"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['edmerchcity'].invalid && 
+                      (edMerchantForm.controls['edmerchcity'].dirty || 
+                      edMerchantForm.controls['edmerchcity'].touched)), 
+                    'is-valid': edMerchantForm.controls['edmerchcity'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchcity').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="edmerchpostcode" class="col-form-label">Post Code</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edmerchpostcode"
+                  formControlName="edmerchpostcode"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['edmerchpostcode'].invalid && 
+                      (edMerchantForm.controls['edmerchpostcode'].dirty || 
+                      edMerchantForm.controls['edmerchpostcode'].touched)), 
+                    'is-valid': edMerchantForm.controls['edmerchpostcode'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchpostcode').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="edmerchtcp" class="col-form-label">Contact Phone</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edmerchtcp"
+                  formControlName="edmerchtcp"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['edmerchtcp'].invalid && 
+                      (edMerchantForm.controls['edmerchtcp'].dirty || 
+                      edMerchantForm.controls['edmerchtcp'].touched)), 
+                    'is-valid': edMerchantForm.controls['edmerchtcp'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchtcp').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                  <div *ngIf="edMerchantForm.get('edmerchtcp').errors?.['pattern']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input valid number only.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="edmerchtinfo" class="col-form-label" (click)="submitEditMerchant()">Aditional Information</label>
+                <textarea class="form-control" id="edmerchtinfo" formControlName="edmerchtinfo"></textarea>    
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="submitEditMerchant()">Submit Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>

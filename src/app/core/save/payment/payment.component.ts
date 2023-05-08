@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CurdApiService } from 'src/app/secure/curd.api.service';
 
@@ -21,6 +21,7 @@ export class PaymentComponent {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     public fb: FormBuilder,
     public curdService: CurdApiService,
     private toast : ToastrService,
@@ -30,6 +31,8 @@ export class PaymentComponent {
   get_transaction_datas(){
     this.viewTransactionSection = false
     this.curdService.get_payment_status(this.route.snapshot.params['id']).subscribe((res: any) => {
+      console.log(res);
+      
       if(res.statQuo === '1'){
         this.payment_datas = res.midtrans_payments
         this.orders_datas = res.orderData
@@ -41,6 +44,9 @@ export class PaymentComponent {
         } else {
           this.payment_code = {pay_type: res.responese_midtrans.va_numbers[0].bank + " Virtual Account", codes: res.responese_midtrans.va_numbers[0].va_number}
         }
+      } else {
+        this.toast.error('Invalid Transaction')
+        this.router.navigateByUrl('/')
       }
     })
   }

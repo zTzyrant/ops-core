@@ -122,6 +122,10 @@ export class DetailsproductComponent {
     }
   }
 
+  setOrderNote(event: any){
+    this.orderform.controls['orderNote'].setValue(event.target.value)
+  }
+
   moredetails() {
     this.extendDesc = !this.extendDesc
   }

@@ -162,7 +162,7 @@
           <div class="color-form mt-2">
             <label class="order-label" for="noteTextAreas">Note</label>
             <label class="form-label"></label>
-            <textarea class="form-control" id="noteTextAreas" rows="3"></textarea>
+            <textarea class="form-control" id="noteTextAreas" rows="3" (change)="setOrderNote($event)"></textarea>
             <div class="mt-1" *ngIf="this.file">
               <div class="mt-1 mb-4">
                 <label class="btn btn-outline-dark me-2 mt-1 btn-submit" data-bs-toggle="modal" data-bs-target="#viewTransactionInfo">View Transaction Details</label>
