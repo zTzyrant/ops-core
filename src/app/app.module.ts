@@ -47,6 +47,7 @@ import { AddAddressComponent } from './user/customer/add/address/add.address.com
 import { CalculatePaperWeightComponent } from './core/calculate-paper-weight/calculate-paper-weight.component';
 import { PaymentComponent } from './core/save/payment/payment.component';
 import { details_orderComponent } from './order/view/details/details_order.component';
+import { OfferComponent } from './core/offer/offer.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { details_orderComponent } from './order/view/details/details_order.compo
     AddAddressComponent,
     CalculatePaperWeightComponent,
     PaymentComponent,
-    details_orderComponent
+    details_orderComponent,
+    OfferComponent
   ],
   imports: [
     BrowserModule,
