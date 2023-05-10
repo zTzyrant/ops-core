@@ -67,4 +67,8 @@ export class MerchantApiService {
   update_order_data(datas: any){
     return this.http.post(`${this.apiurl}/secure/merchant/update/order`, datas)
   }
+
+  get_sales_report(id: any){
+    return this.http.get(`${this.apiurl}/secure/merchant/sales/report/${id}`)
+  }
 }

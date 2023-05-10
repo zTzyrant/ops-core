@@ -93,39 +93,57 @@
 						<hr class="w-100">
 						<div class="row">
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-								<p class="mb-0 small fw-semibold ">Status</p>
+								<p class="mb-0 small fw-semibold">Status</p>
 							</div>
-							<div class="col-md-8">
-							</div>
-							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-								<span class="float-end btn btn-danger btn-sm mb-1 fw-semibold small">{{dat.order.orderStatus}}</span>
-							</div>
-						</div>
-						<hr class="w-100">
-						<div class="row">
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
 								<p class="mb-0 small fw-semibold">Merchant</p>
 							</div>
-							<div class="col-md-8"></div>
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-								<p class="mb-0 small fw-semibold">{{dat.merchant_info[0].merchantname}}</p>
+								<p class="mb-0 small fw-semibold">City</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small fw-semibold">Contact</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small fw-semibold">Shipping Option</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small fw-semibold">Shipping Receipt</p>
 							</div>
 						</div>
 						<hr class="w-100">
 						<div class="row">
-							
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-								<p class="mb-0 small fw-semibold ">Contact</p>
+								<span class="float-end btn btn-sm mb-0 small"
+									[ngClass]="{
+										'btn-danger': dat.order.orderStatus === 'Waiting', 
+										'btn-info': dat.order.orderStatus === 'On Process', 
+										'btn-success': dat.order.orderStatus === 'Done'
+									}"
+								>
+									{{dat.order.orderStatus}}
+								</span>
 							</div>
-							<div class="col-md-8">
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small ">{{dat.merchant_info[0].merchantname}}</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small ">{{dat.merchant_info[0].city}}</p>
 							</div>
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
 								<a href="https://api.whatsapp.com/send?phone={{dat.merchant_info[0].phoneAddress}}&text=OPS%20Order%20Id%20{{dat.order.orderid}}" target="_blank">
-									<span class="float-end btn btn-success btn-sm mb-1 fw-semibold small">Whatsapp</span>
+									<span class="float-end btn btn-success mb-0 btn-sm small">Whatsapp</span>
 								</a>
-								
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small " title="Delivery or Pick Up">{{transaction_datas.shippingOptions}}</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small " title="Shipping Codes or Shipping Status">{{dat.order.shippingreceipt}}</p>
 							</div>
 						</div>
+						
+						
 					</div>
 				</div>
 
@@ -134,11 +152,22 @@
 			  </div>
   
 			  <div class="d-flex justify-content-between">
-				<p class="text-muted mb-0">Transaction Time : {{transaction_datas.dateTransaction}} {{transaction_datas.timeTransaction}}</p>
+				<p class="text-muted mb-0">Transaction Start Time : {{transaction_datas.dateTransaction}} {{transaction_datas.timeTransaction}}</p>
+				<p class="text-muted mb-0" *ngIf="transaction_datas.dateDoneTrans">Transaction Done Time : {{transaction_datas.dateDoneTrans}} {{transaction_datas.timeDoneTrans}}</p>
 			  </div>
   
 			  <div class="d-flex justify-content-between mb-5">
-				<p class="text-muted mb-0">Transaction Status : <span class="float-end btn btn-danger btn-sm mb-1 fw-semibold">{{toUpperCase(transaction_datas.transactionStatus)}}</span></p>
+				<p class="text-muted mb-0">Transaction Status :  
+					<span class="ms-2	 float-end btn btn-sm mb-1 fw-semibold"
+						[ngClass]="{
+							'btn-danger': transaction_datas.transactionStatus === 'PENDING', 
+							'btn-success':transaction_datas.transactionStatus === 'DONE'
+						}"
+					>
+						{{toUpperCase(transaction_datas.transactionStatus)}}
+
+					</span>
+				</p>
 			  </div>
 			</div>
 			<div class="card-footer border-0 px-4 py-2"
