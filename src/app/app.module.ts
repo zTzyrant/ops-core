@@ -48,6 +48,9 @@ import { CalculatePaperWeightComponent } from './core/calculate-paper-weight/cal
 import { PaymentComponent } from './core/save/payment/payment.component';
 import { details_orderComponent } from './order/view/details/details_order.component';
 import { OfferComponent } from './core/offer/offer.component';
+import { MerchantDatasComponent } from './merchant/panel/merchant-datas/merchant-datas.component';
+import { MerchOrderComponent } from './merchant/panel/merch.order/merch.order.component';
+import { MerchSalesReportComponent } from './merchant/panel/merch.sales.report/merch.sales.report.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +84,10 @@ import { OfferComponent } from './core/offer/offer.component';
     CalculatePaperWeightComponent,
     PaymentComponent,
     details_orderComponent,
-    OfferComponent
+    OfferComponent,
+    MerchantDatasComponent,
+    MerchOrderComponent,
+    MerchSalesReportComponent,
   ],
   imports: [
     BrowserModule,

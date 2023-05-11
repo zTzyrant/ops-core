@@ -129,6 +129,7 @@ export class ShipmentComponent {
   }
 
   selectedAddressDatas: any = null
+  user_address_id: any
   selectedAddress(event: any){
     this.selectedAddressDatas = null
     this.canPostPayment = false
@@ -147,6 +148,7 @@ export class ShipmentComponent {
     this.collectionAddress.fields.forEach((element: any) => {
       if(element.addressid === parseInt(event.target.value)){
         this.selectedAddressDatas = element
+        this.user_address_id = (event.target.value)
       }
     });
   }
@@ -155,6 +157,7 @@ export class ShipmentComponent {
   
   shippingCost: any = []
   resRajaOngkir: any
+  shippingVia: any = null
   checkCostShipping(event: any){
     if(this.shippingCost){
       this.shippingCost.forEach((ix: any) => {
@@ -162,7 +165,7 @@ export class ShipmentComponent {
       })
       this.shippingCost = []
     }
-
+    this.shippingVia = event.target.value
     this.shippingTo.forEach((e: any, indx: any) => {
       let totalWeight = 0
       this.afterCart[indx].forEach((ex: any) => {
@@ -202,7 +205,6 @@ export class ShipmentComponent {
 
   }
   
-  
   postPayment(){
     let request_payment: any
     let deliver_With: any
@@ -228,7 +230,10 @@ export class ShipmentComponent {
         "transaction_details": {
           "order_id": Math.floor(Date.now() / 1000),
           "gross_amount": this.totalCostShipping
-        },"item_details_ops": this.afterCart
+        },
+        "item_details_ops": this.afterCart,
+        "address_id": this.user_address_id,
+        "shipping_via": this.shippingVia
       }
     } else {
       request_payment = {
@@ -248,7 +253,9 @@ export class ShipmentComponent {
           "gross_amount": this.totalCostShipping
         },
         "item_details_ops": {collection_order: this.afterCart},
-        "shippingOptions": deliver_With
+        "shippingOptions": deliver_With,
+        "address_id": this.user_address_id,
+        "shipping_via": this.shippingVia
       }
     }
 

@@ -30,6 +30,9 @@ import { ShipmentComponent } from './user/customer/shipment/shipment.component';
 import { CalculatePaperWeightComponent } from './core/calculate-paper-weight/calculate-paper-weight.component';
 import { PaymentComponent } from './core/save/payment/payment.component';
 import { details_orderComponent } from './order/view/details/details_order.component';
+import { MerchantDatasComponent } from './merchant/panel/merchant-datas/merchant-datas.component';
+import { MerchOrderComponent } from './merchant/panel/merch.order/merch.order.component';
+import { MerchSalesReportComponent } from './merchant/panel/merch.sales.report/merch.sales.report.component';
 
 const routes: Routes = [
   {
@@ -81,6 +84,10 @@ const routes: Routes = [
   }, {
     path: 'footer',
     component: FooterComponent
+  },{
+    path: 'merchant/admin/dashboard/merchant',
+    component: MerchantDatasComponent,
+    canActivate: [MerchantGuard]
   }, {
     path: 'merchant/admin/dashboard',
     component: MerchDashboardComponent,
@@ -91,6 +98,12 @@ const routes: Routes = [
   }, {
     path: 'merchant/admin/dashboard/merchantproduct',
     component: MerchProductComponent,
+  }, {
+    path: 'merchant/admin/dashboard/incomingorder',
+    component: MerchOrderComponent,
+  }, {
+    path: 'merchant/admin/dashboard/salesreport',
+    component: MerchSalesReportComponent,
   }, {
     path: 'merchant/admin/login',
     component: MerchLoginComponent
