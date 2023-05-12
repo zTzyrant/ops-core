@@ -47,6 +47,7 @@ import { AddAddressComponent } from './user/customer/add/address/add.address.com
 import { CalculatePaperWeightComponent } from './core/calculate-paper-weight/calculate-paper-weight.component';
 import { PaymentComponent } from './core/save/payment/payment.component';
 import { details_orderComponent } from './order/view/details/details_order.component';
+import { OfferComponent } from './core/offer/offer.component';
 import { MerchantDatasComponent } from './merchant/panel/merchant-datas/merchant-datas.component';
 import { MerchOrderComponent } from './merchant/panel/merch.order/merch.order.component';
 import { MerchSalesReportComponent } from './merchant/panel/merch.sales.report/merch.sales.report.component';
@@ -83,6 +84,7 @@ import { MerchSalesReportComponent } from './merchant/panel/merch.sales.report/m
     CalculatePaperWeightComponent,
     PaymentComponent,
     details_orderComponent,
+    OfferComponent,
     MerchantDatasComponent,
     MerchOrderComponent,
     MerchSalesReportComponent,
