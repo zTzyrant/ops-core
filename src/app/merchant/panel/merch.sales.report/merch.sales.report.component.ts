@@ -44,7 +44,7 @@ export class MerchSalesReportComponent {
   }
 
   get_sales_report(){
-    this.merchantApi.get_sales_report(this.devDatas.merchantid  ).subscribe((res: any) => {
+    this.merchantApi.get_sales_report(this.devDatas.merchantid).subscribe((res: any) => {
       if(res.statQuo === '1'){
         this.get_all_product_costs = res.f1
         this.get_total_order_costs = res.f2

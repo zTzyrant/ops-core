@@ -71,4 +71,9 @@ export class MerchantApiService {
   get_sales_report(id: any){
     return this.http.get(`${this.apiurl}/secure/merchant/sales/report/${id}`)
   }
+
+  get_todays_datas(id: any){
+    return this.http.get(`${this.apiurl}/secure/merchant/income/today/${id}`)
+  }
+
 }
