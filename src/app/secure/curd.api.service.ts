@@ -189,4 +189,8 @@ export class CurdApiService {
   get_payment_status(id_transaction: any){
     return this.http.get(`${this.apiurl}/secure/consumer/payment/status/${id_transaction}`)
   }
+
+  get_order_history(user_id: any){
+    return this.http.get(`${this.apiurl}/user/customer/view/order/history/${user_id}`)
+  }
 }

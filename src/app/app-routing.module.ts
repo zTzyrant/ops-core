@@ -33,6 +33,7 @@ import { details_orderComponent } from './order/view/details/details_order.compo
 import { MerchantDatasComponent } from './merchant/panel/merchant-datas/merchant-datas.component';
 import { MerchOrderComponent } from './merchant/panel/merch.order/merch.order.component';
 import { MerchSalesReportComponent } from './merchant/panel/merch.sales.report/merch.sales.report.component';
+import { OrderhistoryComponent } from './user/customer/orderhistory/orderhistory.component';
 
 const routes: Routes = [
   {
@@ -124,6 +125,9 @@ const routes: Routes = [
   }, {
     path: 'order/view/:id',
     component: details_orderComponent,
+  }, {
+    path: 'order/history',
+    component: OrderhistoryComponent
   },
 
   // end error page

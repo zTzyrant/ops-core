@@ -214,6 +214,9 @@
                     <h5 class="font-weight-bolder" *ngIf="total_income_today">
                       Rp. {{total_income_today.toLocaleString('id-RP')}}
                     </h5>
+                    <h5 class="font-weight-bolder" *ngIf="!total_sales_product_today">
+                      Rp. 0
+                    </h5>
                     <p class="mb-0">
                       Total Income Today
                     </p>
@@ -238,6 +241,9 @@
                     <h5 class="font-weight-bolder" *ngIf="total_sales_product_today">
                       {{total_sales_product_today}}
                     </h5>
+                    <h5 class="font-weight-bolder" *ngIf="!total_sales_product_today">
+                      0
+                    </h5>
                     <p class="mb-0">
                       Total Sales Product Today
                     </p>
@@ -258,7 +264,7 @@
         <div class="col-lg-8 mb-lg-0 mb-4">
           <div class="card z-index-2 h-100">
             <div class="card-header pb-0 pt-3 bg-transparent">
-              <h6 class="text-capitalize">Tables</h6>
+              <h6 class="text-capitalize">Orders Today</h6>
               
             </div>
             <div class="card-body">
@@ -349,7 +355,7 @@
           <div class="col-lg-8 mb-lg-0 mb-4">
             <div class="card z-index-2 h-100">
               <div class="card-header pb-0 pt-3 bg-transparent">
-                <h6 class="text-capitalize">Tables</h6>
+                <h6 class="text-capitalize">Sales product today</h6>
                 
               </div>
               <div class="card-body">
@@ -362,7 +368,7 @@
                       <th class="text-center">Costs</th>
                     </tr>
                   </thead>
-                  <tbody *ngIf="collection_info_orders_today">
+                  <tbody *ngIf="collection_info_orders_today.length">
                     <tr *ngFor="let dat of collection_info_orders_today; let no = index">
                       <td class="text-center">{{no+1}}</td>
                       <td class="text-center">{{dat.product}}</td>

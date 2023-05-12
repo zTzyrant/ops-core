@@ -1,5 +1,5 @@
 a{
-    text-decoration: none;
+    text-decoration: none !important;
 }
 /* HEADER WHEN USER NOT LOGIN */
 .headeropscat{
@@ -153,9 +153,10 @@ a{
     order: 2;
     margin-left: 1rem;
     font-size: 25px;
-    color: #07484A;
 }
-
+.notifcatops a {
+    color: #07484A !important;
+}
 /* END HEADER WHEN USER ALREADY LOGIN */
 
 .listifmobileops{

@@ -401,7 +401,18 @@
                 >
                 <input type="button" class="form-control" [hidden]="isImagechages === false" value="Reset image" (click)="resetEditImg(); isImagechages = false">
               </div>
-              
+              <div class="mb-3">
+                <div class="mb-3">
+                  <label>Subscription Type</label>
+                  <input type="text" formControlName="subscription_type" class="form-control" readonly>
+                  <div class="invalid-feedback">
+                    <div *ngIf="newMerchantForm.controls['subscription_type'].errors?.['required']">
+                      <i class="bi bi-exclamation-octagon"></i>
+                      Please Select this field.
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="mb-3">
                 <label for="edmerchaddress" class="col-form-label">Full Address</label>
                 <input 

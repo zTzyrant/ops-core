@@ -51,6 +51,7 @@ import { OfferComponent } from './core/offer/offer.component';
 import { MerchantDatasComponent } from './merchant/panel/merchant-datas/merchant-datas.component';
 import { MerchOrderComponent } from './merchant/panel/merch.order/merch.order.component';
 import { MerchSalesReportComponent } from './merchant/panel/merch.sales.report/merch.sales.report.component';
+import { OrderhistoryComponent } from './user/customer/orderhistory/orderhistory.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { MerchSalesReportComponent } from './merchant/panel/merch.sales.report/m
     MerchantDatasComponent,
     MerchOrderComponent,
     MerchSalesReportComponent,
+    OrderhistoryComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,133 @@
+<app-header></app-header>
+
+<section class="vh-100" *ngIf="orders_datas">
+	<div class="container py-5">
+	  <div class="mx-auto" >
+		<div class="">
+		  <div class="card" style="border-radius: 10px;">
+			<div class="card-header px-4 py-4">
+			  <h5 class="mb-0 textops font-monospace"><b>Orders History</b></h5>
+              <p class="text-secondary">Total Transaction: {{orders_datas.length}}</p>
+			</div>
+
+			<div class="card-body p-4">
+				<div class="card shadow-0 border mb-4" *ngFor="let dat1 of orders_datas">
+                    <div class="card-header cursor-pointer pb-3" title="View Order Details" (click)="directme(dat1.transaction_data.transactionID)">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="lead fw-normal mb-0" style="color: #07484A;">Transaction Id {{dat1.transaction_data.transactionID}}</p>
+                        </div>
+                    </div>
+
+					<div class="card-body" *ngFor="let dat of dat1.orders">
+						<div class="row">
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small fw-semibold">Product</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small fw-semibold">Color</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small fw-semibold">Option</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small fw-semibold">Quantity</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small fw-semibold">Weight</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small fw-semibold">Costs</p>
+							</div>
+						</div>
+						<hr class="w-100">
+						<div class="row">
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<a href="{{dat.fileprintingurl}}" target="_blank" title="View Files"><p class="mb-0 small fw-semibold">{{dat.productype}}</p></a>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="text-muted mb-0 small">{{dat.colortype}}</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="text-muted mb-0 small">{{dat.printingquality}}</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="text-muted mb-0 small">{{dat.totalquantity}}</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="text-muted mb-0 small">{{dat.totalWeight}} gr</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="text-muted mb-0 small">{{dat.totalcost.toLocaleString('id-RP')}}</p>
+							</div>
+						</div>
+						<hr class="w-100">
+						<div class="row">
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small fw-semibold">Status</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small fw-semibold">Merchant</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small fw-semibold">City</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small fw-semibold">Contact</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small fw-semibold">Shipping Option</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small fw-semibold">Shipping Receipt</p>
+							</div>
+						</div>
+						<hr class="w-100">
+						<div class="row">
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<span class="float-end btn btn-sm mb-0 small"
+									[ngClass]="{
+										'btn-danger': dat.orderStatus === 'Waiting', 
+										'btn-info': dat.orderStatus === 'On Process', 
+										'btn-success': dat.orderStatus === 'Done'
+									}"
+								>
+									{{dat.orderStatus}}
+								</span>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small ">{{dat.merchantname}}</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small ">{{dat1.merchant_address.city}}</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<a href="https://api.whatsapp.com/send?phone={{dat1.merchant_address.phoneAddress}}&text=OPS%20Order%20Id%20{{dat.orderid}}" target="_blank">
+									<span class="float-end btn btn-success mb-0 btn-sm small">Whatsapp</span>
+								</a>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small " title="Delivery or Pick Up">{{dat1.transaction_data.shippingOptions}}</p>
+							</div>
+							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+								<p class="mb-0 small " title="Shipping Codes or Shipping Status">{{dat.shippingreceipt}}</p>
+							</div>
+						</div>
+						
+						
+					</div>
+
+				</div>
+
+			  </div>
+			</div>
+			<div class="card-footer border-0 px-4 py-2"
+			  style="background-color: #07484A; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+			</div>
+		  </div>
+		</div>
+
+	</div>
+
+	<app-footer></app-footer>
+
+</section>

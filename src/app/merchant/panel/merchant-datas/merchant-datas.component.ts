@@ -215,6 +215,7 @@ export class MerchantDatasComponent {
       opentime: ['', Validators.required], 
       closetime: ['', Validators.required], 
       merchantlogo: ['', Validators.required],
+      subscription_type: ['', Validators.required],
       
       fulladdress: ['', Validators.required], 
       city: ['', Validators.required], 
@@ -363,6 +364,7 @@ export class MerchantDatasComponent {
           edmerchopen: `${dat.data[0].opentime}`, 
           edmerchclose: `${dat.data[0].closetime}`, 
           edmerchantlogo: '',
+          subscription_type: `${dat.data[0].subscription_type}`,
 
           edmerchaddress: `${dat.data[0].fulladdress}`, 
           edmerchcity: `${dat.data[0].city}`, 
@@ -389,6 +391,7 @@ export class MerchantDatasComponent {
       edmerchopen: ['', Validators.required], 
       edmerchclose: ['', Validators.required], 
       edmerchantlogo: [''],
+      subscription_type: ['', Validators.required],
       // blm ada logo , validasi cek semuanya!
       edmerchaddress: ['', Validators.required], 
       edmerchcity: ['', Validators.required], 

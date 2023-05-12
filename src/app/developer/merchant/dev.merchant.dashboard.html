@@ -344,7 +344,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
+                      <div class="col-6">
                         <label>Merchant Logo</label>
                         <input 
                           type="file" 
@@ -361,6 +361,26 @@
                           <div *ngIf="merchantlogo.errors?.['required']">
                             <i class="bi bi-exclamation-octagon"></i>
                             Please input this field.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <label>Subscription Type</label>
+                        <select formControlName="subscription_type" class="form-select"
+                          [ngClass]="{
+                            'is-invalid': (newMerchantForm.controls['subscription_type'].invalid && (newMerchantForm.controls['subscription_type'].dirty || newMerchantForm.controls['subscription_type'].touched)), 
+                            'is-valid': newMerchantForm.controls['subscription_type'].valid}"
+                        >
+                          <option selected hidden value="">Select Subcription</option>
+                          <option value="Monthly">Monthly</option>
+                          <option value="Annual">Annual</option>
+                          <option value="Annual">Annual Pro</option>
+                          <option value="Expired">Expired</option>
+                        </select>
+                        <div class="invalid-feedback">
+                          <div *ngIf="newMerchantForm.controls['subscription_type'].errors?.['required']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Please Select this field.
                           </div>
                         </div>
                       </div>
@@ -827,7 +847,25 @@
                 >
                 <input type="button" class="form-control" [hidden]="isImagechages === false" value="Reset image" (click)="resetEditImg(); isImagechages = false">
               </div>
-              
+              <div class="mb-3">
+                <label>Subscription Type</label>
+                <select formControlName="subscription_type" class="form-select"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['subscription_type'].invalid && (edMerchantForm.controls['subscription_type'].dirty || edMerchantForm.controls['subscription_type'].touched)), 
+                    'is-valid': edMerchantForm.controls['subscription_type'].valid}"
+                >
+                  <option value="Monthly">Monthly</option>
+                  <option value="Annual">Annual</option>
+                  <option value="Annual Pro">Annual Pro</option>
+                  <option value="Expired">Expired</option>
+                </select>
+                <div class="invalid-feedback">
+                  <div *ngIf="newMerchantForm.controls['subscription_type'].errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please Select this field.
+                  </div>
+                </div>
+              </div>
               <div class="mb-3">
                 <label for="edmerchaddress" class="col-form-label">Full Address</label>
                 <input 
