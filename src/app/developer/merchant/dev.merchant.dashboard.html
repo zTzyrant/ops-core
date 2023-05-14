@@ -205,6 +205,7 @@
                                     <th>Close</th>
                                     <th>City</th>
                                     <th>Admin Total</th>
+                                    <th>Subscription Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -218,6 +219,7 @@
                                     <td>{{dat.merchdatas.closetime}}</td>
                                     <td>{{dat.merchdatas.city}}</td>
                                     <td>{{dat.admin.total}}</td>
+                                    <td>{{dat.merchdatas.subscription_type}}</td>
                                     <td>
                                       <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#ModalEditMerchantInfo" (click)="reqViewMerchant(dat.merchdatas.merchantid)">Edit</button>
                                       <button class="btn btn-danger" (click)="deleteMerchant({merchantid: dat.merchdatas.merchantid, addressid: dat.merchdatas.addressid})">Delete</button>
