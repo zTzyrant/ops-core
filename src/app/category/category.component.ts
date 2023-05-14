@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { CurdApiService } from '../secure/curd.api.service';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'my-categorypage',
   templateUrl: './category.html',
@@ -32,10 +33,28 @@ export class CategoryComponent{
 
   getAllProduct(){
     this.productGrab = false
-    this.curdService.getAllOpsProduct().subscribe((res:any) => {
+    this.curdService.getAllOpsProduct().subscribe(
+      (res:any) => {
       this.allProduct = res
       this.productGrab = true
-    })
+      }, (err: any) =>{        
+        Swal.fire({
+          title: '<strong>Error Cannot Reach Backend</strong>',
+          icon: 'error',
+          html:
+            'If you see this message please email me at <a href="mailto:ztzyrant@gmail.com">ztzyrant@gmail.com</a>'+
+            '<br>Or you can use this website locally on your computer ! <br>' +
+            'Read At <a href="https://github.com/zTzyrant/ops-core">OPS-Core</a>',
+          showCloseButton: false,
+          showCancelButton: false,
+          focusConfirm: false,
+          showDenyButton: false,
+          allowEscapeKey: false,
+          allowOutsideClick: false,
+          confirmButtonText: 'Great !',
+        })
+      }
+    )
   }
 
   getAllCategory(){
