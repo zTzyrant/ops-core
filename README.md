@@ -29,5 +29,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Take a look
 While you access our website from this link [OPS-Core](https://ops-core-site.web.ap) 
 you are required to 
-  >setup localhost server [OPS-Express](https://github.com/zTzyrant/ops-express)
-  >setup mysql database [opscoredb](https://github.com/zTzyrant/opscoredb)
+  - setup localhost server [OPS-Express](https://github.com/zTzyrant/ops-express)
+  - setup mysql database [opscoredb](https://github.com/zTzyrant/opscoredb)
