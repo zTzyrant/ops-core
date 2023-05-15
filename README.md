@@ -6,8 +6,10 @@ This project was a Online Printing Systen e-commerce based on Bali. This project
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.1.
 
 ## Live Preview
-[OPS-Core](https://ops-core-site.web.app/)
-
+- [OPS-Core](https://ops-core-site.web.app/)
+- [OPS-Core Paper Weight Calculator](https://ops-core-site.web.app/calculator/paper)
+- [OPS-Core Developer Dashboard](https://ops-core-site.web.app/developer/login)
+- [OPS-Core Merchant Dashboard](https://ops-core-site.web.app/merchant/admin/login)
 ## How To Use
 While you want access our website from local computer 
 you are required to 
