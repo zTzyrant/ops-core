@@ -65,6 +65,7 @@ h3{
 .desc-collapsed{
   -webkit-line-clamp: none !important;
   overflow: visible !important;
+  -webkit-box-orient: unset !important;
 }
 
 .extend-description{
