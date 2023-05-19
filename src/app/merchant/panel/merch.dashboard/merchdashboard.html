@@ -368,7 +368,7 @@
                       <th class="text-center">Costs</th>
                     </tr>
                   </thead>
-                  <tbody *ngIf="collection_info_orders_today.length">
+                  <tbody *ngIf="collection_info_orders_today">
                     <tr *ngFor="let dat of collection_info_orders_today; let no = index">
                       <td class="text-center">{{no+1}}</td>
                       <td class="text-center">{{dat.product}}</td>

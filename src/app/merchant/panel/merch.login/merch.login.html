@@ -42,14 +42,17 @@
                         'is-valid': logindevFormNew.controls['password'].valid}"
                     >
                       <input 
-                        type="password" 
                         class="form-control form-control-lg passinvalid" 
                         id="formpasswrd" 
                         formControlName="password"
                         [ngClass]="{'is-invalid': (logindevFormNew.controls['password'].invalid && (logindevFormNew.controls['password'].dirty || logindevFormNew.controls['password'].touched)), 
                           'is-valid': logindevFormNew.controls['password'].valid}"
+                        [type]="passwordinputtype ? 'password' : 'text'"
                       >
-                      <span class="input-group-text" ><i class="bi bi-eye-fill"></i></span>
+                      <div class="input-group-text cursor-pointer" (click)="tooglepassword()">
+                        <i class="bi bi-eye-slash" *ngIf="passwordinputtype"></i>
+                        <i class="bi bi-eye" *ngIf="!passwordinputtype"></i>
+                      </div>
                     </div>
                     <label class="form-label" for="formpasswrd">Password</label> 
                     <div class="invalid-feedback">

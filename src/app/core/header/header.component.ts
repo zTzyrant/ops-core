@@ -16,6 +16,10 @@ export class HeaderComponent {
   // log for logged user
   
   constructor(private curdService: CurdApiService){
+    
+  }
+
+  ngOnChanges(){
     if(this.apilogin){
       this.chartUser = this.apilogin.fields[0].userid
       this.curdService.checkloginlegal()

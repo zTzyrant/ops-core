@@ -26,15 +26,12 @@ export class MerchDashboardComponent {
     private toast : ToastrService,
   ) { }
 
-  ngOnInit(){
+  ngOnChanges(){
     if(localStorage.getItem('$admin@merchant')){
       this.merchantApi.checkValidLoginMerchant(localStorage.getItem('$admin@merchant'))
       this.devDatas = JSON.parse(localStorage.getItem('_____$AdminDatas_____')!)
       this.get_todays_datas()
     }
-    $(document).ready(function () {
-        $('#example').DataTable({scrollX: true});
-    });
   }
   setShowNav(){
     this.showNav = !this.showNav
@@ -53,12 +50,15 @@ export class MerchDashboardComponent {
         this.total_income_today = res.total_income_today.total_order_costs
         this.total_sales_product_today = res.total_sales_product_today.total_sales_product_today
         this.collection_info_orders_today = res.collection_info_orders_today
+        if(res.collection_info_orders_today[0].total_quantity === null){
+          this.collection_info_orders_today = null
+        }
         this.orders_today = res.orders_today
         $(document).ready(function () {
           $('#listofsales').DataTable().destroy()
           $('#listofsales').DataTable({
             scrollX: true,
-          });
+          }); 
           $('#listoforders_done').DataTable().destroy()
           $('#listoforders_done').DataTable({
             scrollX: true,
