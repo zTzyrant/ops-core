@@ -10,6 +10,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - [OPS-Core Paper Weight Calculator](https://ops-core-site.web.app/calculator/paper)
 - [OPS-Core Developer Dashboard](https://ops-core-site.web.app/developer/login)
 - [OPS-Core Merchant Dashboard](https://ops-core-site.web.app/merchant/admin/login)
+- [OPS-Core Mirror](https://core.ops-express.site)
 ## How To Use
 While you want access our website from local computer 
 you are required to 
