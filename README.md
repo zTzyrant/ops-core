@@ -1,7 +1,7 @@
 ![Logo](https://raw.githubusercontent.com/zTzyrant/ops-core/master/src/assets/image/bannerops.png)
 
 # OpsCore
-This project was a Online Printing Systen e-commerce based on Bali. This project was created for our final project.
+This project was a Online Printing System e-commerce based on Bali. This project was created for our final project.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.1.
 
