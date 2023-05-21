@@ -26,13 +26,17 @@ export class MerchDashboardComponent {
     private toast : ToastrService,
   ) { }
 
-  ngOnChanges(){
+
+  ngOnInit(){
     if(localStorage.getItem('$admin@merchant')){
       this.merchantApi.checkValidLoginMerchant(localStorage.getItem('$admin@merchant'))
-      this.devDatas = JSON.parse(localStorage.getItem('_____$AdminDatas_____')!)
-      this.get_todays_datas()
+      if(localStorage.getItem('_____$AdminDatas_____')){
+        this.devDatas = JSON.parse(localStorage.getItem('_____$AdminDatas_____')!)
+        this.get_todays_datas()
+      }
     }
   }
+
   setShowNav(){
     this.showNav = !this.showNav
   }

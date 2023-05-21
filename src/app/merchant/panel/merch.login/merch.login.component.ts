@@ -61,6 +61,7 @@ export class MerchLoginComponent {
       if(datas.statusLogin === '1'){
         this.toast.info('Successfully Login')
         localStorage.setItem('$admin@merchant', datas.authLogin)
+        this.merchantApi.checkValidLoginMerchant(localStorage.getItem('$admin@merchant'))
         this.router.navigate(['/merchant/admin/dashboard'])
       } else {
         this.toast.error('Invalid Username or Password')        
