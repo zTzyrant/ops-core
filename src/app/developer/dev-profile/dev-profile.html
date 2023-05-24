@@ -1,11 +1,11 @@
-<body class="g-sidenav-show bg-gray-100">
+<body class="g-sidenav-show   bg-gray-100">
     <div class="min-height-300 bg-ops position-absolute w-100"></div>
     <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main" data-color="primary" [ngClass]="{'showNavMenu': this.showNav === true}">
       <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="/">
           <img src="../../../assets/image/appicon-ops-color.png" class="navbar-brand-img h-100" alt="ops_logo">
-          <span class="ms-1 font-weight-bold">Merchant Dashboard</span>
+          <span class="ms-1 font-weight-bold">Developer Dashboard</span>
         </a>
       </div>
       <hr class="horizontal dark mt-0">
@@ -14,7 +14,7 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">OPS Menu</h6>
   
           <li class="nav-item">
-            <a class="nav-link nav-link-sz" routerLink="/merchant/admin/dashboard/">
+            <a class="nav-link nav-link-sz " routerLink="/developer/dashboard/">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="bi bi-tv brand-color text-sm opacity-10"></i>
               </div>
@@ -26,7 +26,7 @@
             <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Manage OPS</h6>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav-link-sz" routerLink="/merchant/admin/dashboard/merchant">
+            <a class="nav-link nav-link-sz " routerLink="/developer/dashboard/merchant">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="bi bi-basket2 brand-color text-sm opacity-10"></i>
               </div>
@@ -34,7 +34,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav-link-sz" routerLink="/merchant/admin/dashboard/adminprinting">
+            <a class="nav-link nav-link-sz " routerLink="/developer/dashboard/adminprinting">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="bi bi-person-bounding-box brand-color text-sm opacity-10"></i>
               </div>
@@ -42,27 +42,11 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav-link-sz" routerLink="/merchant/admin/dashboard/merchantproduct">
+            <a class="nav-link nav-link-sz " routerLink="/developer/dashboard/merchantproduct">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="bi bi-box-seam-fill brand-color text-sm opacity-10"></i>
               </div>
               <span class="nav-link-text ms-1">Merchant Product</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-link-sz " routerLink="/merchant/admin/dashboard/incomingorder">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="bi bi-mailbox2 brand-color text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Incoming Order</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-link-sz active" routerLink="/merchant/admin/dashboard/salesreport">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="bi bi-clipboard-data brand-color text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Sales Report</span>
             </a>
           </li>
           
@@ -71,14 +55,14 @@
           </li>
   
           <li class="nav-item">
-            <a class="nav-link nav-link-sz" routerLink="/merchant/admin/dashboard/profile">
+            <a class="nav-link nav-link-sz active" routerLink="/developer/dashboard/profile">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="bi bi-person-badge brand-color text-dark text-sm opacity-10"></i>
               </div>
               <span class="nav-link-text ms-1">Profile</span>
             </a>
           </li>
-  
+          
           <li class="nav-item">
             <a class="nav-link nav-link-sz" (click)="this.signDevOut()">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -87,7 +71,7 @@
               <span class="nav-link-text ms-1">Sign Out</span>
             </a>
           </li>
-          
+
         </ul>
       </div>
   
@@ -95,11 +79,11 @@
     <main class="main-content position-relative border-radius-lg ">
       <!-- Navbar -->
       <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
-        <div class="container-fluid py-1 px-3">   
+        <div class="container-fluid py-1 px-3">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
               <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" >Dashboard</a></li>
-              <li class="breadcrumb-item text-sm text-white active" aria-current="Developer">Sales Report</li>
+              <li class="breadcrumb-item text-sm text-white active" aria-current="Developer">Developer Profile</li>
             </ol>
             <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
           </nav>
@@ -110,7 +94,7 @@
             </div>
             <ul class="navbar-nav  justify-content-end">
               <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                <a class="nav-link text-white p-0" id="iconNavbarSidenav">
+                <a  class="nav-link text-white p-0" id="iconNavbarSidenav">
                   <div class="sidenav-toggler-inner cursor-pointer" (click)="setShowNav()">
                     <i class="sidenav-toggler-line bg-white"></i>
                     <i class="sidenav-toggler-line bg-white"></i>
@@ -119,12 +103,12 @@
                 </a>
               </li>
               <li class="nav-item px-3 d-flex align-items-center">
-                <a class="nav-link text-white p-0">
+                <a  class="nav-link text-white p-0">
                   <i class="bi bi-gear-fill fixed-plugin-button-nav cursor-pointer"></i>
                 </a>
               </li>
               <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                <a class="nav-link text-white p-0 " id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <a  class="nav-link text-white p-0 " id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                   <i class="bi bi-bell-fill cursor-pointer"></i>
                 </a>
                 <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
@@ -201,157 +185,125 @@
         </div>
       </nav>
       <div class="container-fluid py-4">
-        <div class="row mb-4">
-
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4" *ngIf="get_all_product_costs">
-              <div class="card">
-                <div class="card-body p-3">
-                  <div class="row">
-                    <div class="col-8">
-                      <div class="numbers">
-                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Expectation Sales</p>
-                        <h5 class="font-weight-bolder">
-                          Rp. 
-                          <span *ngIf="get_all_product_costs.total_expectations_sales">{{get_all_product_costs.total_expectations_sales.toLocaleString('id-RP')}}</span>
-                          <span *ngIf="!get_all_product_costs.total_expectations_sales">0</span>
-                        </h5>
-                        <p class="mb-0 small text-secondary">
-                          Total expectation sales
-                        </p>
-                      </div>
-                    </div>
-                    <div class="col-4 text-end">
-                      <div class="icon icon-shape shape-op-sale bg-gradient-primary shadow-primary text-center">
-                        <i class="bi bi-graph-up icon-ops-bs text-lg opacity-10" aria-hidden="true"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4" *ngIf="get_total_order_costs">
-              <div class="card">
-                <div class="card-body p-3">
-                  <div class="row">
-                    <div class="col-8">
-                      <div class="numbers">
-                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Actualy Sales <span class="text-muted small">(With Options)</span></p>
-                        <h5 class="font-weight-bolder">
-                          Rp. 
-                          <span *ngIf="get_total_order_costs.total_order_costs">{{get_total_order_costs.total_order_costs.toLocaleString('id-RP')}}</span>
-                          <span *ngIf="!get_total_order_costs.total_order_costs">0</span>
-                        </h5>
-                        <p class="mb-0 small text-secondary">
-                            Total Actualy sales
-                        </p>
-                      </div>
-                    </div>
-                    <div class="col-4 text-end">
-                      <div class="icon icon-shape shape-op-sale gr-skies-ops shadow-danger text-center">
-                        <i class="bi bi-cash-coin icon-ops-bs text-lg opacity-10"  aria-hidden="true"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4" *ngIf="get_total_products">
-              <div class="card">
-                <div class="card-body p-3">
-                  <div class="row">
-                    <div class="col-8">
-                      <div class="numbers">
-                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Product Type</p>
-                        <h5 class="font-weight-bolder">
-                          <span *ngIf="get_total_products.total_product">{{get_total_products.total_product}}</span>
-                          <span *ngIf="!get_total_products.total_product">0</span>
-                        </h5>
-                        <p class="mb-0 small text-secondary">
-                            Total Merchant product
-                        </p>
-                      </div>
-                    </div>
-                    <div class="col-4 text-end">
-                      <div class="icon icon-shape shape-op-sale gr-dull-ops shadow-success text-center">
-                        <i class="bi bi-box2-fill icon-ops-bs text-lg opacity-10" aria-hidden="true"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-sm-6" *ngIf="get_total_sold_product_wquantity">
-              <div class="card">
-                <div class="card-body p-3">
-                  <div class="row">
-                    <div class="col-8">
-                      <div class="numbers">
-                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Sold Product <span class="text-muted small">(+ Quantity)</span></p>
-                        <h5 class="font-weight-bolder">
-                          <span *ngIf="get_total_sold_product_wquantity.total_sales_product">{{get_total_sold_product_wquantity.total_sales_product}}</span>
-                          <span *ngIf="!get_total_sold_product_wquantity.total_sales_productf">0</span>
-                        </h5>
-                        <p class="mb-0 small text-secondary">
-                            Total products sold
-                        </p>
-                      </div>
-                    </div>
-                    <div class="col-4 text-end">
-                      <div class="icon icon-shape shape-op-sale gr-moon-ops shadow-warning text-center">
-                        <i class="bi bi-bag-check-fill icon-ops-bs text-lg opacity-10" aria-hidden="true"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </div>
 
         <div class="row">
-            <div class="col-lg-9 mb-lg-0 mb-4">
-                <div class="card z-index-2 h-100">
-                    <div class="card-header pb-0 pt-3 bg-transparent">
-                        <h6 class="text-capitalize">Sales product</h6>
-                        <div class="card-body">
-                            <table id="listofsales" class="table table-borderless" style="width:100%">
-                                <thead>
-                                  <tr>
-                                    <th class="text-center">No</th>
-                                    <th class="text-center">Product</th>
-                                    <th class="text-center">Total Sales</th>
-                                    <th class="text-center">Costs</th>
-                                  </tr>
-                                </thead>
-                                <tbody *ngIf="get_orders_with_costs">
-                                  <tr *ngFor="let dat of get_orders_with_costs; let no = index">
-                                    <td class="text-center">{{no+1}}</td>
-                                    <td class="text-center">{{dat.product}}</td>
-                                    <td class="text-center">{{dat.total_quantity}}</td>
-                                    <td class="text-center">Rp. {{dat.total_costs.toLocaleString('id-RP')}}</td>
-                                  </tr>
-                                </tbody>
-                            </table>
-                        </div>
+          <div class="col-lg-9 mb-lg-0 mb-4">
+            <div class="card z-index-2 h-100">
+              <div class="card shadow">
+                    
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#account-information" type="button" role="tab" aria-controls="account-information" aria-selected="true">
+                            Account Information
+                        </button>
+                    </li>
+                </ul>
+                    
+                <div class="tab-content" id="myTabContent">
+                    <!-- Account Information -->
+                    <div class="tab-pane fade show active" id="account-information" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                        <form [formGroup]="formUpdateProfile" (ngSubmit)="submitChangesProfile()">
+                            <div class="card-body">
+                                <div class="row">
+    
+                                    <!-- Username -->
+                                    <div class="col-md-6 my-2">
+                                        <div class="form-group">
+                                            <label for="username" class="form-label">Username</label>
+                                            <div class="input-group">
+                                                <input type="text" id="username" class="form-control" value="{{this.jsonData.username}}" disabled="" >
+                                                <!-- for now please email admin for change username -->
+                                                <!-- <button class="btn btn-outline-secondary" type="button" id="edit-username" (click)="editSomeDatas('username')">Edit</button> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End-of-Username -->
+    
+                                    <!-- Fullname -->                 
+                                    <div class="col-md-6  my-2">
+                                        <div class="form-group">
+                                            <label for="fullname" class="form-label">Full name</label>
+                                            <div class="input-group">
+                                                <input type="text" id="fullname" class="form-control" formControlName="fullname">
+                                                <button class="btn btn-outline-secondary" type="button" id="edit-fullname" (click)="editSomeDatas('fullname')" *ngIf="!this.listManage.updateFullname">Edit</button>
+                                                <button class="btn btn-outline-secondary" type="button" id="edit-fullname" (click)="cancelSomeDatas('fullname')" *ngIf="this.listManage.updateFullname">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End-of-Fullname -->
+    
+                                    <!-- Email -->                 
+                                    <div class="col-md-6  my-2">
+                                        <div class="form-group">
+                                            <label for="email" class="form-label">Email</label>
+                                            <div class="input-group">
+                                                <input type="text" id="email" class="form-control" value="{{this.jsonData.email}}" disabled="" >
+                                                <!-- for now please email admin for change email -->
+                                                <!-- <button class="btn btn-outline-secondary" type="button" id="edit-email">Edit</button> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End-of-Email -->
+    
+                                    <!-- Gender -->                 
+                                    <div class="col-md-6  my-2">
+                                        <div class="form-group">
+                                            <label for="gender" class="form-label">Gender</label>
+                                            <div class="input-group">
+                                                <select class="form-control" id="gender" required formControlName="gender">
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                </select>
+                                                <button class="btn btn-outline-secondary" type="button" id="edit-gender" (click)="editSomeDatas('gender')" *ngIf="!this.listManage.updateGender">Edit</button>
+                                                <button class="btn btn-outline-secondary" type="button" id="edit-fullname" (click)="cancelSomeDatas('gender')" *ngIf="this.listManage.updateGender">Cancel</button>
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End-of-Gender -->
+    
+                                    <!-- Phone -->
+                                    <div class="col-md-6  my-2">
+                                        <div class="form-group">
+                                            <label for="phone" class="form-label">Phone</label>
+                                            <div class="input-group">
+                                                <input type="text" id="phone" class="form-control" value="{{this.jsonData.phone}}" disabled="" >
+                                                <!-- for now please email admin for change phone -->
+                                                <!-- <button class="btn btn-outline-secondary" type="button" id="edit-phone">Edit</button> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End-of-Phone -->
+    
+                                </div>
+                            </div>
+                            <div class="card-footer bg-white" *ngIf="changesDatas">
+                                <button type="button" class="btn btn-outline-secondary my-2 mx-2">Cancel</button>
+                                <button type="submit" class="btn cusopssub my-2 mx-2">Submit Changes</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="card-body">
+                    <!-- End-of-Tab Account Information -->
 
-                    </div>
                 </div>
-            </div>
-            <div class="col-lg-3 mb-lg-0 mb-4">
-              <div class="card z-index-2 h-100">
-                      <div class="card-header pb-0 pt-3 bg-transparent">
-                      <h6 class="text-capitalize">Account Information</h6>
-                  </div>
-                  <div class="card-body">
-                      a
-                  </div>
               </div>
             </div>
-
+          </div>
+          
+          <div class="col-lg-3 mb-lg-0 mb-4">
+            <div class="card z-index-2 h-100">
+                    <div class="card-header pb-0 pt-3 bg-transparent">
+                    <h6 class="text-capitalize">Account Information</h6>
+                </div>
+                <div class="card-body">
+                    a
+                </div>
+            </div>
+          </div>
         </div>
+
+
       </div>
     </main>
-
     
-</body>
+  </body>

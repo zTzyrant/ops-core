@@ -15,7 +15,7 @@ export class OrderhistoryComponent {
   orders_datas: any
   transaction_datas: any
   apilogin = JSON.parse(localStorage.getItem('logindatas')!);
-
+  p: number = 1;
   constructor(
     private route: Router,
     public fb: FormBuilder,

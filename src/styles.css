@@ -38,6 +38,10 @@ input[type=number] {
   color: #07484A !important;
 }
 
+.cursor-pointer{
+  cursor: pointer !important;
+}
+
 .btnops-outline:hover, .btnops-outline:active{
   background: #043233 !important;
   color: white !important;

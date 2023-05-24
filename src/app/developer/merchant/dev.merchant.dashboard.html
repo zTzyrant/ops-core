@@ -55,7 +55,7 @@
           </li>
   
           <li class="nav-item">
-            <a class="nav-link nav-link-sz" href="./pages/profile.html">
+            <a class="nav-link nav-link-sz " routerLink="/developer/dashboard/profile">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="bi bi-person-badge brand-color text-dark text-sm opacity-10"></i>
               </div>
@@ -467,6 +467,51 @@
                             Please input valid number only.
                           </div>
                         </div>
+                      </div>
+
+                      <div class="col-6">
+                        <label>Longitude</label>
+                        <input 
+                          type="text" 
+                          class="form-control" 
+                          placeholder="Longitude" 
+                          formControlName="longitude"
+                          [ngClass]="{
+                            'is-invalid': (newMerchantForm.controls['longitude'].invalid && (newMerchantForm.controls['longitude'].dirty || newMerchantForm.controls['longitude'].touched)), 
+                            'is-valid': newMerchantForm.controls['longitude'].valid}" 
+                        >
+                        <div class="invalid-feedback">
+                          <div *ngIf="newMerchantForm.controls['longitude'].errors?.['required']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Please input this longitude field.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <label>Latitude</label>
+                        <input
+                          type="text" 
+                          class="form-control"  
+                          placeholder="Latitude" 
+                          formControlName="latitude"
+                          [ngClass]="{
+                            'is-invalid': (newMerchantForm.controls['latitude'].invalid && (newMerchantForm.controls['latitude'].dirty || newMerchantForm.controls['latitude'].touched)), 
+                            'is-valid': newMerchantForm.controls['latitude'].valid}" 
+                        >
+                        <div class="invalid-feedback">
+                          <div *ngIf="newMerchantForm.controls['latitude'].errors?.['required']">
+                            <i class="bi bi-exclamation-octagon"></i>
+                            Please input this latitude field.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 text-center">
+                        <p class="font-monospace">
+                          You can get your longitude and latitude by follow this 
+                          <a  target="_blank" [href]="'https://www.google.com/maps/search/'+ newMerchantForm.controls['fulladdress'].value">link</a> or 
+                          <a href="/ol" target="_blank">ops-longlat</a>. read more about find longitude and latitude with google maps
+                          <a href="https://www.wikihow.com/Get-Latitude-and-Longitude-from-Google-Maps" target="_blank">here</a>.
+                        </p>
                       </div>
                       <div class="col-12">
                         <label>Aditional Information</label>
@@ -927,6 +972,54 @@
                     Please input this field.
                   </div>
                 </div>
+              </div>
+              <div class="mb-3">
+                <label for="edlongitude" class="col-form-label">Longitude</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edlongitude"
+                  formControlName="longitude"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['longitude'].invalid && 
+                      (edMerchantForm.controls['longitude'].dirty || 
+                      edMerchantForm.controls['longitude'].touched)), 
+                    'is-valid': edMerchantForm.controls['longitude'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('longitude').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-2">
+                <label for="edLatitude" class="col-form-label">Latitude</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edLatitude"
+                  formControlName="latitude"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['latitude'].invalid && 
+                      (edMerchantForm.controls['latitude'].dirty || 
+                      edMerchantForm.controls['latitude'].touched)), 
+                    'is-valid': edMerchantForm.controls['latitude'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchpostcode').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3 text-center">
+                <p class="font-monospace">
+                  You can get your longitude and latitude by follow this 
+                  <a href="https://www.google.com/maps/search/{{gmap_search}}" target="_blank">link</a> or 
+                  <a href="/ol" target="_blank">ops-longlat</a>. read more about find longitude and latitude with google maps
+                  <a href="https://www.wikihow.com/Get-Latitude-and-Longitude-from-Google-Maps" target="_blank">here</a>.
+                </p>
               </div>
               <div class="mb-3">
                 <label for="edmerchtcp" class="col-form-label">Contact Phone</label>

@@ -52,6 +52,12 @@ import { MerchantDatasComponent } from './merchant/panel/merchant-datas/merchant
 import { MerchOrderComponent } from './merchant/panel/merch.order/merch.order.component';
 import { MerchSalesReportComponent } from './merchant/panel/merch.sales.report/merch.sales.report.component';
 import { OrderhistoryComponent } from './user/customer/orderhistory/orderhistory.component';
+import { TosComponent } from './core/tos/tos.component';
+import { DevProfileComponent } from './developer/dev-profile/dev-profile.component';
+import { OpenlayersComponent } from './core/openlayers/openlayers.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MerchantProfileComponent } from './merchant/panel/merchant-profile/merchant-profile.component';
+import { LonglatComponent } from './core/openlayers/get/longlat/longlat.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +96,11 @@ import { OrderhistoryComponent } from './user/customer/orderhistory/orderhistory
     MerchOrderComponent,
     MerchSalesReportComponent,
     OrderhistoryComponent,
+    TosComponent,
+    DevProfileComponent,
+    OpenlayersComponent,
+    MerchantProfileComponent,
+    LonglatComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,6 +112,7 @@ import { OrderhistoryComponent } from './user/customer/orderhistory/orderhistory
     ToastrModule.forRoot(), // ToastrModule added
     NgxMaterialTimepickerModule,
     Ng2SearchPipeModule,
+    NgxPaginationModule
   ],
   providers: [
     CurdApiService, DevGuard, DevService, MerchantApiService, MerchantGuard

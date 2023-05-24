@@ -58,7 +58,8 @@
               "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/ngx-toastr/toastr.css",
-              "src/assets/css/datatables/dataTables.min.css"
+              "src/assets/css/datatables/dataTables.min.css",
+              "node_modules/ol/ol.css"
             ],
             "scripts": [
               "node_modules/@popperjs/core/dist/umd/popper.min.js",
@@ -71,7 +72,8 @@
               "sweetalert2",
               "crypto-js",
               "jquery",
-              "luxon"
+              "luxon",
+              "rbush"
            ]
           },
           "configurations": {

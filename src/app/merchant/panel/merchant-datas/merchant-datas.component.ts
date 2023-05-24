@@ -369,6 +369,8 @@ export class MerchantDatasComponent {
           edmerchaddress: `${dat.data[0].fulladdress}`, 
           edmerchcity: `${dat.data[0].city}`, 
           edmerchpostcode: `${dat.data[0].postcode}`, 
+          longitude: `${dat.data[0].longitude}`,
+          latitude: `${dat.data[0].latitude}`, 
           edmerchtcp: `${dat.data[0].phoneAddress}`, 
           edmerchtinfo: `${dat.data[0].note}`,
         })
@@ -396,6 +398,8 @@ export class MerchantDatasComponent {
       edmerchaddress: ['', Validators.required], 
       edmerchcity: ['', Validators.required], 
       edmerchpostcode: ['', Validators.required], 
+      longitude: ['', Validators.required],
+      latitude: ['', Validators.required],
       edmerchtcp: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], 
       edmerchtinfo: [''],
     })

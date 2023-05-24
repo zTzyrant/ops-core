@@ -46,12 +46,21 @@
       <!-- prod header start -->
       <div class="prod-header">
         <h2 class="prod-tittle">{{currentProd.producttitle}}</h2>
-        <span><i class="bi bi-star-fill" style="color: #FFC107;"></i><strong> 246 reviews</strong></span>
+        <!-- <span><i class="bi bi-star-fill" style="color: #FFC107;"></i><strong> 246 reviews</strong></span> -->
       </div>
       <!-- end prod header -->
-      <P class="tittle">{{currentProd.merchantuname}} | {{currentProd.city}}</P>
+      <div class="d-flex align-items-start">
+        <img src="{{currentProd.merchantlogo}}" alt="merchant image" style="height: 5rem; width: 5rem;">
+        <div class="col ms-2">
+          <span><strong>Merchant Information</strong></span>
+          <P class="title mb-0">{{currentProd.merchantuname}} | {{currentProd.city}}</P>
+          <P class="title">{{currentProd.fulladdress}}</P>
+        </div>
+      </div>
+
+      
       <!-- start prod desc -->
-      <div class="prod-description mt-4">
+      <div class="prod-description mt-2">
         <h3>Description</h3>
         <p [ngClass]="{'desc-collapsed': extendDesc}" id="somedsec" #proddesc>
           {{currentProd.productdescription}}          
