@@ -49,13 +49,17 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/sitemap.xml",
+              "src/robots.txt",
+              "src/google8baeb7c80e024a83.html"
             ],
             "styles": [
               "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/ngx-toastr/toastr.css",
-              "src/assets/css/datatables/dataTables.min.css"
+              "src/assets/css/datatables/dataTables.min.css",
+              "node_modules/ol/ol.css"
             ],
             "scripts": [
               "node_modules/@popperjs/core/dist/umd/popper.min.js",
@@ -68,7 +72,8 @@
               "sweetalert2",
               "crypto-js",
               "jquery",
-              "luxon"
+              "luxon",
+              "rbush"
            ]
           },
           "configurations": {
@@ -83,6 +88,12 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "5mb",
                   "maximumError": "10mb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"

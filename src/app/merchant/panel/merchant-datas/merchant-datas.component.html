@@ -71,7 +71,7 @@
           </li>
   
           <li class="nav-item">
-            <a class="nav-link nav-link-sz" href="./pages/profile.html">
+            <a class="nav-link nav-link-sz" routerLink="/merchant/admin/dashboard/profile">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="bi bi-person-badge brand-color text-dark text-sm opacity-10"></i>
               </div>
@@ -221,6 +221,7 @@
                                     <th>Close</th>
                                     <th>City</th>
                                     <th>Admin Total</th>
+                                    <th>Subscription Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -234,8 +235,9 @@
                                     <td>{{dat.merchdatas.closetime}}</td>
                                     <td>{{dat.merchdatas.city}}</td>
                                     <td>{{dat.admin.total}}</td>
+                                    <td>{{dat.merchdatas.subscription_type}}</td>
                                     <td>
-                                      <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#ModalEditMerchantInfo" (click)="reqViewMerchant(dat.merchdatas.merchantid)">Edit</button>
+                                      <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#ModalEditMerchantInfo" (click)="reqViewMerchant(dat.merchdatas.merchantid)">View</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -472,6 +474,54 @@
                     Please input this field.
                   </div>
                 </div>
+              </div>
+              <div class="mb-3">
+                <label for="edlongitude" class="col-form-label">Longitude</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edlongitude"
+                  formControlName="longitude"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['longitude'].invalid && 
+                      (edMerchantForm.controls['longitude'].dirty || 
+                      edMerchantForm.controls['longitude'].touched)), 
+                    'is-valid': edMerchantForm.controls['longitude'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('longitude').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-2">
+                <label for="edLatitude" class="col-form-label">Latitude</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="edLatitude"
+                  formControlName="latitude"
+                  [ngClass]="{
+                    'is-invalid': (edMerchantForm.controls['latitude'].invalid && 
+                      (edMerchantForm.controls['latitude'].dirty || 
+                      edMerchantForm.controls['latitude'].touched)), 
+                    'is-valid': edMerchantForm.controls['latitude'].valid}" 
+                >
+                <div class="invalid-feedback">
+                  <div *ngIf="edMerchantForm.get('edmerchpostcode').errors?.['required']">
+                    <i class="bi bi-exclamation-octagon"></i>
+                    Please input this field.
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3 text-center">
+                <p class="font-monospace">
+                  You can get your longitude and latitude by follow this 
+                  <a [href]="'https://www.google.com/maps/search/'+ edMerchantForm.controls['edmerchaddress'].value" target="_blank">link</a> or 
+                  <a href="/ol" target="_blank">ops-longlat</a>. read more about find longitude and latitude with google maps
+                  <a href="https://www.wikihow.com/Get-Latitude-and-Longitude-from-Google-Maps" target="_blank">here</a>.
+                </p>
               </div>
               <div class="mb-3">
                 <label for="edmerchtcp" class="col-form-label">Contact Phone</label>

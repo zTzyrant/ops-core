@@ -145,7 +145,7 @@ a{
 }
 
 
-
+.cursor-pointer{cursor: pointer;}
 
 .notifcatops{
     flex: none;

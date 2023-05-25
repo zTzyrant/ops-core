@@ -28,6 +28,11 @@ export class LogindeveloperComponent{
 
   }
 
+  passwordinputtype = true
+  tooglepassword(){
+    this.passwordinputtype = !this.passwordinputtype;
+  }
+
   ngOnInit(){
     if(localStorage.getItem('__$DEV__TOKEN__')){
       this.devService.checkSessionDeveloper().subscribe((result: any) => {

@@ -1,5 +1,5 @@
 <div class="col">
-    <h1 class="tagbrandops">OPS</h1>
+    <h1 class="tagbrandops cursor-pointer" routerLink="/">OPS</h1>
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col col-md-auto">
@@ -136,7 +136,7 @@
                             <input class="form-check-input" type="checkbox" value="" id="invalidCheck" formControlName="agreeterm" required
                             >
                             <label class="form-check-label" for="invalidCheck">
-                            I agree to terms and conditions
+                            I agree to <a class="pe-auto cursor-pointer" data-bs-toggle="modal" data-bs-target="#tosmodal">terms and conditions</a>.
                             </label>
                         </div>
                         <div class="invalid-feedback alert alert-danger mt-3 inputcustops">
@@ -157,3 +157,5 @@
         </div>
     </div>
 </div>
+
+<app-tos></app-tos>

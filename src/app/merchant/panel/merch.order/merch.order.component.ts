@@ -45,14 +45,17 @@ export class MerchOrderComponent {
     this.orderDatas_progress = []
     this.orderDatas_done = []
     this.merchantApi.get_orders_datas(this.devDatas.merchantid).subscribe((res: any) => {
-      this.orderDatas = res
-      this.orderDatas.orders_datas.forEach((e: any) => {
-        if(e.orderStatus === 'Done'){
-          this.orderDatas_done.push(e)
-        } else if (e.orderStatus === 'Waiting' || e.orderStatus === 'On Process') {
-          this.orderDatas_progress.push(e) 
-        }
-      });
+      if(res.statusQuo === '1'){
+        this.orderDatas = res
+        this.orderDatas.orders_datas.forEach((e: any) => {
+          if(e.orderStatus === 'Done'){
+            this.orderDatas_done.push(e)
+          } else if (e.orderStatus === 'Waiting' || e.orderStatus === 'On Process') {
+            this.orderDatas_progress.push(e) 
+          }
+        });
+      }
+      
 
       $(document).ready(function () {
         $('#listoforders').DataTable().destroy()

@@ -164,7 +164,7 @@
   background-position: right calc(2.3rem + 0.1875rem) center !important;
 }
 
-.cstareapass .bi{
+.cstareapass .bi, .cursor-pointer{
   cursor: pointer;
 }
 

@@ -34,6 +34,10 @@ import { MerchantDatasComponent } from './merchant/panel/merchant-datas/merchant
 import { MerchOrderComponent } from './merchant/panel/merch.order/merch.order.component';
 import { MerchSalesReportComponent } from './merchant/panel/merch.sales.report/merch.sales.report.component';
 import { OrderhistoryComponent } from './user/customer/orderhistory/orderhistory.component';
+import { DevProfileComponent } from './developer/dev-profile/dev-profile.component';
+import { OpenlayersComponent } from './core/openlayers/openlayers.component';
+import { MerchantProfileComponent } from './merchant/panel/merchant-profile/merchant-profile.component';
+import { LonglatComponent } from './core/openlayers/get/longlat/longlat.component';
 
 const routes: Routes = [
   {
@@ -83,6 +87,10 @@ const routes: Routes = [
     path: 'developer/login',
     component: LogindeveloperComponent
   }, {
+    path: 'developer/dashboard/profile',
+    component: DevProfileComponent,
+    canActivate: [DevGuard]
+  }, {
     path: 'footer',
     component: FooterComponent
   },{
@@ -96,15 +104,23 @@ const routes: Routes = [
   }, {
     path: 'merchant/admin/dashboard/adminprinting',
     component: MerchAdminprintingComponent,
+    canActivate: [MerchantGuard]
   }, {
     path: 'merchant/admin/dashboard/merchantproduct',
     component: MerchProductComponent,
+    canActivate: [MerchantGuard]
   }, {
     path: 'merchant/admin/dashboard/incomingorder',
     component: MerchOrderComponent,
+    canActivate: [MerchantGuard]
   }, {
     path: 'merchant/admin/dashboard/salesreport',
     component: MerchSalesReportComponent,
+    canActivate: [MerchantGuard]
+  }, {
+    path: 'merchant/admin/dashboard/profile',
+    component: MerchantProfileComponent,
+    canActivate: [MerchantGuard]
   }, {
     path: 'merchant/admin/login',
     component: MerchLoginComponent
@@ -128,6 +144,12 @@ const routes: Routes = [
   }, {
     path: 'order/history',
     component: OrderhistoryComponent
+  }, {
+    path: 'openlayers/ops',
+    component: OpenlayersComponent
+  }, {
+    path: 'ol',
+    component: LonglatComponent
   },
 
   // end error page

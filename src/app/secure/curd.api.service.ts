@@ -193,4 +193,12 @@ export class CurdApiService {
   get_order_history(user_id: any){
     return this.http.get(`${this.apiurl}/user/customer/view/order/history/${user_id}`)
   }
+
+  reqUpdateUserAccount(body: any){
+    return this.http.post(`${this.apiurl}/updateUsers`, body)
+  }
+
+  get_merchant_longlat(){
+    return this.http.get(`${this.apiurl}/merchant/view/longlat`)
+  }
 }

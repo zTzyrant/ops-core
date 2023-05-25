@@ -211,6 +211,8 @@ export class MerchantComponent {
       city: ['', Validators.required], 
       postcode: ['', Validators.required], 
       phoneaddress: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], 
+      longitude: ['', Validators.required],
+      latitude: ['', Validators.required],
       note: [''],
      
       username: ['', [Validators.required, Validators.minLength(5), this.noWhitespaceValidator]], 
@@ -336,18 +338,20 @@ export class MerchantComponent {
     this.newmerchUsed = usedIs
   }
 
+  gmap_search: any
   reqViewMerchant(meID: any){
     this.selectedMerchId = meID
     this.isViewMerch = true
-    
+    this.gmap_search = undefined
     this.devService.viewMerchantInfo(meID).subscribe((dat: any) => {
       if(dat.statusCode === '1'){
+        this.gmap_search = `${dat.data[0].fulladdress}`
+
         console.log("Iamtrying");
         this.imgMerchLinkTemp = this.imgLinkedTemp = dat.data[0].merchantlogo
         this.edMerchantForm.setValue({
           merchantid: `${dat.data[0].merchantid}`,
           addressid: `${dat.data[0].addressid}`,
-
           edmerchuname: `${dat.data[0].merchantuname}`,
           edmerchname: `${dat.data[0].merchantname}`,
           edmerchdate: `${dat.data[0].datecreated}`, 
@@ -357,7 +361,9 @@ export class MerchantComponent {
           subscription_type: `${dat.data[0].subscription_type}`,
           edmerchaddress: `${dat.data[0].fulladdress}`, 
           edmerchcity: `${dat.data[0].city}`, 
-          edmerchpostcode: `${dat.data[0].postcode}`, 
+          edmerchpostcode: `${dat.data[0].postcode}`,
+          longitude: `${dat.data[0].longitude}`,
+          latitude: `${dat.data[0].latitude}`, 
           edmerchtcp: `${dat.data[0].phoneAddress}`, 
           edmerchtinfo: `${dat.data[0].note}`,
         })
@@ -383,7 +389,9 @@ export class MerchantComponent {
       subscription_type: ['', Validators.required],
       edmerchaddress: ['', Validators.required], 
       edmerchcity: ['', Validators.required], 
-      edmerchpostcode: ['', Validators.required], 
+      edmerchpostcode: ['', Validators.required],
+      longitude: ['', Validators.required],
+      latitude: ['', Validators.required],
       edmerchtcp: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], 
       edmerchtinfo: [''],
     })

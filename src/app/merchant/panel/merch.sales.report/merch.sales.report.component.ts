@@ -50,7 +50,9 @@ export class MerchSalesReportComponent {
         this.get_total_order_costs = res.f2
         this.get_total_products = res.f3
         this.get_total_sold_product_wquantity = res.f4
-        this.get_orders_with_costs = res.get_orders_with_costs
+        if(res.get_orders_with_costs[0].total_quantity){
+          this.get_orders_with_costs = res.get_orders_with_costs
+        }
       } else{
         this.toast.error('Internal Server Error')
       }

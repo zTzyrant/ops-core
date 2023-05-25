@@ -11,15 +11,16 @@
 			</div>
 
 			<div class="card-body p-4">
-				<div class="card shadow-0 border mb-4" *ngFor="let dat1 of orders_datas">
-                    <div class="card-header cursor-pointer pb-3" title="View Order Details" (click)="directme(dat1.transaction_data.transactionID)">
+				<div class="card shadow-0 border mb-4" *ngFor="let dat1 of orders_datas  | paginate: { itemsPerPage: 5, currentPage: p };  let i = index">
+                    <div class="card-header pb-3" title="View Order Details" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i">
                         <div class="d-flex justify-content-between align-items-center">
-                            <p class="lead fw-normal mb-0" style="color: #07484A;">Transaction Id {{dat1.transaction_data.transactionID}}</p>
-                        </div>
+                            <p class="lead fw-normal mb-0 cursor-pointer" style="color: #07484A;" (click)="directme(dat1.transaction_data.transactionID)">Transaction Id {{dat1.transaction_data.transactionID}}</p>
+							<i class="bi bi-list"></i>
+						</div>
                     </div>
 
-					<div class="card-body" *ngFor="let dat of dat1.orders">
-						<div class="row">
+					<div id="collapse{{i}}" class="collapse" *ngFor="let dat of dat1.orders;">
+						<div class="row mt-4">
 							<div class="col-md-2 text-center d-flex justify-content-center align-items-center">
 								<p class="mb-0 small fw-semibold">Product</p>
 							</div>
@@ -112,11 +113,11 @@
 								<p class="mb-0 small " title="Shipping Codes or Shipping Status">{{dat.shippingreceipt}}</p>
 							</div>
 						</div>
-						
-						
-					</div>
+						<hr class="mb-0">
 
+					</div>
 				</div>
+				<pagination-controls (pageChange)="p = $event"></pagination-controls>
 
 			  </div>
 			</div>

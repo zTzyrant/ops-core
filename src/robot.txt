@@ -1,0 +1,9 @@
+User-agent: *
+Disallow:
+Site: https://ops-core-site.web.app
+Sitemap: https://ops-core-site.web.app/sitemap.xml
+
+User-agent: *
+Disallow:
+Site: https://core.ops-express.site
+Sitemap: https://core.ops-express.site/sitemap.xml

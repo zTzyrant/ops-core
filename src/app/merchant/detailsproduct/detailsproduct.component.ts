@@ -34,6 +34,7 @@ export class DetailsproductComponent {
   selectedWeigth: any
 
   apilogin = JSON.parse(localStorage.getItem('logindatas')!);
+  fullname = 'Guest User'
 
   constructor(
     private route: ActivatedRoute,
@@ -83,8 +84,10 @@ export class DetailsproductComponent {
     
     this.totalPrice = (this.selectColorFee + this.selectTypeFee + this.selectQualityFee) * parseInt(this.copies.value)
     
-    
-    this.orderform.controls['consumerid'].setValue(this.apilogin.fields[0].userid)
+    if(this.apilogin){ 
+      this.orderform.controls['consumerid'].setValue(this.apilogin.fields[0].userid)
+      this.fullname = this.apilogin.fields[0].fullname
+    }
     this.orderform.controls['totalquantity'].setValue(this.orderform.controls['copies'].value * this.totalpages)
 
   }

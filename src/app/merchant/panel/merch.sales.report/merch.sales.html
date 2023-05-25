@@ -71,7 +71,7 @@
           </li>
   
           <li class="nav-item">
-            <a class="nav-link nav-link-sz" href="./pages/profile.html">
+            <a class="nav-link nav-link-sz" routerLink="/merchant/admin/dashboard/profile">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="bi bi-person-badge brand-color text-dark text-sm opacity-10"></i>
               </div>
@@ -211,7 +211,9 @@
                       <div class="numbers">
                         <p class="text-sm mb-0 text-uppercase font-weight-bold">Expectation Sales</p>
                         <h5 class="font-weight-bolder">
-                          Rp. {{get_all_product_costs.total_expectations_sales.toLocaleString('id-RP')}}
+                          Rp. 
+                          <span *ngIf="get_all_product_costs.total_expectations_sales">{{get_all_product_costs.total_expectations_sales.toLocaleString('id-RP')}}</span>
+                          <span *ngIf="!get_all_product_costs.total_expectations_sales">0</span>
                         </h5>
                         <p class="mb-0 small text-secondary">
                           Total expectation sales
@@ -235,7 +237,9 @@
                       <div class="numbers">
                         <p class="text-sm mb-0 text-uppercase font-weight-bold">Actual Sales <span class="text-muted small">(With Options)</span></p>
                         <h5 class="font-weight-bolder">
-                          Rp. {{get_total_order_costs.total_order_costs.toLocaleString('id-RP')}}
+                          Rp. 
+                          <span *ngIf="get_total_order_costs.total_order_costs">{{get_total_order_costs.total_order_costs.toLocaleString('id-RP')}}</span>
+                          <span *ngIf="!get_total_order_costs.total_order_costs">0</span>
                         </h5>
                         <p class="mb-0 small text-secondary">
                             Total actual sales
@@ -259,7 +263,8 @@
                       <div class="numbers">
                         <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Product Type</p>
                         <h5 class="font-weight-bolder">
-                          {{get_total_products.total_product}}
+                          <span *ngIf="get_total_products.total_product">{{get_total_products.total_product}}</span>
+                          <span *ngIf="!get_total_products.total_product">0</span>
                         </h5>
                         <p class="mb-0 small text-secondary">
                             Total merchant product
@@ -283,7 +288,8 @@
                       <div class="numbers">
                         <p class="text-sm mb-0 text-uppercase font-weight-bold">Sold Product <span class="text-muted small">(+ Quantity)</span></p>
                         <h5 class="font-weight-bolder">
-                          {{get_total_sold_product_wquantity.total_sales_product}}
+                          <span *ngIf="get_total_sold_product_wquantity.total_sales_product">{{get_total_sold_product_wquantity.total_sales_product}}</span>
+                          <span *ngIf="!get_total_sold_product_wquantity.total_sales_productf">0</span>
                         </h5>
                         <p class="mb-0 small text-secondary">
                             Total products sold
