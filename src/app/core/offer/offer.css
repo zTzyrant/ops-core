@@ -1,0 +1,75 @@
+body{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100% !important;
+    font-style: normal;
+    font-size: 0.875em;
+    color: #FFFFFF;
+}
+a{
+    text-decoration: none;
+}
+
+.header_logo{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.15);
+}
+.brandopstag{
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 60px;
+    color: #07484A;
+    text-align: center;
+}
+.all-colomn
+{
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    border-top: 1rem solid #07484A;
+
+}
+.header_colomn{
+    margin-top: 10%;
+    color: black;
+
+}
+.offer_option{
+    margin-top: 5%;
+}
+.betweet-header-colomn{
+    margin-top: 10%;
+    background-color: #07484A;
+    color: #FFFFFF;
+    border-radius: 10px;
+}
+.text-1-fix{
+    padding: 2%;
+    padding-top: 5%;
+    font-size: 1.5em;
+    padding-left: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.text-1{
+    padding: 2%;
+    font-size: 1.5em;
+    padding-left: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.text-2-fix{
+    padding-top: 5%;
+    text-align: center;
+}
+.text-2{
+    text-align: center;
+}
+.button-buy{
+    padding-top: 5%;
+    padding-bottom: 10%;
+    
+
+}
+

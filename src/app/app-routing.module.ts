@@ -38,6 +38,7 @@ import { DevProfileComponent } from './developer/dev-profile/dev-profile.compone
 import { OpenlayersComponent } from './core/openlayers/openlayers.component';
 import { MerchantProfileComponent } from './merchant/panel/merchant-profile/merchant-profile.component';
 import { LonglatComponent } from './core/openlayers/get/longlat/longlat.component';
+import { OfferComponent } from './core/offer/offer.component';
 
 const routes: Routes = [
   {
@@ -93,7 +94,10 @@ const routes: Routes = [
   }, {
     path: 'footer',
     component: FooterComponent
-  },{
+  }, {
+    path: 'offer',
+    component: OfferComponent
+  }, {
     path: 'merchant/admin/dashboard/merchant',
     component: MerchantDatasComponent,
     canActivate: [MerchantGuard]
